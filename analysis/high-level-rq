@@ -1,3 +1,7 @@
- - Zaznamenavat sjore po strele
- - Videt vlastni statistiku (her, strel, protihracu)
+ - Zaznamenavat skore po strele
+ - Videt vlastni statistiku (her, strel, protihracu, casu)
  - Podpora ruznych druhu her (???)
+ |  - Moznost vytvareni vlastnich her (ve smyslu pravidel, poctu bodu)
+ 
+ Pokud bude tato aplikace vytvorena pro nejaky kulecnikovy klub/bar (o tomto budem vedet po schuzce s zakaznikem), tak:
+ - Statistika za celou dobu provozovani appky (napr. nejkratsi/nejdelsi hra, nejvetsi skore za nejmensi pocet strel, tabulka sampionu)
