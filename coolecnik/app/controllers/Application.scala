@@ -1,6 +1,9 @@
 package controllers
 
-import model.{GameTable, UserTable}
+import java.sql.Timestamp
+import java.time.LocalDateTime
+
+import models._
 import org.slf4j.LoggerFactory
 import play.api.libs.json._
 import play.api.mvc._
@@ -14,39 +17,39 @@ class Application extends Controller {
 
   val log = LoggerFactory.getLogger(classOf[Application])
 
-  implicit val uw = new Writes[(Long, String)] {
-    ((a: Int) => 34) (5)
-
-    override def writes(o: (Long, String)): JsValue = JsObject(Seq(
-      "id" -> JsNumber(o._1),
-      "name" -> JsString(o._2)
-    ))
+  implicit var w = new Writes[User] {
+    override def writes(u: User): JsValue = JsObject(Seq(
+      "id" -> JsNumber(u.id),
+      "login" -> JsString(u.login),
+      "email" -> JsString(u.login),
+      "created" -> Json.toJson(u.created.toLocalDateTime)
+    )
+    )
   }
 
-  implicit var gw = new Writes[(Long, Long, String, Int)] {
-    override def writes(o: (Long, Long, String, Int)): JsValue = JsObject(Seq(
-      "id" -> JsNumber(o._1),
-      "name" -> JsString(o._3),
-      "score" -> JsNumber(o._4)
-    ))
+  implicit var cw = new Writes[Comment] {
+    override def writes(c: Comment): JsValue = JsObject(Seq(
+      "id" -> JsNumber(c.id)
+    )
+    )
   }
 
   def getData = Action.async {
     log.info("Info")
-    val db = Database.forConfig("postgres")
+    val db = Database.forConfig("dev")
     log.debug("Debug")
-    //new DBUtils(db).createSchema.createTetsData(5)
+    //new DBUtils(db).createTetsData(10)
 
     log.warn("Warning")
     log.error("Error")
     log.trace("Trace")
-    db.run(TableQuery[UserTable].result) map (s => Ok(Json.toJson(s map (u => Json.toJson(u)))))
+    db.run(T.users.result) map (s => Ok(Json.toJson(s map (u => Json.toJson(u)))))
   }
 
   def gamesForUser(id: Long) = Action.async {
-    val db = Database.forConfig("postgres")
+    val db = Database.forConfig("dev")
 
-    db.run(TableQuery[GameTable].filter(_.userId === id).result) map (s => Ok(Json.toJson(s map (g => Json.toJson(g)))))
+    db.run(T.comments.result map (s => Ok(Json.toJson(s map (g => Json.toJson(g))))))
   }
 
   def saveUser(id: Long) = Action(parse.json) {
@@ -61,21 +64,22 @@ class DBUtils(db: Database) {
   def createSchema = {
     Await.result(
       db.run(DBIO.seq(
-        TableQuery[GameTable].schema.create,
-        TableQuery[UserTable].schema.create
+        /*TableQuery[CommentsTable].schema.drop,
+        TableQuery[TopicsTable].schema.drop,
+        TableQuery[UsersTable].schema.drop,*/
+        TableQuery[UsersTable].schema.create,
+        TableQuery[TopicsTable].schema.create,
+        TableQuery[CommentsTable].schema.create
       )), 500.millis)
     this
   }
 
   def createTetsData(count: Int) = {
-    val uq = TableQuery[UserTable]
-    val gq = TableQuery[GameTable]
     Await.result(
       db.run(DBIO.seq(
         (for (i <- 0 until count) yield
-          gq += (i, i, "Game" + i, i)) ++
-          (for (i <- 0 until count) yield
-            uq += (i, "User" + i)): _*
+          T.users += User(login = "user" + i, email = "email" + i + "@user.com", password = "password" + i, salt = i.toString, created = Timestamp.valueOf(LocalDateTime.now()))
+          ): _ *
       )), 500.millis)
   }
 
