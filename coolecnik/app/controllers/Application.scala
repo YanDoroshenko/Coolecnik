@@ -36,9 +36,9 @@ class Application extends Controller {
 
   def getData = Action.async {
     log.info("Info")
-    val db = Database.forConfig("dev")
+    val db = Database.forConfig("prod")
     log.debug("Debug")
-    //new DBUtils(db).createTetsData(10)
+    //new DBUtils(db).createSchema.createTestData(10)
 
     log.warn("Warning")
     log.error("Error")
@@ -74,7 +74,7 @@ class DBUtils(db: Database) {
     this
   }
 
-  def createTetsData(count: Int) = {
+  def createTestData(count: Int) = {
     Await.result(
       db.run(DBIO.seq(
         (for (i <- 0 until count) yield
