@@ -1,6 +1,9 @@
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 name := "coolecnik"
 
-version := "0.0.1"
+version := "0.0.1." + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd.HH.mm"))
 
 enablePlugins(JavaAppPackaging)
 lazy val `coolecnik` = (project in file(".")).enablePlugins(PlayScala)
@@ -12,8 +15,6 @@ libraryDependencies ++= Seq(jdbc, cache, ws, specs2 % Test,
   "com.h2database" % "h2" % "1.4.191",
   "org.postgresql" % "postgresql" % "9.4.1212",
   "com.typesafe.play" %% "play-slick" % "2.0.0")
-
-unmanagedResourceDirectories in Test += baseDirectory(_ / "target/web/public/test").value
 
 fork in run := true
 
