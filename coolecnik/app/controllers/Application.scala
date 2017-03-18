@@ -25,7 +25,7 @@ class Application extends Controller {
 
   def getData = Action.async {
     log.info("Info")
-    val db = Database.forConfig("dev")
+    val db = Database.forConfig("prod")
     log.debug("Debug")
     //new DBUtils(db).createSchema.createTestData(10)
 
