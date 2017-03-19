@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="hello">
+    Hello world
+</div>
+
+<script>
+    function httpGetAsync(theUrl, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.responseText);
+        };
+        xmlHttp.open("GET", theUrl, false); // true for asynchronous
+        xmlHttp.send(null);
+    }
+
+    function getData() {
+        try {
+            httpGetAsync("/data", function (res) {
+                document.getElementById("hello").innerHTML = res;
+            });
+        }
+        catch (err) {
+            alert("Your stuff will be sent later")
+        }
+    }
+</script>
+<button onclick="getData()">Button!</button>
+</body>
+</html>

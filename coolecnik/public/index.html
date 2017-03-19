@@ -1,36 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="shortcut icon" type="image/png" href="res/favicon.png"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <title>Coolecnik</title>
 </head>
 <body>
-<div id="hello">
-    Hello world
+
+<div class="container col-md-3">
+    <div class="row justify-content-center">
+        <h1 class="h1">COOLEČNÍK</h1>
+    </div>
 </div>
 
-<script>
-    function httpGetAsync(theUrl, callback) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                callback(xmlHttp.responseText);
-        };
-        xmlHttp.open("GET", theUrl, false); // true for asynchronous
-        xmlHttp.send(null);
-    }
+<div class="container login-form col-md-3">
+    
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#signin" aria-expanded="false" aria-controls="signin">
+        Sign In
+    </button>
+    <form class="collapse" id="signin" action="game.html">
+        <label for="inputLogin" class="sr-only">Login</label>
+        <input type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <div style="display:table; margin:0px auto;">
+            <button class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Log In</button>
+        </div>
+    
+        <br>
+    </form>
 
-    function getData() {
-        try {
-            httpGetAsync("/data", function (res) {
-                document.getElementById("hello").innerHTML = res;
-            });
-        }
-        catch (err) {
-            alert("Your stuff will be sent later")
-        }
-    }
-</script>
-<button onclick="getData()">Button!</button>
+
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#register"aria-expanded="false" aria-controls="register">
+        Register
+    </button>
+    <form class="collapse" id="register">
+        <input type="email" placeholder="E-mail" class="form-control" required>
+        <input type="text" placeholder="Login" class="form-control" required>
+        <input type="password" placeholder="Password" class="form-control" required>
+        <input type="password" placeholder="Password again" class="form-control" required>
+        <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit">Sign Up</button>
+    </form>
+    <hr class="hr-light"/>
+
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#anonplay" aria-expanded="false" aria-controls="anonplay">
+        Play as a guest
+    </button>
+    <form class="collapse" id="anonplay">
+        
+        <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default" >8-Pool</span></div>
+        <div style="width: 33%; float: left; text-align: center;">
+            <label class="switch">
+                <input type="checkbox">
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
+            <span class="label label-default">Karambol</span>
+        </div>
+        
+        <input id="pl0" type="text" placeholder="Player's 1 name" class="form-control" required>
+        <input id="pl1" type="text" placeholder="Player's 2 name" class="form-control" required>
+        <hr class="hr-green"/>
+        <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit">Start game</button>
+    </form>
+</div>
+
+
+
 </body>
 </html>
