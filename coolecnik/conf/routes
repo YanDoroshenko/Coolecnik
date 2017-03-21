@@ -4,8 +4,7 @@
 
 # Home page
 GET         /                       controllers.Assets.at(path = "/public", file ="index.html")
-GET         /data                   controllers.Application.getData
-#POST        /users/:id              controllers.Application.saveUser(id: Long)
+POST        /api/register              controllers.Application.register
 #GET         /users/:id/games        controllers.Application.gamesForUser(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
