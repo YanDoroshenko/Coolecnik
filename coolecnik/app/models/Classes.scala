@@ -9,10 +9,10 @@ case class Player(id: Int = 0, login: String, email: String, passwordHash: Strin
 
 case class FriendList(playerId: Int, friendId: Int)
 
-case class GameType(id: Int = 0, title: String, description: Option[String])
+case class GameType(id: Int, title: String, description: Option[String])
 
 case class Game(
-                 id: Int = 0,
+                 id: Int,
                  game_type: Int,
                  player1: Int,
                  player2: Int,
