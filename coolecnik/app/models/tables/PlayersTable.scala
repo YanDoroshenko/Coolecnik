@@ -6,7 +6,7 @@ import slick.driver.PostgresDriver.api._
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
   */
-class PlayersTable(tag: Tag) extends Table[Player](tag, "t_players") {
+class PlayersTable(tag: Tag) extends Table[Player](tag, "t_player") {
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
   def login = column[String]("login")
