@@ -33,5 +33,5 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
 
   def player2Fk = foreignKey("game_player2_fk", player2, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  def winnerFk = foreignKey("game_winner_fk", winner, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  def winnerFk = foreignKey("game_winner_fk", winner, Queries.players)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 }

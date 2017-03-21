@@ -1,64 +1,35 @@
 package controllers
 
+import controllers.Implicits._
 import models._
 import org.slf4j.LoggerFactory
 import play.api.libs.json._
 import play.api.mvc._
 import slick.driver.PostgresDriver.api.{Database, _}
 
-import scala.concurrent.Await
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration._
+import scala.concurrent.Future
 
 class Application extends Controller {
 
   val log = LoggerFactory.getLogger(classOf[Application])
 
-  implicit var w = new Writes[Player] {
-    override def writes(p: Player): JsValue = JsObject(Seq(
-      "id" -> JsNumber(BigDecimal(p.id)),
-      "login" -> JsString(p.login),
-      "email" -> JsString(p.login)
-    )
-    )
-  }
-
-  def getData = Action.async {
-    log.info("Info")
+  def register = Action.async(parse.json) { rq => {
+    log.warn("Recieved request: \n" + rq.body)
     val db = Database.forConfig("prod")
-    log.debug("Debug")
-    //new DBUtils(db).createSchema.createTestData(10)
-
-    log.warn("Warning")
-    log.error("Error")
-    log.trace("Trace")
-    db.run(Queries.players.result) map (s => Ok(Json.toJson(s map (u => Json.toJson(u)))))
+    Json.fromJson[Player](rq.body).asOpt match {
+      case Some(p) =>
+        db.run(
+          Queries.players.map(
+            p0 =>
+              (p0.login, p0.email, p0.passwordHash, p0.firstName, p0.lastName)) +=
+            (p.login, p.email, p.passwordHash, p.firstName, p.lastName)
+        )
+        db.run(Queries.players.filter(_.login === p.login).result).map(
+          id => Created(Json.toJson(id))
+        )
+      case None => Future(BadRequest)
+    }
   }
-}
-
-class DBUtils(db: Database) {
-  def createSchema = {
-    Await.result(
-      db.run(DBIO.seq(
-        Queries.players.schema.create,
-        Queries.friendList.schema.create,
-        Queries.gameTypes.schema.create,
-        Queries.games.schema.create,
-        Queries.caramboleStrikes.schema.create,
-        Queries.poolStrikeTypes.schema.create,
-        Queries.poolStrikes.schema.create
-      )), 500.millis)
-    this
   }
-
-  def createTestData(count: Int) = {
-    Await.result(
-      db.run(DBIO.seq(
-        (for (i <- 0 until count) yield
-          Queries.players += Player(login = "user" + i, email = "email" + i + "@user.com", passwordHash = "password" + i, firstName = None, lastName = None)
-          ): _ *
-      )), 500.millis)
-  }
-
-
 }
