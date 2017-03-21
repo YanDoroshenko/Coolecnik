@@ -1,6 +1,6 @@
 package controllers
 
-import models.Player
+import models.{Player, PlayerJson}
 import play.api.libs.json._
 
 /**
@@ -8,6 +8,7 @@ import play.api.libs.json._
   */
 object Implicits {
 
+  implicit val pjf = Json.format[PlayerJson]
   implicit val pf = Json.format[Player]
 
 }
