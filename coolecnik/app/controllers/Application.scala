@@ -17,17 +17,17 @@ class Application extends Controller {
   def register = Action.async(parse.json) { rq => {
     log.warn("Recieved request: \n" + rq.body)
     val db = Database.forConfig("prod")
-    Json.fromJson[Player](rq.body).asOpt match {
+    Json.fromJson[PlayerJson](rq.body).asOpt match {
       case Some(p) =>
         db.run(
           Queries.players.map(
             p0 =>
               (p0.login, p0.email, p0.passwordHash, p0.firstName, p0.lastName)) +=
-            (p.login, p.email, p.passwordHash, p.firstName, p.lastName)
-        )
-        db.run(Queries.players.filter(_.login === p.login).result).map(
-          id => Created(Json.toJson(id))
-        )
+            PlayerJson.unapply(p).get
+        ).flatMap(_ =>
+          db.run(Queries.players.filter(_.login === p.login).result).map(
+            id => Created(Json.toJson(id))
+          ))
       case None => Future(BadRequest)
     }
   }
