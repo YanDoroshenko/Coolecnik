@@ -28,7 +28,7 @@ class Application extends Controller {
         ).recover {
           case _: PSQLException => Future(Conflict("409"))
         }.flatMap {
-          case r: Future[Status] => r
+          case r: Future[_ <: Status] => r
           case _ =>
             db.run(Queries.players.filter(_.login === p.login).result).map(
               id => Created(Json.toJson(id))
