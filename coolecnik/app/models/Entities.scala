@@ -5,7 +5,7 @@ import java.sql.Timestamp
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
   */
-case class Player(id: Int = 0, login: String, email: String, passwordHash: String, firstName: Option[String], lastName: Option[String])
+case class Player(id: Int, login: String, email: String, passwordHash: String, firstName: Option[String], lastName: Option[String])
 
 case class FriendList(playerId: Int, friendId: Int)
 
