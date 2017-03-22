@@ -31,16 +31,16 @@
     </button>
     <form class="collapse" id="signin" action="game.html">
         <label for="inputLogin" class="sr-only">Login</label>
-        <input type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+        <input id="loginLogin" type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
         <label for="inputPassword" class="sr-only">Heslo</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Heslo" required>
+        <input id="loginPass" type="password" id="inputPassword" class="form-control" placeholder="Heslo" required>
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Zapamatovat přihlašovací údaje
             </label>
         </div>
         <div style="display:table; margin:0px auto;">
-            <button class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Přihlásit se</button>
+            <button id="btnLogin" class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Přihlásit se</button>
         </div>
     
         <br>    
@@ -84,8 +84,8 @@
     </form>
 </div>
 
-
-<script src="js/register.js"></script>
+<script src="js/login.js"></script>
+<script src="js/registration.js"></script>
 
 </body>
 </html>
