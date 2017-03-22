@@ -12,6 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-3.2.0.min.js"></script>
+    
     <title>Coolecnik</title>
 </head>
 <body>
@@ -25,40 +27,42 @@
 <div class="container login-form col-md-3">
     
     <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#signin" aria-expanded="false" aria-controls="signin">
-        Sign In
+        Přihlásit se
     </button>
     <form class="collapse" id="signin" action="game.html">
         <label for="inputLogin" class="sr-only">Login</label>
         <input type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="inputPassword" class="sr-only">Heslo</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Heslo" required>
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <input type="checkbox" value="remember-me"> Zapamatovat přihlašovací údaje
             </label>
         </div>
         <div style="display:table; margin:0px auto;">
-            <button class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Log In</button>
+            <button class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Přihlásit se</button>
         </div>
     
-        <br>
+        <br>    
     </form>
 
 
     <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#register"aria-expanded="false" aria-controls="register">
-        Register
+        Zaregistrovat se
     </button>
     <form class="collapse" id="register">
-        <input type="email" placeholder="E-mail" class="form-control" required>
-        <input type="text" placeholder="Login" class="form-control" required>
-        <input type="password" placeholder="Password" class="form-control" required>
-        <input type="password" placeholder="Password again" class="form-control" required>
-        <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit">Sign Up</button>
+        <input id="regEmail" type="email" placeholder="E-mail" class="form-control" required>
+        <input id="regLogin" type="text" placeholder="Login" class="form-control" required>
+        <input id="regName" type="text" placeholder="Jméno a příjmení (nepovinné)" class="form-control">
+        <input id="regPass1" type="password" placeholder="Heslo" class="form-control" required>
+        <input id="regPass2" type="password" placeholder="Heslo znovu" class="form-control" required>
+        <span id="regSpan" style="color: red;"></span>
+        <button id="btnRegister" class="btn btn-lg btn-secondary green-btn btn-block" type="button" >Zaregistrovat se</button>
     </form>
     <hr class="hr-light"/>
 
     <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#anonplay" aria-expanded="false" aria-controls="anonplay">
-        Play as a guest
+         Anonymní hra
     </button>
     <form class="collapse" id="anonplay">
         
@@ -73,14 +77,15 @@
             <span class="label label-default">Karambol</span>
         </div>
         
-        <input id="pl0" type="text" placeholder="Player's 1 name" class="form-control" required>
-        <input id="pl1" type="text" placeholder="Player's 2 name" class="form-control" required>
+        <input id="pl0" type="text" placeholder="Jméno" class="form-control" required>
+        <input id="pl1" type="text" placeholder="Jméno" class="form-control" required>
         <hr class="hr-green"/>
         <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit">Start game</button>
     </form>
 </div>
 
 
+<script src="js/register.js"></script>
 
 </body>
 </html>
