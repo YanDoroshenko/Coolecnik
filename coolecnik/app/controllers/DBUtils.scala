@@ -13,14 +13,15 @@ class DBUtils(db: Database) {
   def createSchema = {
     Await.result(
       db.run(DBIO.seq(
+        Queries.tournamentTypes.schema.create,
+        Queries.tournaments.schema.create,
         Queries.players.schema.create,
         Queries.friendList.schema.create,
         Queries.gameTypes.schema.create,
         Queries.games.schema.create,
-        Queries.caramboleStrikes.schema.create,
-        Queries.poolStrikeTypes.schema.create,
-        Queries.poolStrikes.schema.create
-      )), 500.millis)
+        Queries.strikeTypes.schema.create,
+        Queries.strikes.schema.create)
+      ), 500.millis)
     this
   }
 }

@@ -9,9 +9,10 @@ import slick.lifted.TableQuery
 object Queries {
   val players: TableQuery[PlayersTable] = TableQuery[PlayersTable]
   val friendList: TableQuery[FriendListTable] = TableQuery[FriendListTable]
-  val gameTypes: TableQuery[GameTypeTable] = TableQuery[GameTypeTable]
+  val gameTypes: TableQuery[GameTypesTable] = TableQuery[GameTypesTable]
   val games: TableQuery[GamesTable] = TableQuery[GamesTable]
-  val caramboleStrikes: TableQuery[CaramboleStrikesTable] = TableQuery[CaramboleStrikesTable]
-  val poolStrikeTypes: TableQuery[PoolStrikeTypesTable] = TableQuery[PoolStrikeTypesTable]
-  val poolStrikes: TableQuery[PoolStrikesTable] = TableQuery[PoolStrikesTable]
+  val strikeTypes: TableQuery[StrikeTypesTable] = TableQuery[StrikeTypesTable]
+  val strikes: TableQuery[StrikesTable] = TableQuery[StrikesTable]
+  val tournaments: TableQuery[TournamentsTable] = TableQuery[TournamentsTable]
+  val tournamentTypes: TableQuery[TournamentTypesTable] = TableQuery[TournamentTypesTable]
 }

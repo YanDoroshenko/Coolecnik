@@ -19,7 +19,9 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
 
   def winner = column[Option[Int]]("winner")
 
-  def beginning = column[Timestamp]("beginning")
+  def tournament = column[Option[Int]]("tournament")
+
+  def beginning = column[Option[Timestamp]]("beginning")
 
   def end = column[Option[Timestamp]]("end")
 
@@ -27,11 +29,13 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
 
   def carambolesToWin = column[Option[Int]]("caramboles_to_win")
 
-  override def * = (id, game_type, player1, player2, winner, beginning, end, rounds, carambolesToWin) <> (Game.tupled, Game.unapply)
+  override def * = (id, game_type, player1, player2, winner, tournament, beginning, end, rounds, carambolesToWin) <> (Game.tupled, Game.unapply)
 
   def player1Fk = foreignKey("game_player1_fk", player1, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
   def player2Fk = foreignKey("game_player2_fk", player2, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
   def winnerFk = foreignKey("game_winner_fk", winner, Queries.players)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+
+  def tournamentFk = foreignKey("game_tournament_fk", tournament, Queries.tournaments)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 }
