@@ -17,7 +17,7 @@ class Application extends Controller {
 
   private val db = Database.forConfig("dev")
 
-  def register = Action.async(parse.json) { rq => {
+  def register: Action[JsValue] = Action.async(parse.json) { rq => {
     log.info("Registration")
     log.info("Recieved request: \n" + rq.body)
     Json.fromJson[Registration](rq.body).asOpt match {
@@ -41,7 +41,7 @@ class Application extends Controller {
   }
   }
 
-  def login = Action.async(parse.json) { rq => {
+  def login: Action[JsValue] = Action.async(parse.json) { rq => {
     log.info("Login")
     log.info("Recieved request: \n" + rq.body)
     Json.fromJson[Login](rq.body).asOpt match {

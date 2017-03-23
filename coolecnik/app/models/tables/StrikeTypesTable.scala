@@ -2,24 +2,35 @@ package models.tables
 
 import models.{Queries, StrikeType}
 import slick.driver.PostgresDriver.api._
+import slick.lifted.ProvenShape
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
   */
 class StrikeTypesTable(tag: Tag) extends Table[StrikeType](tag, "t_strike_type") {
-  def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
-  def gameType = column[Int]("game_type")
+  def id: Rep[Int] =
+    column[Int]("id", O.PrimaryKey, O.AutoInc)
 
-  def title = column[String]("title")
+  def gameType: Rep[Int] =
+    column[Int]("game_type")
 
-  def description = column[Option[String]]("description")
+  def title: Rep[String] =
+    column[String]("title")
 
-  def endsGame = column[Option[Boolean]]("ends_game")
+  def description: Rep[Option[String]] =
+    column[Option[String]]("description")
 
-  override def * = (id, gameType, title, description, endsGame) <> (StrikeType.tupled, StrikeType.unapply)
+  def endsGame: Rep[Option[Boolean]] =
+    column[Option[Boolean]]("ends_game")
 
-  def stFk = foreignKey("strike_type_game_fk", gameType, Queries.gameTypes)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  override def * : ProvenShape[StrikeType] =
+    (id, gameType, title, description, endsGame) <>
+      (StrikeType.tupled, StrikeType.unapply)
 
-  def titleIdx = index("pool_strike_type_title_idx", title, unique = true)
+  private def stFk =
+    foreignKey("strike_type_game_fk", gameType, Queries.gameTypes)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+
+  private def titleIdx =
+    index("pool_strike_type_title_idx", title, unique = true)
 }

@@ -4,38 +4,56 @@ import java.sql.Timestamp
 
 import models.{Game, Queries}
 import slick.driver.PostgresDriver.api._
+import slick.lifted.ProvenShape
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
   */
 class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
-  def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
-  def game_type = column[Int]("type")
+  def id: Rep[Int] =
+    column[Int]("id", O.PrimaryKey, O.AutoInc)
 
-  def player1 = column[Int]("player1")
+  def game_type: Rep[Int] =
+    column[Int]("type")
 
-  def player2 = column[Int]("player2")
+  def player1: Rep[Int] =
+    column[Int]("player1")
 
-  def winner = column[Option[Int]]("winner")
+  def player2: Rep[Int] =
+    column[Int]("player2")
 
-  def tournament = column[Option[Int]]("tournament")
+  def winner: Rep[Option[Int]] =
+    column[Option[Int]]("winner")
 
-  def beginning = column[Option[Timestamp]]("beginning")
+  def tournament: Rep[Option[Int]] =
+    column[Option[Int]]("tournament")
 
-  def end = column[Option[Timestamp]]("end")
+  def beginning: Rep[Option[Timestamp]] =
+    column[Option[Timestamp]]("beginning")
 
-  def rounds = column[Option[Int]]("rounds")
+  def end: Rep[Option[Timestamp]] =
+    column[Option[Timestamp]]("end")
 
-  def carambolesToWin = column[Option[Int]]("caramboles_to_win")
+  def rounds: Rep[Option[Int]] =
+    column[Option[Int]]("rounds")
 
-  override def * = (id, game_type, player1, player2, winner, tournament, beginning, end, rounds, carambolesToWin) <> (Game.tupled, Game.unapply)
+  def carambolesToWin: Rep[Option[Int]] =
+    column[Option[Int]]("caramboles_to_win")
 
-  def player1Fk = foreignKey("game_player1_fk", player1, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  override def * : ProvenShape[Game] =
+    (id, game_type, player1, player2, winner, tournament, beginning, end, rounds, carambolesToWin) <>
+      (Game.tupled, Game.unapply)
 
-  def player2Fk = foreignKey("game_player2_fk", player2, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  private def player1Fk =
+    foreignKey("game_player1_fk", player1, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  def winnerFk = foreignKey("game_winner_fk", winner, Queries.players)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  private def player2Fk =
+    foreignKey("game_player2_fk", player2, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  def tournamentFk = foreignKey("game_tournament_fk", tournament, Queries.tournaments)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  private def winnerFk =
+    foreignKey("game_winner_fk", winner, Queries.players)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+
+  private def tournamentFk =
+    foreignKey("game_tournament_fk", tournament, Queries.tournaments)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 }
