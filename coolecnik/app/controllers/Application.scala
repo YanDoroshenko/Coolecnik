@@ -27,15 +27,15 @@ class Application extends Controller {
               (p0.login, p0.email, p0.passwordHash, p0.firstName, p0.lastName)) +=
             Registration.unapply(p).get
         ).recover {
-          case _: PSQLException => Future(Conflict("409"))
+          case e: PSQLException => Future(NotAcceptable(e.getMessage))
         }.flatMap {
           case r: Future[Status@unchecked] => r
           case _ =>
             db.run(Queries.players.filter(_.login === p.login).result).map(
-              id => Created(Json.toJson(id))
+              p_ => Created(Json.toJson(p_))
             )
         }
-      case None => Future(BadRequest("400"))
+      case None => Future(BadRequest("Request can't be deserialized"))
     }
   }
   }
@@ -49,10 +49,10 @@ class Application extends Controller {
         db.run(
           Queries.players.filter(p0 => p0.login === p.login && p0.passwordHash === p.passwordHash).result
         ).map {
-          case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted(Json.toJson(true))
-          case _ => Unauthorized(Json.toJson(false))
+          case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted
+          case _ => Unauthorized("Bad credentials")
         }
-      case None => Future(BadRequest("400"))
+      case None => Future(BadRequest("Request can't be deserialized"))
     }
   }
   }
