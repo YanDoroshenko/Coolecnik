@@ -13,12 +13,13 @@ import scala.concurrent.Future
 
 class Application extends Controller {
 
-  val log = LoggerFactory.getLogger(classOf[Application])
+  private val log = LoggerFactory.getLogger(classOf[Application])
+
+  private val db = Database.forConfig("dev")
 
   def register = Action.async(parse.json) { rq => {
     log.info("Registration")
     log.info("Recieved request: \n" + rq.body)
-    val db = Database.forConfig("prod")
     Json.fromJson[Registration](rq.body).asOpt match {
       case Some(p) =>
         db.run(
@@ -43,7 +44,6 @@ class Application extends Controller {
   def login = Action.async(parse.json) { rq => {
     log.info("Login")
     log.info("Recieved request: \n" + rq.body)
-    val db = Database.forConfig("prod")
     Json.fromJson[Login](rq.body).asOpt match {
       case Some(p) =>
         db.run(
@@ -55,5 +55,10 @@ class Application extends Controller {
       case None => Future(BadRequest("Request can't be deserialized"))
     }
   }
+  }
+
+  def createSchema = Action {
+    new DBUtils(db).createSchema
+    Ok
   }
 }
