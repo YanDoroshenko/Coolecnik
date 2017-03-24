@@ -21,7 +21,7 @@ class DBUtils(db: Database) {
         Queries.games.schema.create,
         Queries.strikeTypes.schema.create,
         Queries.strikes.schema.create)
-      ), 500.millis)
+      ), 5000.millis)
     this
   }
 }
