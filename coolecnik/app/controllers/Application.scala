@@ -15,7 +15,7 @@ class Application extends Controller {
 
   private val log = LoggerFactory.getLogger(classOf[Application])
 
-  private val db = Database.forConfig("dev")
+  private val db = Database.forConfig("prod")
 
   def register: Action[JsValue] = Action.async(parse.json) {
     rq => {
