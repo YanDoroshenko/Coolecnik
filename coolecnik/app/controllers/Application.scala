@@ -20,7 +20,7 @@ class Application extends Controller {
   def register: Action[JsValue] = Action.async(parse.json) {
     rq => {
       log.info("Registration")
-      log.info("Recieved request: \n" + rq.body)
+      log.info("Received request: \n" + rq.body)
       Json.fromJson[Registration](rq.body).asOpt match {
         case Some(p) =>
           db.run(
@@ -45,7 +45,7 @@ class Application extends Controller {
   def login: Action[JsValue] = Action.async(parse.json) {
     rq => {
       log.info("Login")
-      log.info("Recieved request: \n" + rq.body)
+      log.info("Received request: \n" + rq.body)
       Json.fromJson[Login](rq.body).asOpt match {
         case Some(p) =>
           db.run(
