@@ -47,17 +47,17 @@
             <img src="">
             <span>Player1</span>
             vs
-            <span class="activePlayer">Player2</span>
+            <span class="active-player">Player2</span>
             <img src="res/gambling.png">
         </h3>
     </div>
 
     <div class="row mt-3">
         <div class="list-group p-0 col-3">
-            <button class="btn btn-lg btnGoodPokes" data-toggle="gp1" title="Good Pokes"
+            <button class="btn btn-lg btn-good-pokes" data-toggle="gp1" title="Good Pokes"
                     data-content="Number of good pokes">9
             </button>
-            <button class="btn btn-lg btnBadPokes" data-toggle="bp1" title="Bad Pokes"
+            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp1" title="Bad Pokes"
                     data-content="Number of bad pokes">10
             </button>
         </div>
@@ -65,65 +65,63 @@
         <h5 class="h5 col-6 align-self-center text-center">15m : 36s</h5>
 
         <div class="list-group p-0 col-3">
-            <button class="btn btn-lg btnGoodPokes" data-toggle="gp2" title="Good Pokes"
+            <button class="btn btn-lg btn-good-pokes" data-toggle="gp2" title="Good Pokes"
                     data-content="Number of good pokes">12
             </button>
-            <button class="btn btn-lg btnBadPokes" data-toggle="bp2" title="Bad Pokes"
+            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp2" title="Bad Pokes"
                     data-content="Number of bad pokes">10
             </button>
         </div>
     </div>
     <div class="container mt-3">
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-info col-4 mx-auto">Correct</button>
-            <button class="btn btn-outline-warning col-4 mx-auto">Faul</button>
+            <button class="btn btn-outline-info col-5 mx-auto">Correct</button>
+            <button class="btn btn-outline-danger col-5 mx-auto">White in hole</button>
+        </div>
+        <div class="row justify-content-center mb-2">
+            <button class="btn btn-outline-warning col-5 mx-auto">Incorect</button>
+            <button class="btn btn-outline-danger col-5 mx-auto">Wrong Ball</button>
+        </div>
+        <div class="row justify-content-center mb-2">
+            <button class="btn btn-outline-secondary col-5 mx-auto">Back</button>
+            <button class="btn btn-outline-danger col-5 mx-auto">Other Faul</button>
         </div>
         <div class="row justify-content-center mt-2">
-            <button class="btn btn-outline-success col-4 mx-auto"
-                data-toggle="modal" data-target="#winModalWindow">
-                Win!
-            </button>
-            <button id="looseModalBtn" type="button" class="btn btn-outline-danger col-4 mx-auto"
+            <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto"
                     data-toggle="modal" data-target="#looseModalWindow">
-                Loose!
+                End of game!
             </button>
         </div>
     </div>
 </div>
 
 <!-- Modal Loose -->
-<div class="modal fade " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal" aria-hidden="true">
+<div class="modal fade " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content modalPopUp">
+        <div class="modal-content modal-pop-up">
             <div class="modal-header">
-                <h5 class="modal-title" id="looseModal">You Lost? You're looser then.</h5>
-            </div>
-            <div class="modal-body row justify-content-center">
-                <a class="col-8 mb-2 btn green-btn" href="#">Faul with 8</a>
-                <a class="col-8 mb-2 btn green-btn" href="#">8 too soon</a>
-                <a class="col-8 mb-2 btn green-btn" href="#">8 to wrong hole</a>
-                <a class="col-8 btn green-btn" href="#">8 of the table</a>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No, I did not.</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Win -->
-<div class="modal fade " id="winModalWindow" tabindex="-1" role="dialog" aria-labelledby="winModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modalPopUp">
-            <div class="modal-header">
-                <h5 class="modal-title" id="winModal">Winner? You sure?</h5>
+                <h5 class="modal-title" id="looseModal">Correct or Wrong?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div class="modal-body row justify-content-center">
+                <a class="col-8 mb-2 btn btn-success" href="#">Correct!</a>
+                <a class="col-8 mb-2 btn btn-danger" href="#wrong" data-toggle="collapse"
+                   aria-expanded="false" aria-controls="wrong">
+                    Wrong!</a>
+            </div>
+            <div class="collapse" id="wrong">
+                <div class="row justify-content-center mb-2">
+                    <a class="col-8 mb-2 btn green-btn" href="#">Faul with 8</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#">8 too soon</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#">8 to wrong hole</a>
+                    <a class="col-8 btn green-btn" href="#">8 of the table</a>
+                </div>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Yes, I won!</button>
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No, shame.</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

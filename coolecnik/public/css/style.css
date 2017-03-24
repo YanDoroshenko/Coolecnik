@@ -63,24 +63,24 @@ button {
     margin-bottom: 15px;
 }
 
-.activePlayer {
+.active-player {
     color: #419641;
     font-style: inherit;
 }
 
-.modalPopUp {
+.modal-pop-up {
     background-color: #1d1e1f;
     color: #d9edf7;
 }
 
-.btnGoodPokes{
+.btn-good-pokes{
     margin: 3px;
     background-color: transparent;
     color: rgba(0,255,0,0.5);
     border-color: #4b5257;
 }
 
-.btnBadPokes{
+.btn-bad-pokes{
     margin: 3px;
     background-color: transparent;
     color: rgba(255,0,0,0.5);
