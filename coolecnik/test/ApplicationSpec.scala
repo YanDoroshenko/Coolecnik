@@ -127,4 +127,133 @@ class ApplicationSpec extends PlaySpecification with MockitoSugar {
       ), 5000.millis)
     }
   }
+
+  "login" should {
+    "return ACCEPTED if login successful" in new WithApplication {
+
+      val login = UUID.randomUUID().toString
+
+      val p = Player(-1, login, login + "email@e.com", "password", None, None)
+
+      val db = Database.forConfig("dev")
+      Await.result(db.run(
+        Queries.players += p
+      ), 5000.millis)
+
+      val rq = FakeRequest(
+        POST,
+        "/api/login",
+        headers = FakeHeaders(
+          Seq("Content-type" -> "application/json")
+        ),
+        body =
+          s"""
+             |{
+             |"login" : "$login",
+             |"passwordHash" : "password"
+             |}
+          """.stripMargin)
+      val a = route(rq).get
+      status(a) shouldEqual ACCEPTED
+
+      contentAsString(a) must be empty
+
+      Await.result(db.run(
+        Queries.players.filter(_.login === p.login).delete
+      ), 5000.millis)
+      Await.result(db.run(
+        Queries.players.filter(_.login === login).result
+      ), 5000.millis) must be empty
+    }
+
+    "return BAD_REQUEST for bad request" in new WithApplication() {
+      val rq = FakeRequest(
+        POST,
+        "/api/register",
+        headers = FakeHeaders(
+          Seq("Content-type" -> "application/json")
+        ),
+        body =
+          s"""
+             |{
+             |"passwordHash" : "password",
+             |"email": "email@e.com"
+             |}
+          """.stripMargin)
+      val a = route(rq).get
+      status(a) shouldEqual BAD_REQUEST
+
+      contentAsString(a) shouldEqual "Request can't be deserialized"
+    }
+
+    "return UNAUTHORIZED for wrong password" in new WithApplication() {
+      val login = UUID.randomUUID().toString
+
+      val p = Player(-1, login, login + "email@e.com", "password", None, None)
+
+      val db = Database.forConfig("dev")
+      Await.result(db.run(
+        Queries.players += p
+      ), 5000.millis)
+
+      val rq = FakeRequest(
+        POST,
+        "/api/login",
+        headers = FakeHeaders(
+          Seq("Content-type" -> "application/json")
+        ),
+        body =
+          s"""
+             |{
+             |"login" : "$login",
+             |"passwordHash" : "wrong_password"
+             |}
+          """.stripMargin)
+      val a = route(rq).get
+      status(a) shouldEqual UNAUTHORIZED
+
+      contentAsString(a) shouldEqual "Bad credentials"
+
+      Await.result(db.run(
+        Queries.players.filter(_.login === p.login).delete
+      ), 5000.millis)
+      Await.result(db.run(
+        Queries.players.filter(_.login === login).result
+      ), 5000.millis) must be empty
+    }
+
+    "return UNAUTHORIZED for non-existent login" in new WithApplication() {
+      val login = UUID.randomUUID().toString
+
+      val rq = FakeRequest(
+        POST,
+        "/api/login",
+        headers = FakeHeaders(
+          Seq("Content-type" -> "application/json")
+        ),
+        body =
+          s"""
+             |{
+             |"login" : "$login",
+             |"passwordHash" : "wrong_password"
+             |}
+          """.stripMargin)
+      val a = route(rq).get
+      status(a) shouldEqual UNAUTHORIZED
+
+      contentAsString(a) shouldEqual "Bad credentials"
+
+
+    }
+
+    "clean up after test" in new WithApplication {
+      val db = Database.forConfig("dev")
+      Await.result(db.run(
+        sql"""SELECT setval('t_player_id_seq', (
+          SELECT MAX(id)
+          FROM t_player))"""
+          .as[String]
+      ), 5000.millis)
+    }
+  }
 }
