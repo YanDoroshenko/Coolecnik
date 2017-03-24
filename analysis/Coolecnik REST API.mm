@@ -139,18 +139,18 @@
 </node>
 </node>
 <node TEXT="/api/login" ID="ID_656188260" CREATED="1490339056282" MODIFIED="1490339059533">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_582743712" CREATED="1490339093794" MODIFIED="1490340644196">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1609172563" CREATED="1490339110938" MODIFIED="1490340646370">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" ID="ID_582743712" CREATED="1490339093794" MODIFIED="1490340644196">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1609172563" CREATED="1490339110938" MODIFIED="1490340646370">
 <node TEXT="POST" ID="ID_1954440184" CREATED="1490339138114" MODIFIED="1490389110399"/>
 </node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_762647841" CREATED="1490339128682" MODIFIED="1490340646668">
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_762647841" CREATED="1490339128682" MODIFIED="1490340646668">
 <node TEXT="application/json" ID="ID_320405408" CREATED="1490339854082" MODIFIED="1490339859181"/>
 </node>
 <node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1909823858" CREATED="1490339115410" MODIFIED="1490340646964">
-<node TEXT="{&#xa;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;  &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/registration.json&quot;,&#xa;  &quot;properties&quot;: {&#xa;    &quot;login&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/registration.json/login&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;email&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/registration.json/email&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;passwordHash&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/registration.json/passwordHash&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;firstName&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/registration.json/firstName&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;lastName&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/registration.json/lastName&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    }&#xa;  },&#xa;  &quot;required&quot;: [&#xa;    &quot;login&quot;,&#xa;    &quot;passwordHash&quot;,&#xa;    &quot;email&quot;&#xa;  ],&#xa;  &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1620114458" CREATED="1490339301882" MODIFIED="1490339844458"/>
+<node TEXT="{&#xa;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;  &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/login.json&quot;,&#xa;  &quot;properties&quot;: {&#xa;    &quot;login&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/login.json/login&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;passwordHash&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/login.json/passwordHash&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    }&#xa;  },&#xa;  &quot;required&quot;: [&#xa;    &quot;login&quot;,&#xa;    &quot;passwordHash&quot;&#xa;  ],&#xa;  &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1620114458" CREATED="1490339301882" MODIFIED="1490398725264"/>
 </node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1469875075" CREATED="1490339119666" MODIFIED="1490340647196">
-<node TEXT="{&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;email&quot;: &quot;user1@coolecnik.com&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;,&#xa;  &quot;firstName&quot;: &quot;User&quot;,&#xa;  &quot;lastName&quot;: &quot;Smith&quot;&#xa;}" ID="ID_765399102" CREATED="1490339360474" MODIFIED="1490339407446"/>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1469875075" CREATED="1490339119666" MODIFIED="1490340647196">
+<node TEXT="{&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;&#xa;}" ID="ID_765399102" CREATED="1490339360474" MODIFIED="1490398735748"/>
 </node>
 </node>
 <node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" ID="ID_363948555" CREATED="1490339105938" MODIFIED="1490340644996">
