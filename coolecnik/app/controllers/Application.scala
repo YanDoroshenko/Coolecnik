@@ -17,44 +17,46 @@ class Application extends Controller {
 
   private val db = Database.forConfig("dev")
 
-  def register: Action[JsValue] = Action.async(parse.json) { rq => {
-    log.info("Registration")
-    log.info("Recieved request: \n" + rq.body)
-    Json.fromJson[Registration](rq.body).asOpt match {
-      case Some(p) =>
-        db.run(
-          Queries.players.map(
-            p0 =>
-              (p0.login, p0.email, p0.passwordHash, p0.firstName, p0.lastName)) +=
-            Registration.unapply(p).get
-        ).recover {
-          case e: PSQLException => Future(NotAcceptable(e.getMessage))
-        }.flatMap {
-          case r: Future[Status@unchecked] => r
-          case _ =>
-            db.run(Queries.players.filter(_.login === p.login).result).map(
-              p_ => Created(Json.toJson(p_))
-            )
-        }
-      case None => Future(BadRequest("Request can't be deserialized"))
+  def register: Action[JsValue] = Action.async(parse.json) {
+    rq => {
+      log.info("Registration")
+      log.info("Recieved request: \n" + rq.body)
+      Json.fromJson[Registration](rq.body).asOpt match {
+        case Some(p) =>
+          db.run(
+            Queries.players.map(
+              p0 =>
+                (p0.login, p0.email, p0.passwordHash, p0.firstName, p0.lastName)) +=
+              Registration.unapply(p).get
+          ).recover {
+            case e: PSQLException => Future(NotAcceptable(e.getMessage))
+          }.flatMap {
+            case r: Future[Status@unchecked] => r
+            case _ =>
+              db.run(Queries.players.filter(_.login === p.login).result).map(
+                p_ => Created(Json.toJson(p_))
+              )
+          }
+        case None => Future(BadRequest("Request can't be deserialized"))
+      }
     }
-  }
   }
 
-  def login: Action[JsValue] = Action.async(parse.json) { rq => {
-    log.info("Login")
-    log.info("Recieved request: \n" + rq.body)
-    Json.fromJson[Login](rq.body).asOpt match {
-      case Some(p) =>
-        db.run(
-          Queries.players.filter(p0 => p0.login === p.login && p0.passwordHash === p.passwordHash).result
-        ).map {
-          case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted
-          case _ => Unauthorized("Bad credentials")
-        }
-      case None => Future(BadRequest("Request can't be deserialized"))
+  def login: Action[JsValue] = Action.async(parse.json) {
+    rq => {
+      log.info("Login")
+      log.info("Recieved request: \n" + rq.body)
+      Json.fromJson[Login](rq.body).asOpt match {
+        case Some(p) =>
+          db.run(
+            Queries.players.filter(p0 => p0.login === p.login && p0.passwordHash === p.passwordHash).result
+          ).map {
+            case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted
+            case _ => Unauthorized("Bad credentials")
+          }
+        case None => Future(BadRequest("Request can't be deserialized"))
+      }
     }
-  }
   }
 
   def createSchema = Action {
