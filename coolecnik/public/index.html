@@ -39,6 +39,7 @@
                 <input type="checkbox" value="remember-me"> Zapamatovat přihlašovací údaje
             </label>
         </div>
+        <span id="loginSpan" style="color: red;"></span>
         <div style="display:table; margin:0px auto;">
             <button id="btnLogin" class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Přihlásit se</button>
         </div>
@@ -53,7 +54,8 @@
     <form class="collapse" id="register">
         <input id="regEmail" type="email" placeholder="E-mail" class="form-control" required>
         <input id="regLogin" type="text" placeholder="Login" class="form-control" required>
-        <input id="regName" type="text" placeholder="Jméno a příjmení (nepovinné)" class="form-control">
+        <input id="regFirstName" type="text" placeholder="Jméno (nepovinné)" class="form-control">
+        <input id="regLastName" type="text" placeholder="Příjmení (nepovinné)" class="form-control">
         <input id="regPass1" type="password" placeholder="Heslo" class="form-control" required>
         <input id="regPass2" type="password" placeholder="Heslo znovu" class="form-control" required>
         <span id="regSpan" style="color: red;"></span>
