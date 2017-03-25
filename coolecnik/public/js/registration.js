@@ -15,65 +15,80 @@ function hash(str, asString, seed) {
     return hval >>> 0;
 }
 
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
 
 document.getElementById("btnRegister").addEventListener("click", function(event){
-    event.preventDefault();
+  event.preventDefault(); // html5's 'required' doesnt work because of this I suppose
+  $("#regSpan").text("");
 
-	var vLogin = $('#regLogin').val();
-	var vEmail = $('#regEmail').val();
-	var vPassHash = hash($('#regPass1').val(), false, 0).toString();
-	var vFirstName =  $('#regFirstName').val();
-  var vLastName =  $('#regLastName').val();
+  //------pass checks-----------
+  // check for required fields non-emptiness
+  if ($('#regLogin').val().length == 0 || $('#regEmail').val().length == 0 || $('#regPass1').val().length == 0 || $('#regPass2').val().length == 0){
+    $("#regSpan").text("Jedno z povinných polí je nevyplněno");
+    return;
+  }
+  // check for email format
+  else if (validateEmail($('#regEmail').val()) == false){
+    $("#regSpan").text("Zadaný email je ve špatném formátu");
+    return;
+  }
+  //check for length
+  else if ($('#regPass1').val().length < 5){
+    $("#regSpan").text("Vaše heslo je příliš krátké, musí mít min 5 symbolů");
+    return;
+  }
+  // 	check for passwords similarity
+  else if ($('#regPass1').val() != $('#regPass2').val()){
+  	$("#regSpan").text("Váši hesla jsou různá. Zkuste ještě jednou");
+    return;
+  }
+  // check if login value equals to password value
+  else if ($('#regPass1').val() == $('#regLogin').val()){
+    $("#regSpan").text("Login je stejný s heslem. Toto není bezpečně!");
+    return;
+  }
+  //------pass checks-----------     END
 
-/*  var str1 = ' { "login" : ' + vLogin + ' ,';
-  var str2 = ' "email" : ' + vEmail + ' ,';
-  var str3 = ' "passwordHash" : ' + vPassHash + ' ,';
-  var str4 = ' "firstName" : ' + vFirstName + ' ,';
-  var str5 = ' "lastName" : ' + vLastName + ' }';*/
-  var obj = {
-    "login": vLogin,
-    "email": vEmail,
-    "passwordHash": vPassHash,
-    "firstName": vFirstName,
-    "lastName": vLastName
+  // TODO maybe make post-registration messages more beautiful
+  else
+  {
+      var vLogin = $('#regLogin').val();
+      var vEmail = $('#regEmail').val();
+      var vPassHash = hash($('#regPass1').val(), false, 0).toString();
+      var vFirstName =  $('#regFirstName').val();
+      var vLastName =  $('#regLastName').val();
+
+      var obj = {
+        "login": vLogin,
+        "email": vEmail,
+        "passwordHash": vPassHash,
+        "firstName": vFirstName,
+        "lastName": vLastName
+      }
+
+      $.ajax("api/register", {
+         type: "POST",
+         contentType: "application/json; charset=utf-8",
+         data: JSON.stringify(obj),
+         statusCode: {
+            201: function (response) {
+               $("#regSpan").text("Jste úspěšně zaregistrován, můžete se přihlásit.");
+               console.log("201 CREATED");
+            },
+            400: function (response) {
+               $("#regSpan").text("Can't deserialize JSON");
+               console.log("400 BAD REQUEST");
+            },
+            406: function (response) {
+               $("#regSpan").text("Can't insert user into DB");
+               console.log("406 NOT ACCEPTABLE");
+            }
+         }
+      });
   }
 
-    //		------pass checks-----------
-    // 	check for similarity
-    if ($('#regPass1').val() != $('#regPass2').val()){
-    	//alert ("Váši hesla jsou různá. Zkuste ještě jednou");
-    	$("#regSpan").text("Váši hesla jsou různá. Zkuste ještě jednou");
-        return;
-    }
-    //check for length
-    else if ($('#regPass1').val().length < 5){
-    	//alert ("Vaše heslo je příliš krátké, musí být min. 5 symbolů");
-    	$("#regSpan").text("Vaše heslo je příliš krátké, musí mít min 5 symbolů");
-        return;
-    }
-    //		------pass checks-----------     END
-
-    // TODO maybe make error messages more beautiful
-    else
-    {
-        $.ajax("api/register", {
-           type: "POST",
-           contentType: "application/json; charset=utf-8",
-           data: JSON.stringify(obj),
-           statusCode: {
-              201: function (response) {
-                 $("#regSpan").text("Jste úspěšně zaregistrován, můžete se přihlásit.");
-                 console.log("201 CREATED");
-              },
-              400: function (response) {
-                 $("#regSpan").text("Can't deserialize JSON");
-                 console.log("400 BAD REQUEST");
-              },
-              406: function (response) {
-                 $("#regSpan").text("Can't insert user into DB");
-                 console.log("406 NOT ACCEPTABLE");
-              }
-           }
-        });
-    }
 });
