@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-    <script src="js/bootstrap.js"></script>
     <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     
     <title>Coolecnik</title>
 </head>
@@ -26,7 +26,7 @@
 
 <div class="container login-form col-md-3">
     
-    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#signin" aria-expanded="false" aria-controls="signin">
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#signin" aria-expanded="false" aria-controls="signin" id="signinCollapseBtn">
         Přihlásit se
     </button>
     <form class="collapse" id="signin" action="game.html">
@@ -48,7 +48,7 @@
     </form>
 
 
-    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#register"aria-expanded="false" aria-controls="register">
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#register"aria-expanded="false" aria-controls="register" id="regCollapseBtn">
         Zaregistrovat se
     </button>
     <form class="collapse" id="register">
@@ -63,7 +63,7 @@
     </form>
     <hr class="hr-light"/>
 
-    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#anonplay" aria-expanded="false" aria-controls="anonplay">
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#anonplay" aria-expanded="false" aria-controls="anonplay" id="anonGameCollapseBtn">
          Anonymní hra
     </button>
     <form class="collapse" id="anonplay">
@@ -88,6 +88,7 @@
 
 <script src="js/login.js"></script>
 <script src="js/registration.js"></script>
+<script src="js/indexCollapseForms.js"></script>
 
 </body>
 </html>

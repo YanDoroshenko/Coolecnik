@@ -18,6 +18,13 @@ function hash(str, asString, seed) {
 
 document.getElementById("btnLogin").addEventListener("click", function(event){
     event.preventDefault();
+    $("#loginSpan").text("");
+
+    // check for required fields non-emptiness
+    if ($('#loginLogin').val().length == 0 || $('#loginPass').val() == 0){
+      $("#loginSpan").text("Jedno z povinných polí je nevyplněno");
+      return;
+    }
 
     var vLogin = $('#loginLogin').val();
     var vPassHash = hash($('#loginPass').val(), false, 0).toString();
@@ -26,8 +33,6 @@ document.getElementById("btnLogin").addEventListener("click", function(event){
         "login" : vLogin, 
         "passwordHash" : vPassHash
     };
-
-    
 
     $.ajax("api/login", {
        type: "POST",
