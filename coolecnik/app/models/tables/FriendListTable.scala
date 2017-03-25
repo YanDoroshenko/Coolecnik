@@ -1,21 +1,30 @@
 package models.tables
 
-import models.{FriendList, Queries}
+import models.{FriendShip, Queries}
 import slick.driver.PostgresDriver.api._
+import slick.lifted.ProvenShape
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
   */
-class FriendListTable(tag: Tag) extends Table[FriendList](tag, "t_friendlist") {
-  def playerId = column[Int]("player_id")
+class FriendListTable(tag: Tag) extends Table[FriendShip](tag, "t_friendlist") {
 
-  def friendId = column[Int]("friend_id")
+  def playerId: Rep[Int] =
+    column[Int]("player_id")
 
-  override def * = (playerId, friendId) <> (FriendList.tupled, FriendList.unapply)
+  def friendId: Rep[Int] =
+    column[Int]("friend_id")
 
-  def playerFk = foreignKey("fl_player_fk", playerId, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  override def * : ProvenShape[FriendShip] =
+    (playerId, friendId) <>
+      (FriendShip.tupled, FriendShip.unapply)
 
-  def friendFk = foreignKey("fl_friend_fk", friendId, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+  private def playerFk =
+    foreignKey("fl_player_fk", playerId, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  def pk = primaryKey("fl_pk", (playerId, friendId))
+  private def friendFk =
+    foreignKey("fl_friend_fk", friendId, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+
+  private def pk =
+    primaryKey("fl_pk", (playerId, friendId))
 }

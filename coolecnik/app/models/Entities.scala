@@ -7,7 +7,7 @@ import java.sql.Timestamp
   */
 case class Player(id: Int, login: String, email: String, passwordHash: String, firstName: Option[String], lastName: Option[String])
 
-case class FriendList(playerId: Int, friendId: Int)
+case class FriendShip(playerId: Int, friendId: Int)
 
 case class GameType(id: Int, title: String, description: Option[String])
 
@@ -17,13 +17,16 @@ case class Game(
                  player1: Int,
                  player2: Int,
                  winner: Option[Int],
-                 beginning: Timestamp,
+                 tournament: Option[Int],
+                 beginning: Option[Timestamp],
                  end: Option[Timestamp],
                  rounds: Option[Int],
                  carambolesToWin: Option[Int])
 
-case class CaramboleStrike(id: Int, game: Int, player: Int, correct: Boolean, round: Int)
+case class StrikeType(id: Int, gameType: Int, title: String, description: Option[String], endsGame: Option[Boolean])
 
-case class PoolStrikeType(id: Int, title: String, description: Option[String], endsGame: Boolean)
+case class Strike(id: Int, strikeType: Int, game: Int, player: Int, round: Int)
 
-case class PoolStrike(id: Int, strikeType: Int, game: Int, player: Int, seqNumber: Int)
+case class Tournament(id: Int, tournamentType: Int)
+
+case class TournamentType(id: Int, title: String, description: Option[String])

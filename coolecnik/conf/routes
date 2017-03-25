@@ -5,6 +5,9 @@
 # Home page
 GET         /                    controllers.Assets.at(path = "/public", file ="index.html")
 
+# Generate DB schema
+#GET         /createSchema       controllers.Application.createSchema
+
 # Registration
 POST        /api/register        controllers.Application.register
 

@@ -21,16 +21,22 @@ document.getElementById("btnRegister").addEventListener("click", function(event)
 
 	var vLogin = $('#regLogin').val();
 	var vEmail = $('#regEmail').val();
-	var vPassHash = hash($('#regPass1').val(), false, 0);
-	var vName =  $('#regName').val();
+	var vPassHash = hash($('#regPass1').val(), false, 0).toString();
+	var vFirstName =  $('#regFirstName').val();
+  var vLastName =  $('#regLastName').val();
 
-
-	var d = { 
-		login : vLogin, 
-		email : vEmail, 
-		passwordHash : vPassHash, 
-		firstName : vName 
-	};
+/*  var str1 = ' { "login" : ' + vLogin + ' ,';
+  var str2 = ' "email" : ' + vEmail + ' ,';
+  var str3 = ' "passwordHash" : ' + vPassHash + ' ,';
+  var str4 = ' "firstName" : ' + vFirstName + ' ,';
+  var str5 = ' "lastName" : ' + vLastName + ' }';*/
+  var obj = {
+    "login": vLogin,
+    "email": vEmail,
+    "passwordHash": vPassHash,
+    "firstName": vFirstName,
+    "lastName": vLastName
+  }
 
     //		------pass checks-----------
     // 	check for similarity
@@ -40,18 +46,34 @@ document.getElementById("btnRegister").addEventListener("click", function(event)
         return;
     }
     //check for length
-    if ($('#regPass1').val().length < 5){
+    else if ($('#regPass1').val().length < 5){
     	//alert ("Vaše heslo je příliš krátké, musí být min. 5 symbolů");
-    	$("#regSpan").text("Vaše heslo je příliš krátké, musí mít min. 5 symbolů");
+    	$("#regSpan").text("Vaše heslo je příliš krátké, musí mít min 5 symbolů");
         return;
     }
     //		------pass checks-----------     END
 
-
-	console.log("Pass check OK. Sending request...");
-	$.post( "api/login/", d, function( data ) {
-		console.log(data);
-	});
-
-	console.log("Hash of pass:", vPassHash);
+    // TODO maybe make error messages more beautiful
+    else
+    {
+        $.ajax("api/register", {
+           type: "POST",
+           contentType: "application/json; charset=utf-8",
+           data: JSON.stringify(obj),
+           statusCode: {
+              201: function (response) {
+                 $("#regSpan").text("Jste úspěšně zaregistrován, můžete se přihlásit.");
+                 console.log("201 CREATED");
+              },
+              400: function (response) {
+                 $("#regSpan").text("Can't deserialize JSON");
+                 console.log("400 BAD REQUEST");
+              },
+              406: function (response) {
+                 $("#regSpan").text("Can't insert user into DB");
+                 console.log("406 NOT ACCEPTABLE");
+              }
+           }
+        });
+    }
 });

@@ -17,22 +17,36 @@ function hash(str, asString, seed) {
 
 
 document.getElementById("btnLogin").addEventListener("click", function(event){
-    // TODO uncoment next line when autorization will be implemented
-    //event.preventDefault();
+    event.preventDefault();
 
     var vLogin = $('#loginLogin').val();
-    var vPassHash = hash($('#loginPass').val(), false, 0);
+    var vPassHash = hash($('#loginPass').val(), false, 0).toString();
 
-    var d = { 
-        login : vLogin, 
-        passwordHash : vPassHash
+    var obj = { 
+        "login" : vLogin, 
+        "passwordHash" : vPassHash
     };
 
-    //      ------pass checks-----------
-    //      ------pass checks-----------     END
+    
 
-    $.post( "api/login/", d, function( data ) {
-        console.log(data);
+    $.ajax("api/login", {
+       type: "POST",
+       contentType: "application/json; charset=utf-8",
+       data: JSON.stringify(obj),
+       statusCode: {
+          202: function (response) {
+             console.log("202 ACCEPTED");
+             window.location.replace("/game8pool.html");
+          },
+          400: function (response) {
+             $("#loginSpan").text("Can't deserialize JSON");
+             console.log("400 BAD REQUEST");
+          },
+          401: function (response) {
+             $("#loginSpan").text("Špatný login nebo heslo. Zkuste ještě jednou. ");
+             console.log("401 UNAUTHORIZED");
+          }
+       }
     });
 
 });
