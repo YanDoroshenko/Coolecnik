@@ -1,5 +1,5 @@
 /* 	Use as hash(<what>, false, 0);
-	thanks to  https://github.com/garycourt/murmurhash-js*/
+	thanks to  https://github.com/garycourt/murmurhash-js */
 function hash(str, asString, seed) {
     var i, l,
         hval = (seed === undefined) ? 0x811c9dc5 : seed;
