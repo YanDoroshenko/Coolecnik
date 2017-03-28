@@ -3,18 +3,22 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Assets.at(path = "/public", file ="index.html")
+GET         /                        controllers.Assets.at(path = "/public", file ="index.html")
 
 # Generate DB schema
-#GET         /createSchema       controllers.Application.createSchema
+#GET         /createSchema       util.DBUtils.createSchema
 
 # Registration
-POST        /api/register        controllers.Application.register
+POST        /api/register            controllers.Application.register
 
 # Login
-POST        /api/login           controllers.Application.login
+POST        /api/login               controllers.Application.login
+
+# Reset password
+PUT         /api/passwdreset         controllers.Application.resetPassword
+
+# Update password
+PUT         /api/passwdupdate        controllers.Application.updatePassword
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /*file               controllers.Assets.at(path="/public", file)
-
-    
+GET         /*file                   controllers.Assets.at(path="/public", file)

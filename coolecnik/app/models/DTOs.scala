@@ -6,3 +6,7 @@ package models
 case class Registration(login: String, email: String, passwordHash: String, firstName: Option[String], lastName: Option[String])
 
 case class Login(login: String, passwordHash: String)
+
+case class PasswordReset(email: String, restorePassword: Option[String])
+
+case class PasswordUpdate(email: String, newPassword: String)
