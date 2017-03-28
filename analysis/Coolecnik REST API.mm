@@ -109,8 +109,8 @@
 <node TEXT="201 CREATED" ID="ID_1396597569" CREATED="1490340088426" MODIFIED="1490340091502"/>
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_546970634" CREATED="1490340031618" MODIFIED="1490340533137">
-<node TEXT="Created user as a JSON" FOLDED="true" ID="ID_838583552" CREATED="1490340276338" MODIFIED="1490340293437">
-<node TEXT="example" FOLDED="true" ID="ID_357099164" CREATED="1490340294145" MODIFIED="1490340296733">
+<node TEXT="Created user as a JSON" ID="ID_838583552" CREATED="1490340276338" MODIFIED="1490340293437">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_357099164" CREATED="1490340294145" MODIFIED="1490733252056">
 <node TEXT="{&#xa;  &quot;id&quot;: 123,&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;email&quot;: &quot;user1@coolecnik.com&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;,&#xa;  &quot;firstName&quot;: &quot;User&quot;,&#xa;  &quot;lastName&quot;: &quot;Smith&quot;&#xa;}" ID="ID_1487176458" CREATED="1490340036506" MODIFIED="1490340046902"/>
 </node>
 </node>
@@ -140,22 +140,22 @@
 </node>
 </node>
 <node TEXT="/api/login" FOLDED="true" ID="ID_656188260" CREATED="1490339056282" MODIFIED="1490339059533">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" ID="ID_582743712" CREATED="1490339093794" MODIFIED="1490340644196">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_582743712" CREATED="1490339093794" MODIFIED="1490340644196">
 <node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1609172563" CREATED="1490339110938" MODIFIED="1490340646370">
 <node TEXT="POST" ID="ID_1954440184" CREATED="1490339138114" MODIFIED="1490389110399"/>
 </node>
 <node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_762647841" CREATED="1490339128682" MODIFIED="1490340646668">
 <node TEXT="application/json" ID="ID_320405408" CREATED="1490339854082" MODIFIED="1490339859181"/>
 </node>
-<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1909823858" CREATED="1490339115410" MODIFIED="1490340646964">
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1909823858" CREATED="1490339115410" MODIFIED="1490340646964">
 <node TEXT="{&#xa;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;  &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/login.json&quot;,&#xa;  &quot;properties&quot;: {&#xa;    &quot;login&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/login.json/login&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;passwordHash&quot;: {&#xa;      &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/login.json/passwordHash&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    }&#xa;  },&#xa;  &quot;required&quot;: [&#xa;    &quot;login&quot;,&#xa;    &quot;passwordHash&quot;&#xa;  ],&#xa;  &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1620114458" CREATED="1490339301882" MODIFIED="1490398725264"/>
 </node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1469875075" CREATED="1490339119666" MODIFIED="1490340647196">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1469875075" CREATED="1490339119666" MODIFIED="1490340647196">
 <node TEXT="{&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;&#xa;}" ID="ID_765399102" CREATED="1490339360474" MODIFIED="1490398735748"/>
 </node>
 </node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" ID="ID_363948555" CREATED="1490339105938" MODIFIED="1490340644996">
-<node TEXT="registered succesfully" ID="ID_1638230469" CREATED="1490339865890" MODIFIED="1490340086987">
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_363948555" CREATED="1490339105938" MODIFIED="1490340644996">
+<node TEXT="registered succesfully" FOLDED="true" ID="ID_1638230469" CREATED="1490339865890" MODIFIED="1490340086987">
 <node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1451528939" CREATED="1490339886618" MODIFIED="1490340529009">
 <node TEXT="202 ACCEPTED" ID="ID_1798796570" CREATED="1490340088426" MODIFIED="1490398548924"/>
 </node>
@@ -167,7 +167,7 @@
 </node>
 </node>
 </node>
-<node TEXT="can&apos;t deserialize JSON" ID="ID_1875694184" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_1875694184" CREATED="1490339882146" MODIFIED="1490340107973">
 <node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1824011381" CREATED="1490340050658" MODIFIED="1490340536352">
 <node TEXT="400 BAD REQUEST" ID="ID_1313723345" CREATED="1490340204657" MODIFIED="1490340210420"/>
 </node>
@@ -175,7 +175,7 @@
 <node TEXT="Request can&apos;t be deserialized" ID="ID_573080437" CREATED="1490340257682" MODIFIED="1490340258861"/>
 </node>
 </node>
-<node TEXT="bad credentials" ID="ID_1992527257" CREATED="1490340112410" MODIFIED="1490398575373">
+<node TEXT="bad credentials" FOLDED="true" ID="ID_1992527257" CREATED="1490340112410" MODIFIED="1490398575373">
 <node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_111266835" CREATED="1490340050658" MODIFIED="1490340568782">
 <node TEXT="401 UNAUTHORIZED" ID="ID_743223346" CREATED="1490340380722" MODIFIED="1490398583565"/>
 </node>
@@ -223,6 +223,53 @@
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_349593624" CREATED="1490340253026" MODIFIED="1490340539716">
 <node TEXT="Request can&apos;t be deserialized" ID="ID_204486036" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/api/passwdupdate" FOLDED="true" ID="ID_1472921065" CREATED="1490733049057" MODIFIED="1490733063737">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_159873632" CREATED="1490730029521" MODIFIED="1490730057227">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_579513219" CREATED="1490730059438" MODIFIED="1490730081928">
+<node TEXT="PUT" ID="ID_669973201" CREATED="1490730124937" MODIFIED="1490730126609"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1751580881" CREATED="1490730065473" MODIFIED="1490730082519">
+<node TEXT="application/json" ID="ID_382269736" CREATED="1490730129550" MODIFIED="1490730132636"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1553859382" CREATED="1490730071424" MODIFIED="1490730082770">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;email&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json/email&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;newPassword&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json/recoveryPassword&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;        &quot;email&quot;,&#xa;        &quot;newPasswd&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1683524756" CREATED="1490730447673" MODIFIED="1490733132866"/>
+<node TEXT="" ID="ID_856976535" CREATED="1490733114857" MODIFIED="1490733114857"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1091224250" CREATED="1490730075057" MODIFIED="1490730083021">
+<node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;,&#xa;  &quot;newPassword&quot;:&quot;newPassword1234&quot;&#xa;}" ID="ID_940900207" CREATED="1490730477097" MODIFIED="1490733175402"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1268653486" CREATED="1490730034409" MODIFIED="1490730057789">
+<node TEXT="email not found" FOLDED="true" ID="ID_1403288338" CREATED="1490730482712" MODIFIED="1490730490139">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_765391337" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="404 NOT FOUND" ID="ID_1201041361" CREATED="1490730496040" MODIFIED="1490730499941"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1436789116" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="Email ${email} not found" ID="ID_1933347840" CREATED="1490730501552" MODIFIED="1490730517748"/>
+</node>
+</node>
+<node TEXT="recovery password sent" FOLDED="true" ID="ID_1105336001" CREATED="1490730519681" MODIFIED="1490730541991">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_33021968" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="201 CREATED" ID="ID_1192721166" CREATED="1490730548305" MODIFIED="1490733211357"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1875487836" CREATED="1490730563841" MODIFIED="1490730567517">
+<node TEXT="Updated user as a JSON" FOLDED="true" ID="ID_174962100" CREATED="1490340276338" MODIFIED="1490733284640">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_631151213" CREATED="1490340294145" MODIFIED="1490733252056">
+<node TEXT="{&#xa;  &quot;id&quot;: 123,&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;email&quot;: &quot;user1@coolecnik.com&quot;,&#xa;  &quot;passwordHash&quot;: &quot;newPassword1234&quot;,&#xa;  &quot;firstName&quot;: &quot;User&quot;,&#xa;  &quot;lastName&quot;: &quot;Smith&quot;&#xa;}" ID="ID_321888174" CREATED="1490340036506" MODIFIED="1490733303896"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_948421245" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_343295455" CREATED="1490340050658" MODIFIED="1490340536352">
+<node TEXT="400 BAD REQUEST" ID="ID_1281075654" CREATED="1490340204657" MODIFIED="1490340210420"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1836808496" CREATED="1490340253026" MODIFIED="1490340539716">
+<node TEXT="Request can&apos;t be deserialized" ID="ID_1775814847" CREATED="1490340257682" MODIFIED="1490340258861"/>
 </node>
 </node>
 </node>
