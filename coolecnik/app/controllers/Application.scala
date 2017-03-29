@@ -3,11 +3,11 @@ package controllers
 import java.util.UUID
 import javax.inject.Inject
 
-import controllers.Implicits._
 import models._
 import org.postgresql.util.PSQLException
 import org.slf4j.LoggerFactory
 import play.api.Configuration
+import util.Implicits._
 import util.MailSender
 import play.api.libs.json._
 import play.api.mvc._
@@ -88,7 +88,7 @@ class Application @Inject()(configuration: Configuration) extends Controller {
 
   def updatePassword: Action[JsValue] = Action.async(parse.json) {
     rq =>
-      log.info("Password reset")
+      log.info("Password update")
       log.info("Received request: \n" + rq.body)
       Json.fromJson[PasswordUpdate](rq.body).asOpt match {
         case Some(p) =>

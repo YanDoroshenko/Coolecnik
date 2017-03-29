@@ -1,12 +1,12 @@
 import java.util.UUID
 
-import controllers.Implicits._
 import models._
 import org.scalatest.mockito.MockitoSugar
 import play.api.libs.json.Json
 import play.api.test._
 import slick.driver.PostgresDriver.api._
 import slick.driver.PostgresDriver.backend.Database
+import util.Implicits._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._

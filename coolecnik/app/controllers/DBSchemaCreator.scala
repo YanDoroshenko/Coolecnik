@@ -1,4 +1,4 @@
-package util
+package controllers
 
 import models.Queries
 import play.api.mvc.{Action, _}
@@ -9,7 +9,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 21.03.2017.
   */
-class DBUtils extends Controller {
+class DBSchemaCreator extends Controller {
 
   private val db = Database.forConfig("prod")
 
@@ -23,6 +23,7 @@ class DBUtils extends Controller {
       Queries.games.schema.create,
       Queries.strikeTypes.schema.create,
       Queries.strikes.schema.create)
-    ).map(_ => Ok)
+    )
+      .map(_ => Ok)
   }
 }

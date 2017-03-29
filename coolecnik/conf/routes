@@ -6,7 +6,7 @@
 GET         /                        controllers.Assets.at(path = "/public", file ="index.html")
 
 # Generate DB schema
-#GET         /createSchema       util.DBUtils.createSchema
+#GET         /createSchema            controllers.DBSchemaCreator.createSchema
 
 # Registration
 POST        /api/register            controllers.Application.register
