@@ -29,7 +29,7 @@
     <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#signin" aria-expanded="false" aria-controls="signin" id="signinCollapseBtn">
         Přihlásit se
     </button>
-    <form class="collapse" id="signin" action="game.html">
+    <form  class="collapse" id="signin" action="game.html">
         <label for="inputLogin" class="sr-only">Login</label>
         <input id="loginLogin" type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
         <label for="inputPassword" class="sr-only">Heslo</label>
@@ -42,10 +42,12 @@
         <span id="loginSpan" style="color: red;"></span>
         <div style="display:table; margin:0px auto;">
             <button id="btnLogin" class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Přihlásit se</button>
+            <button id="btnLogin" class="btn btn-sm btn-secondary green-btn btn-block center-block" data-toggle="modal" data-target="#myModal" style="margin-top:3%;">Zapomenuté heslo</button>
         </div>
     
         <br>    
     </form>
+    
 
 
     <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#register"aria-expanded="false" aria-controls="register" id="regCollapseBtn">
@@ -63,12 +65,11 @@
     </form>
     <hr class="hr-light"/>
 
-    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#anonplay" aria-expanded="false" aria-controls="anonplay" id="anonGameCollapseBtn">
-         Anonymní hra
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#anonplay" aria-expanded="false" aria-controls="anonplay" id="anonGameCollapseBtn">Anonymní hra
     </button>
     <form class="collapse" id="anonplay">
         
-        <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default" >8-Pool</span></div>
+        <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default">8-Pool</span></div>
         <div style="width: 33%; float: left; text-align: center;">
             <label class="switch">
                 <input type="checkbox">
@@ -84,6 +85,30 @@
         <hr class="hr-green"/>
         <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit">Start game</button>
     </form>
+</div>
+
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Obnovení hesla</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 </div>
 
 <script src="js/login.js"></script>
