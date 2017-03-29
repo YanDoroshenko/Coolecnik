@@ -9,4 +9,4 @@ case class Login(login: String, passwordHash: String)
 
 case class PasswordReset(email: String, restorePassword: Option[String])
 
-case class PasswordUpdate(email: String, newPassword: String)
+case class PasswordUpdate(email: String, oldPassword: String, newPassword: String)

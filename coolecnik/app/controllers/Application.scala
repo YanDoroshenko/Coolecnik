@@ -72,12 +72,15 @@ class Application @Inject()(configuration: Configuration) extends Controller {
         case Some(p) =>
           db.run(
             Queries.players.filter(_.email === p.email).result
-          ).map {
+          ).flatMap {
             case l: Iterable[Player@unchecked] if l.nonEmpty =>
               val newPasswd = UUID.randomUUID().toString.split("-").head
               new MailSender(configuration).send(p.email, newPasswd)
-              Created(Json.toJson(PasswordReset(p.email, Some(newPasswd))))
-            case _ => NotFound("Email " + p.email + " not found")
+              val q = for {p_ <- Queries.players if p_.email === p.email} yield p_.passwordHash
+              val updateAction = q.update(newPasswd)
+
+              db.run(updateAction).map(_ => Created(Json.toJson(PasswordReset(p.email, Some(newPasswd)))))
+            case _ => Future(NotFound("Email " + p.email + " not found"))
           }
         case None => Future(BadRequest("Request can't be deserialized"))
       }
@@ -90,9 +93,9 @@ class Application @Inject()(configuration: Configuration) extends Controller {
       Json.fromJson[PasswordUpdate](rq.body).asOpt match {
         case Some(p) =>
           db.run(
-            Queries.players.filter(_.email === p.email).result
+            Queries.players.filter(p_ => p_.email === p.email).result
           ).flatMap {
-            case l: Iterable[Player@unchecked] if l.nonEmpty =>
+            case l: Iterable[Player@unchecked] if l.nonEmpty && l.head.passwordHash == p.oldPassword =>
 
               val q = for {p_ <- Queries.players if p_.email === p.email} yield p_.passwordHash
               val updateAction = q.update(p.newPassword)
@@ -105,6 +108,7 @@ class Application @Inject()(configuration: Configuration) extends Controller {
                     case _ =>
                       NotFound("Email " + p.email + " not found")
                   })
+            case l: Iterable[Player@unchecked] if l.nonEmpty => Future(Unauthorized("Wrong recovery password"))
             case _ => Future(NotFound("Email " + p.email + " not found"))
           }
         case None => Future(BadRequest("Request can't be deserialized"))
