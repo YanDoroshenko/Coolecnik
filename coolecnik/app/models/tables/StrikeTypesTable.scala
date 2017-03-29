@@ -16,10 +16,10 @@ class StrikeTypesTable(tag: Tag) extends Table[StrikeType](tag, "t_strike_type")
     column[Int]("game_type")
 
   def title: Rep[String] =
-    column[String]("title")
+    column[String]("title", O.SqlType("varchar(55)"))
 
   def description: Rep[Option[String]] =
-    column[Option[String]]("description")
+    column[Option[String]]("description", O.SqlType("varchar(1000)"))
 
   def endsGame: Rep[Option[Boolean]] =
     column[Option[Boolean]]("ends_game")
