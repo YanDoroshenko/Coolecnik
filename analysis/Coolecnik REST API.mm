@@ -236,23 +236,23 @@
 <node TEXT="application/json" ID="ID_382269736" CREATED="1490730129550" MODIFIED="1490730132636"/>
 </node>
 <node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1553859382" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;email&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json/email&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;newPassword&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json/recoveryPassword&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;        &quot;email&quot;,&#xa;        &quot;newPasswd&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1683524756" CREATED="1490730447673" MODIFIED="1490733132866"/>
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;email&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json/email&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;oldPassword&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json/oldPassword&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;newPassword&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdupdate.json/newPassword&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;        &quot;email&quot;,&#xa;&quot;oldPassword&quot;,&#xa;        &quot;newPassword&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1683524756" CREATED="1490730447673" MODIFIED="1490801183180"/>
 <node TEXT="" ID="ID_856976535" CREATED="1490733114857" MODIFIED="1490733114857"/>
 </node>
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1091224250" CREATED="1490730075057" MODIFIED="1490730083021">
-<node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;,&#xa;  &quot;newPassword&quot;:&quot;newPassword1234&quot;&#xa;}" ID="ID_940900207" CREATED="1490730477097" MODIFIED="1490733175402"/>
+<node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;,&#xa;  &quot;oldPassword&quot; : &quot;1f1g3abc&quot;,&#xa;  &quot;newPassword&quot;:&quot;newPassword1234&quot;&#xa;}" ID="ID_940900207" CREATED="1490730477097" MODIFIED="1490801212499"/>
 </node>
 </node>
 <node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1268653486" CREATED="1490730034409" MODIFIED="1490730057789">
 <node TEXT="email not found" FOLDED="true" ID="ID_1403288338" CREATED="1490730482712" MODIFIED="1490730490139">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_765391337" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_765391337" CREATED="1490730059438" MODIFIED="1490730099560">
 <node TEXT="404 NOT FOUND" ID="ID_1201041361" CREATED="1490730496040" MODIFIED="1490730499941"/>
 </node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1436789116" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1436789116" CREATED="1490730065473" MODIFIED="1490730103319">
 <node TEXT="Email ${email} not found" ID="ID_1933347840" CREATED="1490730501552" MODIFIED="1490730517748"/>
 </node>
 </node>
-<node TEXT="recovery password sent" FOLDED="true" ID="ID_1105336001" CREATED="1490730519681" MODIFIED="1490730541991">
+<node TEXT="password updated" FOLDED="true" ID="ID_1105336001" CREATED="1490730519681" MODIFIED="1490801248123">
 <node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_33021968" CREATED="1490730542729" MODIFIED="1490730547498">
 <node TEXT="201 CREATED" ID="ID_1192721166" CREATED="1490730548305" MODIFIED="1490733211357"/>
 </node>
@@ -270,6 +270,14 @@
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1836808496" CREATED="1490340253026" MODIFIED="1490340539716">
 <node TEXT="Request can&apos;t be deserialized" ID="ID_1775814847" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+<node TEXT="wrong old password" FOLDED="true" ID="ID_1344342752" CREATED="1490730482712" MODIFIED="1490801261132">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_65942611" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="401 UNAUTHORIZED" ID="ID_532613500" CREATED="1490730496040" MODIFIED="1490801286229"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1157472566" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="Wrong recovery password" ID="ID_168184873" CREATED="1490730501552" MODIFIED="1490801293550"/>
 </node>
 </node>
 </node>
