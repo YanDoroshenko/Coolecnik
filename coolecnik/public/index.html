@@ -29,11 +29,11 @@
     <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#signin" aria-expanded="false" aria-controls="signin" id="signinCollapseBtn">
         Přihlásit se
     </button>
-    <form  class="collapse" id="signin" action="game.html">
+    <form class="collapse" id="signin">
         <label for="inputLogin" class="sr-only">Login</label>
-        <input id="loginLogin" type="text" id="inputLogin" class="form-control" placeholder="Login" required autofocus>
+        <input id="loginLogin" type="text" id="inputLogin" class="form-control" placeholder="Login" autofocus>
         <label for="inputPassword" class="sr-only">Heslo</label>
-        <input id="loginPass" type="password" id="inputPassword" class="form-control" placeholder="Heslo" required>
+        <input id="loginPass" type="password" id="inputPassword" class="form-control" placeholder="Heslo">
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="remember-me"> Zapamatovat přihlašovací údaje
@@ -42,7 +42,9 @@
         <span id="loginSpan" style="color: red;"></span>
         <div style="display:table; margin:0px auto;">
             <button id="btnLogin" class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Přihlásit se</button>
-            <button id="btnLogin" class="btn btn-sm btn-secondary green-btn btn-block center-block" data-toggle="modal" data-target="#myModal" style="margin-top:3%;">Zapomenuté heslo</button>
+            <button id="btnRec" class="btn btn-sm btn-secondary green-btn btn-block center-block" data-toggle="modal"
+                    data-target="#myModal" style="margin-top:3%;">Zapomenuté heslo
+            </button>
         </div>
     
         <br>    
@@ -54,12 +56,12 @@
         Zaregistrovat se
     </button>
     <form class="collapse" id="register">
-        <input id="regEmail" type="email" placeholder="E-mail" class="form-control" required>
+        <input id="regEmail" type="email" placeholder="E-mail" class="form-control">
         <input id="regLogin" type="text" placeholder="Login" class="form-control" required>
         <input id="regFirstName" type="text" placeholder="Jméno (nepovinné)" class="form-control">
         <input id="regLastName" type="text" placeholder="Příjmení (nepovinné)" class="form-control">
-        <input id="regPass1" type="password" placeholder="Heslo" class="form-control" required>
-        <input id="regPass2" type="password" placeholder="Heslo znovu" class="form-control" required>
+        <input id="regPass1" type="password" placeholder="Heslo" class="form-control">
+        <input id="regPass2" type="password" placeholder="Heslo znovu" class="form-control">
         <span id="regSpan" style="color: red;"></span>
         <button id="btnRegister" class="btn btn-lg btn-secondary green-btn btn-block" type="button" >Zaregistrovat se</button>
     </form>
@@ -88,6 +90,7 @@
 </div>
 
 
+
 <div class="container">
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -98,8 +101,35 @@
         <div class="modal-header">
           <h4 class="modal-title">Obnovení hesla</h4>
         </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <div style="padding: 5% 5% 5% 5%;">
+              <br>
+              <form id='recEmail' style='display: block;'>
+                  <input id="recEmailForm" type="text" placeholder='Zadejte váš email' class='form-control' required>
+                  <button id='recEmailBtn' class='btn btn-lg btn-secondary green-btn btn-block' type='submit'>
+                      Pokračovat
+                  </button>
+                  <span id='recEmailSpan'></span>
+                  <span>Na zadaný email dostenete dopis s speciálním kódem, který bude muset uvést v další formě</span>
+              </form>
+
+              <form id='recRecCode' style='display: none;'>
+                  <input id='recRecCodeForm' type='text' placeholder='Zadejte kod' class='form-control' required>
+                  <button id='recRecCodeBtn' class='btn btn-lg btn-secondary green-btn btn-block' type='submit'>
+                      Pokračovat
+                  </button>
+                  <span id='recRecCodeSpan'></span>
+              </form>
+
+              <form id='recRecNewPass' style='display: none;'>
+                  <input id='recRecNewPass1' placeholder='Nové heslo' type="password" class='form-control' required>
+                  <input id='recRecNewPass2' placeholder='Nové heslo znovu' type="password" class='form-control'
+                         required>
+                  <button id='recRecNewPassBtn' class='btn btn-lg btn-secondary green-btn btn-block' type='submit'>
+                      Pokračovat
+                  </button>
+                  <span id='recRecNewPassSpan'></span>
+              </form>
+              <br>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -113,6 +143,7 @@
 
 <script src="js/login.js"></script>
 <script src="js/registration.js"></script>
+<script src="js/recoveryPassword.js"></script>
 <script src="js/indexCollapseForms.js"></script>
 
 </body>
