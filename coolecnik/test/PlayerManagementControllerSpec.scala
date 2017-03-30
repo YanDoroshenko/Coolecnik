@@ -16,7 +16,7 @@ import scala.concurrent.duration._
   * You can mock out a whole application including requests, plugins etc.
   * For more information, consult the wiki.
   */
-class ApplicationSpec extends PlaySpecification with MockitoSugar {
+class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar {
 
   "registration" should {
     "return user if successfully registered" in new WithApplication {

@@ -16,22 +16,20 @@ import slick.driver.PostgresDriver.api.{Database, _}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class Application @Inject()(configuration: Configuration) extends Controller {
+class PlayerManagementController @Inject()(configuration: Configuration) extends Controller {
 
-  private val log = LoggerFactory.getLogger(classOf[Application])
+  private val log = LoggerFactory.getLogger(classOf[PlayerManagementController])
 
   private val db = Database.forConfig("prod")
 
   def register: Action[JsValue] = Action.async(parse.json) {
     rq => {
-      log.info("Registration")
-      log.info("Received request: \n" + rq.body)
+      log.info("Registration:\n" + rq.body)
       Json.fromJson[Registration](rq.body).asOpt match {
         case Some(p) =>
           db.run(
             Queries.players.map(
-              p0 =>
-                (p0.login, p0.email, p0.passwordHash, p0.firstName, p0.lastName)) +=
+              p_ => (p_.login, p_.email, p_.passwordHash, p_.firstName, p_.lastName)) +=
               Registration.unapply(p).get
           ).recover {
             case e: PSQLException => Future(NotAcceptable(e.getMessage))
@@ -49,14 +47,13 @@ class Application @Inject()(configuration: Configuration) extends Controller {
 
   def login: Action[JsValue] = Action.async(parse.json) {
     rq => {
-      log.info("Login")
-      log.info("Received request: \n" + rq.body)
+      log.info("Login:\n" + rq.body)
       Json.fromJson[Login](rq.body).asOpt match {
         case Some(p) =>
           db.run(
-            Queries.players.filter(p0 => p0.login === p.login && p0.passwordHash === p.passwordHash).result
+            Queries.players.filter(p_ => p_.login === p.login && p_.passwordHash === p.passwordHash).result
           ).map {
-            case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted
+            case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted(Json.toJson(l.head))
             case _ => Unauthorized("Bad credentials")
           }
         case None => Future(BadRequest("Request can't be deserialized"))
@@ -66,8 +63,7 @@ class Application @Inject()(configuration: Configuration) extends Controller {
 
   def resetPassword: Action[JsValue] = Action.async(parse.json) {
     rq =>
-      log.info("Password reset")
-      log.info("Received request: \n" + rq.body)
+      log.info("Password reset:\n" + rq.body)
       Json.fromJson[PasswordReset](rq.body).asOpt match {
         case Some(p) =>
           db.run(
@@ -88,8 +84,7 @@ class Application @Inject()(configuration: Configuration) extends Controller {
 
   def updatePassword: Action[JsValue] = Action.async(parse.json) {
     rq =>
-      log.info("Password update")
-      log.info("Received request: \n" + rq.body)
+      log.info("Password update:\n" + rq.body)
       Json.fromJson[PasswordUpdate](rq.body).asOpt match {
         case Some(p) =>
           db.run(
