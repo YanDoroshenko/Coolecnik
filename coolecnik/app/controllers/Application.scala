@@ -79,7 +79,7 @@ class Application @Inject()(configuration: Configuration) extends Controller {
               val q = for {p_ <- Queries.players if p_.email === p.email} yield p_.passwordHash
               val updateAction = q.update(newPasswd)
 
-              db.run(updateAction).map(_ => Created(Json.toJson(PasswordReset(p.email, Some(newPasswd)))))
+              db.run(updateAction).map(_ => Accepted(Json.toJson(PasswordReset(p.email, Some(newPasswd)))))
             case _ => Future(NotFound("Email " + p.email + " not found"))
           }
         case None => Future(BadRequest("Request can't be deserialized"))
