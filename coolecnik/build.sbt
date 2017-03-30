@@ -1,9 +1,6 @@
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 name := "coolecnik"
 
-version := "0.0.3." + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd.HH.mm"))
+version := "0.0.4"
 
 enablePlugins(JavaAppPackaging)
 lazy val `coolecnik` = (project in file(".")).enablePlugins(PlayScala)
