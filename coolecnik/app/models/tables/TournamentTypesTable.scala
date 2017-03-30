@@ -12,10 +12,10 @@ class TournamentTypesTable(tag: Tag) extends Table[TournamentType](tag, "t_tourn
     column[Int]("id", O.PrimaryKey, O.AutoInc)
 
   def title: Rep[String] =
-    column[String]("title", O.SqlType("varchar(55)"))
+    column[String]("title", O.SqlType("VARCHAR(55)"))
 
   def description: Rep[Option[String]] =
-    column[Option[String]]("description", O.SqlType("varchar(1000)"))
+    column[Option[String]]("description", O.SqlType("VARCHAR(1000)"))
 
   override def * : ProvenShape[TournamentType] =
     (id, title, description) <>
