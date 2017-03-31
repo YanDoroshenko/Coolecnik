@@ -27,6 +27,6 @@ case class StrikeType(id: Int, gameType: Int, title: String, description: Option
 
 case class Strike(id: Int, strikeType: Int, game: Int, player: Int, round: Int)
 
-case class Tournament(id: Int, tournamentType: Int)
+case class Tournament(id: Int, tournamentType: Int, title: Option[String])
 
 case class TournamentType(id: Int, title: String, description: Option[String])
