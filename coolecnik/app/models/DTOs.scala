@@ -20,3 +20,7 @@ case class NewGame(
                     carambolesToWin: Option[Int])
 
 case class NewGameType(title: String, description: Option[String])
+
+case class NewStrikeType(gameType: Int, title: String, description: Option[String], endsGame: Option[Boolean])
+
+case class NewStrike(strikeType: Int, game: Int, player: Int, round: Int)

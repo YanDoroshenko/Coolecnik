@@ -26,6 +26,8 @@ object Implicits {
   implicit val pf: OFormat[Player] = Json.format[Player]
   implicit val gf: OFormat[Game] = Json.format[Game]
   implicit val gtf: OFormat[GameType] = Json.format[GameType]
+  implicit val stf: OFormat[StrikeType] = Json.format[StrikeType]
+  implicit val sf: OFormat[Strike] = Json.format[Strike]
 
 
   implicit val pjf: OFormat[Registration] = Json.format[Registration]
@@ -34,4 +36,6 @@ object Implicits {
   implicit val puf: OFormat[PasswordUpdate] = Json.format[PasswordUpdate]
   implicit val ngf: OFormat[NewGame] = Json.format[NewGame]
   implicit val ngtf: OFormat[NewGameType] = Json.format[NewGameType]
+  implicit val nstf: OFormat[NewStrikeType] = Json.format[NewStrikeType]
+  implicit val nsf: OFormat[NewStrike] = Json.format[NewStrike]
 }
