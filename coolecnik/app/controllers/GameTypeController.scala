@@ -1,7 +1,5 @@
 package controllers
 
-import java.sql.Timestamp
-
 import models.{NewGameType, Queries}
 import org.postgresql.util.PSQLException
 import org.slf4j.LoggerFactory
@@ -26,16 +24,16 @@ class GameTypeController extends Controller {
       log.info("New game type:\n" + rq.body)
       Json.fromJson[NewGameType](rq.body).asOpt match {
         case Some(g) =>
-          val beginning = new Timestamp(System.currentTimeMillis)
           db.run(
             Queries.gameTypes.map(
               g_ => {
                 (g_.title, g_.description)
               }) +=
               (g.title, g.description)
-          ).recover {
-            case e: PSQLException => Future(NotAcceptable(e.getMessage))
-          }
+          )
+            .recover {
+              case e: PSQLException => Future(NotAcceptable(e.getMessage))
+            }
             .flatMap(_ =>
               db.run(Queries.gameTypes.filter(
                 g_ => g_.title === g.title)
