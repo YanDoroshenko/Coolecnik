@@ -27,7 +27,7 @@ class MailSender(configuration: Configuration) {
   private class ResetPassword(newPwd: String) extends HtmlBody(
     s"""
        |<center>
-       |<h3>Your recovery password is</h3>
+       |<h3>Váš přístupový kód pro obnovení hesla je</h3>
        |<h1>$newPwd</h1>
        |</center>
        |""".stripMargin
@@ -36,7 +36,7 @@ class MailSender(configuration: Configuration) {
   private val HTML = "text/html; charset=utf-8"
   private val PLAIN = "text/plain; charset=utf-8"
 
-  private val PASSWORD_RESET_SUBJECT = "Coolečník password reset"
+  private val PASSWORD_RESET_SUBJECT = "Coolečník obnovení hesla"
 
   private val username = conf("mail.username")
   private val password = conf("mail.password")
