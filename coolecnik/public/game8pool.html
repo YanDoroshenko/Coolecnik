@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>8-pool Game</title>
+    <title>8-pool</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse green-nav navbar-toggleable-sm">
@@ -23,18 +23,21 @@
                 <a class="nav-link ">8-Pool</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Rules</a>
+                <a class="nav-link" href="#">Turnaje</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Friends</a>
+                <a class="nav-link" href="#">Přátelé</a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href="#">Pravidla</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Profile</a>
+                   aria-haspopup="true" aria-expanded="false">Profil</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Statistic</a>
-                    <a class="dropdown-item" href="#">Log Out</a>
+                    <a class="dropdown-item" href="#">Profil</a>
+                    <a class="dropdown-item" href="#">Statistika</a>
+                    <a class="dropdown-item" href="#">Odhlásit se</a>
                 </div>
             </li>
         </ul>
@@ -45,9 +48,9 @@
     <div class="row justify-content-center">
         <h3 class="h3 ">
             <img src="">
-            <span>Player1</span>
+            <span>David</span>
             vs
-            <span class="active-player">Player2</span>
+            <span class="active-player">Potato</span>
             <img src="res/gambling.png">
         </h3>
     </div>
@@ -75,21 +78,21 @@
     </div>
     <div class="container mt-3">
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-info col-5 mx-auto">Correct</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">White in hole</button>
+            <button class="btn btn-outline-info col-5 mx-auto">Správný tah</button>
+            <button class="btn btn-outline-danger col-5 mx-auto">Faul: bílá koule</button>
         </div>
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-warning col-5 mx-auto">Incorect</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">Wrong Ball</button>
+            <button class="btn btn-outline-warning col-5 mx-auto">Nesprávný tah</button>
+            <button class="btn btn-outline-danger col-5 mx-auto">Faul: cizí koule</button>
         </div>
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-secondary col-5 mx-auto">Back</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">Other Faul</button>
+            <button class="btn btn-outline-secondary col-5 mx-auto">Krok zpět</button>
+            <button class="btn btn-outline-danger col-5 mx-auto">Faul: jiný</button>
         </div>
         <div class="row justify-content-center mt-2">
             <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto"
                     data-toggle="modal" data-target="#looseModalWindow">
-                End of game!
+                Konec hry!
             </button>
         </div>
     </div>
@@ -101,27 +104,27 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-pop-up">
             <div class="modal-header">
-                <h5 class="modal-title" id="looseModal">Correct or Wrong?</h5>
+                <h5 class="modal-title" id="looseModal">Je hra ukončena korektně?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body row justify-content-center">
-                <a class="col-8 mb-2 btn btn-success" href="#">Correct!</a>
+                <a class="col-8 mb-2 btn btn-success" href="#">Ano, je!</a>
                 <a class="col-8 mb-2 btn btn-danger" href="#wrong" data-toggle="collapse"
                    aria-expanded="false" aria-controls="wrong">
-                    Wrong!</a>
+                    Ne, není!</a>
             </div>
             <div class="collapse" id="wrong">
                 <div class="row justify-content-center mb-2">
                     <a class="col-8 mb-2 btn green-btn" href="#">Faul with 8</a>
-                    <a class="col-8 mb-2 btn green-btn" href="#">8 too soon</a>
-                    <a class="col-8 mb-2 btn green-btn" href="#">8 to wrong hole</a>
-                    <a class="col-8 btn green-btn" href="#">8 of the table</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#">8 utopena příliš brzy</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#">8 utopena do jiného rohu</a>
+                    <a class="col-8 btn green-btn" href="#">8 spadla ze stolu</a>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Storno</button>
             </div>
         </div>
     </div>
