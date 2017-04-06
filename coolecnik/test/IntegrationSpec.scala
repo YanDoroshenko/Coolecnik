@@ -10,7 +10,7 @@ import play.api.test._
 @RunWith(classOf[JUnitRunner])
 class IntegrationSpec extends Specification {
 
-  "PlayerManagementController" should {
+  "PlayerController" should {
 
     "work from within a browser" in new WithBrowser {
 

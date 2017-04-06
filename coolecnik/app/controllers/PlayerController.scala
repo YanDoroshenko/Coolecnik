@@ -7,20 +7,22 @@ import models._
 import org.postgresql.util.PSQLException
 import org.slf4j.LoggerFactory
 import play.api.Configuration
-import util.Implicits._
-import util.MailSender
+import util.HttpWriters._
+import util.JsonSerializers._
+import util.{Database, MailSender}
 import play.api.libs.json._
 import play.api.mvc._
-import slick.driver.PostgresDriver.api.{Database, _}
+import slick.driver.PostgresDriver.api._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class PlayerManagementController @Inject()(configuration: Configuration) extends Controller {
 
-  private val log = LoggerFactory.getLogger(classOf[PlayerManagementController])
+class PlayerController @Inject()(configuration: Configuration) extends Controller {
 
-  private val db = Database.forConfig("prod")
+  private val log = LoggerFactory.getLogger(classOf[PlayerController])
+
+  private val db = Database
 
   def register: Action[JsValue] = Action.async(parse.json) {
     rq => {
@@ -37,7 +39,7 @@ class PlayerManagementController @Inject()(configuration: Configuration) extends
             case r: Future[Status@unchecked] => r
             case _ =>
               db.run(Queries.players.filter(_.login === p.login).result).map(
-                p_ => Created(Json.toJson(p_))
+                ps => Created(ps.head)
               )
           }
         case None => Future(BadRequest("Request can't be deserialized"))
@@ -53,7 +55,7 @@ class PlayerManagementController @Inject()(configuration: Configuration) extends
           db.run(
             Queries.players.filter(p_ => p_.login === p.login && p_.passwordHash === p.passwordHash).result
           ).map {
-            case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted(Json.toJson(l.head))
+            case l: Iterable[Player@unchecked] if l.nonEmpty => Accepted(l.head)
             case _ => Unauthorized("Bad credentials")
           }
         case None => Future(BadRequest("Request can't be deserialized"))

@@ -9,7 +9,7 @@ import play.api.libs.json._
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 21.03.2017.
   */
-object Implicits {
+object JsonSerializers {
 
   implicit object timestampFormat extends Format[Timestamp] {
     val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
@@ -21,7 +21,6 @@ object Implicits {
 
     def writes(ts: Timestamp) = JsString(format.format(ts))
   }
-
 
   implicit val pf: OFormat[Player] = Json.format[Player]
   implicit val gf: OFormat[Game] = Json.format[Game]

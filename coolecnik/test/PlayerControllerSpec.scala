@@ -6,7 +6,7 @@ import play.api.libs.json.Json
 import play.api.test._
 import slick.driver.PostgresDriver.api._
 import slick.driver.PostgresDriver.backend.Database
-import util.Implicits._
+import util.JsonSerializers._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -16,7 +16,7 @@ import scala.concurrent.duration._
   * You can mock out a whole application including requests, plugins etc.
   * For more information, consult the wiki.
   */
-class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar {
+class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
 
   "registration" should {
     "return user if successfully registered" in new WithApplication {
@@ -45,14 +45,14 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
       val db = Database.forConfig("dev")
       val p = Await.result(db.run(
         Queries.players.filter(_.login === login).result
-      ), 5000.millis)
-      contentAsJson(a) shouldEqual Json.toJson(p)
+      ), 5.seconds)
+      contentAsJson(a) shouldEqual Json.toJson(p.head)
       Await.result(db.run(
         Queries.players.filter(_.id === p.head.id).delete
-      ), 5000.millis)
+      ), 5.seconds)
       Await.result(db.run(
         Queries.players.filter(_.login === login).result
-      ), 5000.millis) must be empty
+      ), 5.seconds) must be empty
     }
 
     "return BAD_REQUEST for bad request" in new WithApplication() {
@@ -101,9 +101,9 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
       val db = Database.forConfig("dev")
       val p = Await.result(db.run(
         Queries.players.filter(_.login === login).result
-      ), 5000.millis)
+      ), 5.seconds)
 
-      contentAsJson(a) shouldEqual Json.toJson(p)
+      contentAsJson(a) shouldEqual Json.toJson(p.head)
 
       val b = route(rq).get
       status(b) shouldEqual NOT_ACCEPTABLE
@@ -111,10 +111,10 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
 
       Await.result(db.run(
         Queries.players.filter(_.id === p.head.id).delete
-      ), 5000.millis)
+      ), 5.seconds)
       Await.result(db.run(
         Queries.players.filter(_.login === login).result
-      ), 5000.millis) must be empty
+      ), 5.seconds) must be empty
     }
 
     "clean up after test" in new WithApplication {
@@ -124,7 +124,7 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
           SELECT MAX(id)
           FROM t_player))"""
           .as[String]
-      ), 5000.millis)
+      ), 5.seconds)
     }
   }
 
@@ -138,7 +138,7 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
       val db = Database.forConfig("dev")
       Await.result(db.run(
         Queries.players += p
-      ), 5000.millis)
+      ), 5.seconds)
 
       val rq = FakeRequest(
         POST,
@@ -156,14 +156,17 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
       val a = route(rq).get
       status(a) shouldEqual ACCEPTED
 
-      contentAsString(a) must be empty
+      contentAsJson(a) shouldEqual Json.toJson(Await.result(
+        db.run(
+          Queries.players.filter(p => p.login === login && p.email === (login + "email@e.com"))
+            .result), 5.seconds).head)
 
       Await.result(db.run(
         Queries.players.filter(_.login === p.login).delete
-      ), 5000.millis)
+      ), 5.seconds)
       Await.result(db.run(
         Queries.players.filter(_.login === login).result
-      ), 5000.millis) must be empty
+      ), 5.seconds) must be empty
     }
 
     "return BAD_REQUEST for bad request" in new WithApplication() {
@@ -194,7 +197,7 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
       val db = Database.forConfig("dev")
       Await.result(db.run(
         Queries.players += p
-      ), 5000.millis)
+      ), 5.seconds)
 
       val rq = FakeRequest(
         POST,
@@ -216,10 +219,10 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
 
       Await.result(db.run(
         Queries.players.filter(_.login === p.login).delete
-      ), 5000.millis)
+      ), 5.seconds)
       Await.result(db.run(
         Queries.players.filter(_.login === login).result
-      ), 5000.millis) must be empty
+      ), 5.seconds) must be empty
     }
 
     "return UNAUTHORIZED for non-existent login" in new WithApplication() {
@@ -253,7 +256,7 @@ class PlayerManagementControllerSpec extends PlaySpecification with MockitoSugar
           SELECT MAX(id)
           FROM t_player))"""
           .as[String]
-      ), 5000.millis)
+      ), 5.seconds)
     }
   }
 }

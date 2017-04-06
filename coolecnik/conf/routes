@@ -9,19 +9,19 @@ GET         /                             controllers.Assets.at(path = "/public"
 #GET         /createSchema                 controllers.DBSchemaCreator.createSchema
 
 # Player management
-POST        /api/register                 controllers.PlayerManagementController.register
-POST        /api/login                    controllers.PlayerManagementController.login
-PUT         /api/passwdreset              controllers.PlayerManagementController.resetPassword
-PUT         /api/passwdupdate             controllers.PlayerManagementController.updatePassword
+POST        /api/register                 controllers.PlayerController.register
+POST        /api/login                    controllers.PlayerController.login
+PUT         /api/passwdreset              controllers.PlayerController.resetPassword
+PUT         /api/passwdupdate             controllers.PlayerController.updatePassword
 
 # Game type
-POST        /api/games/types/new          controllers.GameTypeController.newGameType
+POST        /api/games/types/new          controllers.GameController.newGameType
 
 # Game
 POST        /api/games/new                controllers.GameController.newGame
 
 # Strike type
-POST        /api/strikes/types/new        controllers.StrikeTypeController.newStrikeType
+POST        /api/strikes/types/new        controllers.StrikeController.newStrikeType
 
 # Strike
 POST        /api/strikes/new              controllers.StrikeController.addStrikes

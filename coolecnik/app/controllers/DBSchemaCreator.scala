@@ -2,7 +2,8 @@ package controllers
 
 import models.Queries
 import play.api.mvc.{Action, _}
-import slick.driver.PostgresDriver.api.{Database, _}
+import slick.driver.PostgresDriver.api._
+import util.Database
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -11,7 +12,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
   */
 class DBSchemaCreator extends Controller {
 
-  private val db = Database.forConfig("prod")
+  private val db = Database
 
   def createSchema: Action[AnyContent] = Action.async {
     createTables
