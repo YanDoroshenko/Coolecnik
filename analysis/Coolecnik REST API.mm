@@ -82,7 +82,7 @@
 </map_styles>
 </hook>
 <hook NAME="AutomaticEdgeColor" COUNTER="6" RULE="ON_BRANCH_CREATION"/>
-<node TEXT="functionality" LOCALIZED_STYLE_REF="styles.subsubtopic" POSITION="right" ID="ID_204372916" CREATED="1490339000619" MODIFIED="1490340565218">
+<node TEXT="functionality" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" POSITION="right" ID="ID_204372916" CREATED="1490339000619" MODIFIED="1490340565218">
 <node TEXT="registration" ID="ID_439902513" CREATED="1490338952202" MODIFIED="1490343416383" LINK="#ID_1838319806"/>
 <node TEXT="login" ID="ID_361722778" CREATED="1490338943946" MODIFIED="1490343402007" LINK="#ID_656188260"/>
 <node TEXT="reset password" ID="ID_1440106549" CREATED="1490730634336" MODIFIED="1490730656624" LINK="#ID_1612113672"/>
@@ -92,7 +92,7 @@
 <node TEXT="update password" ID="ID_1477137077" CREATED="1490898954541" MODIFIED="1490898966904" LINK="#ID_1472921065"/>
 <node TEXT="create new strike type" ID="ID_1037871574" CREATED="1490971710589" MODIFIED="1490971723595" LINK="#ID_71683048"/>
 </node>
-<node TEXT="endpoints" LOCALIZED_STYLE_REF="styles.subsubtopic" POSITION="right" ID="ID_598258874" CREATED="1490339036906" MODIFIED="1490340558307">
+<node TEXT="endpoints" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" POSITION="right" ID="ID_598258874" CREATED="1490339036906" MODIFIED="1490340558307">
 <node TEXT="/api/register" FOLDED="true" ID="ID_1838319806" CREATED="1490339047850" MODIFIED="1490339055230">
 <node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1153028670" CREATED="1490339093794" MODIFIED="1490340644196">
 <node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_460586185" CREATED="1490339110938" MODIFIED="1490340646370">
@@ -114,8 +114,8 @@
 <node TEXT="201 CREATED" ID="ID_1396597569" CREATED="1490340088426" MODIFIED="1490340091502"/>
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_546970634" CREATED="1490340031618" MODIFIED="1490340533137">
-<node TEXT="Created user as a JSON" ID="ID_838583552" CREATED="1490340276338" MODIFIED="1490340293437">
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_357099164" CREATED="1490340294145" MODIFIED="1490733252056">
+<node TEXT="Created user as a JSON" FOLDED="true" ID="ID_838583552" CREATED="1490340276338" MODIFIED="1490340293437">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_357099164" CREATED="1490340294145" MODIFIED="1490733252056">
 <node TEXT="{&#xa;  &quot;id&quot;: 123,&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;email&quot;: &quot;user1@coolecnik.com&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;,&#xa;  &quot;firstName&quot;: &quot;User&quot;,&#xa;  &quot;lastName&quot;: &quot;Smith&quot;&#xa;}" ID="ID_1487176458" CREATED="1490340036506" MODIFIED="1490340046902"/>
 </node>
 </node>
@@ -165,8 +165,8 @@
 <node TEXT="202 ACCEPTED" ID="ID_1798796570" CREATED="1490340088426" MODIFIED="1490398548924"/>
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_75597941" CREATED="1490340031618" MODIFIED="1490340533137">
-<node TEXT="Created user as a JSON" FOLDED="true" ID="ID_1836523156" CREATED="1490340276338" MODIFIED="1490340293437">
-<node TEXT="example" FOLDED="true" ID="ID_1550389192" CREATED="1490340294145" MODIFIED="1490340296733">
+<node TEXT="User as a JSON" ID="ID_1836523156" CREATED="1490340276338" MODIFIED="1491505135145">
+<node TEXT="example" ID="ID_1550389192" CREATED="1490340294145" MODIFIED="1490340296733">
 <node TEXT="{&#xa;  &quot;id&quot;: 123,&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;email&quot;: &quot;user1@coolecnik.com&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;,&#xa;  &quot;firstName&quot;: &quot;User&quot;,&#xa;  &quot;lastName&quot;: &quot;Smith&quot;&#xa;}" ID="ID_367960377" CREATED="1490340036506" MODIFIED="1490340046902"/>
 </node>
 </node>
@@ -215,10 +215,10 @@
 </node>
 </node>
 <node TEXT="recovery password sent" FOLDED="true" ID="ID_1837354459" CREATED="1490730519681" MODIFIED="1490730541991">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_935830168" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_935830168" CREATED="1490730542729" MODIFIED="1490730547498">
 <node TEXT="202 ACCEPTED" ID="ID_321220115" CREATED="1490730548305" MODIFIED="1490730557685"/>
 </node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1505053175" CREATED="1490730563841" MODIFIED="1490730567517">
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1505053175" CREATED="1490730563841" MODIFIED="1490730567517">
 <node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;,&#xa;  &quot;recoveryPassword&quot; : &quot;abc123&quot;&#xa;}" ID="ID_1992680639" CREATED="1490730568640" MODIFIED="1490730605976"/>
 </node>
 </node>
@@ -310,7 +310,7 @@
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1624474492" CREATED="1490730563841" MODIFIED="1490730567517">
 <node TEXT="Created game type JSON" FOLDED="true" ID="ID_551033520" CREATED="1490340276338" MODIFIED="1490875880846">
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_304606887" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="[{&quot;id&quot;:2,&quot;title&quot;:&quot;Carambole&quot;}]" ID="ID_654006573" CREATED="1490340036506" MODIFIED="1490898885416"/>
+<node TEXT="{&quot;id&quot;:2,&quot;title&quot;:&quot;Carambole&quot;}" ID="ID_654006573" CREATED="1490340036506" MODIFIED="1491505168239"/>
 </node>
 </node>
 </node>
@@ -356,7 +356,7 @@
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1430333532" CREATED="1490730563841" MODIFIED="1490730567517">
 <node TEXT="Created game JSON" FOLDED="true" ID="ID_382740439" CREATED="1490340276338" MODIFIED="1490898398263">
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_650198463" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="[{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25.574&quot;}]" ID="ID_1009829414" CREATED="1490340036506" MODIFIED="1490898402071"/>
+<node TEXT="{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25.574&quot;}" ID="ID_1009829414" CREATED="1490340036506" MODIFIED="1491505178337"/>
 </node>
 </node>
 </node>
@@ -402,7 +402,7 @@
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1467150485" CREATED="1490730563841" MODIFIED="1490730567517">
 <node TEXT="Created strike type JSON" FOLDED="true" ID="ID_1629705716" CREATED="1490340276338" MODIFIED="1490971670187">
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1065595680" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="[{&quot;id&quot;:5,&quot;gameType&quot;:1,&quot;title&quot;:&quot;Faul1&quot;}]" ID="ID_1859799576" CREATED="1490340036506" MODIFIED="1490971698962"/>
+<node TEXT="{&quot;id&quot;:5,&quot;gameType&quot;:1,&quot;title&quot;:&quot;Faul1&quot;}" ID="ID_1859799576" CREATED="1490340036506" MODIFIED="1491505192293"/>
 </node>
 </node>
 </node>
