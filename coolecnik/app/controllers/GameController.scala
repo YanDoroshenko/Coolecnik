@@ -1,7 +1,5 @@
 package controllers
 
-import java.sql.Timestamp
-
 import models.{NewGame, Queries}
 import org.postgresql.util.PSQLException
 import org.slf4j.LoggerFactory
@@ -26,19 +24,18 @@ class GameController extends Controller {
       log.info("New game:\n" + rq.body)
       Json.fromJson[NewGame](rq.body).asOpt match {
         case Some(g) =>
-          val beginning = new Timestamp(System.currentTimeMillis)
           db.run(
             Queries.games.map(
               g_ => {
                 (g_.gameType, g_.player1, g_.player2, g_.beginning, g_.tournament, g_.rounds, g_.carambolesToWin)
               }) +=
-              (g.gameType, g.player1, g.player2, Some(beginning), g.tournament, g.rounds, g.carambolesToWin)
+              (g.gameType, g.player1, g.player2, Some(g.beginning), g.tournament, g.rounds, g.carambolesToWin)
           ).recover {
             case e: PSQLException => Future(NotAcceptable(e.getMessage))
           }
             .flatMap(_ =>
               db.run(Queries.games.filter(
-                g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === beginning)
+                g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === g.beginning)
                 .result)
                 .map(g_ => Created(Json.toJson(g_))))
         case None => Future(BadRequest("Request can't be deserialized"))

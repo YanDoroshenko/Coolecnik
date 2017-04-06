@@ -1,10 +1,9 @@
 package util
 
 import java.sql.Timestamp
-import java.time.{LocalDateTime, ZoneId}
+import java.text.SimpleDateFormat
 
 import models._
-import play.api.libs.json.Json._
 import play.api.libs.json._
 
 /**
@@ -12,14 +11,15 @@ import play.api.libs.json._
   */
 object Implicits {
 
-  private def timestampToDateTime(t: Timestamp): LocalDateTime = LocalDateTime.ofInstant(t.toInstant, ZoneId.systemDefault())
+  implicit object timestampFormat extends Format[Timestamp] {
+    val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
 
-  private def dateTimeToTimestamp(dt: LocalDateTime): Timestamp = new Timestamp(dt.toInstant(ZoneId.systemDefault().getRules().getOffset(dt)).toEpochMilli)
+    def reads(json: JsValue): JsSuccess[Timestamp] = {
+      val str = json.as[String]
+      JsSuccess(new Timestamp(format.parse(str).getTime))
+    }
 
-  implicit val timestampFormat = new Format[Timestamp] {
-    def writes(t: Timestamp): JsValue = toJson(timestampToDateTime(t))
-
-    def reads(json: JsValue): JsResult[Timestamp] = fromJson[LocalDateTime](json).map(dateTimeToTimestamp)
+    def writes(ts: Timestamp) = JsString(format.format(ts))
   }
 
 

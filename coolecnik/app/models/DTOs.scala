@@ -1,5 +1,7 @@
 package models
 
+import java.sql.Timestamp
+
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 21.03.2017.
   */
@@ -15,6 +17,7 @@ case class NewGame(
                     gameType: Int,
                     player1: Int,
                     player2: Int,
+                    beginning: Timestamp,
                     tournament: Option[Int],
                     rounds: Option[Int],
                     carambolesToWin: Option[Int])
