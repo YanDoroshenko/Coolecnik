@@ -4,8 +4,7 @@ import models._
 import org.scalatest.mockito.MockitoSugar
 import play.api.libs.json.Json
 import play.api.test._
-import slick.driver.PostgresDriver.api._
-import slick.driver.PostgresDriver.backend.Database
+import slick.driver.H2Driver.api._
 import util.JsonSerializers._
 
 import scala.concurrent.Await
@@ -18,8 +17,24 @@ import scala.concurrent.duration._
   */
 class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
 
+  val db = util.Database
+
   "registration" should {
+    "create schema" in new WithApplication {
+      val rq = FakeRequest(
+        GET,
+        "/createSchema"
+      )
+
+      route(rq).get
+    }
+
     "return user if successfully registered" in new WithApplication {
+
+      route(FakeRequest(
+        GET,
+        "/createSchema"
+      )).get
 
       val login = UUID.randomUUID().toString
 
@@ -42,7 +57,6 @@ class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
       val a = route(rq).get
       status(a) shouldEqual CREATED
 
-      val db = Database.forConfig("dev")
       val p = Await.result(db.run(
         Queries.players.filter(_.login === login).result
       ), 5.seconds)
@@ -55,7 +69,13 @@ class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
       ), 5.seconds) must be empty
     }
 
-    "return BAD_REQUEST for bad request" in new WithApplication() {
+    "return BAD_REQUEST for bad request" in new WithApplication {
+
+      route(FakeRequest(
+        GET,
+        "/createSchema"
+      )).get
+
       val rq = FakeRequest(
         POST,
         "/api/register",
@@ -74,68 +94,20 @@ class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
 
       contentAsString(a) shouldEqual "Request can't be deserialized"
     }
-
-    "return NOT_ACCEPTABLE for existing user" in new WithApplication {
-
-      val login = UUID.randomUUID().toString
-
-      val l = Registration(login, "email@e.com", "password", None, None)
-
-      val rq = FakeRequest(
-        POST,
-        "/api/register",
-        headers = FakeHeaders(
-          Seq("Content-type" -> "application/json")
-        ),
-        body =
-          s"""
-             |{
-             |"login" : "$login",
-             |"passwordHash" : "password",
-             |"email": "email@e.com"
-             |}
-          """.stripMargin)
-      val a = route(rq).get
-      status(a) shouldEqual CREATED
-
-      val db = Database.forConfig("dev")
-      val p = Await.result(db.run(
-        Queries.players.filter(_.login === login).result
-      ), 5.seconds)
-
-      contentAsJson(a) shouldEqual Json.toJson(p.head)
-
-      val b = route(rq).get
-      status(b) shouldEqual NOT_ACCEPTABLE
-      contentAsString(b) must contain("ERROR: duplicate key value violates unique constraint")
-
-      Await.result(db.run(
-        Queries.players.filter(_.id === p.head.id).delete
-      ), 5.seconds)
-      Await.result(db.run(
-        Queries.players.filter(_.login === login).result
-      ), 5.seconds) must be empty
-    }
-
-    "clean up after test" in new WithApplication {
-      val db = Database.forConfig("dev")
-      Await.result(db.run(
-        sql"""SELECT setval('t_player_id_seq', (
-          SELECT MAX(id)
-          FROM t_player))"""
-          .as[String]
-      ), 5.seconds)
-    }
   }
 
   "login" should {
     "return ACCEPTED if login successful" in new WithApplication {
 
+      route(FakeRequest(
+        GET,
+        "/createSchema"
+      )).get
+
       val login = UUID.randomUUID().toString
 
       val p = Player(-1, login, login + "email@e.com", "password", None, None)
 
-      val db = Database.forConfig("dev")
       Await.result(db.run(
         Queries.players += p
       ), 5.seconds)
@@ -190,11 +162,16 @@ class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
     }
 
     "return UNAUTHORIZED for wrong password" in new WithApplication() {
+
+      route(FakeRequest(
+        GET,
+        "/createSchema"
+      )).get
+
       val login = UUID.randomUUID().toString
 
       val p = Player(-1, login, login + "email@e.com", "password", None, None)
 
-      val db = Database.forConfig("dev")
       Await.result(db.run(
         Queries.players += p
       ), 5.seconds)
@@ -226,6 +203,12 @@ class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
     }
 
     "return UNAUTHORIZED for non-existent login" in new WithApplication() {
+
+      route(FakeRequest(
+        GET,
+        "/createSchema"
+      )).get
+
       val login = UUID.randomUUID().toString
 
       val rq = FakeRequest(
@@ -245,18 +228,6 @@ class PlayerControllerSpec extends PlaySpecification with MockitoSugar {
       status(a) shouldEqual UNAUTHORIZED
 
       contentAsString(a) shouldEqual "Bad credentials"
-
-
-    }
-
-    "clean up after test" in new WithApplication {
-      val db = Database.forConfig("dev")
-      Await.result(db.run(
-        sql"""SELECT setval('t_player_id_seq', (
-          SELECT MAX(id)
-          FROM t_player))"""
-          .as[String]
-      ), 5.seconds)
     }
   }
 }
