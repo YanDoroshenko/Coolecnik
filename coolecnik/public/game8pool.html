@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
     <title>8-pool Game</title>
 </head>
 <body>
@@ -41,7 +47,41 @@
     </div>
 </nav>
 
-<div class="container col-md-3 marg">
+
+
+
+
+
+<!--      New game panel      -->
+<div class="container col-md-3 marg" id="newGameDiv">
+    <h3 class="row justify-content-center">Nová hra</h3>
+<form id="newGame">
+        
+        <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default">8-Pool</span></div>
+        <div style="width: 33%; float: left; text-align: center;">
+            <label class="switch">
+                <input type="checkbox" id="gameType">
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
+            <span class="label label-default">Karambol</span>
+        </div>
+        
+        <input id="pl0" type="text" placeholder="Jméno/login protihráče" class="form-control" style="width: 85%; display: inline;">
+        <button class="icon-user" id="authPlayer2" style="width: 42px; height: 32px; padding-top: 3%"></button>
+        <hr class="hr-green"/>
+        <span id="newGameSpan"></span>
+        <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit" id="newGameBtn">Start game</button>
+    </form>
+</div>
+
+
+
+
+
+<!--      8pool game control      -->
+<div class="container col-md-3 marg" id="poolControlDiv" style="display: none">
     <div class="row justify-content-center">
         <h3 class="h3 ">
             <img src="">
@@ -95,6 +135,14 @@
     </div>
 </div>
 
+
+<!--      karambol game control      -->
+<div class="container col-md-3 marg" id="karambolControlDiv" style="display: none">
+<!--    TODO karambol control panel-->
+    <h1>TODO karambol control panel</h1>
+</div>
+
+
 <!-- Modal Loose -->
 <div class="modal fade " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
      aria-hidden="true">
@@ -128,12 +176,8 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/game.js"></script>
 </body>
 </html>
