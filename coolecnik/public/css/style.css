@@ -218,3 +218,23 @@ input:checked + .slider:before {
     background: none;
     border: 1px solid rgba(255,255,255,0.225);
 }
+
+.rules-spec a:hover{
+	color:#bb781a;	
+}
+
+.rules-spec a:link{
+	color:#ff9500;
+}
+.rules-spec a:visited{
+	color:#ff9500;
+}
+
+.rules-spec img {
+	width: 100%;
+    height: auto;
+}
+
+.rules-text {
+	text-align: justify;
+}
