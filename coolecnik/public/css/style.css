@@ -188,6 +188,11 @@ input:checked + .slider:before {
 }
 /* The slider END*/
 
+.tournament {
+    background-color: #292a2b;
+    border-color: #333333;
+}
+
 .tournament-card {
     color: #d9edf7;
     background-color: #292a2b;
@@ -232,6 +237,7 @@ input:checked + .slider:before {
 
 .rules-spec img {
 	width: 100%;
+    max-width: 600px;
     height: auto;
 }
 
