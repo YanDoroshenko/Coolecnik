@@ -219,15 +219,15 @@ input:checked + .slider:before {
     border: 1px solid rgba(255,255,255,0.225);
 }
 
-.rules-spec a:hover{
-	color:#bb781a;	
-}
-
 .rules-spec a:link{
-	color:#ff9500;
+  color:#bb781a;  
 }
 .rules-spec a:visited{
-	color:#ff9500;
+  color:#bb781a;  
+}
+
+.rules-spec a:hover{
+  color:#ff9500;
 }
 
 .rules-spec img {
@@ -237,4 +237,20 @@ input:checked + .slider:before {
 
 .rules-text {
 	text-align: justify;
+}
+
+h1 {
+	color:white;
+}
+
+h2 {
+	color:red;
+}
+
+h3 {
+	color:green;
+}
+
+h4 {
+	color:green;
 }
