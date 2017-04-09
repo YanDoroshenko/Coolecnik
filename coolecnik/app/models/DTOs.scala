@@ -22,6 +22,8 @@ case class NewGame(
                     rounds: Option[Int],
                     carambolesToWin: Option[Int])
 
+case class EndGame(end: Timestamp)
+
 case class NewGameType(title: String, description: Option[String])
 
 case class NewStrikeType(gameType: Int, title: String, description: Option[String], endsGame: Option[Boolean])

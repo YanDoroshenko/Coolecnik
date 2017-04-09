@@ -19,6 +19,7 @@ POST        /api/games/types/new          controllers.GameController.newGameType
 
 # Game
 POST        /api/games/new                controllers.GameController.newGame
+PUT         /api/games/:id/end            controllers.GameController.endGame(id: Int)
 
 # Strike type
 POST        /api/strikes/types/new        controllers.StrikeController.newStrikeType

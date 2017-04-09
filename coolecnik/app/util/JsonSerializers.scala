@@ -34,6 +34,7 @@ object JsonSerializers {
   implicit val prf: OFormat[PasswordReset] = Json.format[PasswordReset]
   implicit val puf: OFormat[PasswordUpdate] = Json.format[PasswordUpdate]
   implicit val ngf: OFormat[NewGame] = Json.format[NewGame]
+  implicit val egf: OFormat[EndGame] = Json.format[EndGame]
   implicit val ngtf: OFormat[NewGameType] = Json.format[NewGameType]
   implicit val nstf: OFormat[NewStrikeType] = Json.format[NewStrikeType]
   implicit val nsf: OFormat[NewStrike] = Json.format[NewStrike]
