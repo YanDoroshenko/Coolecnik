@@ -357,7 +357,7 @@
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1430333532" CREATED="1490730563841" MODIFIED="1490730567517">
 <node TEXT="Created game JSON" FOLDED="true" ID="ID_382740439" CREATED="1490340276338" MODIFIED="1490898398263">
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_650198463" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25.574&quot;}" ID="ID_1009829414" CREATED="1490340036506" MODIFIED="1491505178337"/>
+<node TEXT="{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25Z+0200&quot;}" ID="ID_1009829414" CREATED="1490340036506" MODIFIED="1491739664093"/>
 </node>
 </node>
 </node>
