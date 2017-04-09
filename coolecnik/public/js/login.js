@@ -43,6 +43,7 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
                 console.log("202 ACCEPTED");
                 // TODO myId must be stored at cookies!
                 localStorage.setItem("myId", response.id);
+                localStorage.setItem("myName", vLogin);
                 window.location.replace("/game8pool.html");
             },
             400: function (response) {

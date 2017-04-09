@@ -85,9 +85,9 @@
     <div class="row justify-content-center">
         <h3 class="h3 ">
             <img src="">
-            <span>Player1</span>
+            <span id="player1">Player1</span>
             vs
-            <span class="active-player">Player2</span>
+            <span class="active-player" id="player2">Player2</span>
             <img src="res/gambling.png">
         </h3>
     </div>
@@ -115,20 +115,19 @@
     </div>
     <div class="container mt-3">
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-info col-5 mx-auto">Correct</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">White in hole</button>
+            <button class="btn btn-outline-info col-5 mx-auto" id="poolCorrectBtn">Correct</button>
+            <button class="btn btn-outline-danger col-5 mx-auto" id="poolWhInHoleBtn">White in hole</button>
         </div>
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-warning col-5 mx-auto">Incorect</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">Wrong Ball</button>
+            <button class="btn btn-outline-warning col-5 mx-auto" id="poolIncorrectBtn">Incorect</button>
+            <button class="btn btn-outline-danger col-5 mx-auto" id="poolWrBallBtn">Wrong Ball</button>
         </div>
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-secondary col-5 mx-auto">Back</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">Other Faul</button>
+            <button class="btn btn-outline-secondary col-5 mx-auto" id="removeLastBtn">One step back</button>
+            <button class="btn btn-outline-danger col-5 mx-auto" id="poolOthFaulBtn">Other Faul</button>
         </div>
         <div class="row justify-content-center mt-2">
-            <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto"
-                    data-toggle="modal" data-target="#looseModalWindow">
+            <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto" data-toggle="modal" data-target="#looseModalWindow">
                 End of game!
             </button>
         </div>
@@ -147,7 +146,7 @@
 <div class="modal fade " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content modal-pop-up">
+        <div class="modal-content modal-pop-up" id="endGameModal">
             <div class="modal-header">
                 <h5 class="modal-title" id="looseModal">Correct or Wrong?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -155,17 +154,17 @@
                 </button>
             </div>
             <div class="modal-body row justify-content-center">
-                <a class="col-8 mb-2 btn btn-success" href="#">Correct!</a>
+                <a class="col-8 mb-2 btn btn-success" href="#">Correct! (closes modal)</a>
                 <a class="col-8 mb-2 btn btn-danger" href="#wrong" data-toggle="collapse"
                    aria-expanded="false" aria-controls="wrong">
-                    Wrong!</a>
+                    Wrong! (choose the reason of game end)</a>
             </div>
             <div class="collapse" id="wrong">
                 <div class="row justify-content-center mb-2">
-                    <a class="col-8 mb-2 btn green-btn" href="#">Faul with 8</a>
-                    <a class="col-8 mb-2 btn green-btn" href="#">8 too soon</a>
-                    <a class="col-8 mb-2 btn green-btn" href="#">8 to wrong hole</a>
-                    <a class="col-8 btn green-btn" href="#">8 of the table</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#" id="poolFaul8Btn">Faul with 8</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#" id="pool8tooSoonBtn">8 too soon</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#" id="pool8WrHoleBtn">8 to wrong hole</a>
+                    <a class="col-8 btn green-btn" href="#" id="pool8OfTableBtn">8 of the table</a>
                 </div>
             </div>
             <div class="modal-footer">
