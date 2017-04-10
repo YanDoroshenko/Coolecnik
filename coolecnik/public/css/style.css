@@ -58,11 +58,6 @@ button {
     text-align: center;
 }
 
-.marg {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
 .active-player {
     color: #419641;
     font-style: inherit;
@@ -229,6 +224,78 @@ input:checked + .slider:before {
 }
 /* The slider END*/
 
+.tournament {
+    background-color: #292a2b;
+    border-color: #333333;
+}
+
+.tournament-card {
+    color: #d9edf7;
+    background-color: #292a2b;
+    border: 1px solid rgba(255,255,255,0.5);
+    margin: 0.5em;
+}
+
+.tournament-card a {
+    color: #d9edf7;
+    display: block;
+    text-decoration: none;
+}
+
+.tournament-card a:hover h4{
+    color: white;
+    font-size: 1.6em;
+}
+
+.tournament-card:hover  {
+    color: #d9edf7;
+    background-color: #38393a;
+    border: 1px solid rgba(255,255,255,0.225);
+    margin: 0.5em;
+}
+
+.tournament-spec {
+    color: #d9edf7;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.225);
+}
+
+.rules-spec a:link{
+  color:#bb781a;  
+}
+.rules-spec a:visited{
+  color:#bb781a;  
+}
+
+.rules-spec a:hover{
+  color:#ff9500;
+}
+
+.rules-spec img {
+	width: 100%;
+    max-width: 600px;
+    height: auto;
+}
+
+.rules-text {
+	text-align: justify;
+}
+
+h1 {
+	color:white;
+}
+
+h2 {
+	color:red;
+}
+
+h3 {
+	color:green;
+}
+
+h4 {
+	color:green;
+}
 
 /* Modal for pass recovery */
 .modal-title{
@@ -238,6 +305,4 @@ input:checked + .slider:before {
 .modal-content{
   background-color: #1d1e1f;
 }
-
-
 

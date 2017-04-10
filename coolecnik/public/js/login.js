@@ -44,7 +44,7 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
                 // TODO myId must be stored at cookies!
                 localStorage.setItem("myId", response.id);
                 localStorage.setItem("myName", vLogin);
-                window.location.replace("/game8pool.html");
+                window.location.replace("/game.html");
             },
             400: function (response) {
                 $("#loginSpan").text("Can't deserialize JSON");
