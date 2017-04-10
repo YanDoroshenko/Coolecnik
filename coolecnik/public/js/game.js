@@ -191,6 +191,7 @@ document.getElementById("poolCorrectBtn").addEventListener("click", function (ev
 	else
 		$("#pl2good").html( parseInt($("#pl2good").text()) + 1 );
 	round = round + 1;
+	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
 });
 
 document.getElementById("poolWhInHoleBtn").addEventListener("click", function (event) {
@@ -222,6 +223,7 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
 		document.getElementById("player1").className = "";
 		document.getElementById("player2").className = "active-player";
 	}
+	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
 });
 
 document.getElementById("poolIncorrectBtn").addEventListener("click", function (event) {
@@ -248,6 +250,7 @@ document.getElementById("poolIncorrectBtn").addEventListener("click", function (
 		document.getElementById("player1").className = "";
 		document.getElementById("player2").className = "active-player";
 	}
+	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
 });
 
 document.getElementById("poolWrBallBtn").addEventListener("click", function (event) {
@@ -279,6 +282,7 @@ document.getElementById("poolWrBallBtn").addEventListener("click", function (eve
 		document.getElementById("player1").className = "";
 		document.getElementById("player2").className = "active-player";
 	}
+	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
 });
 
 document.getElementById("removeLastBtn").addEventListener("click", function (event) {
@@ -289,9 +293,68 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 		existingStrikes = [];
 		return;
 	}
+	round = round - 1;
 
-	existingStrikes.pop();
+	var lastStrike = existingStrikes.pop();
+
+	if (lastStrike.player == parseInt(localStorage.getItem("myId"))) {
+		if (lastStrike.strikeType == 1){
+			$("#pl1good").html( parseInt($("#pl1good").text()) - 1 );
+		}
+		else if (lastStrike.strikeType == 3){
+			activePlayer = (activePlayer == 1) ? 0 : 1;
+			if (activePlayer == 1){
+				document.getElementById("player1").className = "active-player";
+				document.getElementById("player2").className = "";
+			}
+			else {
+				document.getElementById("player1").className = "";
+				document.getElementById("player2").className = "active-player";
+			}
+		}
+		else {
+			$("#pl1bad").html( parseInt($("#pl1bad").text()) - 1 );
+			activePlayer = (activePlayer == 1) ? 0 : 1;
+			if (activePlayer == 1){
+				document.getElementById("player1").className = "active-player";
+				document.getElementById("player2").className = "";
+			}
+			else {
+				document.getElementById("player1").className = "";
+				document.getElementById("player2").className = "active-player";
+			}
+		}
+	}
+	else {
+		if (lastStrike.strikeType == 1)
+			$("#pl2good").html( parseInt($("#pl2good").text()) - 1 );
+		else if (lastStrike.strikeType == 3) {
+			activePlayer = (activePlayer == 1) ? 0 : 1;
+			if (activePlayer == 1){
+				document.getElementById("player1").className = "active-player";
+				document.getElementById("player2").className = "";
+			}
+			else {
+				document.getElementById("player1").className = "";
+				document.getElementById("player2").className = "active-player";
+			}
+		}
+		else {
+			$("#pl2bad").html( parseInt($("#pl2bad").text()) - 1 );
+			activePlayer = (activePlayer == 1) ? 0 : 1;
+			if (activePlayer == 1){
+				document.getElementById("player1").className = "active-player";
+				document.getElementById("player2").className = "";
+			}
+			else {
+				document.getElementById("player1").className = "";
+				document.getElementById("player2").className = "active-player";
+			}
+		}
+	}
+	localStorage.setItem("currentGame", null);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
+	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
 });
 
 document.getElementById("poolOthFaulBtn").addEventListener("click", function (event) {
@@ -323,6 +386,7 @@ document.getElementById("poolOthFaulBtn").addEventListener("click", function (ev
 		document.getElementById("player1").className = "";
 		document.getElementById("player2").className = "active-player";
 	}
+	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
 });
 
 // TODO Check if there is internet connection!
