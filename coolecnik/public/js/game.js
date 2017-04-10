@@ -100,8 +100,8 @@ document.getElementById("authPlayer2").addEventListener("click", function (event
 document.getElementById("newGameBtn").addEventListener("click", function (event) {
 	event.preventDefault();
 	$("#newGameSpan").val = "";
-	if ($("#pl0").val == 0){
-		$("#newGameSpan").val = "Jméno musí být neprazdné";
+	if ($("#pl0").val().length == 0){
+		$("#newGameSpan").text("Jméno musí být neprazdné");
 		return;
 	}
 
@@ -328,6 +328,56 @@ document.getElementById("poolOthFaulBtn").addEventListener("click", function (ev
 // TODO Check if there is internet connection!
 
 // End of game buttons
+document.getElementById("correctEndBtn").addEventListener("click", function (event) {
+	// send game to server
+	var allStrikes = JSON.parse(localStorage.getItem("currentGame")); 
+	$.ajax("/api/strikes/new", {
+	        type: "POST",
+	        contentType: "application/json; charset=utf-8",
+	        data: JSON.stringify(allStrikes),
+	        statusCode: {
+	            201: function (response) {
+	                console.log("201");
+	                $("#looseModalWindow").modal("hide");
+	                $("#poolControlDiv").css("display", "none");
+	                $("#karambolControlDiv").css("display", "none");
+	                $("#endOfGameDiv").css("display", "block");
+	            },
+	            400: function (response) {
+	                console.log("400");
+	            },
+	            406: function (response) {
+	                console.log("406");
+	            }
+	        }
+    	});
+	// send end of game
+	var endpoint = "/api/games/" + gameId + "/end";
+	var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset()/60 + "00";
+	if (new Date().getTimezoneOffset()/60 < 10 && new Date().getTimezoneOffset()/60 > -10)
+		dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+	var obj = {
+	        "end": dateTime
+    	};
+	$.ajax(endpoint, {
+	        type: "PUT",
+	        contentType: "application/json; charset=utf-8",
+	        data: JSON.stringify(obj),
+	        statusCode: {
+	            200: function (response) {
+	                console.log("200");
+	            },
+	            400: function (response) {
+	                console.log("400");
+	            },
+	            406: function (response) {
+	                console.log("406");
+	            }
+	        }
+    	});
+
+});
+
 document.getElementById("poolFaul8Btn").addEventListener("click", function (event) {
 	var obj = {
 		"strikeType" : 6,
@@ -414,7 +464,10 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                $("#endGameModal").html(gameOver);
+	                $("#looseModalWindow").modal("hide");
+	                $("#poolControlDiv").css("display", "none");
+	                $("#karambolControlDiv").css("display", "none");
+	                $("#endOfGameDiv").css("display", "block");
 	            },
 	            400: function (response) {
 	                console.log("400");
@@ -474,7 +527,10 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                $("#endGameModal").html(gameOver);
+	                $("#looseModalWindow").modal("hide");
+	                $("#poolControlDiv").css("display", "none");
+	                $("#karambolControlDiv").css("display", "none");
+	                $("#endOfGameDiv").css("display", "block");
 	            },
 	            400: function (response) {
 	                console.log("400");
@@ -534,7 +590,10 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                $("#endGameModal").html(gameOver);
+	                $("#looseModalWindow").modal("hide");
+	                $("#poolControlDiv").css("display", "none");
+	                $("#karambolControlDiv").css("display", "none");
+	                $("#endOfGameDiv").css("display", "block");
 	            },
 	            400: function (response) {
 	                console.log("400");
