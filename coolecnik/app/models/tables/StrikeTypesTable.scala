@@ -13,13 +13,13 @@ class StrikeTypesTable(tag: Tag) extends Table[StrikeType](tag, "t_strike_type")
     column[Int]("id", O.PrimaryKey, O.AutoInc)
 
   def gameType: Rep[Int] =
-    column[Int]("game_type")
+    column[Int]("gameType")
 
   def title: Rep[String] =
-    column[String]("title")
+    column[String]("title", O.SqlType("VARCHAR(55)"))
 
   def description: Rep[Option[String]] =
-    column[Option[String]]("description")
+    column[Option[String]]("description", O.SqlType("VARCHAR(1000)"))
 
   def endsGame: Rep[Option[Boolean]] =
     column[Option[Boolean]]("ends_game")

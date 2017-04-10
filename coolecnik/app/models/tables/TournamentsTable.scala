@@ -14,10 +14,15 @@ class TournamentsTable(tag: Tag) extends Table[Tournament](tag, "t_tournament") 
 
   def tournamentType: Rep[Int] = column[Int]("type")
 
+  def title: Rep[Option[String]] =
+    column[Option[String]]("title", O.SqlType("VARCHAR(100)"))
+
   override def * : ProvenShape[Tournament] =
-    (id, tournamentType) <>
+    (id, tournamentType, title) <>
       (Tournament.tupled, Tournament.unapply)
 
   private def ttFk =
     foreignKey("tournament_type_fk", tournamentType, Queries.tournamentTypes)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+
+  private def titleIdx = index("tournament_title_idx", title, unique = true)
 }

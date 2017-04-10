@@ -14,7 +14,7 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
   def id: Rep[Int] =
     column[Int]("id", O.PrimaryKey, O.AutoInc)
 
-  def game_type: Rep[Int] =
+  def gameType: Rep[Int] =
     column[Int]("type")
 
   def player1: Rep[Int] =
@@ -42,7 +42,7 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
     column[Option[Int]]("caramboles_to_win")
 
   override def * : ProvenShape[Game] =
-    (id, game_type, player1, player2, winner, tournament, beginning, end, rounds, carambolesToWin) <>
+    (id, gameType, player1, player2, winner, tournament, beginning, end, rounds, carambolesToWin) <>
       (Game.tupled, Game.unapply)
 
   private def player1Fk =
@@ -56,4 +56,7 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
 
   private def tournamentFk =
     foreignKey("game_tournament_fk", tournament, Queries.tournaments)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
+
+  private def game_idx =
+    index("game_idx", (player1, player2, beginning), unique = true)
 }

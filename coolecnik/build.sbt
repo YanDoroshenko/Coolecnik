@@ -1,14 +1,11 @@
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 name := "coolecnik"
 
-version := "0.0.3." + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd.HH.mm"))
+version := "0.0.4"
 
 enablePlugins(JavaAppPackaging)
 lazy val `coolecnik` = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.9"
 
 libraryDependencies ++= Seq(jdbc, cache, ws, specs2 % Test,
   "com.typesafe.slick" %% "slick" % "3.1.1",

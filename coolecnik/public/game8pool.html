@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
@@ -8,7 +9,13 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>8-pool</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <title>8-pool Game</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse green-nav navbar-toggleable-sm">
@@ -17,97 +24,135 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse justify-content-md-center collapse" role="navigation" id="navbar" aria-expanded="false">
+    <div class="navbar-collapse justify-content-md-center collapse" id="navbar" aria-expanded="false">
         <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link ">8-Pool</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Turnaje</a>
+                <a class="nav-link" href="#">Rules</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Přátelé</a>
-            </li>
-			<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Pravidla</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown02">
-                    <a class="dropdown-item" href="#">Osmička</a>
-                    <a class="dropdown-item" href="#">Karambol</a>
-                </div>
+                <a class="nav-link" href="#">Friends</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Profil</a>
+                   aria-haspopup="true" aria-expanded="false">Profile</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
-                    <a class="dropdown-item" href="#">Profil</a>
-                    <a class="dropdown-item" href="#">Statistika</a>
-                    <a class="dropdown-item" href="#">Odhlásit se</a>
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Statistic</a>
+                    <a class="dropdown-item" href="#" onclick="window.location.replace('./index.html')">Log Out</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
 
-<div class="container col-md-7 marg">
+
+
+
+
+
+<!--      New game panel      -->
+<div class="container col-md-3 marg" id="newGameDiv">
+    <h3 class="row justify-content-center">Nová hra</h3>
+    <form id="newGame">
+        <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default">8-Pool</span></div>
+        <div style="width: 33%; float: left; text-align: center;">
+            <label class="switch">
+                <input type="checkbox" id="gameType">
+                <div class="slider round"></div>
+            </label>
+        </div>
+        <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
+            <span class="label label-default">Karambol</span>
+        </div>
+        
+        <input id="pl0" type="text" placeholder="Jméno/login protihráče" class="form-control" style="width: 85%; display: inline;">
+        <button class="icon-user" id="authPlayer2" style="width: 42px; height: 32px; padding-top: 3%"></button>
+        <hr class="hr-green"/>
+        <span id="newGameSpan"></span>
+        <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit" id="newGameBtn">Start game</button>
+    </form>
+</div>
+
+
+
+
+
+<!--      8pool game control      -->
+<div class="container col-md-7 marg" id="poolControlDiv" style="display: none">
     <div class="row justify-content-center">
         <h3 class="h3 ">
-            <img src="" alt="">
-            <span>David</span>
+            <img src="">
+            <span id="player1">Player1</span>
             vs
-            <span class="active-player">Potato</span>
-            <img src="res/gambling.png" alt="">
+            <span class="active-player" id="player2">Player2</span>
+            <!-- <img src="res/gambling.png"> -->
         </h3>
     </div>
 
     <div class="row mt-3">
         <div class="list-group p-0 col-3">
-            <button class="btn btn-lg btn-good-pokes" data-toggle="gp1" title="Good Pokes"
-                    data-content="Number of good pokes">9
+            <button class="btn btn-lg btn-good-pokes" data-toggle="gp1" title="Good Pokes" data-content="Number of good pokes" id="pl1good">0
             </button>
-            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp1" title="Bad Pokes"
-                    data-content="Number of bad pokes">10
+            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp1" title="Bad Pokes" data-content="Number of bad pokes" id="pl1bad">0
             </button>
         </div>
 
-        <h5 class="h5 col-6 align-self-center text-center">15m : 36s</h5>
+        <h5 class="h5 col-6 align-self-center text-center" id="timer"></h5>
 
         <div class="list-group p-0 col-3">
-            <button class="btn btn-lg btn-good-pokes" data-toggle="gp2" title="Good Pokes"
-                    data-content="Number of good pokes">12
+            <button class="btn btn-lg btn-good-pokes" data-toggle="gp2" title="Good Pokes" data-content="Number of good pokes" id="pl2good">0
             </button>
-            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp2" title="Bad Pokes"
-                    data-content="Number of bad pokes">10
+            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp2" title="Bad Pokes" data-content="Number of bad pokes" id="pl2bad">0
             </button>
         </div>
     </div>
     <div class="container mt-3">
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-info col-5 mx-auto">Správný strk</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">Utopení bílé koule</button>
+            <button class="btn btn-outline-info col-5 mx-auto" id="poolCorrectBtn">Správný strk</button>
+            <button class="btn btn-outline-danger col-5 mx-auto" id="poolWhInHoleBtn">Utopení bílé koule</button>
         </div>
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-warning col-5 mx-auto">Nesprávný strk</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">Faul: cizí koule</button>
+            <button class="btn btn-outline-warning col-5 mx-auto" id="poolIncorrectBtn">Nesprávný strk</button>
+            <button class="btn btn-outline-danger col-5 mx-auto" id="poolWrBallBtn">Faul: cizí koule</button>
         </div>
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-secondary col-5 mx-auto">Krok zpět</button>
-            <button class="btn btn-outline-danger col-5 mx-auto">Faul: jiný</button>
+            <button class="btn btn-outline-secondary col-5 mx-auto" id="removeLastBtn">Krok zpět</button>
+            <button class="btn btn-outline-danger col-5 mx-auto" id="poolOthFaulBtn">Faul: jiný</button>
         </div>
         <div class="row justify-content-center mt-2">
-            <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto"
-                    data-toggle="modal" data-target="#looseModalWindow">
+            <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto" data-toggle="modal" data-target="#looseModalWindow">
                 Konec hry!
             </button>
         </div>
     </div>
 </div>
 
+
+<!--      karambol game control      -->
+<div class="container col-md-3 marg" id="karambolControlDiv" style="display: none">
+<!--    TODO karambol control panel-->
+    <h1>TODO karambol control panel</h1>
+</div>
+
+
+
+<!--      end of game block      -->
+<div class="container col-md-3 marg" id="endOfGameDiv" style="display: none">
+    <div>Hra je ukončena.Obnovte stránku.</div>
+    <div>[dev] TODO Is there connection to internet? Is game sent or stored?</div>
+</div>
+
+
+
+
 <!-- Modal Loose -->
 <div class="modal fade " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content modal-pop-up">
+        <div class="modal-content modal-pop-up" id="endGameModal">
             <div class="modal-header">
                 <h5 class="modal-title" id="looseModal">Je hra ukončena korektně?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -115,33 +160,28 @@
                 </button>
             </div>
             <div class="modal-body row justify-content-center">
-                <a class="col-8 mb-2 btn btn-success" href="#">Ano, je!</a>
+                <a class="col-8 mb-2 btn btn-success" href="#" id="correctEndBtn">Ano, je</a>
                 <a class="col-8 mb-2 btn btn-danger" href="#wrong" data-toggle="collapse"
-                   aria-expanded="false" aria-controls="wrong">
-                    Ne, není!</a>
+                   aria-expanded="false" aria-controls="wrong">Ne, není</a>
             </div>
             <div class="collapse" id="wrong">
                 <div class="row justify-content-center mb-2">
-                    <a class="col-8 mb-2 btn green-btn" href="#">Faul při potápění 8</a>
-                    <a class="col-8 mb-2 btn green-btn" href="#">8 utopena příliš brzy</a>
-                    <a class="col-8 mb-2 btn green-btn" href="#">8 utopena do jiného rohu</a>
-                    <a class="col-8 btn green-btn" href="#">8 vyražena ze stolu</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#" id="poolFaul8Btn">Faul při potápění 8</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#" id="pool8tooSoonBtn">8 utopena příliš brzy</a>
+                    <a class="col-8 mb-2 btn green-btn" href="#" id="pool8WrHoleBtn">8 utopena do jiného rohu</a>
+                    <a class="col-8 btn green-btn" href="#" id="pool8OfTableBtn">8 vyražena ze stolu</a>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Storno</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/game.js"></script>
 </body>
 </html>

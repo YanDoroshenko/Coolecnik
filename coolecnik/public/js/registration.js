@@ -1,4 +1,4 @@
-/* 	Use as hash(<what>, false, 0);
+/* 	Use as hash(<what>, true);
 	thanks to  https://github.com/garycourt/murmurhash-js*/
 function hash(str, asString, seed) {
     var i, l,
@@ -29,27 +29,27 @@ document.getElementById("btnRegister").addEventListener("click", function(event)
   // check for required fields non-emptiness
   if ($('#regLogin').val().length == 0 || $('#regEmail').val().length == 0 || $('#regPass1').val().length == 0 || $('#regPass2').val().length == 0){
     $("#regSpan").text("Jedno z povinných polí je nevyplněno");
-    return;
+
   }
   // check for email format
   else if (validateEmail($('#regEmail').val()) == false){
     $("#regSpan").text("Zadaný email je ve špatném formátu");
-    return;
+
   }
   //check for length
   else if ($('#regPass1').val().length < 5){
     $("#regSpan").text("Vaše heslo je příliš krátké, musí mít min 5 symbolů");
-    return;
+
   }
   // 	check for passwords similarity
   else if ($('#regPass1').val() != $('#regPass2').val()){
   	$("#regSpan").text("Váši hesla jsou různá. Zkuste ještě jednou");
-    return;
+
   }
   // check if login value equals to password value
   else if ($('#regPass1').val() == $('#regLogin').val()){
     $("#regSpan").text("Login je stejný s heslem. Toto není bezpečně!");
-    return;
+
   }
   //------pass checks-----------     END
 
@@ -58,7 +58,7 @@ document.getElementById("btnRegister").addEventListener("click", function(event)
   {
       var vLogin = $('#regLogin').val();
       var vEmail = $('#regEmail').val();
-      var vPassHash = hash($('#regPass1').val(), false, 0).toString();
+      var vPassHash = hash($('#regPass1').val(), true, $('#regPass1').val().length).toString();
       var vFirstName =  $('#regFirstName').val();
       var vLastName =  $('#regLastName').val();
 
@@ -68,7 +68,7 @@ document.getElementById("btnRegister").addEventListener("click", function(event)
         "passwordHash": vPassHash,
         "firstName": vFirstName,
         "lastName": vLastName
-      }
+      };
 
       $.ajax("api/register", {
          type: "POST",

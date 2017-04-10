@@ -7,7 +7,7 @@ import java.sql.Timestamp
   */
 case class Player(id: Int, login: String, email: String, passwordHash: String, firstName: Option[String], lastName: Option[String])
 
-case class FriendShip(playerId: Int, friendId: Int)
+case class Friendship(playerId: Int, friendId: Int)
 
 case class GameType(id: Int, title: String, description: Option[String])
 
@@ -27,6 +27,6 @@ case class StrikeType(id: Int, gameType: Int, title: String, description: Option
 
 case class Strike(id: Int, strikeType: Int, game: Int, player: Int, round: Int)
 
-case class Tournament(id: Int, tournamentType: Int)
+case class Tournament(id: Int, tournamentType: Int, title: Option[String])
 
 case class TournamentType(id: Int, title: String, description: Option[String])

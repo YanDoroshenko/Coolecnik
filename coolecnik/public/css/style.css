@@ -112,7 +112,7 @@ button {
 }
 
 .icon-thrash {
-    background-image: url("../res/thrash.png");
+    background-image: url("../res/thrash1.png");
     background-repeat: no-repeat;
     background-position: center center;
     width: 20px; 
@@ -122,6 +122,42 @@ button {
 
 .icon-user {
     background-image: url("../res/user1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 20px; 
+    height: 20px; 
+    display: inline-block;
+}
+
+.icon-key {
+    background-image: url("../res/key1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 20px; 
+    height: 20px; 
+    display: inline-block;
+}
+
+.icon-ok {
+    background-image: url("../res/ok1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 20px; 
+    height: 20px; 
+    display: inline-block;
+}
+
+.icon-nook {
+    background-image: url("../res/nook1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 20px; 
+    height: 20px; 
+    display: inline-block;
+}
+
+.icon-load {
+    background-image: url("../res/load.gif");
     background-repeat: no-repeat;
     background-position: center center;
     width: 20px; 
@@ -260,3 +296,13 @@ h3 {
 h4 {
 	color:green;
 }
+
+/* Modal for pass recovery */
+.modal-title{
+  text-align: center;
+}
+
+.modal-content{
+  background-color: #1d1e1f;
+}
+

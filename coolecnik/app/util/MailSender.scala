@@ -1,7 +1,7 @@
 package util
 
 import java.util.Properties
-import javax.mail.internet.MimeMessage
+import javax.mail.internet.{InternetAddress, MimeMessage}
 import javax.mail.{Message, Session, Transport}
 
 import play.api.Configuration
@@ -27,7 +27,7 @@ class MailSender(configuration: Configuration) {
   private class ResetPassword(newPwd: String) extends HtmlBody(
     s"""
        |<center>
-       |<h3>Your recovery password is</h3>
+       |<h3>Váš přístupový kód pro obnovení hesla je</h3>
        |<h1>$newPwd</h1>
        |</center>
        |""".stripMargin
@@ -36,7 +36,7 @@ class MailSender(configuration: Configuration) {
   private val HTML = "text/html; charset=utf-8"
   private val PLAIN = "text/plain; charset=utf-8"
 
-  private val PASSWORD_RESET_SUBJECT = "Coolečník password reset"
+  private val PASSWORD_RESET_SUBJECT = "Coolečník obnovení hesla"
 
   private val username = conf("mail.username")
   private val password = conf("mail.password")
@@ -51,7 +51,7 @@ class MailSender(configuration: Configuration) {
 
   private val session = Session.getDefaultInstance(p)
   private val message = new MimeMessage(session)
-  message.setFrom(s"Coolecnik <$username>")
+  message.setFrom(new InternetAddress(username, "Coolečnik", "utf-8"))
 
   private def conf(k: String) = configuration.getString(k) match {
     case Some(v) => v

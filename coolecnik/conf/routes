@@ -3,22 +3,29 @@
 # ~~~~
 
 # Home page
-GET         /                        controllers.Assets.at(path = "/public", file ="index.html")
+GET         /                             controllers.Assets.at(path = "/public", file ="index.html")
 
 # Generate DB schema
-#GET         /createSchema       util.DBUtils.createSchema
+#GET         /createSchema                 controllers.DBSchemaCreator.createSchema
 
-# Registration
-POST        /api/register            controllers.Application.register
+# Player management
+POST        /api/register                 controllers.PlayerController.register
+POST        /api/login                    controllers.PlayerController.login
+PUT         /api/passwdreset              controllers.PlayerController.resetPassword
+PUT         /api/passwdupdate             controllers.PlayerController.updatePassword
 
-# Login
-POST        /api/login               controllers.Application.login
+# Game type
+POST        /api/games/types/new          controllers.GameController.newGameType
 
-# Reset password
-PUT         /api/passwdreset         controllers.Application.resetPassword
+# Game
+POST        /api/games/new                controllers.GameController.newGame
+PUT         /api/games/:id/end            controllers.GameController.endGame(id: Int)
 
-# Update password
-PUT         /api/passwdupdate        controllers.Application.updatePassword
+# Strike type
+POST        /api/strikes/types/new        controllers.StrikeController.newStrikeType
+
+# Strike
+POST        /api/strikes/new              controllers.StrikeController.addStrikes
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /*file                   controllers.Assets.at(path="/public", file)
+GET         /*file                        controllers.Assets.at(path="/public", file)
