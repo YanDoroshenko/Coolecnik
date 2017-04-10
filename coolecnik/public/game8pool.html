@@ -94,32 +94,28 @@
 
     <div class="row mt-3">
         <div class="list-group p-0 col-3">
-            <button class="btn btn-lg btn-good-pokes" data-toggle="gp1" title="Good Pokes"
-                    data-content="Number of good pokes">9
+            <button class="btn btn-lg btn-good-pokes" data-toggle="gp1" title="Good Pokes" data-content="Number of good pokes" id="pl1good">0
             </button>
-            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp1" title="Bad Pokes"
-                    data-content="Number of bad pokes">10
+            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp1" title="Bad Pokes" data-content="Number of bad pokes" id="pl1bad">0
             </button>
         </div>
 
-        <h5 class="h5 col-6 align-self-center text-center">15m : 36s</h5>
+        <h5 class="h5 col-6 align-self-center text-center" id="timer"></h5>
 
         <div class="list-group p-0 col-3">
-            <button class="btn btn-lg btn-good-pokes" data-toggle="gp2" title="Good Pokes"
-                    data-content="Number of good pokes">12
+            <button class="btn btn-lg btn-good-pokes" data-toggle="gp2" title="Good Pokes" data-content="Number of good pokes" id="pl2good">0
             </button>
-            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp2" title="Bad Pokes"
-                    data-content="Number of bad pokes">10
+            <button class="btn btn-lg btn-bad-pokes" data-toggle="bp2" title="Bad Pokes" data-content="Number of bad pokes" id="pl2bad">0
             </button>
         </div>
     </div>
     <div class="container mt-3">
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-info col-5 mx-auto" id="poolCorrectBtn">Correct</button>
+            <button class="btn btn-outline-info col-5 mx-auto" id="poolCorrectBtn">Correct ball</button>
             <button class="btn btn-outline-danger col-5 mx-auto" id="poolWhInHoleBtn">White in hole</button>
         </div>
         <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-warning col-5 mx-auto" id="poolIncorrectBtn">Incorect</button>
+            <button class="btn btn-outline-warning col-5 mx-auto" id="poolIncorrectBtn">Usual strike</button>
             <button class="btn btn-outline-danger col-5 mx-auto" id="poolWrBallBtn">Wrong Ball</button>
         </div>
         <div class="row justify-content-center mb-2">
@@ -140,6 +136,15 @@
 <!--    TODO karambol control panel-->
     <h1>TODO karambol control panel</h1>
 </div>
+
+
+
+<!--      end of game block      -->
+<div class="container col-md-3 marg" id="endOfGameDiv" style="display: none">
+    <div>Hra je ukončena.Obnovte stránku.</div>
+    <div>[dev] TODO Is there connection to internet? Is game sent or stored?</div>
+</div>
+
 
 
 <!-- Modal Loose -->

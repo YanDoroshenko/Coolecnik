@@ -1,3 +1,16 @@
+// timer for HTML timer
+function countTimer() {
+   ++totalSeconds;
+   var hour = Math.floor(totalSeconds /3600);
+   var minute = Math.floor((totalSeconds - hour*3600)/60);
+   var seconds = totalSeconds - (hour*3600 + minute*60);
+
+   document.getElementById("timer").innerHTML = minute + "m : " + seconds + "s";
+}
+
+var totalSeconds = 0;
+
+
 function hash(str, asString, seed) {
     var i, l,
         hval = (seed === undefined) ? 0x811c9dc5 : seed;
@@ -12,6 +25,8 @@ function hash(str, asString, seed) {
     }
     return hval >>> 0;
 }
+
+
 
 var isSecondPlayerAuthorized = false;
 var isSecondPlayerAuthMenuOpened = false;
@@ -138,6 +153,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 						document.getElementById("player1").className = "";
 						document.getElementById("player2").className = "active-player";
 					}
+					var timerVar = setInterval(countTimer, 1000);
 	            },
 	            400: function (response) {
 	                console.log("400");
@@ -169,6 +185,11 @@ document.getElementById("poolCorrectBtn").addEventListener("click", function (ev
 
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
+
+	if (activePlayer == 1)
+		$("#pl1good").html( parseInt($("#pl1good").text()) + 1 );
+	else
+		$("#pl2good").html( parseInt($("#pl2good").text()) + 1 );
 	round = round + 1;
 });
 
@@ -186,6 +207,11 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
 
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
+
+	if (activePlayer == 1)
+		$("#pl1bad").html( parseInt($("#pl1bad").text()) + 1 );
+	else
+		$("#pl2bad").html( parseInt($("#pl2bad").text()) + 1 );
 	round = round + 1;
 	activePlayer = (activePlayer == 1) ? 0 : 1;
 	if (activePlayer == 1){
@@ -238,6 +264,11 @@ document.getElementById("poolWrBallBtn").addEventListener("click", function (eve
 
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
+
+	if (activePlayer == 1)
+		$("#pl1bad").html( parseInt($("#pl1bad").text()) + 1 );
+	else
+		$("#pl2bad").html( parseInt($("#pl2bad").text()) + 1 );
 	round = round + 1;
 	activePlayer = (activePlayer == 1) ? 0 : 1;
 	if (activePlayer == 1){
@@ -277,6 +308,11 @@ document.getElementById("poolOthFaulBtn").addEventListener("click", function (ev
 
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
+
+	if (activePlayer == 1)
+		$("#pl1bad").html( parseInt($("#pl1bad").text()) + 1 );
+	else
+		$("#pl2bad").html( parseInt($("#pl2bad").text()) + 1 );
 	round = round + 1;
 	activePlayer = (activePlayer == 1) ? 0 : 1;
 	if (activePlayer == 1){
@@ -315,7 +351,10 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                $("#endGameModal").val = "Hra je ukončena.Obnovte stránku.";
+	                $("#looseModalWindow").modal("hide");
+	                $("#poolControlDiv").css("display", "none");
+	                $("#karambolControlDiv").css("display", "none");
+	                $("#endOfGameDiv").css("display", "block");
 	            },
 	            400: function (response) {
 	                console.log("400");
@@ -375,7 +414,7 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                $("#endGameModal").val = "Hra je ukončena.Obnovte stránku.";
+	                $("#endGameModal").html(gameOver);
 	            },
 	            400: function (response) {
 	                console.log("400");
@@ -435,7 +474,7 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                $("#endGameModal").val = "Hra je ukončena.Obnovte stránku.";
+	                $("#endGameModal").html(gameOver);
 	            },
 	            400: function (response) {
 	                console.log("400");
@@ -495,7 +534,7 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                $("#endGameModal").val = "Hra je ukončena.Obnovte stránku.";
+	                $("#endGameModal").html(gameOver);
 	            },
 	            400: function (response) {
 	                console.log("400");
