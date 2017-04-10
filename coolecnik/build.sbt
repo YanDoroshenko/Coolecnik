@@ -1,6 +1,6 @@
 name := "coolecnik"
 
-version := "0.0.4"
+version := "0.1"
 
 enablePlugins(JavaAppPackaging)
 lazy val `coolecnik` = (project in file(".")).enablePlugins(PlayScala)
