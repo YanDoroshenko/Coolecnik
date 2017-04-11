@@ -3,30 +3,31 @@
 # ~~~~
 
 # Home page
-GET         /                                           controllers.Assets.at(path = "/public", file ="index.html")
+GET           /                                           controllers.Assets.at(path = "/public", file ="index.html")
 
 # Generate DB schema
 #GET         /createSchema                               controllers.DBSchemaCreator.createSchema
 
 # Player management
-POST        /api/register                               controllers.PlayerController.register
-POST        /api/login                                  controllers.PlayerController.login
-PUT         /api/passwdreset                            controllers.PlayerController.resetPassword
-PUT         /api/passwdupdate                           controllers.PlayerController.updatePassword
-POST        /api/players/:idWho/befriend/:idWhom        controllers.PlayerController.befriend(idWho: Int, idWhom: Int)
+POST          /api/register                               controllers.PlayerController.register
+POST          /api/login                                  controllers.PlayerController.login
+PUT           /api/passwdreset                            controllers.PlayerController.resetPassword
+PUT           /api/passwdupdate                           controllers.PlayerController.updatePassword
+POST          /api/players/:idWho/befriend/:idWhom        controllers.PlayerController.befriend(idWho: Int, idWhom: Int)
+DELETE        /api/players/:idWho/unfriend/:idWhom        controllers.PlayerController.unfriend(idWho:Int, idWhom: Int)
 
 # Game type
-POST        /api/games/types/new                        controllers.GameController.newGameType
+POST          /api/games/types/new                        controllers.GameController.newGameType
 
 # Game
-POST        /api/games/new                              controllers.GameController.newGame
-PUT         /api/games/:id/end                          controllers.GameController.endGame(id: Int)
+POST          /api/games/new                              controllers.GameController.newGame
+PUT           /api/games/:id/end                          controllers.GameController.endGame(id: Int)
 
 # Strike type
-POST        /api/strikes/types/new                      controllers.StrikeController.newStrikeType
+POST          /api/strikes/types/new                      controllers.StrikeController.newStrikeType
 
 # Strike
-POST        /api/strikes/new                            controllers.StrikeController.addStrikes
+POST          /api/strikes/new                            controllers.StrikeController.addStrikes
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /*file                                      controllers.Assets.at(path="/public", file)
+GET           /*file                                      controllers.Assets.at(path="/public", file)

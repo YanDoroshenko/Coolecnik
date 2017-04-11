@@ -131,4 +131,18 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
       case _ => Future(NotFound)
     }
   }
+
+  def unfriend(idWho: Int, idWhom: Int): Action[AnyContent] = Action.async {
+    db.run(
+      Queries.friendList.filter(f => f.playerId === idWho && f.friendId === idWhom).exists.result
+    ).flatMap {
+      case true =>
+        db.run(
+          Queries.friendList.filter(f => f.playerId === idWho && f.friendId === idWhom).delete)
+          .flatMap(_ =>
+            db.run(Queries.friendList.filter(_.playerId === idWho).result)
+              .map(_ => NoContent))
+      case _ => Future(NotFound)
+    }
+  }
 }
