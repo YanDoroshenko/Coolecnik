@@ -2,7 +2,7 @@ package models.tables
 
 import models.GameType
 import slick.driver.PostgresDriver.api._
-import slick.lifted.ProvenShape
+import slick.lifted.{Index, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
@@ -18,10 +18,10 @@ class GameTypesTable(tag: Tag) extends Table[GameType](tag, "t_game_type") {
   def description: Rep[Option[String]] =
     column[Option[String]]("description", O.SqlType("VARCHAR(1000)"))
 
-  override def * : ProvenShape[GameType] =
+  def * : ProvenShape[GameType] =
     (id, title, description) <>
       (GameType.tupled, GameType.unapply)
 
-  private def titleIdx =
+  def titleIdx: Index =
     index("game_type_title_idx", title, unique = true)
 }

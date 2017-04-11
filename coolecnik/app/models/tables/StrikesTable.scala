@@ -2,7 +2,7 @@ package models.tables
 
 import models._
 import slick.driver.PostgresDriver.api._
-import slick.lifted.ProvenShape
+import slick.lifted.{ForeignKeyQuery, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
@@ -27,12 +27,12 @@ class StrikesTable(tag: Tag) extends Table[Strike](tag, "t_strike") {
     (id, strikeType, game, player, round) <>
       (Strike.tupled, Strike.unapply)
 
-  private def typeFk =
+  def typeFk: ForeignKeyQuery[StrikeTypesTable, StrikeType] =
     foreignKey("strike_type_fk", strikeType, Queries.strikeTypes)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def playerFk =
+  def playerFk: ForeignKeyQuery[PlayersTable, Player] =
     foreignKey("strike_player_fk", player, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def gameFk =
+  def gameFk: ForeignKeyQuery[GamesTable, Game] =
     foreignKey("strike_game_fk", game, Queries.games)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 }

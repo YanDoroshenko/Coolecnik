@@ -1,8 +1,8 @@
 package models.tables
 
-import models.{Queries, Tournament}
+import models.{Queries, Tournament, TournamentType}
 import slick.driver.PostgresDriver.api._
-import slick.lifted.ProvenShape
+import slick.lifted.{ForeignKeyQuery, Index, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 23.03.2017.
@@ -21,8 +21,8 @@ class TournamentsTable(tag: Tag) extends Table[Tournament](tag, "t_tournament") 
     (id, tournamentType, title) <>
       (Tournament.tupled, Tournament.unapply)
 
-  private def ttFk =
+  def ttFk: ForeignKeyQuery[TournamentTypesTable, TournamentType] =
     foreignKey("tournament_type_fk", tournamentType, Queries.tournamentTypes)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def titleIdx = index("tournament_title_idx", title, unique = true)
+  def titleIdx: Index = index("tournament_title_idx", title, unique = true)
 }
