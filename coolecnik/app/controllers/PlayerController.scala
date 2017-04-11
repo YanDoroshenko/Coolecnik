@@ -111,4 +111,24 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
         case None => Future(BadRequest("Request can't be deserialized"))
       }
   }
+
+  def befriend(idWho: Int, idWhom: Int): Action[AnyContent] = Action.async {
+    db.run(
+      Queries.players.filter(p => p.id === idWho || p.id === idWhom).size.result
+    ).flatMap {
+      case 2 =>
+        db.run(
+          Queries.friendList += Friendship(idWho, idWhom))
+          .recover {
+            case e: PSQLException => e
+          }
+          .flatMap {
+            case _: PSQLException => Future(Conflict)
+            case _ =>
+              db.run(Queries.friendList.filter(_.playerId === idWho).result)
+                .map(fl => Ok(fl))
+          }
+      case _ => Future(NotFound)
+    }
+  }
 }

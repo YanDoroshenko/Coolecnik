@@ -27,6 +27,7 @@ object JsonSerializers {
   implicit val gtf: OFormat[GameType] = Json.format[GameType]
   implicit val stf: OFormat[StrikeType] = Json.format[StrikeType]
   implicit val sf: OFormat[Strike] = Json.format[Strike]
+  implicit val flf: OFormat[Friendship] = Json.format[Friendship]
 
 
   implicit val pjf: OFormat[Registration] = Json.format[Registration]

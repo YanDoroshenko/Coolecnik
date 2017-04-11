@@ -11,17 +11,21 @@ import util.JsonSerializers._
   */
 object HttpWriters {
   implicit val pw: Writeable[Player] = new Writeable[Player](
-    p => ByteString.apply(Json.toJson(p).toString()), Some("application/json"))
+    p => ByteString(Json.toJson(p).toString()), Some("application/json"))
 
   implicit val gw: Writeable[Game] = new Writeable[Game](
-    g => ByteString.apply(Json.toJson(g).toString()), Some("application/json"))
+    g => ByteString(Json.toJson(g).toString()), Some("application/json"))
 
   implicit val gtw: Writeable[GameType] = new Writeable[GameType](
-    gt => ByteString.apply(Json.toJson(gt).toString()), Some("application/json"))
+    gt => ByteString(Json.toJson(gt).toString()), Some("application/json"))
 
   implicit val sw: Writeable[Strike] = new Writeable[Strike](
-    s => ByteString.apply(Json.toJson(s).toString()), Some("application/json"))
+    s => ByteString(Json.toJson(s).toString()), Some("application/json"))
 
   implicit val stw: Writeable[StrikeType] = new Writeable[StrikeType](
-    st => ByteString.apply(Json.toJson(st).toString()), Some("application/json"))
+    st => ByteString(Json.toJson(st).toString()), Some("application/json"))
+
+  implicit val flw: Writeable[Seq[Friendship]] = new Writeable[Seq[Friendship]](
+    fl => ByteString(Json.toJson(fl).toString()), Some("application/json")
+  )
 }
