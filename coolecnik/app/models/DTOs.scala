@@ -26,7 +26,7 @@ case class EndGame(end: Timestamp)
 
 case class NewGameType(title: String, description: Option[String])
 
-case class NewStrikeType(gameType: Int, correct: Boolean, title: String, description: Option[String], endsGame: Option[Boolean])
+case class NewStrikeType(gameType: Int, correct: Boolean, title: String, description: Option[String], endsGame: Boolean)
 
 case class NewStrike(strikeType: Int, game: Int, player: Int, round: Int)
 

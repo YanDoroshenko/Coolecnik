@@ -23,7 +23,7 @@ case class Game(
                  rounds: Option[Int],
                  carambolesToWin: Option[Int])
 
-case class StrikeType(id: Int, correct: Boolean, gameType: Int, title: String, description: Option[String], endsGame: Option[Boolean])
+case class StrikeType(id: Int, correct: Boolean, gameType: Int, title: String, description: Option[String], endsGame: Boolean)
 
 case class Strike(id: Int, strikeType: Int, game: Int, player: Int, round: Int)
 

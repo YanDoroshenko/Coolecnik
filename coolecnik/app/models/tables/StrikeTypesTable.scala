@@ -24,8 +24,8 @@ class StrikeTypesTable(tag: Tag) extends Table[StrikeType](tag, "t_strike_type")
   def description: Rep[Option[String]] =
     column[Option[String]]("description", O.SqlType("VARCHAR(1000)"))
 
-  def endsGame: Rep[Option[Boolean]] =
-    column[Option[Boolean]]("ends_game")
+  def endsGame: Rep[Boolean] =
+    column[Boolean]("ends_game")
 
   override def * : ProvenShape[StrikeType] =
     (id, correct, gameType, title, description, endsGame) <>
