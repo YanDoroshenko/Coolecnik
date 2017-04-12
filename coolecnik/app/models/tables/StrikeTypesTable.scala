@@ -15,6 +15,9 @@ class StrikeTypesTable(tag: Tag) extends Table[StrikeType](tag, "t_strike_type")
   def gameType: Rep[Int] =
     column[Int]("gameType")
 
+  def correct: Rep[Boolean] =
+    column[Boolean]("correct")
+
   def title: Rep[String] =
     column[String]("title", O.SqlType("VARCHAR(55)"))
 
@@ -25,7 +28,7 @@ class StrikeTypesTable(tag: Tag) extends Table[StrikeType](tag, "t_strike_type")
     column[Option[Boolean]]("ends_game")
 
   override def * : ProvenShape[StrikeType] =
-    (id, gameType, title, description, endsGame) <>
+    (id, correct, gameType, title, description, endsGame) <>
       (StrikeType.tupled, StrikeType.unapply)
 
   def stFk: ForeignKeyQuery[GameTypesTable, GameType] =
