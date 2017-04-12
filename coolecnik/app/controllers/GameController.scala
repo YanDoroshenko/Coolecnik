@@ -1,5 +1,6 @@
 package controllers
 
+import models.Queries._
 import models._
 import org.postgresql.util.PSQLException
 import org.slf4j.LoggerFactory
@@ -27,7 +28,7 @@ class GameController extends Controller {
       Json.fromJson[NewGameType](rq.body).asOpt match {
         case Some(g) =>
           db.run(
-            Queries.gameTypes.map(
+            gameTypes.map(
               g_ => {
                 (g_.title, g_.description)
               }) +=
@@ -37,7 +38,7 @@ class GameController extends Controller {
               case e: PSQLException => Future(NotAcceptable(e.getMessage))
             }
             .flatMap(_ =>
-              db.run(Queries.gameTypes.filter(
+              db.run(gameTypes.filter(
                 g_ => g_.title === g.title)
                 .result)
                 .map(gs => Created(gs.head)))
@@ -52,7 +53,7 @@ class GameController extends Controller {
       Json.fromJson[NewGame](rq.body).asOpt match {
         case Some(g) =>
           db.run(
-            Queries.games.map(
+            games.map(
               g_ => {
                 (g_.gameType, g_.player1, g_.player2, g_.beginning, g_.tournament, g_.rounds, g_.carambolesToWin)
               }) +=
@@ -61,7 +62,7 @@ class GameController extends Controller {
             case e: PSQLException => Future(NotAcceptable(e.getMessage))
           }
             .flatMap(_ =>
-              db.run(Queries.games.filter(
+              db.run(games.filter(
                 g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === g.beginning)
                 .result)
                 .map(gs => Created(gs.head)))
@@ -76,10 +77,10 @@ class GameController extends Controller {
       Json.fromJson[EndGame](rq.body).asOpt match {
         case Some(e) =>
           db.run(
-            Queries.games.filter(r => r.id === id && r.end.isEmpty).result.map {
+            games.filter(r => r.id === id && r.end.isEmpty).result.map {
               case rs: Iterable[Game] if rs.nonEmpty =>
                 db.run(
-                  Queries.games.filter(r => r.id === id).map(_.end)
+                  games.filter(r => r.id === id).map(_.end)
                     .update(Some(e.end)))
               case _ =>
                 new IllegalStateException("Game has already been ended")
@@ -88,7 +89,7 @@ class GameController extends Controller {
               case e: IllegalStateException => Future(Conflict(e.getMessage))
               case e: PSQLException => Future(NotAcceptable(e.getMessage))
               case _ =>
-                db.run(Queries.games.filter(_.id === id).result)
+                db.run(games.filter(_.id === id).result)
                   .map(gs => Ok(gs.head))
             }
         case None => Future(BadRequest("Request can't be deserialized"))
