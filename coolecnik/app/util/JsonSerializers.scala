@@ -39,4 +39,5 @@ object JsonSerializers {
   implicit val ngtf: OFormat[NewGameType] = Json.format[NewGameType]
   implicit val nstf: OFormat[NewStrikeType] = Json.format[NewStrikeType]
   implicit val nsf: OFormat[NewStrike] = Json.format[NewStrike]
+  implicit val bgsf: OFormat[BasicGameStats] = Json.format[BasicGameStats]
 }
