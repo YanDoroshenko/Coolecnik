@@ -112,35 +112,35 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
       }
   }
 
-  def befriend(idWho: Int, idWhom: Int): Action[AnyContent] = Action.async {
+  def befriend(playerId: Int, friendId: Int): Action[AnyContent] = Action.async {
     db.run(
-      Queries.players.filter(p => p.id === idWho || p.id === idWhom).size.result
+      Queries.players.filter(p => p.id === playerId || p.id === friendId).size.result
     ).flatMap {
       case 2 =>
         db.run(
-          Queries.friendList += Friendship(idWho, idWhom))
+          Queries.friendList += Friendship(playerId, friendId))
           .recover {
             case e: PSQLException => e
           }
           .flatMap {
             case _: PSQLException => Future(Conflict)
             case _ =>
-              db.run(Queries.friendList.filter(_.playerId === idWho).result)
+              db.run(Queries.friendList.filter(_.playerId === playerId).result)
                 .map(fl => Ok(fl))
           }
       case _ => Future(NotFound)
     }
   }
 
-  def unfriend(idWho: Int, idWhom: Int): Action[AnyContent] = Action.async {
+  def unfriend(playerId: Int, friendId: Int): Action[AnyContent] = Action.async {
     db.run(
-      Queries.friendList.filter(f => f.playerId === idWho && f.friendId === idWhom).exists.result
+      Queries.friendList.filter(f => f.playerId === playerId && f.friendId === friendId).exists.result
     ).flatMap {
       case true =>
         db.run(
-          Queries.friendList.filter(f => f.playerId === idWho && f.friendId === idWhom).delete)
+          Queries.friendList.filter(f => f.playerId === playerId && f.friendId === friendId).delete)
           .flatMap(_ =>
-            db.run(Queries.friendList.filter(_.playerId === idWho).result)
+            db.run(Queries.friendList.filter(_.playerId === playerId).result)
               .map(_ => NoContent))
       case _ => Future(NotFound)
     }
