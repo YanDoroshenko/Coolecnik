@@ -36,9 +36,8 @@ class StatisticsController extends Controller {
   def basicStrike8Stats(id: Int): Action[AnyContent] = Action.async {
     val s = for ((s, st) <- strikes.filter(_.player === id) join strikeTypes on (_.strikeType === _.id) if st.gameType === 1) yield st.correct
     val correct = s.filter(_ === true).size.result
-    val incorrect = s.filter(_ === false).size.result
     db.run(correct)
-      .flatMap(c => db.run(incorrect)
+      .flatMap(c => db.run(s.size.result)
         .map {
           case 0 => 0
           case i => c.toDouble / i
@@ -49,9 +48,8 @@ class StatisticsController extends Controller {
   def basicStrikeCaramboleStats(id: Int): Action[AnyContent] = Action.async {
     val s = for ((s, st) <- strikes.filter(_.player === id) join strikeTypes on (_.strikeType === _.id) if st.gameType === 2) yield st.correct
     val correct = s.filter(_ === true).size.result
-    val incorrect = s.filter(_ === false).size.result
     db.run(correct)
-      .flatMap(c => db.run(incorrect)
+      .flatMap(c => db.run(s.size.result)
         .map {
           case 0 => 0
           case i => c.toDouble / i
