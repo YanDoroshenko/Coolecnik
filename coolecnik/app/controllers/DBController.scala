@@ -1,7 +1,7 @@
 package controllers
 
 import models.Queries._
-import models.{GameType, StrikeType}
+import models.{GameType, Player, StrikeType}
 import play.api.mvc.{Action, _}
 import slick.driver.PostgresDriver.api._
 import util.Database
@@ -23,6 +23,15 @@ class DBController extends Controller {
   def createData: Action[AnyContent] = Action.async {
     createGameTypes
       .flatMap(_ => createStrikeTypes)
+      .flatMap(_ => createGuest)
+      .map(_ => Ok)
+  }
+
+  def createTestUsers: Action[AnyContent] = Action.async {
+    db.run(
+      players ++= Seq(
+        Player(-1, "login1", "none1", "d19dd94b", Some("Login1"), None),
+        Player(-2, "login2", "none2", "d29ddade", Some("Login2"), None)))
       .map(_ => Ok)
   }
 
@@ -63,6 +72,13 @@ class DBController extends Controller {
         StrikeType(11, true, 2, "correct_carambole", Some("correct carambole, player continues"), false),
         StrikeType(12, false, 2, "foul_carambole", Some("foul at shot, other players turn"), false)
       )
+    )
+  }
+
+  private def createGuest = {
+    db.run(
+      players +=
+        Player(0, "guest", "none", "none", Some("Guest"), None)
     )
   }
 }

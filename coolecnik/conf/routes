@@ -13,6 +13,7 @@ GET           /api/players/:id/statistics/basicCarambole        controllers.Stat
 # Populate DB
 #GET           /createSchema                                     controllers.DBController.createSchema
 #GET           /createData                                       controllers.DBController.createData
+#GET           /createTestUsers                                  controllers.DBController.createTestUsers
 
 # Player management
 POST          /api/register                                     controllers.PlayerController.register
