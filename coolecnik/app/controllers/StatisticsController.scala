@@ -8,6 +8,7 @@ import util.Database
 import util.HttpWriters._
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 12.04.2017.
@@ -36,24 +37,22 @@ class StatisticsController extends Controller {
   def basicStrike8Stats(id: Int): Action[AnyContent] = Action.async {
     val s = for ((s, st) <- strikes.filter(_.player === id) join strikeTypes on (_.strikeType === _.id) if st.gameType === 1) yield st.correct
     val correct = s.filter(_ === true).size.result
-    db.run(correct)
-      .flatMap(c => db.run(s.size.result)
-        .map {
-          case 0 => 0
-          case i => c.toDouble / i
-        })
-      .map(Ok(_))
+    db.run(s.size.result)
+      .flatMap {
+        case 0 => Future(NotFound)
+        case _s =>
+          db.run(correct).map(s_ => Ok(s_.toDouble / _s))
+      }
   }
 
   def basicStrikeCaramboleStats(id: Int): Action[AnyContent] = Action.async {
     val s = for ((s, st) <- strikes.filter(_.player === id) join strikeTypes on (_.strikeType === _.id) if st.gameType === 2) yield st.correct
     val correct = s.filter(_ === true).size.result
-    db.run(correct)
-      .flatMap(c => db.run(s.size.result)
-        .map {
-          case 0 => 0
-          case i => c.toDouble / i
-        })
-      .map(Ok(_))
+    db.run(s.size.result)
+      .flatMap {
+        case 0 => Future(NotFound)
+        case _s =>
+          db.run(correct).map(s_ => Ok(s_.toDouble / _s))
+      }
   }
 }
