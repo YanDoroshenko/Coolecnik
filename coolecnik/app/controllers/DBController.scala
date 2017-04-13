@@ -30,8 +30,8 @@ class DBController extends Controller {
   def createTestUsers: Action[AnyContent] = Action.async {
     db.run(
       players ++= Seq(
-        Player(-1, "login1", "none1", "d19dd94b", Some("Login1"), None),
-        Player(-2, "login2", "none2", "d29ddade", Some("Login2"), None)))
+        Player(1337, "login1", "none1", "d19dd94b", Some("Login1"), None),
+        Player(1488, "login2", "none2", "d29ddade", Some("Login2"), None)))
       .map(_ => Ok)
   }
 
