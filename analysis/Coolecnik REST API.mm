@@ -81,7 +81,7 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="6" RULE="ON_BRANCH_CREATION"/>
+<hook NAME="AutomaticEdgeColor" COUNTER="8" RULE="ON_BRANCH_CREATION"/>
 <node TEXT="functionality" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" POSITION="right" ID="ID_204372916" CREATED="1490339000619" MODIFIED="1490340565218">
 <node TEXT="registration" ID="ID_439902513" CREATED="1490338952202" MODIFIED="1490343416383" LINK="#ID_1838319806"/>
 <node TEXT="login" ID="ID_361722778" CREATED="1490338943946" MODIFIED="1490343402007" LINK="#ID_656188260"/>
@@ -96,7 +96,8 @@
 <node TEXT="remove a friend" ID="ID_151539905" CREATED="1491946568278" MODIFIED="1491946582593" LINK="#ID_1851693545"/>
 </node>
 <node TEXT="endpoints" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" POSITION="right" ID="ID_598258874" CREATED="1490339036906" MODIFIED="1490340558307">
-<node TEXT="/api/register" FOLDED="true" ID="ID_1838319806" CREATED="1490339047850" MODIFIED="1490339055230">
+<node TEXT="/api" FOLDED="true" ID="ID_1702402510" CREATED="1492076459204" MODIFIED="1492076462679">
+<node TEXT="/register" FOLDED="true" ID="ID_1838319806" CREATED="1490339047850" MODIFIED="1492076596873">
 <node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1153028670" CREATED="1490339093794" MODIFIED="1490340644196">
 <node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_460586185" CREATED="1490339110938" MODIFIED="1490340646370">
 <node TEXT="POST" ID="ID_314272529" CREATED="1490339138114" MODIFIED="1490389100408"/>
@@ -147,7 +148,7 @@
 </node>
 </node>
 </node>
-<node TEXT="/api/login" FOLDED="true" ID="ID_656188260" CREATED="1490339056282" MODIFIED="1490339059533">
+<node TEXT="/login" FOLDED="true" ID="ID_656188260" CREATED="1490339056282" MODIFIED="1492076599686">
 <node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_582743712" CREATED="1490339093794" MODIFIED="1490340644196">
 <node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1609172563" CREATED="1490339110938" MODIFIED="1490340646370">
 <node TEXT="POST" ID="ID_1954440184" CREATED="1490339138114" MODIFIED="1490389110399"/>
@@ -193,49 +194,287 @@
 </node>
 </node>
 </node>
-<node TEXT="/api/passwdreset" FOLDED="true" ID="ID_1612113672" CREATED="1490730007761" MODIFIED="1490730027384">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1198573224" CREATED="1490730029521" MODIFIED="1490730057227">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1941341720" CREATED="1490730059438" MODIFIED="1490730081928">
-<node TEXT="PUT" ID="ID_82695773" CREATED="1490730124937" MODIFIED="1490730126609"/>
-</node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_743921154" CREATED="1490730065473" MODIFIED="1490730082519">
-<node TEXT="application/json" ID="ID_143489603" CREATED="1490730129550" MODIFIED="1490730132636"/>
-</node>
-<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_690030308" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdreset.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;email&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdreset.json/email&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;restorePassword&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdreset.json/recoveryPassword&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;        &quot;email&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1504091892" CREATED="1490730447673" MODIFIED="1490864331991"/>
-</node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_784493746" CREATED="1490730075057" MODIFIED="1490730083021">
-<node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;&#xa;}" ID="ID_1387100200" CREATED="1490730477097" MODIFIED="1490730617505"/>
+<node TEXT="/players" FOLDED="true" ID="ID_794403110" CREATED="1492076482179" MODIFIED="1492076484214">
+<node TEXT="/$idWho/unfriend/$idWhom" FOLDED="true" ID="ID_1851693545" CREATED="1491946364157" MODIFIED="1492076527509">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_137957055" CREATED="1491946383230" MODIFIED="1491946391011">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_977459427" CREATED="1491946392534" MODIFIED="1491946412610">
+<node TEXT="DELETE" ID="ID_1350393575" CREATED="1491946397710" MODIFIED="1491946416083"/>
 </node>
 </node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_265969750" CREATED="1490730034409" MODIFIED="1490730057789">
-<node TEXT="email not found" FOLDED="true" ID="ID_183735857" CREATED="1490730482712" MODIFIED="1490730490139">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_75189759" CREATED="1490730059438" MODIFIED="1490730099560">
-<node TEXT="404 NOT FOUND" ID="ID_250315605" CREATED="1490730496040" MODIFIED="1490730499941"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_811050479" CREATED="1490730065473" MODIFIED="1490730103319">
-<node TEXT="Email ${email} not found" ID="ID_1703675479" CREATED="1490730501552" MODIFIED="1490730517748"/>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_389591573" CREATED="1491946386998" MODIFIED="1491946391304">
+<node TEXT="success" FOLDED="true" ID="ID_989513195" CREATED="1491946418638" MODIFIED="1491946429600">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_583390750" CREATED="1491946430302" MODIFIED="1491946445301">
+<node TEXT="204 NO CONTENT" ID="ID_1489350006" CREATED="1491946445934" MODIFIED="1491946449552"/>
 </node>
 </node>
-<node TEXT="recovery password sent" FOLDED="true" ID="ID_1837354459" CREATED="1490730519681" MODIFIED="1490730541991">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_935830168" CREATED="1490730542729" MODIFIED="1490730547498">
-<node TEXT="202 ACCEPTED" ID="ID_321220115" CREATED="1490730548305" MODIFIED="1490730557685"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1505053175" CREATED="1490730563841" MODIFIED="1490730567517">
-<node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;,&#xa;  &quot;recoveryPassword&quot; : &quot;abc123&quot;&#xa;}" ID="ID_1992680639" CREATED="1490730568640" MODIFIED="1490730605976"/>
-</node>
-</node>
-<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_1457592617" CREATED="1490339882146" MODIFIED="1490340107973">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_349506270" CREATED="1490340050658" MODIFIED="1490340536352">
-<node TEXT="400 BAD REQUEST" ID="ID_549205656" CREATED="1490340204657" MODIFIED="1490340210420"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_349593624" CREATED="1490340253026" MODIFIED="1490340539716">
-<node TEXT="Request can&apos;t be deserialized" ID="ID_204486036" CREATED="1490340257682" MODIFIED="1490340258861"/>
+<node TEXT="no such friendship" FOLDED="true" ID="ID_760297524" CREATED="1491946454575" MODIFIED="1491946465505">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1518630792" CREATED="1491946466550" MODIFIED="1491946475188">
+<node TEXT="404 NOT FOUND" ID="ID_1152778171" CREATED="1491946469862" MODIFIED="1491946472704"/>
 </node>
 </node>
 </node>
 </node>
-<node TEXT="/api/passwdupdate" FOLDED="true" ID="ID_1472921065" CREATED="1490733049057" MODIFIED="1490733063737">
+<node TEXT="/$idWho/befriend/$idWhom" FOLDED="true" ID="ID_1936842614" CREATED="1491944616790" MODIFIED="1492076533222">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_544278379" CREATED="1491944633246" MODIFIED="1491944644600">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_151536737" CREATED="1491944837894" MODIFIED="1491946407404">
+<node TEXT="POST" ID="ID_652445849" CREATED="1491944846078" MODIFIED="1491944848873"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_981806172" CREATED="1491944646422" MODIFIED="1491944653652">
+<node TEXT="success" FOLDED="true" ID="ID_499210084" CREATED="1491944731150" MODIFIED="1491944733058">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1342289553" CREATED="1491944753246" MODIFIED="1491944772579">
+<node TEXT="200 OK" ID="ID_564361477" CREATED="1491944760606" MODIFIED="1491944763008"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_94774330" CREATED="1491944769926" MODIFIED="1491944772791">
+<node TEXT="friendlist for the player" FOLDED="true" ID="ID_1007330012" CREATED="1491944773798" MODIFIED="1491944785690">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1836867081" CREATED="1491944786718" MODIFIED="1491944789057">
+<node TEXT="[{&quot;playerId&quot;:3,&quot;friendId&quot;:1}]" ID="ID_1065580637" CREATED="1491944789798" MODIFIED="1491944801201"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="player not found" FOLDED="true" ID="ID_601283474" CREATED="1491944733774" MODIFIED="1491944740875">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_859425025" CREATED="1491944807678" MODIFIED="1491944818283">
+<node TEXT="404 NOT FOUND" ID="ID_387815664" CREATED="1491944811718" MODIFIED="1491944816688"/>
+</node>
+</node>
+<node TEXT="db exception (already friends)" FOLDED="true" ID="ID_525852970" CREATED="1491944741493" MODIFIED="1491944751218">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_815585542" CREATED="1491944820814" MODIFIED="1491944833562">
+<node TEXT="409 CONFLICT" ID="ID_1111265506" CREATED="1491944823806" MODIFIED="1491944829249"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/games" FOLDED="true" ID="ID_147989827" CREATED="1492076498572" MODIFIED="1492076501142">
+<node TEXT="/$id/end" FOLDED="true" ID="ID_769937977" CREATED="1491729403069" MODIFIED="1492076548559">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1842864825" CREATED="1490730029521" MODIFIED="1490730057227">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1817566502" CREATED="1490730059438" MODIFIED="1490730081928">
+<node TEXT="PUT" ID="ID_1615199197" CREATED="1490730124937" MODIFIED="1491729526005"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_823890478" CREATED="1490730065473" MODIFIED="1490730082519">
+<node TEXT="application/json" ID="ID_1688913219" CREATED="1490730129550" MODIFIED="1490730132636"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1834342288" CREATED="1490730071424" MODIFIED="1490730082770">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/endGame.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;end&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/end&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_810514740" CREATED="1491729849204" MODIFIED="1491729862676"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1376850772" CREATED="1490730075057" MODIFIED="1490730083021">
+<node TEXT="{&#xa;    &quot;end&quot;: &quot;2017-08-22T17:35Z+0200&#xa;}" ID="ID_1898393545" CREATED="1491729865997" MODIFIED="1491729893219"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_615505014" CREATED="1490730034409" MODIFIED="1490730057789">
+<node TEXT="success" FOLDED="true" ID="ID_1575199681" CREATED="1490730519681" MODIFIED="1491729568592">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1992778028" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="200 OK" ID="ID_1799370255" CREATED="1490730548305" MODIFIED="1491729576606"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1423297227" CREATED="1490730563841" MODIFIED="1490730567517">
+<node TEXT="Ended game JSON" FOLDED="true" ID="ID_1072308697" CREATED="1490340276338" MODIFIED="1491729586995">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_108665781" CREATED="1490340294145" MODIFIED="1490733252056">
+<node TEXT="{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25.574&quot;}" ID="ID_120758835" CREATED="1490340036506" MODIFIED="1491505178337"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_579970529" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_667277608" CREATED="1490340050658" MODIFIED="1490340536352">
+<node TEXT="400 BAD REQUEST" ID="ID_1875694137" CREATED="1490340204657" MODIFIED="1490340210420"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1534593160" CREATED="1490340253026" MODIFIED="1490340539716">
+<node TEXT="Request can&apos;t be deserialized" ID="ID_413129580" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+<node TEXT="db problems" FOLDED="true" ID="ID_1103571253" CREATED="1490730482712" MODIFIED="1491729613113">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1491326269" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="406 NOT ACCEPTABLE" ID="ID_1950182467" CREATED="1490730496040" MODIFIED="1490875826138"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_891884189" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="message from DB exception" ID="ID_809822277" CREATED="1490875844521" MODIFIED="1490875849772"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/new" FOLDED="true" ID="ID_1206525773" CREATED="1490875506280" MODIFIED="1492076553296">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_27010995" CREATED="1490730029521" MODIFIED="1490730057227">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_163721045" CREATED="1490730059438" MODIFIED="1490730081928">
+<node TEXT="POST" ID="ID_875111680" CREATED="1490730124937" MODIFIED="1490875522346"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_743018874" CREATED="1490730065473" MODIFIED="1490730082519">
+<node TEXT="application/json" ID="ID_1561793299" CREATED="1490730129550" MODIFIED="1490730132636"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1184544468" CREATED="1490730071424" MODIFIED="1490730082770">
+<node TEXT="{&#xa;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;  &quot;definitions&quot;: {},&#xa;  &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newGame.json&quot;,&#xa;  &quot;properties&quot;: {&#xa;    &quot;carambolesToWin&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/carambolesToWin&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;gameType&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/gameType&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;player1&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/player1&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;player2&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/player2&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;beginning&quot; : {&#xa;       &quot;id&quot;: &quot;/properties/beginning&quot;,&#xa;       &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;rounds&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/rounds&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;tournament&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/tournament&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    }&#xa;  },&#xa;  &quot;required&quot;: [&#xa;    &quot;gameType&quot;,&#xa;    &quot;player2&quot;,&#xa;    &quot;player1&quot;&#xa;  ],&#xa;  &quot;type&quot;: &quot;object&quot;&#xa;}&#xa;vertical_align_top" ID="ID_824066760" CREATED="1490733114857" MODIFIED="1491477760560"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1747456360" CREATED="1490730075057" MODIFIED="1490730083021">
+<node TEXT="{&#xa;&quot;gameType&quot;: 1,&#xa;&quot;player1&quot; : 1,&#xa;&quot;player2&quot; : 1,&#xa;&quot;beginning&quot; : &quot;2017-04-06T14:00:00Z+0300&quot;&#xa;}" ID="ID_261993478" CREATED="1490730477097" MODIFIED="1491483851965"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_513235008" CREATED="1490730034409" MODIFIED="1490730057789">
+<node TEXT="created" FOLDED="true" ID="ID_490163230" CREATED="1490730519681" MODIFIED="1490875863127">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1980737946" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="201 CREATED" ID="ID_25167275" CREATED="1490730548305" MODIFIED="1490733211357"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1430333532" CREATED="1490730563841" MODIFIED="1490730567517">
+<node TEXT="Created game JSON" FOLDED="true" ID="ID_382740439" CREATED="1490340276338" MODIFIED="1490898398263">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_650198463" CREATED="1490340294145" MODIFIED="1490733252056">
+<node TEXT="{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25Z+0200&quot;}" ID="ID_1009829414" CREATED="1490340036506" MODIFIED="1491739664093"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_494415026" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1414595059" CREATED="1490340050658" MODIFIED="1490340536352">
+<node TEXT="400 BAD REQUEST" ID="ID_919226898" CREATED="1490340204657" MODIFIED="1490340210420"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_401263605" CREATED="1490340253026" MODIFIED="1490340539716">
+<node TEXT="Request can&apos;t be deserialized" ID="ID_1461214082" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_150011471" CREATED="1490730482712" MODIFIED="1490875818371">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1718427232" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="406 NOT ACCEPTABLE" ID="ID_605974599" CREATED="1490730496040" MODIFIED="1490875826138"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1211970338" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="message from DB exception" ID="ID_1210245903" CREATED="1490875844521" MODIFIED="1490875849772"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/types/new" FOLDED="true" ID="ID_1582186992" CREATED="1490875506280" MODIFIED="1492076557298">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1021190449" CREATED="1490730029521" MODIFIED="1490730057227">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1480807260" CREATED="1490730059438" MODIFIED="1490730081928">
+<node TEXT="POST" ID="ID_1861164702" CREATED="1490730124937" MODIFIED="1490875522346"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_180132163" CREATED="1490730065473" MODIFIED="1490730082519">
+<node TEXT="application/json" ID="ID_853423680" CREATED="1490730129550" MODIFIED="1490730132636"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_730331434" CREATED="1490730071424" MODIFIED="1490730082770">
+<node TEXT="{&#xa;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;  &quot;definitions&quot;: {},&#xa;  &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newGameType.json&quot;,&#xa;  &quot;properties&quot;: {&#xa;    &quot;description&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/description&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;title&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/title&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    }&#xa;  },&#xa;  &quot;required&quot;: [&#xa;    &quot;title&quot;&#xa;  ],&#xa;  &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1637787364" CREATED="1490733114857" MODIFIED="1490875701220"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1609100444" CREATED="1490730075057" MODIFIED="1490730083021">
+<node TEXT="{&#xa;  &quot;title&quot; : &quot;carambole&quot;&#xa;}" ID="ID_1313060750" CREATED="1490730477097" MODIFIED="1490875720913"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_677990443" CREATED="1490730034409" MODIFIED="1490730057789">
+<node TEXT="created" FOLDED="true" ID="ID_1332457228" CREATED="1490730519681" MODIFIED="1490875863127">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1817391441" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="201 CREATED" ID="ID_1349201896" CREATED="1490730548305" MODIFIED="1490733211357"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1624474492" CREATED="1490730563841" MODIFIED="1490730567517">
+<node TEXT="Created game type JSON" FOLDED="true" ID="ID_551033520" CREATED="1490340276338" MODIFIED="1490875880846">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_304606887" CREATED="1490340294145" MODIFIED="1490733252056">
+<node TEXT="{&quot;id&quot;:2,&quot;title&quot;:&quot;Carambole&quot;}" ID="ID_654006573" CREATED="1490340036506" MODIFIED="1491505168239"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_88101976" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1722055995" CREATED="1490340050658" MODIFIED="1490340536352">
+<node TEXT="400 BAD REQUEST" ID="ID_453177161" CREATED="1490340204657" MODIFIED="1490340210420"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_16236783" CREATED="1490340253026" MODIFIED="1490340539716">
+<node TEXT="Request can&apos;t be deserialized" ID="ID_1132495579" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_1066335183" CREATED="1490730482712" MODIFIED="1490875818371">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_266792563" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="406 NOT ACCEPTABLE" ID="ID_1297894764" CREATED="1490730496040" MODIFIED="1490875826138"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1819425361" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="message from DB exception" ID="ID_1147282586" CREATED="1490875844521" MODIFIED="1490875849772"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/strikes" FOLDED="true" ID="ID_71156860" CREATED="1492076565077" MODIFIED="1492076638493">
+<node TEXT="/api/strikes/new" FOLDED="true" ID="ID_486238382" CREATED="1490875506280" MODIFIED="1490974072013">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1790589972" CREATED="1490730029521" MODIFIED="1490730057227">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_704824594" CREATED="1490730059438" MODIFIED="1490730081928">
+<node TEXT="POST" ID="ID_1454092951" CREATED="1490730124937" MODIFIED="1490875522346"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_430510398" CREATED="1490730065473" MODIFIED="1490730082519">
+<node TEXT="application/json" ID="ID_1920425849" CREATED="1490730129550" MODIFIED="1490730132636"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_132558869" CREATED="1490730071424" MODIFIED="1490730082770">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newStrike.json&quot;,&#xa;    &quot;items&quot;: {&#xa;        &quot;id&quot;: &quot;/items&quot;,&#xa;        &quot;properties&quot;: {&#xa;            &quot;game&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/game&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;player&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/player&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;round&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/round&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;strikeType&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/strikeType&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            }&#xa;        },&#xa;        &quot;required&quot;: [&#xa;            &quot;player&quot;,&#xa;            &quot;game&quot;,&#xa;            &quot;strikeType&quot;,&#xa;            &quot;round&quot;&#xa;        ],&#xa;        &quot;type&quot;: &quot;object&quot;&#xa;    },&#xa;    &quot;type&quot;: &quot;array&quot;&#xa;}" ID="ID_1516751300" CREATED="1490733114857" MODIFIED="1490974138200"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1931919447" CREATED="1490730075057" MODIFIED="1490730083021">
+<node TEXT="[&#xa;  {&#xa;    &quot;strikeType&quot;: 4,&#xa;    &quot;game&quot;: 1,&#xa;    &quot;player&quot;: 1,&#xa;    &quot;round&quot;: 3&#xa;  },&#xa;  {&#xa;    &quot;strikeType&quot;: 4,&#xa;    &quot;game&quot;: 1,&#xa;    &quot;player&quot;: 1,&#xa;    &quot;round&quot;: 4&#xa;  }&#xa;]" ID="ID_1886933253" CREATED="1490730477097" MODIFIED="1490974155472"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1873324679" CREATED="1490730034409" MODIFIED="1490730057789">
+<node TEXT="created" FOLDED="true" ID="ID_794541152" CREATED="1490730519681" MODIFIED="1490875863127">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_459074484" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="201 CREATED" ID="ID_1573422347" CREATED="1490730548305" MODIFIED="1490733211357"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1849275711" CREATED="1490730563841" MODIFIED="1490730567517"/>
+</node>
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_132106036" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_934895387" CREATED="1490340050658" MODIFIED="1490340536352">
+<node TEXT="400 BAD REQUEST" ID="ID_1732946987" CREATED="1490340204657" MODIFIED="1490340210420"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_64463413" CREATED="1490340253026" MODIFIED="1490340539716">
+<node TEXT="Request can&apos;t be deserialized" ID="ID_1915443127" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_748415329" CREATED="1490730482712" MODIFIED="1490875818371">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1453719054" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="406 NOT ACCEPTABLE" ID="ID_259660697" CREATED="1490730496040" MODIFIED="1490875826138"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_73607967" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="message from DB exception" ID="ID_1199367552" CREATED="1490875844521" MODIFIED="1490875849772"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/api/strikes/types/new" FOLDED="true" ID="ID_71683048" CREATED="1490875506280" MODIFIED="1490971550266">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_618607805" CREATED="1490730029521" MODIFIED="1490730057227">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1280879319" CREATED="1490730059438" MODIFIED="1490730081928">
+<node TEXT="POST" ID="ID_789556386" CREATED="1490730124937" MODIFIED="1490875522346"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1021415658" CREATED="1490730065473" MODIFIED="1490730082519">
+<node TEXT="application/json" ID="ID_1599413077" CREATED="1490730129550" MODIFIED="1490730132636"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_746254193" CREATED="1490730071424" MODIFIED="1490730082770">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newStrikeType.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;description&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/description&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;endsGame&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/endsGame&quot;,&#xa;            &quot;type&quot;: &quot;boolean&quot;&#xa;        },&#xa;        &quot;gameType&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/gameType&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        },&#xa;        &quot;title&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/title&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;        &quot;gameType&quot;,&#xa;        &quot;title&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_446627508" CREATED="1490733114857" MODIFIED="1490971641520"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1093464550" CREATED="1490730075057" MODIFIED="1490730083021">
+<node TEXT="{&#xa;  &quot;gameType&quot;: 1,&#xa;  &quot;title&quot;: &quot;Faul1&quot;&#xa;}" ID="ID_1794991907" CREATED="1490730477097" MODIFIED="1490971657669"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1933873091" CREATED="1490730034409" MODIFIED="1490730057789">
+<node TEXT="created" FOLDED="true" ID="ID_622879228" CREATED="1490730519681" MODIFIED="1490875863127">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_248651750" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="201 CREATED" ID="ID_1272695310" CREATED="1490730548305" MODIFIED="1490733211357"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1467150485" CREATED="1490730563841" MODIFIED="1490730567517">
+<node TEXT="Created strike type JSON" FOLDED="true" ID="ID_1629705716" CREATED="1490340276338" MODIFIED="1490971670187">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1065595680" CREATED="1490340294145" MODIFIED="1490733252056">
+<node TEXT="{&quot;id&quot;:5,&quot;gameType&quot;:1,&quot;title&quot;:&quot;Faul1&quot;}" ID="ID_1859799576" CREATED="1490340036506" MODIFIED="1491505192293"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_1935844026" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1536611614" CREATED="1490340050658" MODIFIED="1490340536352">
+<node TEXT="400 BAD REQUEST" ID="ID_1887245329" CREATED="1490340204657" MODIFIED="1490340210420"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1792880723" CREATED="1490340253026" MODIFIED="1490340539716">
+<node TEXT="Request can&apos;t be deserialized" ID="ID_1334314702" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_1381992531" CREATED="1490730482712" MODIFIED="1490875818371">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1919729711" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="406 NOT ACCEPTABLE" ID="ID_1285777482" CREATED="1490730496040" MODIFIED="1490875826138"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1266316348" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="message from DB exception" ID="ID_1836366815" CREATED="1490875844521" MODIFIED="1490875849772"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/passwdupdate" FOLDED="true" ID="ID_1472921065" CREATED="1490733049057" MODIFIED="1492076604193">
 <node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_159873632" CREATED="1490730029521" MODIFIED="1490730057227">
 <node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_579513219" CREATED="1490730059438" MODIFIED="1490730081928">
 <node TEXT="PUT" ID="ID_669973201" CREATED="1490730124937" MODIFIED="1490730126609"/>
@@ -290,276 +529,45 @@
 </node>
 </node>
 </node>
-<node TEXT="/api/games/types/new" FOLDED="true" ID="ID_1582186992" CREATED="1490875506280" MODIFIED="1490875512861">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1021190449" CREATED="1490730029521" MODIFIED="1490730057227">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1480807260" CREATED="1490730059438" MODIFIED="1490730081928">
-<node TEXT="POST" ID="ID_1861164702" CREATED="1490730124937" MODIFIED="1490875522346"/>
+<node TEXT="/passwdreset" FOLDED="true" ID="ID_1612113672" CREATED="1490730007761" MODIFIED="1492076607265">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1198573224" CREATED="1490730029521" MODIFIED="1490730057227">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1941341720" CREATED="1490730059438" MODIFIED="1490730081928">
+<node TEXT="PUT" ID="ID_82695773" CREATED="1490730124937" MODIFIED="1490730126609"/>
 </node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_180132163" CREATED="1490730065473" MODIFIED="1490730082519">
-<node TEXT="application/json" ID="ID_853423680" CREATED="1490730129550" MODIFIED="1490730132636"/>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_743921154" CREATED="1490730065473" MODIFIED="1490730082519">
+<node TEXT="application/json" ID="ID_143489603" CREATED="1490730129550" MODIFIED="1490730132636"/>
 </node>
-<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_730331434" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;  &quot;definitions&quot;: {},&#xa;  &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newGameType.json&quot;,&#xa;  &quot;properties&quot;: {&#xa;    &quot;description&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/description&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;title&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/title&quot;,&#xa;      &quot;type&quot;: &quot;string&quot;&#xa;    }&#xa;  },&#xa;  &quot;required&quot;: [&#xa;    &quot;title&quot;&#xa;  ],&#xa;  &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1637787364" CREATED="1490733114857" MODIFIED="1490875701220"/>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_690030308" CREATED="1490730071424" MODIFIED="1490730082770">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdreset.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;email&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdreset.json/email&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;restorePassword&quot;: {&#xa;            &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/passwdreset.json/recoveryPassword&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;        &quot;email&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_1504091892" CREATED="1490730447673" MODIFIED="1490864331991"/>
 </node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1609100444" CREATED="1490730075057" MODIFIED="1490730083021">
-<node TEXT="{&#xa;  &quot;title&quot; : &quot;carambole&quot;&#xa;}" ID="ID_1313060750" CREATED="1490730477097" MODIFIED="1490875720913"/>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_784493746" CREATED="1490730075057" MODIFIED="1490730083021">
+<node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;&#xa;}" ID="ID_1387100200" CREATED="1490730477097" MODIFIED="1490730617505"/>
 </node>
 </node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_677990443" CREATED="1490730034409" MODIFIED="1490730057789">
-<node TEXT="created" FOLDED="true" ID="ID_1332457228" CREATED="1490730519681" MODIFIED="1490875863127">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1817391441" CREATED="1490730542729" MODIFIED="1490730547498">
-<node TEXT="201 CREATED" ID="ID_1349201896" CREATED="1490730548305" MODIFIED="1490733211357"/>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_265969750" CREATED="1490730034409" MODIFIED="1490730057789">
+<node TEXT="email not found" FOLDED="true" ID="ID_183735857" CREATED="1490730482712" MODIFIED="1490730490139">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_75189759" CREATED="1490730059438" MODIFIED="1490730099560">
+<node TEXT="404 NOT FOUND" ID="ID_250315605" CREATED="1490730496040" MODIFIED="1490730499941"/>
 </node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1624474492" CREATED="1490730563841" MODIFIED="1490730567517">
-<node TEXT="Created game type JSON" FOLDED="true" ID="ID_551033520" CREATED="1490340276338" MODIFIED="1490875880846">
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_304606887" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="{&quot;id&quot;:2,&quot;title&quot;:&quot;Carambole&quot;}" ID="ID_654006573" CREATED="1490340036506" MODIFIED="1491505168239"/>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_811050479" CREATED="1490730065473" MODIFIED="1490730103319">
+<node TEXT="Email ${email} not found" ID="ID_1703675479" CREATED="1490730501552" MODIFIED="1490730517748"/>
 </node>
 </node>
+<node TEXT="recovery password sent" FOLDED="true" ID="ID_1837354459" CREATED="1490730519681" MODIFIED="1490730541991">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_935830168" CREATED="1490730542729" MODIFIED="1490730547498">
+<node TEXT="202 ACCEPTED" ID="ID_321220115" CREATED="1490730548305" MODIFIED="1490730557685"/>
 </node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1505053175" CREATED="1490730563841" MODIFIED="1490730567517">
+<node TEXT="{&#xa;  &quot;email&quot;: &quot;abc@gmail.com&quot;,&#xa;  &quot;recoveryPassword&quot; : &quot;abc123&quot;&#xa;}" ID="ID_1992680639" CREATED="1490730568640" MODIFIED="1490730605976"/>
 </node>
-<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_88101976" CREATED="1490339882146" MODIFIED="1490340107973">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1722055995" CREATED="1490340050658" MODIFIED="1490340536352">
-<node TEXT="400 BAD REQUEST" ID="ID_453177161" CREATED="1490340204657" MODIFIED="1490340210420"/>
 </node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_16236783" CREATED="1490340253026" MODIFIED="1490340539716">
-<node TEXT="Request can&apos;t be deserialized" ID="ID_1132495579" CREATED="1490340257682" MODIFIED="1490340258861"/>
+<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_1457592617" CREATED="1490339882146" MODIFIED="1490340107973">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_349506270" CREATED="1490340050658" MODIFIED="1490340536352">
+<node TEXT="400 BAD REQUEST" ID="ID_549205656" CREATED="1490340204657" MODIFIED="1490340210420"/>
 </node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_349593624" CREATED="1490340253026" MODIFIED="1490340539716">
+<node TEXT="Request can&apos;t be deserialized" ID="ID_204486036" CREATED="1490340257682" MODIFIED="1490340258861"/>
 </node>
-<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_1066335183" CREATED="1490730482712" MODIFIED="1490875818371">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_266792563" CREATED="1490730059438" MODIFIED="1490730099560">
-<node TEXT="406 NOT ACCEPTABLE" ID="ID_1297894764" CREATED="1490730496040" MODIFIED="1490875826138"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1819425361" CREATED="1490730065473" MODIFIED="1490730103319">
-<node TEXT="message from DB exception" ID="ID_1147282586" CREATED="1490875844521" MODIFIED="1490875849772"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="/api/games/new" FOLDED="true" ID="ID_1206525773" CREATED="1490875506280" MODIFIED="1490898215175">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_27010995" CREATED="1490730029521" MODIFIED="1490730057227">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_163721045" CREATED="1490730059438" MODIFIED="1490730081928">
-<node TEXT="POST" ID="ID_875111680" CREATED="1490730124937" MODIFIED="1490875522346"/>
-</node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_743018874" CREATED="1490730065473" MODIFIED="1490730082519">
-<node TEXT="application/json" ID="ID_1561793299" CREATED="1490730129550" MODIFIED="1490730132636"/>
-</node>
-<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1184544468" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;  &quot;definitions&quot;: {},&#xa;  &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newGame.json&quot;,&#xa;  &quot;properties&quot;: {&#xa;    &quot;carambolesToWin&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/carambolesToWin&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;gameType&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/gameType&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;player1&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/player1&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;player2&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/player2&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;beginning&quot; : {&#xa;       &quot;id&quot;: &quot;/properties/beginning&quot;,&#xa;       &quot;type&quot;: &quot;string&quot;&#xa;    },&#xa;    &quot;rounds&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/rounds&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    },&#xa;    &quot;tournament&quot;: {&#xa;      &quot;id&quot;: &quot;/properties/tournament&quot;,&#xa;      &quot;type&quot;: &quot;integer&quot;&#xa;    }&#xa;  },&#xa;  &quot;required&quot;: [&#xa;    &quot;gameType&quot;,&#xa;    &quot;player2&quot;,&#xa;    &quot;player1&quot;&#xa;  ],&#xa;  &quot;type&quot;: &quot;object&quot;&#xa;}&#xa;vertical_align_top" ID="ID_824066760" CREATED="1490733114857" MODIFIED="1491477760560"/>
-</node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1747456360" CREATED="1490730075057" MODIFIED="1490730083021">
-<node TEXT="{&#xa;&quot;gameType&quot;: 1,&#xa;&quot;player1&quot; : 1,&#xa;&quot;player2&quot; : 1,&#xa;&quot;beginning&quot; : &quot;2017-04-06T14:00:00Z+0300&quot;&#xa;}" ID="ID_261993478" CREATED="1490730477097" MODIFIED="1491483851965"/>
-</node>
-</node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_513235008" CREATED="1490730034409" MODIFIED="1490730057789">
-<node TEXT="created" FOLDED="true" ID="ID_490163230" CREATED="1490730519681" MODIFIED="1490875863127">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1980737946" CREATED="1490730542729" MODIFIED="1490730547498">
-<node TEXT="201 CREATED" ID="ID_25167275" CREATED="1490730548305" MODIFIED="1490733211357"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1430333532" CREATED="1490730563841" MODIFIED="1490730567517">
-<node TEXT="Created game JSON" FOLDED="true" ID="ID_382740439" CREATED="1490340276338" MODIFIED="1490898398263">
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_650198463" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25Z+0200&quot;}" ID="ID_1009829414" CREATED="1490340036506" MODIFIED="1491739664093"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_494415026" CREATED="1490339882146" MODIFIED="1490340107973">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1414595059" CREATED="1490340050658" MODIFIED="1490340536352">
-<node TEXT="400 BAD REQUEST" ID="ID_919226898" CREATED="1490340204657" MODIFIED="1490340210420"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_401263605" CREATED="1490340253026" MODIFIED="1490340539716">
-<node TEXT="Request can&apos;t be deserialized" ID="ID_1461214082" CREATED="1490340257682" MODIFIED="1490340258861"/>
-</node>
-</node>
-<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_150011471" CREATED="1490730482712" MODIFIED="1490875818371">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1718427232" CREATED="1490730059438" MODIFIED="1490730099560">
-<node TEXT="406 NOT ACCEPTABLE" ID="ID_605974599" CREATED="1490730496040" MODIFIED="1490875826138"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1211970338" CREATED="1490730065473" MODIFIED="1490730103319">
-<node TEXT="message from DB exception" ID="ID_1210245903" CREATED="1490875844521" MODIFIED="1490875849772"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="/api/strikes/types/new" FOLDED="true" ID="ID_71683048" CREATED="1490875506280" MODIFIED="1490971550266">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_618607805" CREATED="1490730029521" MODIFIED="1490730057227">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1280879319" CREATED="1490730059438" MODIFIED="1490730081928">
-<node TEXT="POST" ID="ID_789556386" CREATED="1490730124937" MODIFIED="1490875522346"/>
-</node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1021415658" CREATED="1490730065473" MODIFIED="1490730082519">
-<node TEXT="application/json" ID="ID_1599413077" CREATED="1490730129550" MODIFIED="1490730132636"/>
-</node>
-<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_746254193" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newStrikeType.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;description&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/description&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;endsGame&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/endsGame&quot;,&#xa;            &quot;type&quot;: &quot;boolean&quot;&#xa;        },&#xa;        &quot;gameType&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/gameType&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        },&#xa;        &quot;title&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/title&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;        &quot;gameType&quot;,&#xa;        &quot;title&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_446627508" CREATED="1490733114857" MODIFIED="1490971641520"/>
-</node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1093464550" CREATED="1490730075057" MODIFIED="1490730083021">
-<node TEXT="{&#xa;  &quot;gameType&quot;: 1,&#xa;  &quot;title&quot;: &quot;Faul1&quot;&#xa;}" ID="ID_1794991907" CREATED="1490730477097" MODIFIED="1490971657669"/>
-</node>
-</node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1933873091" CREATED="1490730034409" MODIFIED="1490730057789">
-<node TEXT="created" FOLDED="true" ID="ID_622879228" CREATED="1490730519681" MODIFIED="1490875863127">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_248651750" CREATED="1490730542729" MODIFIED="1490730547498">
-<node TEXT="201 CREATED" ID="ID_1272695310" CREATED="1490730548305" MODIFIED="1490733211357"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1467150485" CREATED="1490730563841" MODIFIED="1490730567517">
-<node TEXT="Created strike type JSON" FOLDED="true" ID="ID_1629705716" CREATED="1490340276338" MODIFIED="1490971670187">
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1065595680" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="{&quot;id&quot;:5,&quot;gameType&quot;:1,&quot;title&quot;:&quot;Faul1&quot;}" ID="ID_1859799576" CREATED="1490340036506" MODIFIED="1491505192293"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_1935844026" CREATED="1490339882146" MODIFIED="1490340107973">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1536611614" CREATED="1490340050658" MODIFIED="1490340536352">
-<node TEXT="400 BAD REQUEST" ID="ID_1887245329" CREATED="1490340204657" MODIFIED="1490340210420"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1792880723" CREATED="1490340253026" MODIFIED="1490340539716">
-<node TEXT="Request can&apos;t be deserialized" ID="ID_1334314702" CREATED="1490340257682" MODIFIED="1490340258861"/>
-</node>
-</node>
-<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_1381992531" CREATED="1490730482712" MODIFIED="1490875818371">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1919729711" CREATED="1490730059438" MODIFIED="1490730099560">
-<node TEXT="406 NOT ACCEPTABLE" ID="ID_1285777482" CREATED="1490730496040" MODIFIED="1490875826138"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1266316348" CREATED="1490730065473" MODIFIED="1490730103319">
-<node TEXT="message from DB exception" ID="ID_1836366815" CREATED="1490875844521" MODIFIED="1490875849772"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="/api/strikes/new" FOLDED="true" ID="ID_486238382" CREATED="1490875506280" MODIFIED="1490974072013">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1790589972" CREATED="1490730029521" MODIFIED="1490730057227">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_704824594" CREATED="1490730059438" MODIFIED="1490730081928">
-<node TEXT="POST" ID="ID_1454092951" CREATED="1490730124937" MODIFIED="1490875522346"/>
-</node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_430510398" CREATED="1490730065473" MODIFIED="1490730082519">
-<node TEXT="application/json" ID="ID_1920425849" CREATED="1490730129550" MODIFIED="1490730132636"/>
-</node>
-<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_132558869" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newStrike.json&quot;,&#xa;    &quot;items&quot;: {&#xa;        &quot;id&quot;: &quot;/items&quot;,&#xa;        &quot;properties&quot;: {&#xa;            &quot;game&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/game&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;player&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/player&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;round&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/round&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;strikeType&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/strikeType&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            }&#xa;        },&#xa;        &quot;required&quot;: [&#xa;            &quot;player&quot;,&#xa;            &quot;game&quot;,&#xa;            &quot;strikeType&quot;,&#xa;            &quot;round&quot;&#xa;        ],&#xa;        &quot;type&quot;: &quot;object&quot;&#xa;    },&#xa;    &quot;type&quot;: &quot;array&quot;&#xa;}" ID="ID_1516751300" CREATED="1490733114857" MODIFIED="1490974138200"/>
-</node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1931919447" CREATED="1490730075057" MODIFIED="1490730083021">
-<node TEXT="[&#xa;  {&#xa;    &quot;strikeType&quot;: 4,&#xa;    &quot;game&quot;: 1,&#xa;    &quot;player&quot;: 1,&#xa;    &quot;round&quot;: 3&#xa;  },&#xa;  {&#xa;    &quot;strikeType&quot;: 4,&#xa;    &quot;game&quot;: 1,&#xa;    &quot;player&quot;: 1,&#xa;    &quot;round&quot;: 4&#xa;  }&#xa;]" ID="ID_1886933253" CREATED="1490730477097" MODIFIED="1490974155472"/>
-</node>
-</node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1873324679" CREATED="1490730034409" MODIFIED="1490730057789">
-<node TEXT="created" FOLDED="true" ID="ID_794541152" CREATED="1490730519681" MODIFIED="1490875863127">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_459074484" CREATED="1490730542729" MODIFIED="1490730547498">
-<node TEXT="201 CREATED" ID="ID_1573422347" CREATED="1490730548305" MODIFIED="1490733211357"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1849275711" CREATED="1490730563841" MODIFIED="1490730567517"/>
-</node>
-<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_132106036" CREATED="1490339882146" MODIFIED="1490340107973">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_934895387" CREATED="1490340050658" MODIFIED="1490340536352">
-<node TEXT="400 BAD REQUEST" ID="ID_1732946987" CREATED="1490340204657" MODIFIED="1490340210420"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_64463413" CREATED="1490340253026" MODIFIED="1490340539716">
-<node TEXT="Request can&apos;t be deserialized" ID="ID_1915443127" CREATED="1490340257682" MODIFIED="1490340258861"/>
-</node>
-</node>
-<node TEXT="can&apos;t insert into DB" FOLDED="true" ID="ID_748415329" CREATED="1490730482712" MODIFIED="1490875818371">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1453719054" CREATED="1490730059438" MODIFIED="1490730099560">
-<node TEXT="406 NOT ACCEPTABLE" ID="ID_259660697" CREATED="1490730496040" MODIFIED="1490875826138"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_73607967" CREATED="1490730065473" MODIFIED="1490730103319">
-<node TEXT="message from DB exception" ID="ID_1199367552" CREATED="1490875844521" MODIFIED="1490875849772"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="/api/games/$id/end" FOLDED="true" ID="ID_769937977" CREATED="1491729403069" MODIFIED="1491729818986">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1842864825" CREATED="1490730029521" MODIFIED="1490730057227">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1817566502" CREATED="1490730059438" MODIFIED="1490730081928">
-<node TEXT="PUT" ID="ID_1615199197" CREATED="1490730124937" MODIFIED="1491729526005"/>
-</node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_823890478" CREATED="1490730065473" MODIFIED="1490730082519">
-<node TEXT="application/json" ID="ID_1688913219" CREATED="1490730129550" MODIFIED="1490730132636"/>
-</node>
-<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1834342288" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/endGame.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;end&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/end&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_810514740" CREATED="1491729849204" MODIFIED="1491729862676"/>
-</node>
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1376850772" CREATED="1490730075057" MODIFIED="1490730083021">
-<node TEXT="{&#xa;    &quot;end&quot;: &quot;2017-08-22T17:35Z+0200&#xa;}" ID="ID_1898393545" CREATED="1491729865997" MODIFIED="1491729893219"/>
-</node>
-</node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_615505014" CREATED="1490730034409" MODIFIED="1490730057789">
-<node TEXT="success" FOLDED="true" ID="ID_1575199681" CREATED="1490730519681" MODIFIED="1491729568592">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1992778028" CREATED="1490730542729" MODIFIED="1490730547498">
-<node TEXT="200 OK" ID="ID_1799370255" CREATED="1490730548305" MODIFIED="1491729576606"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1423297227" CREATED="1490730563841" MODIFIED="1490730567517">
-<node TEXT="Ended game JSON" FOLDED="true" ID="ID_1072308697" CREATED="1490340276338" MODIFIED="1491729586995">
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_108665781" CREATED="1490340294145" MODIFIED="1490733252056">
-<node TEXT="{&quot;id&quot;:4,&quot;game_type&quot;:1,&quot;player1&quot;:1,&quot;player2&quot;:1,&quot;beginning&quot;:&quot;2017-03-30T20:26:25.574&quot;}" ID="ID_120758835" CREATED="1490340036506" MODIFIED="1491505178337"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="can&apos;t deserialize JSON" FOLDED="true" ID="ID_579970529" CREATED="1490339882146" MODIFIED="1490340107973">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_667277608" CREATED="1490340050658" MODIFIED="1490340536352">
-<node TEXT="400 BAD REQUEST" ID="ID_1875694137" CREATED="1490340204657" MODIFIED="1490340210420"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1534593160" CREATED="1490340253026" MODIFIED="1490340539716">
-<node TEXT="Request can&apos;t be deserialized" ID="ID_413129580" CREATED="1490340257682" MODIFIED="1490340258861"/>
-</node>
-</node>
-<node TEXT="db problems" FOLDED="true" ID="ID_1103571253" CREATED="1490730482712" MODIFIED="1491729613113">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1491326269" CREATED="1490730059438" MODIFIED="1490730099560">
-<node TEXT="406 NOT ACCEPTABLE" ID="ID_1950182467" CREATED="1490730496040" MODIFIED="1490875826138"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_891884189" CREATED="1490730065473" MODIFIED="1490730103319">
-<node TEXT="message from DB exception" ID="ID_809822277" CREATED="1490875844521" MODIFIED="1490875849772"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="/api/players/$idWho/befriend/$idWhom" FOLDED="true" ID="ID_1936842614" CREATED="1491944616790" MODIFIED="1491944632095">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_544278379" CREATED="1491944633246" MODIFIED="1491944644600">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_151536737" CREATED="1491944837894" MODIFIED="1491946407404">
-<node TEXT="POST" ID="ID_652445849" CREATED="1491944846078" MODIFIED="1491944848873"/>
-</node>
-</node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_981806172" CREATED="1491944646422" MODIFIED="1491944653652">
-<node TEXT="success" FOLDED="true" ID="ID_499210084" CREATED="1491944731150" MODIFIED="1491944733058">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1342289553" CREATED="1491944753246" MODIFIED="1491944772579">
-<node TEXT="200 OK" ID="ID_564361477" CREATED="1491944760606" MODIFIED="1491944763008"/>
-</node>
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_94774330" CREATED="1491944769926" MODIFIED="1491944772791">
-<node TEXT="friendlist for the player" FOLDED="true" ID="ID_1007330012" CREATED="1491944773798" MODIFIED="1491944785690">
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1836867081" CREATED="1491944786718" MODIFIED="1491944789057">
-<node TEXT="[{&quot;playerId&quot;:3,&quot;friendId&quot;:1}]" ID="ID_1065580637" CREATED="1491944789798" MODIFIED="1491944801201"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="player not found" FOLDED="true" ID="ID_601283474" CREATED="1491944733774" MODIFIED="1491944740875">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_859425025" CREATED="1491944807678" MODIFIED="1491944818283">
-<node TEXT="404 NOT FOUND" ID="ID_387815664" CREATED="1491944811718" MODIFIED="1491944816688"/>
-</node>
-</node>
-<node TEXT="db exception (already friends)" FOLDED="true" ID="ID_525852970" CREATED="1491944741493" MODIFIED="1491944751218">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_815585542" CREATED="1491944820814" MODIFIED="1491944833562">
-<node TEXT="409 CONFLICT" ID="ID_1111265506" CREATED="1491944823806" MODIFIED="1491944829249"/>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="/api/players/$idWho/unfriend/$idWhom" FOLDED="true" ID="ID_1851693545" CREATED="1491946364157" MODIFIED="1491946377538">
-<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_137957055" CREATED="1491946383230" MODIFIED="1491946391011">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_977459427" CREATED="1491946392534" MODIFIED="1491946412610">
-<node TEXT="DELETE" ID="ID_1350393575" CREATED="1491946397710" MODIFIED="1491946416083"/>
-</node>
-</node>
-<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_389591573" CREATED="1491946386998" MODIFIED="1491946391304">
-<node TEXT="success" FOLDED="true" ID="ID_989513195" CREATED="1491946418638" MODIFIED="1491946429600">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_583390750" CREATED="1491946430302" MODIFIED="1491946445301">
-<node TEXT="204 NO CONTENT" ID="ID_1489350006" CREATED="1491946445934" MODIFIED="1491946449552"/>
-</node>
-</node>
-<node TEXT="no such friendship" FOLDED="true" ID="ID_760297524" CREATED="1491946454575" MODIFIED="1491946465505">
-<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1518630792" CREATED="1491946466550" MODIFIED="1491946475188">
-<node TEXT="404 NOT FOUND" ID="ID_1152778171" CREATED="1491946469862" MODIFIED="1491946472704"/>
 </node>
 </node>
 </node>
