@@ -143,7 +143,13 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	                }
 
 	                gameId = response.id;
-	                players = new Array({"id" : parseInt(localStorage.getItem("myId")), "name" : localStorage.getItem("myName")}, {"id" : (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1, "name" : $('#pl0').val()});
+                    players = [{
+                        "id": parseInt(localStorage.getItem("myId")),
+                        "name": localStorage.getItem("myName")
+                    }, {
+                        "id": (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+                        "name": $('#pl0').val()
+                    }];
 					activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
 					if (activePlayer == 1){
 						document.getElementById("player1").className = "active-player";
@@ -196,7 +202,7 @@ document.getElementById("poolCorrectBtn").addEventListener("click", function (ev
 
 document.getElementById("poolWhInHoleBtn").addEventListener("click", function (event) {
 	var obj = {
-		"strikeType" : 2,
+        "strikeType": 3,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
 		"round" : round
@@ -228,7 +234,7 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
 
 document.getElementById("poolIncorrectBtn").addEventListener("click", function (event) {
 	var obj = {
-		"strikeType" : 3,
+        "strikeType": 2,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
 		"round" : round
@@ -444,7 +450,7 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
 
 document.getElementById("poolFaul8Btn").addEventListener("click", function (event) {
 	var obj = {
-		"strikeType" : 6,
+        "strikeType": 7,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
 		"round" : round
@@ -507,7 +513,7 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
 
 document.getElementById("pool8tooSoonBtn").addEventListener("click", function (event) {
 	var obj = {
-		"strikeType" : 7,
+        "strikeType": 8,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
 		"round" : round
@@ -570,7 +576,7 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
 
 document.getElementById("pool8WrHoleBtn").addEventListener("click", function (event) {
 	var obj = {
-		"strikeType" : 8,
+        "strikeType": 9,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
 		"round" : round
@@ -633,7 +639,7 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
 
 document.getElementById("pool8OfTableBtn").addEventListener("click", function (event) {
 	var obj = {
-		"strikeType" : 9,
+        "strikeType": 10,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
 		"round" : round
