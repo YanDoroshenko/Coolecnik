@@ -7,6 +7,8 @@ import play.api.libs.json.Json
 import util.JsonSerializers._
 
 /**
+  * Implicit converters from domain objects to [[play.api.http.HttpEntity]]
+  *
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 06.04.2017.
   */
 object HttpWriters {

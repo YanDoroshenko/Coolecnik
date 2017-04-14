@@ -7,6 +7,8 @@ import models._
 import play.api.libs.json._
 
 /**
+  * Implicit converters from entity objects to [[JsValue]]
+  *
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 21.03.2017.
   */
 object JsonSerializers {
