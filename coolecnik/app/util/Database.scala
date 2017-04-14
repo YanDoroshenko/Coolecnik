@@ -1,5 +1,7 @@
 package util
 
+import scala.language.implicitConversions
+
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 06.04.2017.
   */
