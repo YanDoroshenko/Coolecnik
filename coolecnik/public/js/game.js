@@ -58,6 +58,10 @@ $(function () {
         $("#savedGameModalWindow").modal();
         var gameInfo = JSON.parse(localStorage.getItem("savedGameInfo"));
         $("#savedGameModalDiv").html("Máte uloženou hru s hráčem " + gameInfo.pl2name + " od " + gameInfo.endOfGameTime);
+
+        document.getElementById("sendSavedGameBtn").addEventListener("click", function (event) {
+
+        });
     }
 });
 
@@ -258,6 +262,10 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 					}
                     localStorage.setItem("activePlayer", activePlayer);
 
+                    $("#pl1good").html("0");
+                    $("#pl2good").html("0");
+                    $("#pl1bad").html("0");
+                    $("#pl2bad").html("0");
                     var savedCounterValues = {
                         "green1": 0,
                         "green2": 0,
@@ -344,14 +352,6 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
 		$("#pl2bad").html( parseInt($("#pl2bad").text()) + 1 );
 	round = round + 1;
 
-    var savedCounterValues = {
-        "green1": $("#pl1good").text,
-        "green2": $("#pl2good").text,
-        "red1": $("#pl1bad").text,
-        "red2": $("#pl2bad").text
-    };
-    localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
-
 	activePlayer = (activePlayer == 1) ? 0 : 1;
 	if (activePlayer == 1){
 		document.getElementById("player1").className = "active-player";
@@ -362,6 +362,14 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
 		document.getElementById("player2").className = "active-player";
 	}
     localStorage.setItem("activePlayer", activePlayer);
+
+    var savedCounterValues = {
+        "green1": $("#pl1good").text(),
+        "green2": $("#pl2good").text(),
+        "red1": $("#pl1bad").text(),
+        "red2": $("#pl2bad").text()
+    };
+    localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
 	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
 });
