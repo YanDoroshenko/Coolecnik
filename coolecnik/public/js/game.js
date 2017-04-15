@@ -656,6 +656,7 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
+        localStorage.setItem("activeGame", "false");
     }
 
 });
@@ -741,6 +742,7 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
+        localStorage.setItem("activeGame", "false");
     }
 
 });
@@ -825,6 +827,7 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
+        localStorage.setItem("activeGame", "false");
     }
 
 });
@@ -909,6 +912,7 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
+        localStorage.setItem("activeGame", "false");
     }
 
 });
@@ -993,6 +997,7 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
+        localStorage.setItem("activeGame", "false");
     }
 
 });
