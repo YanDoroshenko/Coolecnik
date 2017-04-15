@@ -288,7 +288,9 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
 /*---------------Pool panel---------------*/
 document.getElementById("poolCorrectBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
 		"strikeType" : 1,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
@@ -320,7 +322,9 @@ document.getElementById("poolCorrectBtn").addEventListener("click", function (ev
 });
 
 document.getElementById("poolWhInHoleBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
         "strikeType": 2,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
@@ -363,7 +367,9 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
 });
 
 document.getElementById("poolIncorrectBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
         "strikeType": 3,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
@@ -400,7 +406,9 @@ document.getElementById("poolIncorrectBtn").addEventListener("click", function (
 });
 
 document.getElementById("poolWrBallBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
 		"strikeType" : 4,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
@@ -442,7 +450,8 @@ document.getElementById("poolWrBallBtn").addEventListener("click", function (eve
 });
 
 document.getElementById("removeLastBtn").addEventListener("click", function (event) {
-	
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
 
 	if (existingStrikes == null) {
@@ -524,7 +533,9 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 });
 
 document.getElementById("poolOthFaulBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
 		"strikeType" : 5,
 		"game" : gameId,
         "player": (activePlayer === 1) ? players[0].id : players[1].id,
@@ -573,6 +584,8 @@ document.getElementById("poolOthFaulBtn").addEventListener("click", function (ev
 
 // End of game buttons
 document.getElementById("correctEndBtn").addEventListener("click", function (event) {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
     var obj = {
         "strikeType": 6,
         "game": gameId,
@@ -670,7 +683,8 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
 });
 
 document.getElementById("poolFaul8Btn").addEventListener("click", function (event) {
-    var toSkip = false;
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
     var obj = {
         "strikeType": 7,
 		"game" : gameId,
@@ -756,7 +770,9 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
 });
 
 document.getElementById("pool8tooSoonBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
         "strikeType": 8,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
@@ -841,7 +857,9 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
 });
 
 document.getElementById("pool8WrHoleBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
         "strikeType": 9,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
@@ -926,7 +944,9 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
 });
 
 document.getElementById("pool8OfTableBtn").addEventListener("click", function (event) {
-	var obj = {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    var obj = {
         "strikeType": 10,
 		"game" : gameId,
 		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
