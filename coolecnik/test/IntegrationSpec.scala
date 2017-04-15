@@ -10,13 +10,13 @@ import play.api.test._
 @RunWith(classOf[JUnitRunner])
 class IntegrationSpec extends Specification {
 
-  "PlayerController" should {
+  "Application" should {
 
     "work from within a browser" in new WithBrowser {
 
-      browser.goTo("http://localhost:" + port)
+      browser.goTo("http://localhost:9000")
 
-      browser.pageSource must contain("Your new application is ready.")
+      browser.pageSource must contain("COOLEČNÍK")
     }
   }
 }
