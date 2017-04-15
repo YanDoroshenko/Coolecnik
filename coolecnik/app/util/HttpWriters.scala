@@ -28,14 +28,14 @@ object HttpWriters {
     st => ByteString(Json.toJson(st).toString()), Some("application/json"))
 
   implicit val flw: Writeable[Seq[Friendship]] = new Writeable[Seq[Friendship]](
-    fl => ByteString(Json.toJson(fl).toString()), Some("application/json")
-  )
+    fl => ByteString(Json.toJson(fl).toString()), Some("application/json"))
 
   implicit val bgsw: Writeable[BasicGameStats] = new Writeable[BasicGameStats](
-    bgs => ByteString(Json.toJson(bgs).toString()), Some("application/json")
-  )
+    bgs => ByteString(Json.toJson(bgs).toString()), Some("application/json"))
 
   implicit val dw = new Writeable[Double](
-    d => ByteString(Json.toJson(d).toString()), Some("application/json")
-  )
+    d => ByteString(Json.toJson(d).toString()), Some("application/json"))
+
+  implicit val sfw = new Writeable[Seq[Friend]](
+    sf => ByteString(Json.toJson(sf).toString()), Some("application/json"))
 }

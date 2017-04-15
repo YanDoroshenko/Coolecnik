@@ -31,3 +31,5 @@ case class NewStrikeType(gameType: Int, correct: Boolean, title: String, descrip
 case class NewStrike(strikeType: Int, game: Int, player: Int, round: Int)
 
 case class BasicGameStats(total: Int, won: Int, draws: Int, lost: Int, totalSecs: Long)
+
+case class Friend(id: Int, login: String)
