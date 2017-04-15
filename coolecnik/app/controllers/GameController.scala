@@ -35,13 +35,16 @@ class GameController extends Controller {
               (g.title, g.description)
           )
             .recover {
-              case e: PSQLException => Future(NotAcceptable(e.getMessage))
+              case e: PSQLException => e
             }
-            .flatMap(_ =>
-              db.run(gameTypes.filter(
-                g_ => g_.title === g.title)
-                .result)
-                .map(gs => Created(gs.head)))
+            .flatMap {
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ =>
+                db.run(gameTypes.filter(
+                  g_ => g_.title === g.title)
+                  .result)
+                  .map(gs => Created(gs.head))
+            }
         case None => Future(BadRequest("Request can't be deserialized"))
       }
     }
@@ -59,11 +62,17 @@ class GameController extends Controller {
               }) +=
               (g.gameType, g.player1, g.player2, Some(g.beginning), g.tournament, g.rounds, g.carambolesToWin)
           )
-            .flatMap(_ =>
-              db.run(games.filter(
-                g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === g.beginning)
-                .result)
-                .map(gs => Created(gs.head)))
+            .recover {
+              case e: PSQLException => e
+            }
+            .flatMap {
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ =>
+                db.run(games.filter(
+                  g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === g.beginning)
+                  .result)
+                  .map(gs => Created(gs.head))
+            }
         case None => Future(BadRequest("Request can't be deserialized"))
       }
     }
@@ -85,7 +94,7 @@ class GameController extends Controller {
             })
             .flatMap {
               case e: IllegalStateException => Future(Conflict(e.getMessage))
-              case e: PSQLException => Future(NotAcceptable(e.getMessage))
+              case e: PSQLException => Future(Conflict(e.getMessage))
               case _ =>
                 db.run(games.filter(_.id === id).result)
                   .map(gs => Ok(gs.head))

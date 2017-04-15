@@ -35,14 +35,15 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
               p_ => (p_.login, p_.email, p_.passwordHash, p_.firstName, p_.lastName)) +=
               Registration.unapply(p).get
           ).recover {
-            case e: PSQLException => Future(NotAcceptable(e.getMessage))
-          }.flatMap {
-            case r: Future[Status@unchecked] => r
-            case _ =>
-              db.run(players.filter(_.login === p.login).result).map(
-                ps => Created(ps.head)
-              )
+            case e: PSQLException => e
           }
+            .flatMap {
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ =>
+                db.run(players.filter(_.login === p.login).result).map(
+                  ps => Created(ps.head)
+                )
+            }
         case None => Future(BadRequest("Request can't be deserialized"))
       }
     }
@@ -124,7 +125,7 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
             case e: PSQLException => e
           }
           .flatMap {
-            case _: PSQLException => Future(Conflict)
+            case e: PSQLException => Future(Conflict(e.getMessage))
             case _ =>
               db.run(friendList.filter(_.playerId === playerId).result)
                 .map(fl => Ok(fl))
