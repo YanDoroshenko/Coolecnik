@@ -17,25 +17,25 @@ GET           /api/players/:id/statistics/basicCarambole        controllers.Stat
 
 # Player management
 POST          /api/register                                     controllers.PlayerController.register
-POST          /api/login                                       controllers.PlayerController.login
-PUT           /api/passwdreset                                 controllers.PlayerController.resetPassword
-PUT           /api/passwdupdate                                controllers.PlayerController.updatePassword
-POST          /api/players/:playerId/befriend/:friendId        controllers.PlayerController.befriend(playerId: Int, friendId: Int)
-DELETE        /api/players/:playerId/unfriend/:friendId        controllers.PlayerController.unfriend(playerId:Int, friendId: Int)
-GET           /api/players/:id/friends                         controllers.PlayerController.getFriends(id: Int)
+POST          /api/login                                        controllers.PlayerController.login
+PUT           /api/passwdreset                                  controllers.PlayerController.resetPassword
+PUT           /api/passwdupdate                                 controllers.PlayerController.updatePassword
+POST          /api/players/:playerId/befriend/:friendId         controllers.PlayerController.befriend(playerId: Int, friendId: Int)
+DELETE        /api/players/:playerId/unfriend/:friendId         controllers.PlayerController.unfriend(playerId:Int, friendId: Int)
+GET           /api/players/:id/friends                          controllers.PlayerController.getFriends(id: Int)
 
 # Game type
-POST          /api/games/types/new                             controllers.GameController.newGameType
+POST          /api/games/types/new                              controllers.GameController.newGameType
 
 # Game
-POST          /api/games/new                                   controllers.GameController.newGame
-PUT           /api/games/:id/end                               controllers.GameController.endGame(id: Int)
+POST          /api/games/new                                    controllers.GameController.newGame
+PUT           /api/games/:id/end                                controllers.GameController.endGame(id: Int)
 
 # Strike type
-POST          /api/strikes/types/new                           controllers.StrikeController.newStrikeType
+POST          /api/strikes/types/new                            controllers.StrikeController.newStrikeType
 
 # Strike
-POST          /api/strikes/new                                 controllers.StrikeController.addStrikes
+POST          /api/strikes/new                                  controllers.StrikeController.addStrikes
 
 # Map static resources from the /public folder to the /assets URL path
 GET           /*file                                            controllers.Assets.at(path="/public", file)

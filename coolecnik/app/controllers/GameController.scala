@@ -58,9 +58,7 @@ class GameController extends Controller {
                 (g_.gameType, g_.player1, g_.player2, g_.beginning, g_.tournament, g_.rounds, g_.carambolesToWin)
               }) +=
               (g.gameType, g.player1, g.player2, Some(g.beginning), g.tournament, g.rounds, g.carambolesToWin)
-          ).recover {
-            case e: PSQLException => Future(NotAcceptable(e.getMessage))
-          }
+          )
             .flatMap(_ =>
               db.run(games.filter(
                 g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === g.beginning)

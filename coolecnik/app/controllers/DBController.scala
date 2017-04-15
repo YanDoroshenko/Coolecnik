@@ -17,14 +17,19 @@ class DBController extends Controller {
 
   def createSchema: Action[AnyContent] = Action.async {
     createTables
-      .map(_ => Ok)
+      .map(_ => Created)
   }
 
   def createData: Action[AnyContent] = Action.async {
     createGameTypes
       .flatMap(_ => createStrikeTypes)
-      .flatMap(_ => createGuest)
-      .map(_ => Ok)
+      .flatMap(_ =>
+        db.run(
+          sqlu"""
+             INSERT INTO t_player(id, login, email, password_hash, first_name) VALUES (-1, '-1', '-1','-1', 'guest');
+          """
+        ))
+      .map(_ => Created)
   }
 
   def createTestUsers: Action[AnyContent] = Action.async {
@@ -72,13 +77,6 @@ class DBController extends Controller {
         StrikeType(11, true, 2, "correct_carambole", Some("correct carambole, player continues"), false),
         StrikeType(12, false, 2, "foul_carambole", Some("foul at shot, other players turn"), false)
       )
-    )
-  }
-
-  private def createGuest = {
-    db.run(
-      players +=
-        Player(0, "guest", "none", "none", Some("Guest"), None)
     )
   }
 }
