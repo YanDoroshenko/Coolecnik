@@ -52,8 +52,12 @@ $(function () {
         $("#pl1bad").html(strikes["red1"]);
         $("#pl2bad").html(strikes["red2"]);
     }
-    else if (localStorage.getItem("savedGame") === "true") { //there is saved unsent game
 
+    else if (localStorage.getItem("savedGame") === "true") { //there is saved unsent game
+        // id=savedGameModalDiv  for text
+        $("#savedGameModalWindow").modal();
+        var gameInfo = JSON.parse(localStorage.getItem("savedGameInfo"));
+        $("#savedGameModalDiv").html("Máte uloženou hru s hráčem " + gameInfo.pl2name + " od " + gameInfo.endOfGameTime);
     }
 });
 
@@ -219,7 +223,9 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	        statusCode: {
 	            201: function (response) {
 	                console.log("201");
-	                localStorage.setItem("currentGame", null);
+
+
+                    localStorage.setItem("currentGame", null);
 	                $("#player1").text(localStorage.getItem("myName"));
 	                $("#player2").text($('#pl0').val());
 	                $("#newGameDiv").css("display", "none");
@@ -256,9 +262,11 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                         "green1": 0,
                         "green2": 0,
                         "red1": 0,
-                        "red2": 0,
+                        "red2": 0
                     };
                     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
+
+                    localStorage.setItem("activeGame", true);
 
                     var timerVar = setInterval(countTimer, 1000);
 	            },
@@ -301,10 +309,10 @@ document.getElementById("poolCorrectBtn").addEventListener("click", function (ev
 	round = round + 1;
 
     var savedCounterValues = {
-        "green1": $("#pl1good").text,
-        "green2": $("#pl2good").text,
-        "red1": $("#pl1bad").text,
-        "red2": $("#pl2bad").text
+        "green1": $("#pl1good").text(),
+        "green2": $("#pl2good").text(),
+        "red1": $("#pl1bad").text(),
+        "red2": $("#pl2bad").text()
     };
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
@@ -381,10 +389,10 @@ document.getElementById("poolIncorrectBtn").addEventListener("click", function (
     localStorage.setItem("activePlayer", activePlayer);
 
     var savedCounterValues = {
-        "green1": $("#pl1good").text,
-        "green2": $("#pl2good").text,
-        "red1": $("#pl1bad").text,
-        "red2": $("#pl2bad").text
+        "green1": $("#pl1good").text(),
+        "green2": $("#pl2good").text(),
+        "red1": $("#pl1bad").text(),
+        "red2": $("#pl2bad").text()
     };
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
@@ -423,10 +431,10 @@ document.getElementById("poolWrBallBtn").addEventListener("click", function (eve
     localStorage.setItem("activePlayer", activePlayer);
 
     var savedCounterValues = {
-        "green1": $("#pl1good").text,
-        "green2": $("#pl2good").text,
-        "red1": $("#pl1bad").text,
-        "red2": $("#pl2bad").text
+        "green1": $("#pl1good").text(),
+        "green2": $("#pl2good").text(),
+        "red1": $("#pl1bad").text(),
+        "red2": $("#pl2bad").text()
     };
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
@@ -505,10 +513,10 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
     localStorage.setItem("activePlayer", activePlayer);
 
     var savedCounterValues = {
-        "green1": $("#pl1good").text,
-        "green2": $("#pl2good").text,
-        "red1": $("#pl1bad").text,
-        "red2": $("#pl2bad").text
+        "green1": $("#pl1good").text(),
+        "green2": $("#pl2good").text(),
+        "red1": $("#pl1bad").text(),
+        "red2": $("#pl2bad").text()
     };
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
@@ -547,10 +555,10 @@ document.getElementById("poolOthFaulBtn").addEventListener("click", function (ev
     localStorage.setItem("activePlayer", activePlayer);
 
     var savedCounterValues = {
-        "green1": $("#pl1good").text,
-        "green2": $("#pl2good").text,
-        "red1": $("#pl1bad").text,
-        "red2": $("#pl2bad").text
+        "green1": $("#pl1good").text(),
+        "green2": $("#pl2good").text(),
+        "red1": $("#pl1bad").text(),
+        "red2": $("#pl2bad").text()
     };
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
