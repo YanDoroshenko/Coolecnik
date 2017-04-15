@@ -51,8 +51,6 @@ $(function () {
         $("#pl2good").html(strikes["green2"]);
         $("#pl1bad").html(strikes["red1"]);
         $("#pl2bad").html(strikes["red2"]);
-
-
     }
     else if (localStorage.getItem("savedGame") === "true") { //there is saved unsent game
 
