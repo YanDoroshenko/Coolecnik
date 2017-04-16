@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/bootstrap.js"></script>
 
-    <title>8-pool Game</title>
+    <title>Hra</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse green-nav navbar-toggleable-sm">
@@ -27,38 +27,34 @@
     <div class="navbar-collapse justify-content-md-center collapse" role="navigation" id="navbar" aria-expanded="false">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link ">8-Pool</a>
+                <a class="nav-link">Hra</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Turnaje</a>
+                <a class="nav-link" href="tournaments.html">Turnaje</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Přátelé</a>
+                <a class="nav-link" href="friends.html">Přátelé</a>
             </li>
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Pravidla</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown02">
-                    <a class="dropdown-item" href="#">Osmička</a>
-                    <a class="dropdown-item" href="#">Karambol</a>
+                    <a class="dropdown-item active" href="rules_8pool.html">Osmička</a>
+                    <a class="dropdown-item" href="rules_karambol.html">Karambol</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Profil</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
-                    <a class="dropdown-item" href="#">Profil</a>
-                    <a class="dropdown-item" href="#">Statistika</a>
+                    <a class="dropdown-item" href="profile.html">Profil</a>
+                    <a class="dropdown-item" href="statistics.html">Statistika</a>
                     <a class="dropdown-item" href="#">Odhlásit se</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
-
-
-
-
 
 <!--      New game panel      -->
 <div class="container col-md-3 marg" id="newGameDiv">
@@ -91,7 +87,7 @@
 <div class="container col-md-7 marg" id="poolControlDiv" style="display: none">
     <div class="row justify-content-center">
         <h3 class="h3 ">
-            <img src="">
+            <img src="" alt="">
             <span id="player1">Player1</span>
             vs
             <span class="active-player" id="player2">Player2</span>
