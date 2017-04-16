@@ -51,6 +51,9 @@ $(function () {
         $("#pl2good").html(strikes["green2"]);
         $("#pl1bad").html(strikes["red1"]);
         $("#pl2bad").html(strikes["red2"]);
+
+        activePlayer = parseInt(localStorage.getItem("activePlayer"));
+        players = JSON.parse(localStorage.getItem("players"));
     }
 
     else if (localStorage.getItem("savedGame") === "true") { //there is saved unsent game
@@ -242,13 +245,13 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	                }
 
 	                gameId = response.id;
-                    players = new Array({
+                    players = [{
                         "id": parseInt(localStorage.getItem("myId")),
                         "name": localStorage.getItem("myName")
                     }, {
                         "id": (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
                         "name": $('#pl0').val()
-                    });
+                    }];
                     localStorage.setItem("players", JSON.stringify(players));
 
 					activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
@@ -301,7 +304,7 @@ document.getElementById("poolCorrectBtn").addEventListener("click", function (ev
     var obj = {
 		"strikeType" : 1,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
@@ -312,7 +315,7 @@ document.getElementById("poolCorrectBtn").addEventListener("click", function (ev
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
 
-	if (activePlayer == 1)
+    if (activePlayer === 1)
 		$("#pl1good").html( parseInt($("#pl1good").text()) + 1 );
 	else
 		$("#pl2good").html( parseInt($("#pl2good").text()) + 1 );
@@ -335,7 +338,7 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
     var obj = {
         "strikeType": 2,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
@@ -346,14 +349,14 @@ document.getElementById("poolWhInHoleBtn").addEventListener("click", function (e
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
 
-	if (activePlayer == 1)
+    if (activePlayer === 1)
 		$("#pl1bad").html( parseInt($("#pl1bad").text()) + 1 );
 	else
 		$("#pl2bad").html( parseInt($("#pl2bad").text()) + 1 );
 	round = round + 1;
 
-	activePlayer = (activePlayer == 1) ? 0 : 1;
-	if (activePlayer == 1){
+    activePlayer = (activePlayer === 1) ? 0 : 1;
+    if (activePlayer === 1) {
 		document.getElementById("player1").className = "active-player";
 		document.getElementById("player2").className = "";
 	}
@@ -380,7 +383,7 @@ document.getElementById("poolIncorrectBtn").addEventListener("click", function (
     var obj = {
         "strikeType": 3,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
@@ -391,8 +394,8 @@ document.getElementById("poolIncorrectBtn").addEventListener("click", function (
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
 	round = round + 1;
-	activePlayer = (activePlayer == 1) ? 0 : 1;
-	if (activePlayer == 1){
+    activePlayer = (activePlayer === 1) ? 0 : 1;
+    if (activePlayer === 1) {
 		document.getElementById("player1").className = "active-player";
 		document.getElementById("player2").className = "";
 	}
@@ -419,7 +422,7 @@ document.getElementById("poolWrBallBtn").addEventListener("click", function (eve
     var obj = {
 		"strikeType" : 4,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
@@ -430,13 +433,13 @@ document.getElementById("poolWrBallBtn").addEventListener("click", function (eve
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
 
-	if (activePlayer == 1)
+    if (activePlayer === 1)
 		$("#pl1bad").html( parseInt($("#pl1bad").text()) + 1 );
 	else
 		$("#pl2bad").html( parseInt($("#pl2bad").text()) + 1 );
 	round = round + 1;
-	activePlayer = (activePlayer == 1) ? 0 : 1;
-	if (activePlayer == 1){
+    activePlayer = (activePlayer === 1) ? 0 : 1;
+    if (activePlayer === 1) {
 		document.getElementById("player1").className = "active-player";
 		document.getElementById("player2").className = "";
 	}
@@ -475,8 +478,8 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 			$("#pl1good").html( parseInt($("#pl1good").text()) - 1 );
 		}
 		else if (lastStrike.strikeType == 3){
-			activePlayer = (activePlayer == 1) ? 0 : 1;
-			if (activePlayer == 1){
+            activePlayer = (activePlayer === 1) ? 0 : 1;
+            if (activePlayer === 1) {
 				document.getElementById("player1").className = "active-player";
 				document.getElementById("player2").className = "";
 			}
@@ -487,8 +490,8 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 		}
 		else {
 			$("#pl1bad").html( parseInt($("#pl1bad").text()) - 1 );
-			activePlayer = (activePlayer == 1) ? 0 : 1;
-			if (activePlayer == 1){
+            activePlayer = (activePlayer === 1) ? 0 : 1;
+            if (activePlayer === 1) {
 				document.getElementById("player1").className = "active-player";
 				document.getElementById("player2").className = "";
 			}
@@ -514,7 +517,7 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 		}
 		else {
 			$("#pl2bad").html( parseInt($("#pl2bad").text()) - 1 );
-			activePlayer = (activePlayer == 1) ? 0 : 1;
+            activePlayer = (activePlayer === 1) ? 0 : 1;
             if (activePlayer === 1) {
 				document.getElementById("player1").className = "active-player";
 				document.getElementById("player2").className = "";
@@ -557,13 +560,13 @@ document.getElementById("poolOthFaulBtn").addEventListener("click", function (ev
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
 
-	if (activePlayer == 1)
+    if (activePlayer === 1)
 		$("#pl1bad").html( parseInt($("#pl1bad").text()) + 1 );
 	else
 		$("#pl2bad").html( parseInt($("#pl2bad").text()) + 1 );
 	round = round + 1;
-	activePlayer = (activePlayer == 1) ? 0 : 1;
-	if (activePlayer == 1){
+    activePlayer = (activePlayer === 1) ? 0 : 1;
+    if (activePlayer === 1) {
 		document.getElementById("player1").className = "active-player";
 		document.getElementById("player2").className = "";
 	}
@@ -696,7 +699,7 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
     var obj = {
         "strikeType": 7,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
@@ -783,7 +786,7 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
     var obj = {
         "strikeType": 8,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
@@ -870,7 +873,7 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
     var obj = {
         "strikeType": 9,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
@@ -957,7 +960,7 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
     var obj = {
         "strikeType": 10,
 		"game" : gameId,
-		"player" : (activePlayer == 1) ? players[0].id : players[1].id,
+        "player": (activePlayer === 1) ? players[0].id : players[1].id,
 		"round" : round
 	};
 	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
