@@ -730,12 +730,13 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         var currentdate = new Date();
+        var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
+        var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
         var datetime = currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
             + currentdate.getFullYear() + "  "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + ":"
-            + currentdate.getSeconds();
+            + h + ":"
+            + m;
         obj = {
             "gameId": gameId,
             "gameType": localStorage.getItem("gameType"),
@@ -826,12 +827,13 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         var currentdate = new Date();
+        var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
+        var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
         var datetime = currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
             + currentdate.getFullYear() + "  "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + ":"
-            + currentdate.getSeconds();
+            + h + ":"
+            + m;
         obj = {
             "gameId": gameId,
             "gameType": localStorage.getItem("gameType"),
@@ -922,12 +924,13 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         var currentdate = new Date();
+        var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
+        var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
         var datetime = currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
             + currentdate.getFullYear() + "  "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + ":"
-            + currentdate.getSeconds();
+            + h + ":"
+            + m;
         obj = {
             "gameId": gameId,
             "gameType": localStorage.getItem("gameType"),
@@ -1018,12 +1021,13 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         var currentdate = new Date();
+        var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
+        var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
         var datetime = currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
             + currentdate.getFullYear() + "  "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + ":"
-            + currentdate.getSeconds();
+            + h + ":"
+            + m;
         obj = {
             "gameId": gameId,
             "gameType": localStorage.getItem("gameType"),
@@ -1114,12 +1118,13 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         var currentdate = new Date();
+        var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
+        var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
         var datetime = currentdate.getDate() + "/"
             + (currentdate.getMonth() + 1) + "/"
             + currentdate.getFullYear() + "  "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + ":"
-            + currentdate.getSeconds();
+            + h + ":"
+            + m;
         obj = {
             "gameId": gameId,
             "gameType": localStorage.getItem("gameType"),
