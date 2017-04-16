@@ -1,3 +1,7 @@
+var isSecondPlayerAuthorized = false;
+var isSecondPlayerAuthMenuOpened = false;
+var players, activePlayer, round = 1, gameId;
+
 /*
  localStorage mapping:
  activeGame: bool
@@ -10,7 +14,6 @@
  players: arr(id, name)
  currentGame: arr(obj)
  */
-
 
 
 // check if there are unended or saved but unsent games
@@ -52,6 +55,7 @@ $(function () {
         $("#pl1bad").html(strikes["red1"]);
         $("#pl2bad").html(strikes["red2"]);
 
+        //set other vars
         activePlayer = parseInt(localStorage.getItem("activePlayer"));
         players = JSON.parse(localStorage.getItem("players"));
     }
@@ -60,9 +64,57 @@ $(function () {
         // id=savedGameModalDiv  for text
         $("#savedGameModalWindow").modal();
         var gameInfo = JSON.parse(localStorage.getItem("savedGameInfo"));
-        $("#savedGameModalDiv").html("Máte uloženou hru s hráčem " + gameInfo.pl2name + " od " + gameInfo.endOfGameTime);
+        $("#savedGameModalDiv").html("Máte uloženou hru s hráčem " + gameInfo.pl2Name + " od " + gameInfo.dateTimeString);
 
         document.getElementById("sendSavedGameBtn").addEventListener("click", function (event) {
+            var allStrikes = JSON.parse(localStorage.getItem("currentGame"));
+            $.ajax("/api/strikes/new", {
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(allStrikes),
+                statusCode: {
+                    201: function (response) {
+                        console.log("201");
+                        $("#looseModalWindow").modal("hide");
+                        $("#poolControlDiv").css("display", "none");
+                        $("#karambolControlDiv").css("display", "none");
+                        $("#endOfGameDiv").css("display", "block");
+                        $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
+                    },
+                    400: function (response) {
+                        console.log("400");
+                    },
+                    409: function (response) {
+                        console.log("409");
+                    }
+                }
+            });
+            var savedGameInfoVar = JSON.parse(localStorage.getItem("savedGameInfo"));
+            // send end of game
+            var endpoint = "/api/games/" + savedGameInfoVar.gameId + "/end";
+
+            var obj = {
+                "end": savedGameInfoVar.endOfGameTime
+            };
+            $.ajax(endpoint, {
+                type: "PUT",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(obj),
+                statusCode: {
+                    200: function (response) {
+                        console.log("200");
+                    },
+                    400: function (response) {
+                        console.log("400");
+                    },
+                    409: function (response) {
+                        console.log("409");
+                    }
+                }
+            });
+
+            localStorage.setItem("savedGame", null);
+            localStorage.setItem("savedGameInfo", null);
 
         });
     }
@@ -125,11 +177,6 @@ function hash(str, asString, seed) {
     return hval >>> 0;
 }
 
-
-
-var isSecondPlayerAuthorized = false;
-var isSecondPlayerAuthMenuOpened = false;
-var players, activePlayer, round = 1, gameId;
 
 /*---------------New game panel---------------*/
 document.getElementById("authPlayer2").addEventListener("click", function (event) {
@@ -231,7 +278,6 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	            201: function (response) {
 	                console.log("201");
 
-
                     localStorage.setItem("currentGame", null);
 	                $("#player1").text(localStorage.getItem("myName"));
 	                $("#player2").text($('#pl0').val());
@@ -279,14 +325,17 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
                     localStorage.setItem("activeGame", true);
 
+                    localStorage.setItem("savedGame", null);
+                    localStorage.setItem("savedGameInfo", null);
+
                     var timerVar = setInterval(countTimer, 1000);
 	            },
 	            400: function (response) {
 	                console.log("400");
 	                $("#newGameSpan").val = "OH NO";
 	            },
-	            406: function (response) {
-	                console.log("406");
+                409: function (response) {
+                    console.log("409");
 	                $("#newGameSpan").val = "OH NO";
 	            }
 	        }
@@ -629,8 +678,8 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -653,8 +702,8 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 },
                 500: function (response) {
                     console.log("500");
@@ -680,12 +729,20 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + "  "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
         obj = {
             "gameId": gameId,
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -728,8 +785,8 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -752,8 +809,8 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -768,11 +825,20 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + "  "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
         obj = {
             "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -815,8 +881,8 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -839,8 +905,8 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -855,11 +921,20 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + "  "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
         obj = {
             "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -902,8 +977,8 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -926,8 +1001,8 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -942,11 +1017,20 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + "  "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
         obj = {
             "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -989,8 +1073,8 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -1013,8 +1097,8 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
                 400: function (response) {
                     console.log("400");
                 },
-                406: function (response) {
-                    console.log("406");
+                409: function (response) {
+                    console.log("409");
                 }
             }
         });
@@ -1029,11 +1113,20 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + "  "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
         obj = {
             "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00"
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
