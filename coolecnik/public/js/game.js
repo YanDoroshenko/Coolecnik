@@ -1,6 +1,6 @@
 var isSecondPlayerAuthorized = false;
 var isSecondPlayerAuthMenuOpened = false;
-var players, activePlayer, round = 1, gameId;
+var players, activePlayer, round = 1, gameId, timerVar;
 
 /*
  localStorage mapping:
@@ -46,6 +46,7 @@ $(function () {
         var time = JSON.parse(localStorage.getItem("savedTime"));
         $("#timerM").html(time["m"]);
         $("#timerS").html(time["s"]);
+        clearTimeout(timerVar);
         var timerVar = setInterval(countTimer, 1000);
 
         //set strike counters
@@ -115,7 +116,7 @@ $(function () {
 
             localStorage.setItem("savedGame", null);
             localStorage.setItem("savedGameInfo", null);
-
+            clearTimeout(timerVar);
         });
     }
 });
@@ -311,10 +312,16 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 					}
                     localStorage.setItem("activePlayer", activePlayer);
 
+                    $("#helpDiv").html("");
+                    $("#endOfGameDiv").html("");
+
                     $("#pl1good").html("0");
                     $("#pl2good").html("0");
                     $("#pl1bad").html("0");
                     $("#pl2bad").html("0");
+
+                    $("#timerM").html("0");
+                    $("#timerS").html("0");
                     var savedCounterValues = {
                         "green1": 0,
                         "green2": 0,
@@ -327,8 +334,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
                     localStorage.setItem("savedGame", null);
                     localStorage.setItem("savedGameInfo", null);
-
-                    var timerVar = setInterval(countTimer, 1000);
+                    clearTimeout(timerVar);
+                    timerVar = setInterval(countTimer, 1000);
 	            },
 	            400: function (response) {
 	                console.log("400");
@@ -673,7 +680,9 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
-                    $("#endOfGameDiv").css("display", "block");
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
                 },
                 400: function (response) {
                     console.log("400");
@@ -710,9 +719,10 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
-                    $("#endOfGameDiv").css("display", "block");
-                    $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
-                },
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
+                }
             }
 
         });
@@ -748,6 +758,7 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
     }
+    clearTimeout(timerVar);
 
 });
 
@@ -780,8 +791,9 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
-                    $("#endOfGameDiv").css("display", "block");
-                    $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
                 },
                 400: function (response) {
                     console.log("400");
@@ -845,6 +857,7 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
     }
+    clearTimeout(timerVar);
 
 });
 
@@ -877,8 +890,9 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
-                    $("#endOfGameDiv").css("display", "block");
-                    $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
                 },
                 400: function (response) {
                     console.log("400");
@@ -942,6 +956,7 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
     }
+    clearTimeout(timerVar);
 
 });
 
@@ -974,8 +989,9 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
-                    $("#endOfGameDiv").css("display", "block");
-                    $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
                 },
                 400: function (response) {
                     console.log("400");
@@ -1039,6 +1055,7 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
     }
+    clearTimeout(timerVar);
 
 });
 
@@ -1071,8 +1088,9 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
-                    $("#endOfGameDiv").css("display", "block");
-                    $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
                 },
                 400: function (response) {
                     console.log("400");
@@ -1136,6 +1154,16 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
     }
+    clearTimeout(timerVar);
+});
 
+document.getElementById("endGameBtn").addEventListener("click", function (event) {
+    $("#looseModalWindow").modal("hide");
+    $("#poolControlDiv").css("display", "none");
+    $("#newGameDiv").css("display", "block");
+    localStorage.setItem("activeGame", "false");
+    localStorage.setItem("currentGame", "false");
+    localStorage.setItem("savedGame", "false");
+    clearTimeout(timerVar);
 });
 
