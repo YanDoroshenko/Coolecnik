@@ -75,7 +75,7 @@ $(function () {
                 data: JSON.stringify(allStrikes),
                 statusCode: {
                     201: function (response) {
-                        console.log("201");
+                        console.log("201 CREATED");
                         $("#looseModalWindow").modal("hide");
                         $("#poolControlDiv").css("display", "none");
                         $("#karambolControlDiv").css("display", "none");
@@ -83,10 +83,10 @@ $(function () {
                         $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
                     },
                     400: function (response) {
-                        console.log("400");
+                        console.log("400 BAD REQUEST");
                     },
                     409: function (response) {
-                        console.log("409");
+                        console.log("409 CONFLICT");
                     }
                 }
             });
@@ -103,13 +103,13 @@ $(function () {
                 data: JSON.stringify(obj),
                 statusCode: {
                     200: function (response) {
-                        console.log("200");
+                        console.log("200 OK");
                     },
                     400: function (response) {
-                        console.log("400");
+                        console.log("400 BAD REQUEST");
                     },
                     409: function (response) {
-                        console.log("409");
+                        console.log("409 CONFLICT");
                     }
                 }
             });
@@ -277,7 +277,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	        data: JSON.stringify(obj),
 	        statusCode: {
 	            201: function (response) {
-	                console.log("201");
+                    console.log("201 CREATED");
 
                     localStorage.setItem("currentGame", null);
 	                $("#player1").text(localStorage.getItem("myName"));
@@ -338,11 +338,11 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     timerVar = setInterval(countTimer, 1000);
 	            },
 	            400: function (response) {
-	                console.log("400");
+                    console.log("400 BAD REQUEST");
 	                $("#newGameSpan").val = "OH NO";
 	            },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
 	                $("#newGameSpan").val = "OH NO";
 	            }
 	        }
@@ -676,7 +676,7 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
             data: JSON.stringify(allStrikes),
             statusCode: {
                 201: function (response) {
-                    console.log("201");
+                    console.log("201 CREATED");
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
@@ -685,10 +685,10 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
                     clearTimeout(timerVar);
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -706,16 +706,16 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
             data: JSON.stringify(obj),
             statusCode: {
                 200: function (response) {
-                    console.log("200");
+                    console.log("200 OK");
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 },
                 500: function (response) {
-                    console.log("500");
+                    console.log("500 INTERNAL SERVER ERROR");
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
@@ -787,7 +787,7 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
             data: JSON.stringify(allStrikes),
             statusCode: {
                 201: function (response) {
-                    console.log("201");
+                    console.log("201 CREATED");
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
@@ -796,10 +796,10 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
                     clearTimeout(timerVar);
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -817,13 +817,13 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
             data: JSON.stringify(obj),
             statusCode: {
                 200: function (response) {
-                    console.log("200");
+                    console.log("200 OK");
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -886,7 +886,7 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
             data: JSON.stringify(allStrikes),
             statusCode: {
                 201: function (response) {
-                    console.log("201");
+                    console.log("201 CREATED");
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
@@ -895,10 +895,10 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
                     clearTimeout(timerVar);
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -916,13 +916,13 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
             data: JSON.stringify(obj),
             statusCode: {
                 200: function (response) {
-                    console.log("200");
+                    console.log("200 OK");
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -985,7 +985,7 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
             data: JSON.stringify(allStrikes),
             statusCode: {
                 201: function (response) {
-                    console.log("201");
+                    console.log("201 CREATED");
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
@@ -994,10 +994,10 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
                     clearTimeout(timerVar);
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -1015,13 +1015,13 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
             data: JSON.stringify(obj),
             statusCode: {
                 200: function (response) {
-                    console.log("200");
+                    console.log("200 OK");
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -1084,7 +1084,7 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
             data: JSON.stringify(allStrikes),
             statusCode: {
                 201: function (response) {
-                    console.log("201");
+                    console.log("201 CREATED");
                     $("#looseModalWindow").modal("hide");
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
@@ -1093,10 +1093,10 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
                     clearTimeout(timerVar);
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
@@ -1114,13 +1114,13 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
             data: JSON.stringify(obj),
             statusCode: {
                 200: function (response) {
-                    console.log("200");
+                    console.log("200 OK");
                 },
                 400: function (response) {
-                    console.log("400");
+                    console.log("400 BAD REQUEST");
                 },
                 409: function (response) {
-                    console.log("409");
+                    console.log("409 CONFLICT");
                 }
             }
         });
