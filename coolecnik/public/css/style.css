@@ -297,6 +297,24 @@ h4 {
 	color:green;
 }
 
+/* Friendlist */
+.friend {
+    background-color: #313131;
+    color: #fff;
+    justify-content: space-between;
+}
+
+.friend:hover {
+    background-color: #2b542c;
+    color: #fff;
+}
+
+.friend a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* Modal for pass recovery */
 .modal-title{
   text-align: center;
