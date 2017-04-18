@@ -351,7 +351,7 @@
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_193837024" CREATED="1492254992178" MODIFIED="1492254997746">
 <node TEXT="list of friends&apos; ids and logins" FOLDED="true" ID="ID_1007146072" CREATED="1492255008616" MODIFIED="1492255019848">
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1234902184" CREATED="1492255020672" MODIFIED="1492255022862">
-<node TEXT="[{&quot;id&quot;: 14, &quot;login&quot; : &quot;pep1k&quot;}, {&quot;id&quot;: 44, &quot;login&quot; : &quot;honz4&quot;}]" ID="ID_829708728" CREATED="1492255023456" MODIFIED="1492255086368"/>
+<node TEXT="[{&quot;id&quot;: 14, &quot;login&quot; : &quot;pep1k&quot;, &quot;nov4c3k&quot;}, {&quot;id&quot;: 44, &quot;login&quot; : &quot;honz4&quot;}]" ID="ID_829708728" CREATED="1492255023456" MODIFIED="1492509002997"/>
 </node>
 </node>
 </node>

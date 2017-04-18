@@ -32,4 +32,4 @@ case class NewStrike(strikeType: Int, game: Int, player: Int, round: Int)
 
 case class BasicGameStats(total: Int, won: Int, draws: Int, lost: Int, totalSecs: Long)
 
-case class Friend(id: Int, login: String)
+case class Friend(id: Int, login: String, firstName: Option[String], lastName: Option[String])
