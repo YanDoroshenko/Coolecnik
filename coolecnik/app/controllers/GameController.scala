@@ -87,8 +87,8 @@ class GameController extends Controller {
             games.filter(r => r.id === id && r.end.isEmpty).result.map {
               case rs: Iterable[Game] if rs.nonEmpty =>
                 db.run(
-                  games.filter(r => r.id === id).map(_.end)
-                    .update(Some(e.end)))
+                  (for (g <- games.filter(r => r.id === id)) yield g.end -> g.winner)
+                    .update(Some(e.end) -> e.winner))
               case _ =>
                 new IllegalStateException("Game has already been ended")
             })

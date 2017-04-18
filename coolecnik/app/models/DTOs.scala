@@ -22,7 +22,7 @@ case class NewGame(
                     rounds: Option[Int],
                     carambolesToWin: Option[Int])
 
-case class EndGame(end: Timestamp)
+case class EndGame(winner: Option[Int], end: Timestamp)
 
 case class NewGameType(title: String, description: Option[String])
 

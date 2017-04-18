@@ -1,3 +1,36 @@
+// Session checking
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name,"",-1);
+}
+
+var myId = readCookie("myId");
+var myName = readCookie("myName");
+if (myId == null || myName == null) {
+	console.log("Cookies not found, redirecting...");
+	window.location.replace("/index.html");
+} else {
+	console.log("Cookies found.");
+}
+
+// Session log outerHeight
+document.getElementById("logout").addEventListener("click", function (event) {
+    event.preventDefault();
+	eraseCookie("myId");
+	eraseCookie("myName");
+	window.location.replace("/index.html");
+});
+
 var isSecondPlayerAuthorized = false;
 var isSecondPlayerAuthMenuOpened = false;
 var players, activePlayer, round = 1, gameId, timerVar;
@@ -6,7 +39,7 @@ var players, activePlayer, round = 1, gameId, timerVar;
  localStorage mapping:
  activeGame: bool
  savedGame: bool
- savedGameInfo: obj("gameId","pl2Name","pl2Id","endOfGameTime")
+ savedGameInfo: obj("gameId","pl2Name","pl2Id","endOfGameTime", "winner")
  activePlayer: 1 or 2
  gameType: 1 or 2
  savedTime: obj("m", "s")
@@ -42,6 +75,8 @@ $(function () {
             document.getElementById("player1").className = "";
             document.getElementById("player2").className = "active-player";
         }
+        $("#player1").html(JSON.parse(localStorage.getItem("players"))[0].name);
+        $("#player2").html(JSON.parse(localStorage.getItem("players"))[1].name);
         //set timer
         var time = JSON.parse(localStorage.getItem("savedTime"));
         $("#timerM").html(time["m"]);
@@ -94,9 +129,17 @@ $(function () {
             // send end of game
             var endpoint = "/api/games/" + savedGameInfoVar.gameId + "/end";
 
-            var obj = {
-                "end": savedGameInfoVar.endOfGameTime
-            };
+            if (parseInt(savedGameInfoVar.winner) === -42) {
+                var obj = {
+                    "end": savedGameInfoVar.endOfGameTime,
+                };
+            }
+            else {
+                var obj = {
+                    "end": savedGameInfoVar.endOfGameTime,
+                    "winner": parseInt(savedGameInfoVar.winner)
+                };
+            }
             $.ajax(endpoint, {
                 type: "PUT",
                 contentType: "application/json; charset=utf-8",
@@ -347,6 +390,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     localStorage.setItem("savedGameInfo", null);
                     clearTimeout(timerVar);
                     timerVar = setInterval(countTimer, 1000);
+                    round = 1;
 	            },
 	            400: function (response) {
                     console.log("400 BAD REQUEST");
@@ -656,7 +700,7 @@ document.getElementById("poolOthFaulBtn").addEventListener("click", function (ev
 
 
 // -------------------------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------------------------
+// ------------------ENDINGS OF POOL GAME---------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 
 
@@ -703,13 +747,15 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
                 }
             }
         });
+
         // send end of game
         var endpoint = "/api/games/" + gameId + "/end";
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
         var obj = {
-            "end": dateTime
+            "end": dateTime,
+            "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
         };
         $.ajax(endpoint, {
             type: "PUT",
@@ -764,7 +810,8 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
-            "dateTimeString": datetime
+            "dateTimeString": datetime,
+            "winner": (activePlayer === 1) ? players[0].id : players[1].id
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -820,7 +867,8 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
         var obj = {
-            "end": dateTime
+            "end": dateTime,
+            "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
         };
         $.ajax(endpoint, {
             type: "PUT",
@@ -863,7 +911,8 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
-            "dateTimeString": datetime
+            "dateTimeString": datetime,
+            "winner": (activePlayer === 1) ? players[1].id : players[0].id
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -919,7 +968,8 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
         var obj = {
-            "end": dateTime
+            "end": dateTime,
+            "winner": (activePlayer === 1) ? players[1].id : players[0].id
         };
         $.ajax(endpoint, {
             type: "PUT",
@@ -962,7 +1012,8 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
-            "dateTimeString": datetime
+            "dateTimeString": datetime,
+            "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -1018,7 +1069,8 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
         var obj = {
-            "end": dateTime
+            "end": dateTime,
+            "winner": (activePlayer === 1) ? players[1].id : players[0].id
         };
         $.ajax(endpoint, {
             type: "PUT",
@@ -1061,7 +1113,8 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
-            "dateTimeString": datetime
+            "dateTimeString": datetime,
+            "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
@@ -1087,6 +1140,93 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
 	existingStrikes.push(obj);
 	localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
 	// send game to server
+    if (navigator.onLine === true) {
+        var allStrikes = JSON.parse(localStorage.getItem("currentGame"));
+        $.ajax("/api/strikes/new", {
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(allStrikes),
+            statusCode: {
+                201: function (response) {
+                    console.log("201 CREATED");
+                    $("#looseModalWindow").modal("hide");
+                    $("#poolControlDiv").css("display", "none");
+                    $("#karambolControlDiv").css("display", "none");
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
+                },
+                400: function (response) {
+                    console.log("400 BAD REQUEST");
+                },
+                409: function (response) {
+                    console.log("409 CONFLICT");
+                }
+            }
+        });
+        // send end of game
+        var endpoint = "/api/games/" + gameId + "/end";
+        var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
+            dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        var obj = {
+            "end": dateTime,
+            "winner": (activePlayer === 1) ? players[1].id : players[0].id
+        };
+        $.ajax(endpoint, {
+            type: "PUT",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            statusCode: {
+                200: function (response) {
+                    console.log("200 OK");
+                },
+                400: function (response) {
+                    console.log("400 BAD REQUEST");
+                },
+                409: function (response) {
+                    console.log("409 CONFLICT");
+                }
+            }
+        });
+        localStorage.setItem("activeGame", "false");
+    }
+    else {
+        $("#looseModalWindow").modal("hide");
+        $("#poolControlDiv").css("display", "none");
+        $("#karambolControlDiv").css("display", "none");
+        $("#endOfGameDiv").css("display", "block");
+        $("#endOfGameDiv").html("Hra je ukoncena, ale neni odeslana z duvovu toho ze <u>neni pripojeni k intrnetu</u>." +
+            "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
+        localStorage.setItem("savedGame", "true");
+        var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        var currentdate = new Date();
+        var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
+        var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
+        var datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + "  "
+            + h + ":"
+            + m;
+        obj = {
+            "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
+            "pl2Name": players[1].name,
+            "pl2Id": players[1].id,
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime,
+            "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
+        };
+        localStorage.setItem("savedGameInfo", JSON.stringify(obj));
+        localStorage.setItem("activeGame", "false");
+    }
+    clearTimeout(timerVar);
+});
+
+document.getElementById("endGameBtn").addEventListener("click", function (event) {
+    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+
+    // send game to server
     if (navigator.onLine === true) {
         var allStrikes = JSON.parse(localStorage.getItem("currentGame"));
         $.ajax("/api/strikes/new", {
@@ -1160,15 +1300,16 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
             "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
-            "dateTimeString": datetime
+            "dateTimeString": datetime,
+            "winner": -42
         };
         localStorage.setItem("savedGameInfo", JSON.stringify(obj));
         localStorage.setItem("activeGame", "false");
     }
     clearTimeout(timerVar);
-});
 
-document.getElementById("endGameBtn").addEventListener("click", function (event) {
+
+
     $("#looseModalWindow").modal("hide");
     $("#poolControlDiv").css("display", "none");
     $("#newGameDiv").css("display", "block");
