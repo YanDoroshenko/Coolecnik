@@ -357,6 +357,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     localStorage.setItem("savedGameInfo", null);
                     clearTimeout(timerVar);
                     timerVar = setInterval(countTimer, 1000);
+                    round = 1;
 	            },
 	            400: function (response) {
                     console.log("400 BAD REQUEST");
