@@ -155,10 +155,6 @@ function countTimer1() {
     document.getElementById("timer").innerHTML = minute + "m : " + seconds + "s";
 }
 
-/*function ifConnectionExists() {
-
- }*/
-// USE navigator.onLine; returns true or false
 
 var totalSeconds = 0;
 
@@ -180,6 +176,21 @@ function hash(str, asString, seed) {
 
 
 /*---------------New game panel---------------*/
+$("#gameType").change(function () {
+    if (this.checked) {
+        //Do stuff
+        var carambCount = "<input id='carCount' type='text' placeholder='Počet karambolů' class='form-control'>";
+        $("#hr").before(carambCount);
+        //$("#carCount").collapse("show");
+    }
+    else {
+        // this has to be here really twice - dont know why but it works properly only this way
+        $("#carCount").remove();
+        $("#carCount").remove();
+        //$("#carCount").collapse("hide");
+    }
+});
+
 document.getElementById("authPlayer2").addEventListener("click", function (event) {
     event.preventDefault();
     if (isSecondPlayerAuthMenuOpened === true)

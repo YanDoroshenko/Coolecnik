@@ -69,10 +69,19 @@
         <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
             <span class="label label-default">Karambol</span>
         </div>
-        
-        <input id="pl0" type="text" placeholder="Jméno/login protihráče" class="form-control" style="width: 85%; display: inline;">
-        <button class="icon-user" id="authPlayer2" style="width: 42px; height: 32px; padding-top: 3%"></button>
-        <hr class="hr-green"/>
+
+
+        <input id="pl0" type="text" placeholder="Jméno/login protihráče" class="form-control"
+               style="width: 79%; display: inline;">
+        <button class="icon-invFriend" id="inviteFriend" data-toggle="dropdown"></button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-toggle" style="margin-top: -22%;">
+            <button class="dropdown-item" type="button">Action</button>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
+        </div>
+        <button class="icon-key btn" id="authPlayer2" style=""></button>
+        <input id='carCount' type='text' placeholder='Počet karambolů' class='form-control collapse'>
+        <hr class="hr-green" id="hr"/>
         <span id="newGameSpan"></span>
         <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit" id="newGameBtn">Start game</button>
     </form>
