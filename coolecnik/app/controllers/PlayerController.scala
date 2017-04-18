@@ -150,7 +150,7 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
 
   def getFriends(id: Int): Action[AnyContent] = Action.async {
     db.run(
-      (for {(fl, p) <- friendList.filter(_.playerId === id) join players on (_.friendId === _.id)} yield (fl.friendId, p.login, p.firstName, p.lastName)).result
+      (for ((fl, p) <- friendList join players on (_.friendId === _.id) if fl.playerId === id) yield (p.id, p.login, p.firstName, p.lastName)).result
     )
       .map {
         case fs if fs.isInstanceOf[Iterable[(Int, String, Option[String], Option[String])]] && fs.nonEmpty =>
