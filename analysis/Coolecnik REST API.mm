@@ -157,10 +157,10 @@
 </node>
 <node TEXT="/login" FOLDED="true" ID="ID_656188260" CREATED="1490339056282" MODIFIED="1492076599686">
 <node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_582743712" CREATED="1490339093794" MODIFIED="1490340644196">
-<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1609172563" CREATED="1490339110938" MODIFIED="1490340646370">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1609172563" CREATED="1490339110938" MODIFIED="1490340646370">
 <node TEXT="POST" ID="ID_1954440184" CREATED="1490339138114" MODIFIED="1490389110399"/>
 </node>
-<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_762647841" CREATED="1490339128682" MODIFIED="1490340646668">
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_762647841" CREATED="1490339128682" MODIFIED="1490340646668">
 <node TEXT="application/json" ID="ID_320405408" CREATED="1490339854082" MODIFIED="1490339859181"/>
 </node>
 <node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1909823858" CREATED="1490339115410" MODIFIED="1490340646964">
@@ -369,7 +369,7 @@
 <node TEXT="application/json" ID="ID_1688913219" CREATED="1490730129550" MODIFIED="1490730132636"/>
 </node>
 <node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1834342288" CREATED="1490730071424" MODIFIED="1490730082770">
-<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/endGame.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;end&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/end&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_810514740" CREATED="1491729849204" MODIFIED="1491729862676"/>
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://example.com/example.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;end&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/end&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;winner&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/winner&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        }&#xa;    },&#xa;    &quot;required&quot;: [&#xa;    &quot;end&quot;&#xa;    ],&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_810514740" CREATED="1491729849204" MODIFIED="1492545533651"/>
 </node>
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1376850772" CREATED="1490730075057" MODIFIED="1490730083021">
 <node TEXT="{&#xa;    &quot;end&quot;: &quot;2017-08-22T17:35Z+0200&#xa;}" ID="ID_1898393545" CREATED="1491729865997" MODIFIED="1491729893219"/>
