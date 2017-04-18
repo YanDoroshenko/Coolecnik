@@ -42,6 +42,8 @@ $(function () {
             document.getElementById("player1").className = "";
             document.getElementById("player2").className = "active-player";
         }
+        $("#player1").html(JSON.parse(localStorage.getItem("players"))[0].name);
+        $("#player2").html(JSON.parse(localStorage.getItem("players"))[1].name);
         //set timer
         var time = JSON.parse(localStorage.getItem("savedTime"));
         $("#timerM").html(time["m"]);
