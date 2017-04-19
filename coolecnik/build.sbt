@@ -6,7 +6,7 @@ lazy val `coolecnik` = (project in file("."))
   .enablePlugins(PlayScala, PlayAkkaHttpServer)
   .disablePlugins(PlayNettyServer)
 
-scalaVersion := "2.11.9"
+scalaVersion := "2.11.11"
 
 libraryDependencies ++= Seq(jdbc, cache, ws, specs2 % Test,
   "com.typesafe.slick" %% "slick" % "3.1.1",
