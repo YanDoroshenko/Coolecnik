@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <title>Coolecnik-profile</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse green-nav navbar-toggleable-sm">
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -50,16 +51,107 @@
 </nav>
 
 <div class="container col-md-8">
-    <h1 class="h2">
-        Profile
+    <h1>
+        JmenoHrace
     </h1>
-    <p class="col-md-4 col-sm-6">pokus1</p>
-    <p class="col-md-8 col-sm-6">pokus2</p>
+    <div class="row flex-wrap-reverse">
+        <div class="col-lg-6">
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">email@example.com</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Jméno</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="name" placeholder="Jméno">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="surname" class="col-sm-3 col-form-label">Příjmení</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="surname" placeholder="Příjmení">
+                    </div>
+                </div>
+                <button type="submit" class="btn  green-btn">Změnit údaje</button>
+            </form>
+            <p class="profile-change-pass h4 mt-2" data-toggle="collapse" data-target="#collapseExample"
+               aria-expanded="false" aria-controls="collapseExample">
+                Změnit heslo
+            </p>
+            <div class="collapse" id="collapseExample">
+                <form>
+                    <div class="form-group row">
+                        <label for="oldPass" class="col-sm-3 col-form-label">Staré heslo</label>
+                        <div class="col-sm-9">
+                            <input id="oldPass" type="password" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="newPass" class="col-sm-3 col-form-label">Nové heslo</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="newPass">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="newPassConfirm" class="col-sm-3 col-form-label">Potvrdit heslo</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="newPassConfirm">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn green-btn">Změnit heslo</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5 offset-lg-1">
+            <h3>Základní statistiky</h3>
+            <dl class="row justify-content-end">
+                <dt class="col-7">Celkový čas:</dt>
+                <dd class="col-5 pr-0">80h 25m 16s</dd>
+
+                <dt class="col-7">Odehrané hry:</dt>
+                <dd class="col-5">134</dd>
+
+                <dt class="col-7">Výhry: </dt>
+                <dd class="col-5">90</dd>
+
+                <dt class="col-7">Prohry: </dt>
+                <dd class="col-5">32</dd>
+
+                <dt class="col-7">Remízy: </dt>
+                <dd class="col-5">12</dd>
+
+                <dt class="col-7">Výhernost: </dt>
+                <dd class="col-5">71 %</dd>
+                <hr class="hr-light"/>
+                <dt class="col-7">Turnajové hry: </dt>
+                <dd class="col-5">43</dd>
+
+                <dt class="col-7">Turnajové výhry: </dt>
+                <dd class="col-5">16</dd>
+
+                <dt class="col-7">Turnajové prohry: </dt>
+                <dd class="col-5">25</dd>
+
+                <dt class="col-7">Turnajové remízy: </dt>
+                <dd class="col-5">2</dd>
+
+                <dt class="col-7">Turnajová výhernost: </dt>
+                <dd class="col-5">37 %</dd>
+            </dl>
+        </div>
+    </div>
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>

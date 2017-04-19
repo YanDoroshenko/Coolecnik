@@ -413,6 +413,14 @@ h4 {
     display: inline-block;
 }
 
+.profile-change-pass {
+    cursor: pointer;
+}
+
+.profile-change-pass:hover {
+    text-decoration: underline;
+}
+
 @media (min-width: 770px) {
 
     .rwd-table td:before {
