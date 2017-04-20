@@ -1,5 +1,8 @@
 package controllers
 
+import java.sql.Timestamp
+import java.text.{ParseException, SimpleDateFormat}
+
 import models.Queries._
 import models._
 import play.api.mvc.{Action, AnyContent, Controller}
@@ -54,5 +57,74 @@ class StatisticsController extends Controller {
         case _s =>
           db.run(correct).map(s_ => Ok(s_.toDouble / _s))
       }
+  }
+
+  def stats(
+             id: Int,
+             gameType: Option[String],
+             opponent: Option[Int],
+             result: Option[String],
+             from: Option[String],
+             to: Option[String],
+             pageSize: Option[Int],
+             page: Option[Int]
+           ): Action[AnyContent] = Action.async {
+    if (gameType.nonEmpty && gameType.get == "pool8" && result.nonEmpty && result.get == "draw")
+      Future(BadRequest)
+    else if (opponent.nonEmpty && opponent.get == id)
+      Future(BadRequest)
+    else if (page.isEmpty && pageSize.nonEmpty || page.nonEmpty && pageSize.isEmpty)
+      Future(BadRequest)
+    else {
+      try {
+        db.run(games
+          .filter(_.end.nonEmpty)
+          .filter(g => g.player1 === id || g.player2 === id)
+          .filter(g => gameType match {
+            case Some("pool8") => g.gameType === 1
+            case Some("carambole") => g.gameType === 2
+            case None => g.id === g.id
+          })
+          .filter(g => opponent match {
+            case Some(i) => g.player1 === i || g.player2 === i
+            case None => g.id === g.id
+          })
+          .result)
+          .map {
+            case gs: Seq[Game] if gs.nonEmpty =>
+              val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
+              try {
+                val filtered = gs
+                  .filter(g => result match {
+                    case Some("win") => g.winner.nonEmpty && g.winner.get == id
+                    case Some("lose") => g.winner.nonEmpty && g.winner.get != id
+                    case Some("draw") => g.winner.isEmpty
+                    case None => g.id == g.id
+                  })
+                  .filter(g => from match {
+                    case Some(t) => g.beginning.nonEmpty && g.beginning.get.after(new Timestamp(format.parse(t).getTime))
+                    case _ => true
+                  })
+                  .filter(g => to match {
+                    case Some(t) => g.beginning.nonEmpty && g.beginning.get.before(new Timestamp(format.parse(t).getTime))
+                    case _ => true
+                  })
+                val sorted = filtered.sortWith((l, r) => l.beginning.get.after(r.beginning.get))
+                val paged =
+                  if (page.nonEmpty) sorted.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
+                  else sorted
+                Ok(paged)
+              }
+              catch {
+                case _: ParseException => BadRequest
+                case _: MatchError => BadRequest
+              }
+            case _ => NotFound
+          }
+      }
+      catch {
+        case _: MatchError => Future(BadRequest)
+      }
+    }
   }
 }

@@ -18,6 +18,9 @@ object HttpWriters {
   implicit val gw: Writeable[Game] = new Writeable[Game](
     g => ByteString(Json.toJson(g).toString()), Some("application/json"))
 
+  implicit val gsw: Writeable[Seq[Game]] = new Writeable[Seq[Game]](
+    g => ByteString(Json.toJson(g).toString()), Some("application/json"))
+
   implicit val gtw: Writeable[GameType] = new Writeable[GameType](
     gt => ByteString(Json.toJson(gt).toString()), Some("application/json"))
 
