@@ -13,7 +13,7 @@ case class GameType(id: Int, title: String, description: Option[String])
 
 case class Game(
                  id: Int,
-                 game_type: Int,
+                 gameType: Int,
                  player1: Int,
                  player2: Int,
                  winner: Option[Int],

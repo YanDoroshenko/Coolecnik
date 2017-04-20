@@ -76,11 +76,36 @@ class StatisticsController extends Controller {
     else if (page.isEmpty && pageSize.nonEmpty || page.nonEmpty && pageSize.isEmpty)
       Future(BadRequest)
     else {
+      def process(gs: Seq[Game]) = {
+        val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
+        val filtered = gs
+          .filter(g => (result: @unchecked) match {
+            case Some("win") => g.winner.nonEmpty && g.winner.get == id
+            case Some("lose") => g.winner.nonEmpty && g.winner.get != id
+            case Some("draw") => g.winner.isEmpty
+            case None => g.id == g.id
+          })
+          .filter(g => from match {
+            case Some(t) => g.beginning.nonEmpty && g.beginning.get.after(new Timestamp(format.parse(t).getTime))
+            case _ => true
+          })
+          .filter(g => to match {
+            case Some(t) => g.beginning.nonEmpty && g.beginning.get.before(new Timestamp(format.parse(t).getTime))
+            case _ => true
+          })
+        val sorted = filtered.sortWith((l, r) => l.beginning.get.after(r.beginning.get))
+        val numbered = (sorted.size to 1 by -1).zip(sorted)
+        val paged =
+          if (page.nonEmpty) numbered.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
+          else numbered
+        paged
+      }
+
       try {
         db.run(games
           .filter(_.end.nonEmpty)
           .filter(g => g.player1 === id || g.player2 === id)
-          .filter(g => gameType match {
+          .filter(g => (gameType: @unchecked) match {
             case Some("pool8") => g.gameType === 1
             case Some("carambole") => g.gameType === 2
             case None => g.id === g.id
@@ -90,36 +115,53 @@ class StatisticsController extends Controller {
             case None => g.id === g.id
           })
           .result)
-          .map {
-            case gs: Seq[Game] if gs.nonEmpty =>
-              val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
+          .flatMap {
+            case gs: Seq[Game] if gs.nonEmpty && gameType.isEmpty =>
               try {
-                val filtered = gs
-                  .filter(g => result match {
-                    case Some("win") => g.winner.nonEmpty && g.winner.get == id
-                    case Some("lose") => g.winner.nonEmpty && g.winner.get != id
-                    case Some("draw") => g.winner.isEmpty
-                    case None => g.id == g.id
-                  })
-                  .filter(g => from match {
-                    case Some(t) => g.beginning.nonEmpty && g.beginning.get.after(new Timestamp(format.parse(t).getTime))
-                    case _ => true
-                  })
-                  .filter(g => to match {
-                    case Some(t) => g.beginning.nonEmpty && g.beginning.get.before(new Timestamp(format.parse(t).getTime))
-                    case _ => true
-                  })
-                val sorted = filtered.sortWith((l, r) => l.beginning.get.after(r.beginning.get))
-                val paged =
-                  if (page.nonEmpty) sorted.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
-                  else sorted
-                Ok(paged)
+                Future(Ok(process(gs).map(g => {
+                  val number = g._1
+                  val game = g._2
+                  val opp = if (game.player1 == id) game.player2 else game.player1
+                  GameStats(number, game.id, game.gameType, opp, game.winner, game.beginning.get, game.end.get)
+                }
+                )))
               }
               catch {
-                case _: ParseException => BadRequest
-                case _: MatchError => BadRequest
+                case _: ParseException => Future(BadRequest)
+                case _: MatchError => Future(BadRequest)
               }
-            case _ => NotFound
+            case gs: Seq[Game] if gs.nonEmpty && gameType.contains("pool8") =>
+              try {
+                val shots = db.run(
+                  strikes.filter(_.strikeType <= 5).result
+                )
+
+                shots.map(ss =>
+                  Ok(process(gs).map(g => {
+                    val number = g._1
+                    val game = g._2
+                    val gameShots = ss.filter(_.game == game.id)
+                    val opp = if (game.player1 == id) game.player2 else game.player1
+                    Pool8Stats(
+                      number,
+                      game.id,
+                      game.gameType,
+                      opp,
+                      game.winner,
+                      game.beginning.get,
+                      game.end.get,
+                      gameShots.count(_.strikeType == 1),
+                      gameShots.count(_.strikeType == 2),
+                      gameShots.count(_.strikeType == 3),
+                      gameShots.count(_.strikeType == 4),
+                      gameShots.count(_.strikeType == 5))
+                  }
+                  )))
+              }
+              catch {
+                case _: ParseException => Future(BadRequest)
+                case _: MatchError => Future(BadRequest)
+              }
           }
       }
       catch {

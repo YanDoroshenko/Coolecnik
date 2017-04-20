@@ -32,4 +32,21 @@ case class NewStrike(strikeType: Int, game: Int, player: Int, round: Int)
 
 case class BasicGameStats(total: Int, won: Int, draws: Int, lost: Int, totalSecs: Long)
 
+case class GameStats(gameNumber: Int, gameId: Int, gameType: Int, opponent: Int, winner: Option[Int], beginning: Timestamp, end: Timestamp)
+
+case class Pool8Stats(
+                       gameNumber: Int,
+                       gameId: Int,
+                       gameType: Int,
+                       opponent: Int,
+                       winner: Option[Int],
+                       beginning: Timestamp,
+                       end: Timestamp,
+                       correctStrikes: Int,
+                       wrongStrikes: Int,
+                       faulsWithWhite: Int,
+                       faulsWithOthers: Int,
+                       faulsOther: Int
+                     )
+
 case class Friend(id: Int, login: String, firstName: Option[String], lastName: Option[String])
