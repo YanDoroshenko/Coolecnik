@@ -1,7 +1,7 @@
 package controllers
 
 import java.sql.Timestamp
-import java.text.{ParseException, SimpleDateFormat}
+import java.text.SimpleDateFormat
 
 import models.Queries._
 import models._
@@ -12,6 +12,7 @@ import util.HttpWriters._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.util.{Failure, Success, Try}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 12.04.2017.
@@ -76,6 +77,7 @@ class StatisticsController extends Controller {
     else if (page.isEmpty && pageSize.nonEmpty || page.nonEmpty && pageSize.isEmpty)
       Future(BadRequest)
     else {
+
       def process(gs: Seq[Game]) = {
         val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
         val filtered = gs
@@ -101,7 +103,7 @@ class StatisticsController extends Controller {
         paged
       }
 
-      try {
+      Try(
         db.run(games
           .filter(_.end.nonEmpty)
           .filter(g => g.player1 === id || g.player2 === id)
@@ -117,55 +119,49 @@ class StatisticsController extends Controller {
           .result)
           .flatMap {
             case gs: Seq[Game] if gs.nonEmpty && gameType.isEmpty =>
-              try {
-                Future(Ok(process(gs).map(g => {
+              Future(
+                Try(process(gs).map(g => {
                   val number = g._1
                   val game = g._2
                   val opp = if (game.player1 == id) game.player2 else game.player1
                   GameStats(number, game.id, game.gameType, opp, game.winner, game.beginning.get, game.end.get)
+                })) match {
+                  case Success(stats) => Ok(stats)
+                  case Failure(e) => BadRequest(e.getMessage)
                 }
-                )))
-              }
-              catch {
-                case _: ParseException => Future(BadRequest)
-                case _: MatchError => Future(BadRequest)
-              }
+              )
             case gs: Seq[Game] if gs.nonEmpty && gameType.contains("pool8") =>
-              try {
-                val shots = db.run(
-                  strikes.filter(_.strikeType <= 5).result
-                )
+              val shots = db.run(
+                strikes.filter(_.strikeType <= 5).result
+              )
 
-                shots.map(ss =>
-                  Ok(process(gs).map(g => {
-                    val number = g._1
-                    val game = g._2
-                    val gameShots = ss.filter(_.game == game.id)
-                    val opp = if (game.player1 == id) game.player2 else game.player1
-                    Pool8Stats(
-                      number,
-                      game.id,
-                      game.gameType,
-                      opp,
-                      game.winner,
-                      game.beginning.get,
-                      game.end.get,
-                      gameShots.count(_.strikeType == 1),
-                      gameShots.count(_.strikeType == 2),
-                      gameShots.count(_.strikeType == 3),
-                      gameShots.count(_.strikeType == 4),
-                      gameShots.count(_.strikeType == 5))
-                  }
-                  )))
-              }
-              catch {
-                case _: ParseException => Future(BadRequest)
-                case _: MatchError => Future(BadRequest)
-              }
-          }
-      }
-      catch {
-        case _: MatchError => Future(BadRequest)
+              shots.map(ss =>
+                Try(process(gs).map(g => {
+                  val number = g._1
+                  val game = g._2
+                  val gameShots = ss.filter(_.game == game.id)
+                  val opp = if (game.player1 == id) game.player2 else game.player1
+                  Pool8Stats(
+                    number,
+                    game.id,
+                    game.gameType,
+                    opp,
+                    game.winner,
+                    game.beginning.get,
+                    game.end.get,
+                    gameShots.count(_.strikeType == 1),
+                    gameShots.count(_.strikeType == 2),
+                    gameShots.count(_.strikeType == 3),
+                    gameShots.count(_.strikeType == 4),
+                    gameShots.count(_.strikeType == 5))
+                }
+                )) match {
+                  case Success(s) => Ok(s)
+                  case Failure(e) => BadRequest(e.getMessage)
+                })
+          }) match {
+        case Success(r) => r
+        case Failure(e) => Future(BadRequest(e.getMessage))
       }
     }
   }
