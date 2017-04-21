@@ -71,11 +71,11 @@ class StatisticsController extends Controller {
              page: Option[Int]
            ): Action[AnyContent] = Action.async {
     if (gameType.nonEmpty && gameType.get == "pool8" && result.nonEmpty && result.get == "draw")
-      Future(BadRequest)
+      Future(BadRequest("There are no draws in 8-pool"))
     else if (opponent.nonEmpty && opponent.get == id)
-      Future(BadRequest)
+      Future(BadRequest("One can't play with oneself"))
     else if (page.isEmpty && pageSize.nonEmpty || page.nonEmpty && pageSize.isEmpty)
-      Future(BadRequest)
+      Future(BadRequest("Page number and page size could be only used together"))
     else {
 
       def process(gs: Seq[Game]) = {
