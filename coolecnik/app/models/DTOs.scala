@@ -65,3 +65,6 @@ case class CaramboleStats(
                          )
 
 case class Friend(id: Int, login: String, firstName: Option[String], lastName: Option[String])
+
+
+case class Opponent(id: Int, login: String)
