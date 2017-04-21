@@ -48,6 +48,9 @@ object HttpWriters {
   implicit val dw = new Writeable[Double](
     d => ByteString(Json.toJson(d).toString()), Some("application/json"))
 
+  implicit val siw = new Writeable[Set[Int]](
+    is => ByteString(Json.toJson(is).toString()), Some("application/json"))
+
   implicit val sfw = new Writeable[Seq[Friend]](
     sf => ByteString(Json.toJson(sf).toString()), Some("application/json"))
 }

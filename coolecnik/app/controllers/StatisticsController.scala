@@ -60,16 +60,26 @@ class StatisticsController extends Controller {
       }
   }
 
+  def opponents(id: Int): Action[AnyContent] = Action.async {
+    db.run(games.filter(g => g.player1 === id || g.player2 === id).result)
+      .map {
+        case gs: Seq[Game] if gs.nonEmpty =>
+          Ok(gs.map(g => if (g.player1 == id) g.player2 else g.player1).toSet)
+        case _: Iterable[Any] =>
+          NotFound
+      }
+  }
+
   def statistics(
-             id: Int,
-             gameType: Option[String],
-             opponent: Option[Int],
-             result: Option[String],
-             from: Option[String],
-             to: Option[String],
-             pageSize: Option[Int],
-             page: Option[Int]
-           ): Action[AnyContent] = Action.async {
+                  id: Int,
+                  gameType: Option[String],
+                  opponent: Option[Int],
+                  result: Option[String],
+                  from: Option[String],
+                  to: Option[String],
+                  pageSize: Option[Int],
+                  page: Option[Int]
+                ): Action[AnyContent] = Action.async {
     if (gameType.nonEmpty && gameType.get == "pool8" && result.nonEmpty && result.get == "draw")
       Future(BadRequest("There are no draws in 8-pool"))
     else if (opponent.nonEmpty && opponent.get == id)
