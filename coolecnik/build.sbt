@@ -5,7 +5,7 @@ version := "0.1"
 enablePlugins(JavaAppPackaging)
 lazy val `coolecnik` = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.9"
+scalaVersion := "2.11.11"
 
 libraryDependencies ++= Seq(jdbc, cache, ws, specs2 % Test,
   "com.typesafe.slick" %% "slick" % "3.1.1",
