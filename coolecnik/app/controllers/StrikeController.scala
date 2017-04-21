@@ -1,6 +1,7 @@
 package controllers
 
-import models.{NewStrike, NewStrikeType, Queries}
+import models.Queries._
+import models.{NewStrike, NewStrikeType}
 import org.postgresql.util.PSQLException
 import org.slf4j.LoggerFactory
 import play.api.libs.json.{JsValue, Json}
@@ -27,17 +28,20 @@ class StrikeController extends Controller {
       Json.fromJson[NewStrikeType](rq.body).asOpt match {
         case Some(st) =>
           db.run(
-            Queries.strikeTypes.map(
-              st_ => (st_.gameType, st_.title, st_.description, st_.endsGame)) +=
-              (st.gameType, st.title, st.description, st.endsGame))
+            strikeTypes.map(
+              st_ => (st_.gameType, st_.correct, st_.title, st_.description, st_.endsGame)) +=
+              (st.gameType, st.correct, st.title, st.description, st.endsGame))
             .recover {
-              case e: PSQLException => Future(NotAcceptable(e.getMessage))
+              case e: PSQLException => e
             }
-            .flatMap(_ =>
-              db.run(Queries.strikeTypes.filter(
-                st_ => st_.title === st.title)
-                .result)
-                .map(sts => Created(sts.head)))
+            .flatMap {
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ =>
+                db.run(strikeTypes.filter(
+                  st_ => st_.title === st.title)
+                  .result)
+                  .map(sts => Created(sts.head))
+            }
         case None => Future(BadRequest("Request can't be deserialized"))
       }
     }
@@ -48,18 +52,16 @@ class StrikeController extends Controller {
       log.info("Strikes:\n" + rq.body)
       Json.fromJson[Iterable[NewStrike]](rq.body).asOpt match {
         case Some(l) if l.isInstanceOf[Iterable[NewStrike]] =>
-          l.map(s =>
-            db.run(
-              Queries.strikes.map(s_ => (s_.strikeType, s_.game, s_.player, s_.round)) +=
-                NewStrike.unapply(s).get
-            )
-              .recover {
-                case e: PSQLException => Future(NotAcceptable(e.getMessage))
-              }
-              .map(_ => ())
-          )
-            .fold(Future(()))((l, r) => l.flatMap(_ => r))
-            .map(_ => Created)
+          db.run(
+            strikes.map(s_ => (s_.strikeType, s_.game, s_.player, s_.round)) ++=
+              l.map(s => NewStrike.unapply(s).get))
+            .recover {
+              case e: PSQLException => e
+            }
+            .flatMap {
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ => Future(Created)
+            }
         case None => Future(BadRequest("Request can't be deserialized"))
       }
     }

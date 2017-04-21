@@ -2,7 +2,7 @@ package models.tables
 
 import models.{Friendship, Queries}
 import slick.driver.PostgresDriver.api._
-import slick.lifted.ProvenShape
+import slick.lifted.{PrimaryKey, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
@@ -25,6 +25,6 @@ class FriendListTable(tag: Tag) extends Table[Friendship](tag, "t_friendlist") {
   private def friendFk =
     foreignKey("fl_friend_fk", friendId, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def pk =
+  def pk: PrimaryKey =
     primaryKey("fl_pk", (playerId, friendId))
 }

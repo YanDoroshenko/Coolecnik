@@ -2,7 +2,7 @@ package models.tables
 
 import models.Player
 import slick.driver.PostgresDriver.api._
-import slick.lifted.ProvenShape
+import slick.lifted.{Index, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
@@ -30,9 +30,9 @@ class PlayersTable(tag: Tag) extends Table[Player](tag, "t_player") {
     (id, login, email, passwordHash, firstName, lastName) <>
       (Player.tupled, Player.unapply)
 
-  private def loginIdx =
+  def loginIdx: Index =
     index("players_login_idx", login, unique = true)
 
-  private def emailIdx =
+  def emailIdx: Index =
     index("players_email_idx", email, unique = true)
 }

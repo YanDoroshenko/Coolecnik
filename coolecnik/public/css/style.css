@@ -1,4 +1,5 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+
 body {
     color: #d9edf7;
     background-color: #1d1e1f;
@@ -32,21 +33,21 @@ button {
     border-color: #3c763d;
 }
 
-.green-btn:hover{
-    border-color: #2b542c ;
+.green-btn:hover {
+    border-color: #2b542c;
     background-color: #2b542c;
     color: white;
 }
 
-.green-btn:focus{
-    border-color: #2b542c ;
+.green-btn:focus {
+    border-color: #2b542c;
     background-color: #2b542c;
     color: #d9edf7;
     box-shadow: 0 0 0 1px rgba(0, 239, 49, 0.5);
 }
 
 .login-form {
-    margin-top: 50px ;
+    margin-top: 50px;
 }
 
 .green-nav {
@@ -68,17 +69,17 @@ button {
     color: #d9edf7;
 }
 
-.btn-good-pokes{
+.btn-good-pokes {
     margin: 3px;
     background-color: transparent;
-    color: rgba(0,255,0,0.5);
+    color: rgba(0, 255, 0, 0.5);
     border-color: #4b5257;
 }
 
-.btn-bad-pokes{
+.btn-bad-pokes {
     margin: 3px;
     background-color: transparent;
-    color: rgba(255,0,0,0.5);
+    color: rgba(255, 0, 0, 0.5);
     border-color: #4b5257;
 }
 
@@ -89,8 +90,9 @@ button {
 
 @media (max-width: 576px) {
     .login-form {
-        margin-top: 10px ;
+        margin-top: 10px;
     }
+
     .nav-item {
         text-align: center;
         width: 100%;
@@ -98,25 +100,25 @@ button {
 }
 
 .hr-light {
-    width: 100%; 
-    color: #d9edf7; 
-    height: 1px; 
-    background-color:#d9edf7;
+    width: 100%;
+    color: #d9edf7;
+    height: 1px;
+    background-color: #d9edf7;
 }
 
 .hr-green {
-    width: 100%; 
-    color: #2b542c; 
-    height: 1px; 
-    background-color:#2b542c;
+    width: 100%;
+    color: #2b542c;
+    height: 1px;
+    background-color: #2b542c;
 }
 
 .icon-thrash {
     background-image: url("../res/thrash1.png");
     background-repeat: no-repeat;
     background-position: center center;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
     display: inline-block;
 }
 
@@ -124,8 +126,26 @@ button {
     background-image: url("../res/user1.png");
     background-repeat: no-repeat;
     background-position: center center;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.icon-invFriend {
+    background-color: white;
+    border-left: 1px solid black;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-image: url("../res/arrow1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 12px;
+    width: 32px;
+    height: 36px;
+    margin-left: -3%;
     display: inline-block;
 }
 
@@ -133,17 +153,18 @@ button {
     background-image: url("../res/key1.png");
     background-repeat: no-repeat;
     background-position: center center;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 35px;
     display: inline-block;
+    margin-top: 1px;
 }
 
 .icon-ok {
     background-image: url("../res/ok1.png");
     background-repeat: no-repeat;
     background-position: center center;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
     display: inline-block;
 }
 
@@ -151,8 +172,8 @@ button {
     background-image: url("../res/nook1.png");
     background-repeat: no-repeat;
     background-position: center center;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
     display: inline-block;
 }
 
@@ -160,68 +181,69 @@ button {
     background-image: url("../res/load.gif");
     background-repeat: no-repeat;
     background-position: center center;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
     display: inline-block;
 }
 
- /* The switch - the box around the slider */
+/* The switch - the box around the slider */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 90px;
-  height: 34px;
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 34px;
 }
 
 /* Hide default HTML checkbox */
-.switch input {display:none;}
+.switch input {
+    display: none;
+}
 
 /* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #2b542c;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2b542c;
 
-  -webkit-transition: .4s;
-  transition: .4s;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: black;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: black;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #2b542c;
+    background-color: #2b542c;
 }
 
-
-
 input:checked + .slider:before {
-  -webkit-transform: translateX(56px);
-  -ms-transform: translateX(56px);
-  transform: translateX(56px);
+    -webkit-transform: translateX(56px);
+    -ms-transform: translateX(56px);
+    transform: translateX(56px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }
+
 /* The slider END*/
 
 .tournament {
@@ -232,7 +254,7 @@ input:checked + .slider:before {
 .tournament-card {
     color: #d9edf7;
     background-color: #292a2b;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     margin: 0.5em;
 }
 
@@ -242,67 +264,204 @@ input:checked + .slider:before {
     text-decoration: none;
 }
 
-.tournament-card a:hover h4{
+.tournament-card a:hover h4 {
     color: white;
     font-size: 1.6em;
 }
 
-.tournament-card:hover  {
+.tournament-card:hover {
     color: #d9edf7;
     background-color: #38393a;
-    border: 1px solid rgba(255,255,255,0.225);
+    border: 1px solid rgba(255, 255, 255, 0.225);
     margin: 0.5em;
 }
 
 .tournament-spec {
     color: #d9edf7;
     background: none;
-    border: 1px solid rgba(255,255,255,0.225);
+    border: 1px solid rgba(255, 255, 255, 0.225);
 }
 
-.rules-spec a:link{
-  color:#bb781a;  
-}
-.rules-spec a:visited{
-  color:#bb781a;  
+.rules-spec a:link {
+    color: #bb781a;
 }
 
-.rules-spec a:hover{
-  color:#ff9500;
+.rules-spec a:visited {
+    color: #bb781a;
+}
+
+.rules-spec a:hover {
+    color: #ff9500;
 }
 
 .rules-spec img {
-	width: 100%;
+    width: 100%;
     max-width: 600px;
     height: auto;
 }
 
 .rules-text {
-	text-align: justify;
+    text-align: justify;
 }
 
 h1 {
-	color:white;
+    color: white;
 }
 
 h2 {
-	color:red;
+    color: #ffffb3;
 }
 
 h3 {
-	color:green;
+    color: green;
 }
 
 h4 {
-	color:green;
+    color: green;
+}
+
+/* Friendlist */
+.friend {
+    background-color: #313131;
+    color: #fff;
+    justify-content: space-between;
+}
+
+.friend:hover {
+    background-color: #2b542c;
+    color: #fff;
+}
+
+.friend a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* Modal for pass recovery */
-.modal-title{
-  text-align: center;
+.modal-title {
+    text-align: center;
 }
 
-.modal-content{
-  background-color: #1d1e1f;
+.modal-content {
+    background-color: #1d1e1f;
 }
 
+/*statistics*/
+
+.card-statistics a:link {
+    color: #bb781a;
+}
+
+.card-statistics a:visited {
+    color: #bb781a;
+}
+
+.card-statistics a:hover {
+    color: #ff9500;
+}
+
+.card-header-statistics {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+}
+
+.card-statistics {
+    background-color: #1d1e1f;
+}
+
+.modal-dialog {
+    position: relative;
+    display: table;
+    overflow-y: auto;
+    overflow-x: auto;
+    width: auto;
+    min-width: 300px;
+}
+
+/*profile*/
+.profile-change-pass {
+    cursor: pointer;
+}
+
+.profile-change-pass:hover {
+    text-decoration: underline;
+}
+
+.rwd-table td:before {
+    display: none;
+}
+
+.rwd-table th, .rwd-table td {
+    display: table-cell;
+    padding: .25em .5em;
+}
+
+.rwd-table th, .rwd-table td {
+    margin: .5em 1em;
+}
+
+.rwd-table th, .rwd-table td {
+    padding: 1em !important;
+}
+
+
+.rwd-table th, .rwd-table td:before {
+    color: #23b326;
+}
+
+@media (max-width: 770px) {
+
+    .rwd-table td:before {
+        content: attr(data-th) ": ";
+        font-weight: bold;
+        width: 6.5em;
+        display: inline-block;
+    }
+    .rwd-table th, .rwd-table td {
+        margin: .0em 0em;
+    }
+    .rwd-table tr {
+        border-top: 1px solid #ddd;
+        border-bottom: 20px solid #ddd;
+    }
+    .rwd-table {
+        margin: 2px 0;
+        min-width: 300px;
+        border-collapse: separate;
+        border-spacing: 50px 20px;
+    }
+
+    .rwd-table th {
+        display: none;
+    }
+
+    .rwd-table td {
+        display: block;
+    }
+    .table-bordered {
+        border: none;
+    }
+
+}
+
+/*!*this media query hide, details option 8pool and karambol*!*/
+@media (max-width:770px) {
+td.pool_and_karambol:nth-child(n+7), th.pool_and_karambol:nth-child(n+7) {
+display: none
+}
+}
+
+/*!*this media query hide, details option 8pool*!*/
+@media (max-width:770px) {
+td.eight_pool:nth-child(n+12), th.eight_pool:nth-child(n+12) {
+display: none
+}
+}
+
+/*!*this media query hide, details option 8pool*!*/
+@media (max-width:770px) {
+td.karambol:nth-child(n+11), th.karambol:nth-child(n+11) {
+display: none
+}
+}

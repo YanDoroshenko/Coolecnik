@@ -1,6 +1,10 @@
 package util
 
+import scala.language.implicitConversions
+
 /**
+  * Database configuration object
+  *
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 06.04.2017.
   */
 class Database {

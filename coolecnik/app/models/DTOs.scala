@@ -22,10 +22,49 @@ case class NewGame(
                     rounds: Option[Int],
                     carambolesToWin: Option[Int])
 
-case class EndGame(end: Timestamp)
+case class EndGame(winner: Option[Int], end: Timestamp)
 
 case class NewGameType(title: String, description: Option[String])
 
-case class NewStrikeType(gameType: Int, title: String, description: Option[String], endsGame: Option[Boolean])
+case class NewStrikeType(gameType: Int, correct: Boolean, title: String, description: Option[String], endsGame: Boolean)
 
 case class NewStrike(strikeType: Int, game: Int, player: Int, round: Int)
+
+case class BasicGameStats(total: Int, won: Int, draws: Int, lost: Int, totalSecs: Long)
+
+case class GameStats(gameNumber: Int, gameId: Int, gameType: Int, opponent: Int, winner: Option[Int], beginning: Timestamp, end: Timestamp)
+
+case class Pool8Stats(
+                       gameNumber: Int,
+                       gameId: Int,
+                       gameType: Int,
+                       opponent: Int,
+                       winner: Int,
+                       beginning: Timestamp,
+                       end: Timestamp,
+                       correctStrikes: Int,
+                       wrongStrikes: Int,
+                       faulsWithWhite: Int,
+                       faulsWithOthers: Int,
+                       faulsOther: Int
+                     )
+
+case class CaramboleStats(
+                           gameNumber: Int,
+                           gameId: Int,
+                           gameType: Int,
+                           opponent: Int,
+                           winner: Option[Int],
+                           rounds: Int,
+                           beginning: Timestamp,
+                           end: Timestamp,
+                           myCaramboles: Int,
+                           opponentsCaramboles: Int,
+                           myFouls: Int,
+                           opponentsFouls: Int
+                         )
+
+case class Friend(id: Int, login: String, firstName: Option[String], lastName: Option[String])
+
+
+case class Opponent(id: Int, login: String)

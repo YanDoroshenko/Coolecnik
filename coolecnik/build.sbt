@@ -1,9 +1,10 @@
 name := "coolecnik"
 
-version := "0.1"
+version := "0.1.1"
 
-enablePlugins(JavaAppPackaging)
-lazy val `coolecnik` = (project in file(".")).enablePlugins(PlayScala)
+lazy val `coolecnik` = (project in file("."))
+  .enablePlugins(PlayScala, PlayAkkaHttpServer)
+  .disablePlugins(PlayNettyServer)
 
 scalaVersion := "2.11.11"
 
@@ -16,5 +17,3 @@ libraryDependencies ++= Seq(jdbc, cache, ws, specs2 % Test,
   "com.sun.mail" % "javax.mail" % "1.5.6")
 
 fork in run := true
-
-addCommandAlias("package", "universal:packageBin")

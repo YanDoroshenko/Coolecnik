@@ -7,6 +7,8 @@ import models._
 import play.api.libs.json._
 
 /**
+  * Implicit converters from entity objects to [[JsValue]]
+  *
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 21.03.2017.
   */
 object JsonSerializers {
@@ -27,6 +29,7 @@ object JsonSerializers {
   implicit val gtf: OFormat[GameType] = Json.format[GameType]
   implicit val stf: OFormat[StrikeType] = Json.format[StrikeType]
   implicit val sf: OFormat[Strike] = Json.format[Strike]
+  implicit val flf: OFormat[Friendship] = Json.format[Friendship]
 
 
   implicit val pjf: OFormat[Registration] = Json.format[Registration]
@@ -38,4 +41,10 @@ object JsonSerializers {
   implicit val ngtf: OFormat[NewGameType] = Json.format[NewGameType]
   implicit val nstf: OFormat[NewStrikeType] = Json.format[NewStrikeType]
   implicit val nsf: OFormat[NewStrike] = Json.format[NewStrike]
+  implicit val bgsf: OFormat[BasicGameStats] = Json.format[BasicGameStats]
+  implicit val gsf: OFormat[GameStats] = Json.format[GameStats]
+  implicit val pgs: OFormat[Pool8Stats] = Json.format[Pool8Stats]
+  implicit val cgs: OFormat[CaramboleStats] = Json.format[CaramboleStats]
+  implicit val ff: OFormat[Friend] = Json.format[Friend]
+  implicit val of: OFormat[Opponent] = Json.format[Opponent]
 }

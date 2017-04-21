@@ -2,9 +2,9 @@ package models.tables
 
 import java.sql.Timestamp
 
-import models.{Game, Queries}
+import models.{Game, Player, Queries, Tournament}
 import slick.driver.PostgresDriver.api._
-import slick.lifted.ProvenShape
+import slick.lifted.{ForeignKeyQuery, Index, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
@@ -45,18 +45,18 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
     (id, gameType, player1, player2, winner, tournament, beginning, end, rounds, carambolesToWin) <>
       (Game.tupled, Game.unapply)
 
-  private def player1Fk =
+  def player1Fk: ForeignKeyQuery[PlayersTable, Player] =
     foreignKey("game_player1_fk", player1, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def player2Fk =
+  def player2Fk: ForeignKeyQuery[PlayersTable, Player] =
     foreignKey("game_player2_fk", player2, Queries.players)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def winnerFk =
+  def winnerFk: ForeignKeyQuery[PlayersTable, Player] =
     foreignKey("game_winner_fk", winner, Queries.players)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def tournamentFk =
+  def tournamentFk: ForeignKeyQuery[TournamentsTable, Tournament] =
     foreignKey("game_tournament_fk", tournament, Queries.tournaments)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def game_idx =
+  def game_idx: Index =
     index("game_idx", (player1, player2, beginning), unique = true)
 }

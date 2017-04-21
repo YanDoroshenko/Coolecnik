@@ -1,9 +1,0 @@
-#!/bin/bash
-
-sbt clean package
-cd target/universal
-7z x coolecnik-0.0.4.zip 
-rm coolecnik-0.0.4.zip 
-cd coolecnik-0.0.4/bin
-chmod +x coolecnik
-sudo ./coolecnik

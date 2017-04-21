@@ -41,20 +41,23 @@
         </div>
         <span id="loginSpan" style="color: red;"></span>
         <div style="display:table; margin:0px auto;">
-            <button id="btnLogin" class="btn btn-lg btn-secondary green-btn btn-block center-block" type="submit" >Přihlásit se</button>
-            <button id="btnRec" class="btn btn-sm btn-secondary green-btn btn-block center-block" data-toggle="modal"
+            <button id="btnLogin" class="btn btn-lg btn-outline-success green-btn btn-block center-block" type="submit">
+                Přihlásit se
+            </button>
+            <button id="btnRec" class="btn btn-outline-warning btn-block center-block" data-toggle="modal"
                     data-target="#myModal" style="margin-top:3%;">Zapomenuté heslo
             </button>
         </div>
     
         <br>    
     </form>
-    
 
 
-    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#register"aria-expanded="false" aria-controls="register" id="regCollapseBtn">
+    <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse"
+            href="#register" aria-expanded="false" aria-controls="register" id="regCollapseBtn">
         Zaregistrovat se
     </button>
+    <span id="regSpan" style="color: red;"></span>
     <form class="collapse" id="register">
         <input id="regEmail" type="email" placeholder="E-mail" class="form-control">
         <input id="regLogin" type="text" placeholder="Login" class="form-control" required>
@@ -62,7 +65,6 @@
         <input id="regLastName" type="text" placeholder="Příjmení (nepovinné)" class="form-control">
         <input id="regPass1" type="password" placeholder="Heslo" class="form-control">
         <input id="regPass2" type="password" placeholder="Heslo znovu" class="form-control">
-        <span id="regSpan" style="color: red;"></span>
         <button id="btnRegister" class="btn btn-lg btn-secondary green-btn btn-block" type="button" >Zaregistrovat se</button>
     </form>
     <hr class="hr-light"/>

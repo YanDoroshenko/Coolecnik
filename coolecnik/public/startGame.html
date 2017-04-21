@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset="UTF-8">
@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
         <link rel="stylesheet" href="css/style.css">
-        <title>Karambol</title>
+        <title>Hra</title>
     </head>
 
     <body>
@@ -18,27 +18,32 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="navbar-collapse justify-content-md-center collapse" id="navbar" aria-expanded="false">
+            <div class="navbar-collapse justify-content-md-center collapse" role="navigation" id="navbar" aria-expanded="false">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link ">Game</a>
+                        <a class="nav-link">Hra</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Turnaje</a>
+                        <a class="nav-link" href="tournaments.html">Turnaje</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Přátelé</a>
+                        <a class="nav-link" href="friends.html">Přátelé</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pravidla</a>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Pravidla</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown02">
+                            <a class="dropdown-item" href="rules_8pool.html">Osmička</a>
+                            <a class="dropdown-item active" href="rules_karambol.html">Karambol</a>
+                        </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Profil</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown03">
-                            <a class="dropdown-item" href="#">Profil</a>
-                            <a class="dropdown-item" href="#">Statistika</a>
-                            <a class="dropdown-item" href="#">Odhlásit se</a>
+                            <a class="dropdown-item" href="profile.html">Profil</a>
+                            <a class="dropdown-item" href="statistics.html">Statistika</a>
+                            <a class="dropdown-item" id="logout" href="#">Odhlásit se</a>
                         </div>
                     </li>
                 </ul>

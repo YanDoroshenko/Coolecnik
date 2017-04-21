@@ -1,8 +1,8 @@
 package models.tables
 
-import models.{Queries, StrikeType}
+import models.{GameType, Queries, StrikeType}
 import slick.driver.PostgresDriver.api._
-import slick.lifted.ProvenShape
+import slick.lifted.{ForeignKeyQuery, Index, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
@@ -15,22 +15,25 @@ class StrikeTypesTable(tag: Tag) extends Table[StrikeType](tag, "t_strike_type")
   def gameType: Rep[Int] =
     column[Int]("gameType")
 
+  def correct: Rep[Boolean] =
+    column[Boolean]("correct")
+
   def title: Rep[String] =
     column[String]("title", O.SqlType("VARCHAR(55)"))
 
   def description: Rep[Option[String]] =
     column[Option[String]]("description", O.SqlType("VARCHAR(1000)"))
 
-  def endsGame: Rep[Option[Boolean]] =
-    column[Option[Boolean]]("ends_game")
+  def endsGame: Rep[Boolean] =
+    column[Boolean]("ends_game")
 
   override def * : ProvenShape[StrikeType] =
-    (id, gameType, title, description, endsGame) <>
+    (id, correct, gameType, title, description, endsGame) <>
       (StrikeType.tupled, StrikeType.unapply)
 
-  private def stFk =
+  def stFk: ForeignKeyQuery[GameTypesTable, GameType] =
     foreignKey("strike_type_game_fk", gameType, Queries.gameTypes)(_.id, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
 
-  private def titleIdx =
+  def titleIdx: Index =
     index("pool_strike_type_title_idx", title, unique = true)
 }
