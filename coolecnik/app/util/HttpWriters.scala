@@ -42,6 +42,9 @@ object HttpWriters {
   implicit val psw: Writeable[Seq[Pool8Stats]] = new Writeable[Seq[Pool8Stats]](
     bgs => ByteString(Json.toJson(bgs).toString()), Some("application/json"))
 
+  implicit val csw: Writeable[Seq[CaramboleStats]] = new Writeable[Seq[CaramboleStats]](
+    bgs => ByteString(Json.toJson(bgs).toString()), Some("application/json"))
+
   implicit val dw = new Writeable[Double](
     d => ByteString(Json.toJson(d).toString()), Some("application/json"))
 

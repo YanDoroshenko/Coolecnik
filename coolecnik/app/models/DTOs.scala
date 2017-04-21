@@ -39,7 +39,7 @@ case class Pool8Stats(
                        gameId: Int,
                        gameType: Int,
                        opponent: Int,
-                       winner: Option[Int],
+                       winner: Int,
                        beginning: Timestamp,
                        end: Timestamp,
                        correctStrikes: Int,
@@ -48,5 +48,20 @@ case class Pool8Stats(
                        faulsWithOthers: Int,
                        faulsOther: Int
                      )
+
+case class CaramboleStats(
+                           gameNumber: Int,
+                           gameId: Int,
+                           gameType: Int,
+                           opponent: Int,
+                           winner: Option[Int],
+                           rounds: Int,
+                           beginning: Timestamp,
+                           end: Timestamp,
+                           myCaramboles: Int,
+                           opponentsCaramboles: Int,
+                           myFouls: Int,
+                           opponentsFouls: Int
+                         )
 
 case class Friend(id: Int, login: String, firstName: Option[String], lastName: Option[String])

@@ -60,7 +60,7 @@ class StatisticsController extends Controller {
       }
   }
 
-  def stats(
+  def statistics(
              id: Int,
              gameType: Option[String],
              opponent: Option[Int],
@@ -146,7 +146,7 @@ class StatisticsController extends Controller {
                     game.id,
                     game.gameType,
                     opp,
-                    game.winner,
+                    game.winner.get,
                     game.beginning.get,
                     game.end.get,
                     gameShots.count(_.strikeType == 1),
@@ -159,6 +159,36 @@ class StatisticsController extends Controller {
                   case Success(s) => Ok(s)
                   case Failure(e) => BadRequest(e.getMessage)
                 })
+            case gs: Seq[Game] if gs.nonEmpty && gameType.contains("carambole") =>
+              val shots = db.run(
+                strikes.filter(s => s.strikeType === 11 || s.strikeType === 12).result
+              )
+
+              shots.map(ss =>
+                Try(process(gs).map(g => {
+                  val number = g._1
+                  val game = g._2
+                  val gameShots = ss.filter(_.game == game.id)
+                  val opp = if (game.player1 == id) game.player2 else game.player1
+                  CaramboleStats(
+                    number,
+                    game.id,
+                    game.gameType,
+                    opp,
+                    game.winner,
+                    game.rounds.get,
+                    game.beginning.get,
+                    game.end.get,
+                    gameShots.count(s => s.player == id && s.strikeType == 11),
+                    gameShots.count(s => s.player == opp && s.strikeType == 11),
+                    gameShots.count(s => s.player == id && s.strikeType == 12),
+                    gameShots.count(s => s.player == opp && s.strikeType == 12))
+                }
+                )) match {
+                  case Success(s) => Ok(s)
+                  case Failure(e) => BadRequest(e.getMessage)
+                })
+            case _: Iterable[Any] => Future(NotFound)
           }) match {
         case Success(r) => r
         case Failure(e) => Future(BadRequest(e.getMessage))
