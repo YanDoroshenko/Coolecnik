@@ -37,7 +37,7 @@ class DBController extends Controller {
       players ++= Seq(
         Player(1337, "login1", "none1", "d19dd94b", Some("Login1"), None),
         Player(1488, "login2", "none2", "d29ddade", Some("Login2"), None)))
-      .map(_ => Ok)
+      .map(_ => Created)
   }
 
   private def createTables = db.run(DBIO.seq(
