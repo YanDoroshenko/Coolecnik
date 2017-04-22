@@ -9,8 +9,11 @@ import scala.language.implicitConversions
   */
 class Database {
   private val db = slick.driver.PostgresDriver.api.Database.forConfig("prod")
+  //slick.driver.H2Driver.api.Database.forConfig("test")
 
   implicit def db2slick(d: Database): slick.driver.PostgresDriver.api.Database = d.db
+
+  //slick.driver.H2Driver.api.Database = d.db
 }
 
 object Database extends Database
