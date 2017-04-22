@@ -222,7 +222,7 @@ $("#gameType").change(function () {
     }
 });
 
-document.getElementById("authPlayer2").addEventListener("click", function (event) {
+document.getElementById("authPlayer2btn").addEventListener("click", function (event) {
     event.preventDefault();
     if (isSecondPlayerAuthMenuOpened === true)
     	return;
@@ -230,7 +230,7 @@ document.getElementById("authPlayer2").addEventListener("click", function (event
     var authKey = "<button class='icon-key' id='authBtn' style='width: 42px; height: 32px; padding-top: 3%; margin-left: 2%'></button>";
     var thrashKey = "<button class='icon-thrash' id='thrashBtn' style='width: 42px; height: 32px; padding-top: 3%; margin-left: 2%'></button>";
     isSecondPlayerAuthMenuOpened = true;
-    $("#authPlayer2").after(passField + authKey + thrashKey);
+    $("#authPlayer2btn").after(passField + authKey + thrashKey);
 
 
     document.getElementById("authBtn").addEventListener("click", function (event) {
@@ -287,13 +287,23 @@ document.getElementById("authPlayer2").addEventListener("click", function (event
 
 // callbacked function for addEventListeners of friends
 function tempFunc(event, btnArrHtml, btnArr, i) {
-    console.log(btnArrHtml, i);
-    var plname = String(btnArrHtml[i]).slice(65);
-    plname = plname.slice(0, -9);
-    var plid = btnArr[i].value;
-    localStorage.setItem("secondPlayerId", btnArr[i].value);
-    isSecondPlayerAuthorized = true;
-    $("#pl0").val(plname);
+    // if clicked on any friend, not "JIny hrac"
+    if (btnArr[i].value !== "-41") {
+        console.log(btnArrHtml, i);
+        var plname = String(btnArrHtml[i]).slice(65);
+        plname = plname.slice(0, -9);
+        plname = btnArr[i].innerHTML;
+        console.log(btnArr[i]);
+        var plid = btnArr[i].value;
+        localStorage.setItem("secondPlayerId", btnArr[i].value);
+        isSecondPlayerAuthorized = true;
+        $("#pl0").val(plname);
+        $("#authPlayer2btn").css("display", "none");
+    }
+    else {
+        $("#authPlayer2btn").css("display", "inline");
+        $("#pl0").val("");
+    }
 }
 
 document.getElementById("inviteFriend").addEventListener("click", function (event) {
@@ -314,6 +324,7 @@ document.getElementById("inviteFriend").addEventListener("click", function (even
                     $("#friendList").html($("#friendList").html() + str1 + item.id + str2 + item.login + str3);
                 });
                 btnArrHtml.push(str1 + "-41" + str2 + "Jiny hrac" + str3);
+                $("#friendList").html($("#friendList").html() + str1 + "-41" + str2 + "Jiny hrac" + str3);
                 var btnArr = document.querySelectorAll(".friendBtns");
                 console.log(btnArr);
                 for (var i = 0; i < btnArr.length; i++) {
@@ -350,12 +361,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset()/60 + "00";
 	if (new Date().getTimezoneOffset()/60 < 10 && new Date().getTimezoneOffset()/60 > -10)
 		dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-    /*if (dateTime.length === 25) {
-        dateTime = dateTime.slice(0, -1);
-        var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-        dateTime = temp;
-        console.log("dateTime ", dateTime);
-     }*/
+
     if (dateTime[20] === "0") {
         dateTime = dateTime.replaceAt(20, "+");
         console.log("new dateTime ", dateTime);
