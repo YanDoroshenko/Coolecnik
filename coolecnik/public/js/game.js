@@ -32,6 +32,9 @@ var players, activePlayer, round = 1, gameId, timerVar;
  currentGame: arr(obj)
  */
 
+String.prototype.replaceAt = function (index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
 
 // check if there are unended or saved but unsent games
 // Handler for document.ready() called.
@@ -310,6 +313,7 @@ document.getElementById("inviteFriend").addEventListener("click", function (even
                     btnArrHtml.push(str1 + item.id + str2 + item.login + str3);
                     $("#friendList").html($("#friendList").html() + str1 + item.id + str2 + item.login + str3);
                 });
+                btnArrHtml.push(str1 + "-41" + str2 + "Jiny hrac" + str3);
                 var btnArr = document.querySelectorAll(".friendBtns");
                 console.log(btnArr);
                 for (var i = 0; i < btnArr.length; i++) {
@@ -346,11 +350,15 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset()/60 + "00";
 	if (new Date().getTimezoneOffset()/60 < 10 && new Date().getTimezoneOffset()/60 > -10)
 		dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-    if (dateTime.length === 25) {
+    /*if (dateTime.length === 25) {
         dateTime = dateTime.slice(0, -1);
         var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
         dateTime = temp;
         console.log("dateTime ", dateTime);
+     }*/
+    if (dateTime[20] === "0") {
+        dateTime = dateTime.replaceAt(20, "+");
+        console.log("new dateTime ", dateTime);
     }
 
 	localStorage.setItem("secondPlayerName", $('#pl0').val());
@@ -790,11 +798,9 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var obj = {
             "end": dateTime,
@@ -840,11 +846,9 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         var currentdate = new Date();
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
         var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
@@ -917,11 +921,9 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var obj = {
             "end": dateTime,
@@ -955,11 +957,9 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
@@ -1032,11 +1032,9 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var obj = {
             "end": dateTime,
@@ -1070,11 +1068,9 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
@@ -1147,11 +1143,9 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
 
         var obj = {
@@ -1186,11 +1180,9 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
@@ -1263,11 +1255,9 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
 
         var obj = {
@@ -1302,11 +1292,9 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
@@ -1366,11 +1354,9 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
 
         var obj = {
@@ -1404,11 +1390,9 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
-        if (dateTime.length === 25) {
-            dateTime = dateTime.slice(0, -1);
-            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
-            dateTime = temp;
-            console.log("dateTime ", dateTime);
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
         }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
