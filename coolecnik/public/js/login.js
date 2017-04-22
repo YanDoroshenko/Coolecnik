@@ -1,5 +1,4 @@
-/* 	Use as hash(<what>, false, 0);
- thanks to  https://github.com/garycourt/murmurhash-js */
+// thanks to  https://github.com/garycourt/murmurhash-js
 function hash(str, asString, seed) {
     var i, l,
         hval = (seed === undefined) ? 0x811c9dc5 : seed;
@@ -15,23 +14,13 @@ function hash(str, asString, seed) {
     return hval >>> 0;
 }
 
-function createCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + value + expires + "; path=/";
-}
-
 
 document.getElementById("btnLogin").addEventListener("click", function (event) {
     event.preventDefault();
     $("#loginSpan").text("");
 
     // check for required fields non-emptiness
-    if ($('#loginLogin').val().length == 0 || $('#loginPass').val() == 0) {
+    if ($('#loginLogin').val().length === 0 || $('#loginPass').val() === 0) {
         $("#loginSpan").text("Jedno z povinných polí je nevyplněno");
         return;
     }
@@ -51,8 +40,15 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
         statusCode: {
             202: function (response) {
                 console.log("202 ACCEPTED");
-				createCookie("myId", response.id, 365);
-				createCookie("myName", vLogin, 365);
+
+                if ($("#remembChBox").prop("checked")) {
+                    createCookie("myId", response.id, 365);
+                    createCookie("myName", vLogin, 365);
+                }
+                else {
+                    createCookie("myId", response.id);
+                    createCookie("myName", vLogin);
+                }
                 localStorage.setItem("myId", response.id);
                 localStorage.setItem("myName", vLogin);
                 window.location.replace("/game.html");
@@ -69,4 +65,6 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
     });
 
 });
+
+
 
