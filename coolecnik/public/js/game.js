@@ -440,14 +440,16 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	            400: function (response) {
                     console.log("400 BAD REQUEST");
 	                $("#newGameSpan").val = "OH NO";
+                    localStorage.setItem("activeGame", "false");
 	            },
                 409: function (response) {
                     console.log("409 CONFLICT");
 	                $("#newGameSpan").val = "OH NO";
+                    localStorage.setItem("activeGame", "false");
 	            }
 	        }
     	});
-    localStorage.setItem("activeGame", "true");
+
 
 });
 
