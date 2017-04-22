@@ -2,7 +2,7 @@ import controllers.DBController
 import models.Queries._
 import org.scalatest.Matchers._
 import org.scalatestplus.play._
-import play.api.mvc.{Results, _}
+import play.api.mvc.{Result, Results}
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import slick.driver.H2Driver.api._
@@ -18,7 +18,7 @@ import scala.concurrent.{Await, Future}
   */
 class DBControllerSpec extends PlaySpec with Results {
 
-  private def dropSchema = {
+  def dropSchema = {
     Database.run(DBIO.seq(
       strikes.schema.drop,
       strikeTypes.schema.drop,
