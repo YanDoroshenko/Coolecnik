@@ -1,5 +1,5 @@
 // Session checking
-function readCookie(name) {
+/*function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {
@@ -12,7 +12,7 @@ function readCookie(name) {
 
 function eraseCookie(name) {
     createCookie(name,"",-1);
-}
+ }*/
 
 
 var isSecondPlayerAuthorized = false;
@@ -146,6 +146,7 @@ $(function () {
             clearTimeout(timerVar);
         });
     }
+    isSecondPlayerAuthorized = false;
 });
 
 // timer for HTML timer - starts from 0
@@ -281,6 +282,52 @@ document.getElementById("authPlayer2").addEventListener("click", function (event
 
 });
 
+// callbacked function for addEventListeners of friends
+function tempFunc(event, btnArrHtml, btnArr, i) {
+    console.log(btnArrHtml, i);
+    var plname = String(btnArrHtml[i]).slice(65);
+    plname = plname.slice(0, -9);
+    var plid = btnArr[i].value;
+    localStorage.setItem("secondPlayerId", btnArr[i].value);
+    isSecondPlayerAuthorized = true;
+    $("#pl0").val(plname);
+}
+
+document.getElementById("inviteFriend").addEventListener("click", function (event) {
+    $("#friendList").html("");
+    var endpoint = "/api/players/" + getCookie("myId") + "/friends";
+    $.ajax(endpoint, {
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        statusCode: {
+            200: function (response) {
+                var str1 = "<button class='dropdown-item friendBtns' type='button' value='";
+                var str2 = "'>";
+                var str3 = "</button>";
+                var btnArrHtml = [];
+
+                response.forEach(function (item, i, response) {
+                    btnArrHtml.push(str1 + item.id + str2 + item.login + str3);
+                    $("#friendList").html($("#friendList").html() + str1 + item.id + str2 + item.login + str3);
+                });
+                var btnArr = document.querySelectorAll(".friendBtns");
+                console.log(btnArr);
+                for (var i = 0; i < btnArr.length; i++) {
+                    // fucking closure. What the hell is this?
+                    (function (i) {
+                        btnArr[i].addEventListener('click', function () {
+                            tempFunc(event, btnArrHtml, btnArr, i);
+                        }, false);
+                    })(i);
+                }
+
+            },
+            404: function (response) {
+                console.log("404");
+            }
+        }
+    })
+});
 
 document.getElementById("newGameBtn").addEventListener("click", function (event) {
 	event.preventDefault();
@@ -299,13 +346,19 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 	var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset()/60 + "00";
 	if (new Date().getTimezoneOffset()/60 < 10 && new Date().getTimezoneOffset()/60 > -10)
 		dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+    if (dateTime.length === 25) {
+        dateTime = dateTime.slice(0, -1);
+        var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+        dateTime = temp;
+        console.log("dateTime ", dateTime);
+    }
 
 	localStorage.setItem("secondPlayerName", $('#pl0').val());
 
 	var obj = {
 	        "gameType": gameType,
         "player1": parseInt(getCookie("myId")),
-	        "player2": (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+        "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
 	        "beginning": dateTime
     	};
 
@@ -737,6 +790,12 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var obj = {
             "end": dateTime,
             "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
@@ -781,6 +840,12 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         var currentdate = new Date();
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
         var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
         var datetime = currentdate.getDate() + "/"
@@ -801,6 +866,8 @@ document.getElementById("correctEndBtn").addEventListener("click", function (eve
         localStorage.setItem("activeGame", "false");
     }
     clearTimeout(timerVar);
+    isSecondPlayerAuthorized = false;
+    $("#pl0").val("");
 
 });
 
@@ -850,6 +917,12 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var obj = {
             "end": dateTime,
             "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
@@ -881,6 +954,13 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
         var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
@@ -894,7 +974,7 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "endOfGameTime": dateTime,
             "dateTimeString": datetime,
             "winner": (activePlayer === 1) ? players[1].id : players[0].id
         };
@@ -902,7 +982,8 @@ document.getElementById("poolFaul8Btn").addEventListener("click", function (even
         localStorage.setItem("activeGame", "false");
     }
     clearTimeout(timerVar);
-
+    isSecondPlayerAuthorized = false;
+    $("#pl0").val("");
 });
 
 document.getElementById("pool8tooSoonBtn").addEventListener("click", function (event) {
@@ -951,6 +1032,12 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var obj = {
             "end": dateTime,
             "winner": (activePlayer === 1) ? players[1].id : players[0].id
@@ -982,6 +1069,13 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
         var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
@@ -995,7 +1089,7 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "endOfGameTime": dateTime,
             "dateTimeString": datetime,
             "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
         };
@@ -1003,7 +1097,8 @@ document.getElementById("pool8tooSoonBtn").addEventListener("click", function (e
         localStorage.setItem("activeGame", "false");
     }
     clearTimeout(timerVar);
-
+    isSecondPlayerAuthorized = false;
+    $("#pl0").val("");
 });
 
 document.getElementById("pool8WrHoleBtn").addEventListener("click", function (event) {
@@ -1052,6 +1147,13 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
+
         var obj = {
             "end": dateTime,
             "winner": (activePlayer === 1) ? players[1].id : players[0].id
@@ -1083,6 +1185,13 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
         var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
@@ -1096,7 +1205,7 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "endOfGameTime": dateTime,
             "dateTimeString": datetime,
             "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
         };
@@ -1104,7 +1213,8 @@ document.getElementById("pool8WrHoleBtn").addEventListener("click", function (ev
         localStorage.setItem("activeGame", "false");
     }
     clearTimeout(timerVar);
-
+    isSecondPlayerAuthorized = false;
+    $("#pl0").val("");
 });
 
 document.getElementById("pool8OfTableBtn").addEventListener("click", function (event) {
@@ -1153,6 +1263,13 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
+
         var obj = {
             "end": dateTime,
             "winner": (activePlayer === 1) ? players[1].id : players[0].id
@@ -1184,6 +1301,13 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
         var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
@@ -1197,7 +1321,7 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "endOfGameTime": dateTime,
             "dateTimeString": datetime,
             "winner": (activePlayer === 1) ? parseInt(players[1].id) : parseInt(players[0].id)
         };
@@ -1205,6 +1329,8 @@ document.getElementById("pool8OfTableBtn").addEventListener("click", function (e
         localStorage.setItem("activeGame", "false");
     }
     clearTimeout(timerVar);
+    isSecondPlayerAuthorized = false;
+    $("#pl0").val("");
 });
 
 document.getElementById("endGameBtn").addEventListener("click", function (event) {
@@ -1240,6 +1366,13 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
         if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
             dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
+
         var obj = {
             "end": dateTime
         };
@@ -1270,6 +1403,13 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
             "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
         localStorage.setItem("savedGame", "true");
         var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime.length === 25) {
+            dateTime = dateTime.slice(0, -1);
+            var temp = dateTime.substr(0, 20) + "+" + dateTime.substr(20);
+            dateTime = temp;
+            console.log("dateTime ", dateTime);
+        }
         var currentdate = new Date();
         var h = (currentdate.getHours() < 10) ? "0" + currentdate.getHours() : currentdate.getHours();
         var m = (currentdate.getMinutes() < 10) ? "0" + currentdate.getMinutes() : currentdate.getMinutes();
@@ -1283,7 +1423,7 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
-            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "endOfGameTime": dateTime,
             "dateTimeString": datetime,
             "winner": -42
         };
@@ -1301,5 +1441,7 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
     localStorage.setItem("currentGame", "false");
     localStorage.setItem("savedGame", "false");
     clearTimeout(timerVar);
+    isSecondPlayerAuthorized = false;
+    $("#pl0").val("");
 });
 

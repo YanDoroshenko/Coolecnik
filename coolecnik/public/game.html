@@ -79,10 +79,8 @@
         <input id="pl0" type="text" placeholder="Jméno/login protihráče" class="form-control"
                style="width: 79%; display: inline;">
         <button class="icon-invFriend" id="inviteFriend" data-toggle="dropdown"></button>
-        <div class="dropdown-menu dropdown-menu-right dropdown-toggle" style="margin-top: -22%;">
-            <button class="dropdown-item" type="button">Action</button>
-            <button class="dropdown-item" type="button">Another action</button>
-            <button class="dropdown-item" type="button">Something else here</button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-toggle" id="friendList" style="margin-top: -18%;">
+
         </div>
         <button class="icon-key btn" id="authPlayer2" style=""></button>
         <input id='carCount' type='text' placeholder='Počet karambolů' class='form-control collapse'>
@@ -214,6 +212,7 @@
 
 
 <script type="text/javascript" src="js/game.js"></script>
+<script>$("#pl0").val("");</script>
 
 
 </body>
