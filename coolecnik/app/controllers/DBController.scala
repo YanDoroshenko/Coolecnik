@@ -23,12 +23,7 @@ class DBController extends Controller {
   def createData: Action[AnyContent] = Action.async {
     createGameTypes
       .flatMap(_ => createStrikeTypes)
-      .flatMap(_ =>
-        db.run(
-          sqlu"""
-             INSERT INTO t_player(id, login, email, password_hash, first_name) VALUES (-1, '-1', '-1','-1', 'guest');
-          """
-        ))
+      .flatMap(_ => createGuest)
       .map(_ => Created)
   }
 
@@ -79,4 +74,10 @@ class DBController extends Controller {
       )
     )
   }
+
+  private def createGuest =
+    db.run(
+      sqlu"""
+             INSERT INTO t_player(id, login, email, password_hash, first_name) VALUES (-1, '-1', '-1','-1', 'guest');
+          """)
 }
