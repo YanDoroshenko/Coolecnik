@@ -22,7 +22,12 @@ function deleteCookie(name) {
 }
 
 function unauthorize() {
-    deleteCookie(myName);
-    deleteCookie(myId);
+    deleteCookie("myName");
+    deleteCookie("myId");
     window.location.replace("/");
+}
+
+function checkAuth() {
+    if (getCookie("myId") == null || getCookie("myName") == null)
+        window.location.replace("/");
 }

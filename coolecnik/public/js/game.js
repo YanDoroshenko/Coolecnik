@@ -14,22 +14,6 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
-var myId = readCookie("myId");
-var myName = readCookie("myName");
-if (myId == null || myName == null) {
-	console.log("Cookies not found, redirecting...");
-	window.location.replace("/index.html");
-} else {
-	console.log("Cookies found.");
-}
-
-// Session log outerHeight
-document.getElementById("logout").addEventListener("click", function (event) {
-    event.preventDefault();
-	eraseCookie("myId");
-	eraseCookie("myName");
-	window.location.replace("/index.html");
-});
 
 var isSecondPlayerAuthorized = false;
 var isSecondPlayerAuthMenuOpened = false;
@@ -263,7 +247,7 @@ document.getElementById("authPlayer2").addEventListener("click", function (event
 	        statusCode: {
 	            202: function (response) {
 	                console.log("202 ACCEPTED");
-	                if (localStorage.getItem("myId") == response.id) {
+                    if (getCookie("myId") == response.id) {
 	                	$("#newGameSpan").text("Nelze hrát s sebou. Fakt nemáte kamarádi na to? Je to smůla");
 	                	document.getElementById("authBtn").className = "icon-key";
 	                	return;
@@ -320,7 +304,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
 	var obj = {
 	        "gameType": gameType,
-	        "player1": parseInt(localStorage.getItem("myId")),
+        "player1": parseInt(getCookie("myId")),
 	        "player2": (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
 	        "beginning": dateTime
     	};
@@ -334,7 +318,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     console.log("201 CREATED");
 
                     localStorage.setItem("currentGame", null);
-	                $("#player1").text(localStorage.getItem("myName"));
+                    $("#player1").text(getCookie("myName"));
 	                $("#player2").text($('#pl0').val());
 	                $("#newGameDiv").css("display", "none");
 
@@ -347,8 +331,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
 	                gameId = response.id;
                     players = [{
-                        "id": parseInt(localStorage.getItem("myId")),
-                        "name": localStorage.getItem("myName")
+                        "id": parseInt(getCookie("myId")),
+                        "name": getCookie("myName")
                     }, {
                         "id": (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
                         "name": $('#pl0').val()
@@ -584,8 +568,8 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 
 	var lastStrike = existingStrikes.pop();
 
-	if (lastStrike.player == parseInt(localStorage.getItem("myId"))) {
-		if (lastStrike.strikeType == 1){
+    if (lastStrike.player === parseInt(getCookie("myId"))) {
+        if (lastStrike.strikeType === 1) {
 			$("#pl1good").html( parseInt($("#pl1good").text()) - 1 );
 		}
 		else if (lastStrike.strikeType == 3){
