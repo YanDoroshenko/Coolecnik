@@ -15,6 +15,17 @@
     <script src="js/bootstrap.js"></script>
     
     <title>Coolecnik</title>
+    <script>
+        function getCookie(name) {
+            var matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+        if (getCookie("myId")) {
+            window.location.replace("/game.html");
+        }
+    </script>
 </head>
 <body>
 
@@ -36,7 +47,7 @@
         <input id="loginPass" type="password" id="inputPassword" class="form-control" placeholder="Heslo">
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Zapamatovat přihlašovací údaje
+                <input type="checkbox" value="remember-me" id="remembChBox"> Zapamatovat přihlašovací údaje
             </label>
         </div>
         <span id="loginSpan" style="color: red;"></span>
@@ -143,6 +154,7 @@
   
 </div>
 
+<script src="js/authCookies.js"></script>
 <script src="js/login.js"></script>
 <script src="js/registration.js"></script>
 <script src="js/recoveryPassword.js"></script>
