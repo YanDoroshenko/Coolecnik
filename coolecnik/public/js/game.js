@@ -324,7 +324,7 @@ document.getElementById("inviteFriend").addEventListener("click", function (even
                     $("#friendList").html($("#friendList").html() + str1 + item.id + str2 + item.login + str3);
                 });
                 btnArrHtml.push(str1 + "-41" + str2 + "Jiny hrac" + str3);
-                $("#friendList").html($("#friendList").html() + str1 + "-41" + str2 + "Jiny hrac" + str3);
+                $("#friendList").html($("#friendList").html() + "<hr>" + str1 + "-41" + str2 + "Jiny hrac" + str3);
                 var btnArr = document.querySelectorAll(".friendBtns");
                 console.log(btnArr);
                 for (var i = 0; i < btnArr.length; i++) {
