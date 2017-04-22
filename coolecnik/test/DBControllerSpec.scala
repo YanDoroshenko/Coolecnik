@@ -10,7 +10,8 @@ import slick.jdbc.meta.MTable
 import util.Database
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 22.04.2017.
@@ -36,11 +37,10 @@ class DBControllerSpec extends PlaySpec with Results {
       val result: Future[Result] = controller.createSchema.apply(FakeRequest())
       status(result) mustBe CREATED
 
-      Database.run(MTable.getTables)
-        .map(_ should not be empty)
+      Await.result(Database.run(MTable.getTables), 5 seconds) should not be empty
 
-      dropSchema.map(_ shouldEqual NO_CONTENT)
-      Database.run(MTable.getTables).map(_ shouldBe empty)
+      Await.result(dropSchema, 5 seconds) shouldEqual NO_CONTENT
+      Await.result(Database.run(MTable.getTables), 5 seconds) shouldBe empty
     }
 
     "create test users" in {
@@ -51,11 +51,11 @@ class DBControllerSpec extends PlaySpec with Results {
       val testUsers: Future[Result] = controller.createTestUsers.apply(FakeRequest())
       status(testUsers) mustBe CREATED
 
-      Database.run(players.filter(p => p.login === "login1" || p.login === "login2").result)
-        .map(_.size shouldEqual 2)
+      Await.result(Database.run(players.filter(p => p.login === "login1" || p.login === "login2").result),
+        5 seconds).size shouldEqual 2
 
-      dropSchema.map(_ shouldEqual NO_CONTENT)
-      Database.run(MTable.getTables).map(_ shouldBe empty)
+      Await.result(dropSchema, 5 seconds) shouldEqual NO_CONTENT
+      Await.result(Database.run(MTable.getTables), 5 seconds) shouldBe empty
     }
   }
 }
