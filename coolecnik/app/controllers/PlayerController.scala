@@ -115,23 +115,26 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
   }
 
   def befriend(playerId: Int, friendId: Int): Action[AnyContent] = Action.async {
-    db.run(
-      players.filter(p => p.id === playerId || p.id === friendId).size.result
-    ).flatMap {
-      case 2 =>
-        db.run(
-          friendList += Friendship(playerId, friendId))
-          .recover {
-            case e: PSQLException => e
-          }
-          .flatMap {
-            case e: PSQLException => Future(Conflict(e.getMessage))
-            case _ =>
-              db.run(friendList.filter(_.playerId === playerId).result)
-                .map(fl => Ok(fl))
-          }
-      case _ => Future(NotFound)
-    }
+    if (playerId == friendId)
+      Future(BadRequest)
+    else
+      db.run(
+        players.filter(p => p.id === playerId || p.id === friendId).size.result
+      ).flatMap {
+        case 2 =>
+          db.run(
+            friendList += Friendship(playerId, friendId))
+            .recover {
+              case e: PSQLException => e
+            }
+            .flatMap {
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ =>
+                db.run(friendList.filter(_.playerId === playerId).result)
+                  .map(fl => Created(fl))
+            }
+        case _ => Future(NotFound)
+      }
   }
 
   def unfriend(playerId: Int, friendId: Int): Action[AnyContent] = Action.async {
