@@ -130,8 +130,8 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
             .flatMap {
               case e: PSQLException => Future(Conflict(e.getMessage))
               case _ =>
-                db.run(friendList.filter(_.playerId === playerId).result)
-                  .map(fl => Created(fl))
+                db.run((for ((f, p) <- friendList.filter(_.playerId === playerId) join players on (_.friendId === _.id)) yield p.id -> p.login).result)
+                  .map(fl => Created(fl.map(f => (Opponent.apply _).tupled(f))))
             }
         case _ => Future(NotFound)
       }

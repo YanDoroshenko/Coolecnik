@@ -237,7 +237,7 @@
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_94774330" CREATED="1491944769926" MODIFIED="1491944772791">
 <node TEXT="friendlist for the player" FOLDED="true" ID="ID_1007330012" CREATED="1491944773798" MODIFIED="1491944785690">
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1836867081" CREATED="1491944786718" MODIFIED="1491944789057">
-<node TEXT="[{&quot;playerId&quot;:3,&quot;friendId&quot;:1}]" ID="ID_1065580637" CREATED="1491944789798" MODIFIED="1491944801201"/>
+<node TEXT="[{&quot;id&quot;:3,&quot;login&quot;:&quot;pepa&quot;}]" ID="ID_1065580637" CREATED="1491944789798" MODIFIED="1492967170508"/>
 </node>
 </node>
 </node>
