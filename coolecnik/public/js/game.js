@@ -12,8 +12,11 @@ var players, activePlayer, gameId, timerVar;
  gameType: 1 or 2
  savedTime: obj("m", "s")
  savedCounterValues: obj("green1", "green2", "red1", "red2")
- players: arr(id, name)
+ players: arr of (id, name)
  currentGame: arr(obj)
+ <only carambol> carType:int    1 for carambols game, 2 for rounds game
+ <only carambol && carType==1>  roundsTotal, roundsRemain
+ <only carambol && carType==2>  carsTotal, currentRound
  */
 
 // check if there are unended or saved but unsent games
@@ -29,11 +32,6 @@ $(function () {
     isSecondPlayerAuthorized = false;
 });
 
-
-
-
-
-var totalSeconds = 0;
 
 
 /*---------------Pool panel---------------*/
@@ -162,3 +160,18 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
     $("#pl0").val("");
 });
 
+
+/*---------------Pool panel---------------*/
+
+document.getElementById("carCorrectBtn").addEventListener("click", function (event) {
+    carGameRoutine(11, "good");
+});
+
+document.getElementById("carFaulBtn").addEventListener("click", function (event) {
+    carGameRoutine(12, "true", "bad");
+    round++;
+});
+
+document.getElementById("carRemoveLastBtn").addEventListener("click", function (event) {
+
+});

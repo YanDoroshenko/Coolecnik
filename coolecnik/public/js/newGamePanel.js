@@ -1,15 +1,20 @@
 $("#gameType").change(function () {
     if (this.checked) {
-        //Do stuff
-        var carambCount = "<input id='carCount' type='text' placeholder='Počet karambolů' class='form-control'>";
-        $("#hr").before(carambCount);
-        //$("#carCount").collapse("show");
+        $("#carambParams").show();
     }
     else {
-        // this has to be here really twice - dont know why but it works properly only this way
-        $("#carCount").remove();
-        $("#carCount").remove();
-        //$("#carCount").collapse("hide");
+        $("#carambParams").hide();
+    }
+});
+
+$("#karambolGameType").change(function () {
+    if ($("#karambolGameType").prop("checked")) {
+        console.log("checked");
+        $("#carambCount").prop("placeholder", "Počet kol");
+    }
+    else {
+        console.log(" not checked");
+        $("#carambCount").prop("placeholder", "Počet karambolů");
     }
 });
 
@@ -97,7 +102,14 @@ function tempFunc(event, btnArrHtml, btnArr, i) {
 }
 
 document.getElementById("inviteFriend").addEventListener("click", function (event) {
+    if ($("#friendList").length !== 0)
+        $("#friendList").remove();
+
+    var frPanel = "<div class='dropdown-menu dropdown-menu-right dropdown-toggle' id='friendList' style=''> </div>";
+    $("#inviteFriend").after(frPanel);
+
     $("#friendList").html("");
+
     var endpoint = "/api/players/" + getCookie("myId") + "/friends";
     $.ajax(endpoint, {
         type: "GET",
@@ -142,10 +154,18 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
         return;
     }
 
-    if (document.getElementById('gameType').checked)
+    if (document.getElementById('gameType').checked) {
         var gameType = 2; //karambol
+        if ($("#karambolGameType").prop("checked")) {
+            localStorage.setItem("carType", "2"); //round game
+        }
+        else {
+            localStorage.setItem("carType", "1"); //carambol game
+        }
+    }
     else
         var gameType = 1; //pool
+
     localStorage.setItem("gameType", gameType);
 
     var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
@@ -174,64 +194,133 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
             201: function (response) {
                 console.log("201 CREATED");
 
-                localStorage.setItem("currentGame", null);
-                $("#player1").text(getCookie("myName"));
-                $("#player2").text($('#pl0').val());
-                $("#newGameDiv").css("display", "none");
-
                 if (gameType === 1) {
+                    localStorage.setItem("currentGame", null);
+                    $("#player1").text(getCookie("myName"));
+                    $("#player2").text($('#pl0').val());
+                    $("#newGameDiv").css("display", "none");
+
                     $("#poolControlDiv").css("display", "block");
+
+                    gameId = response.id;
+                    players = [{
+                        "id": parseInt(getCookie("myId")),
+                        "name": getCookie("myName")
+                    }, {
+                        "id": (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+                        "name": $('#pl0').val()
+                    }];
+                    localStorage.setItem("players", JSON.stringify(players));
+
+                    activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
+                    if (activePlayer === 1) {
+                        document.getElementById("player1").className = "active-player";
+                        document.getElementById("player2").className = "";
+                    }
+                    else {
+                        document.getElementById("player1").className = "";
+                        document.getElementById("player2").className = "active-player";
+                    }
+                    localStorage.setItem("activePlayer", activePlayer);
+
+                    $("#helpDiv").html("");
+                    $("#endOfGameDiv").html("");
+
+                    $("#pl1good").html("0");
+                    $("#pl2good").html("0");
+                    $("#pl1bad").html("0");
+                    $("#pl2bad").html("0");
+
+                    $("#timerM").html("0");
+                    $("#timerS").html("0");
+                    var savedCounterValues = {
+                        "green1": 0,
+                        "green2": 0,
+                        "red1": 0,
+                        "red2": 0
+                    };
+                    localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
+
+                    localStorage.setItem("activeGame", true);
+
+                    localStorage.setItem("savedGame", null);
+                    localStorage.setItem("savedGameInfo", null);
+                    clearTimeout(timerVar);
+                    timerVar = setInterval(countTimer, 1000);
+                    round = 1;
                 }
-                else {
+                else if (gameType === 2) {
+                    localStorage.setItem("currentGame", null);
+                    $("#player1c").text(getCookie("myName"));
+                    $("#player2c").text($('#pl0').val());
+                    $("#newGameDiv").css("display", "none");
+
                     $("#karambolControlDiv").css("display", "block");
+
+                    if (localStorage.getItem("carType") === "1") { //carambol game
+                        $("#carGameType1Div").show();
+
+                        localStorage.setItem("roundsTotal", $("#carambCount").val());
+                        localStorage.setItem("roundsRemain", round);
+
+                        $("#carGameType2CarsTotal").html(localStorage.getItem("roundsTotal"));
+                        $("#carGameType2CurrentRound").html(localStorage.getItem("roundsRemain"));
+                    }
+                    else if (localStorage.getItem("carType") === "2") {  //round game
+                        $("#carGameType2Div").show();
+
+                        localStorage.setItem("carsTotal", $("#carambCount").val());
+                        localStorage.setItem("currentRound", $("#carambCount").val());
+
+                        $("#carGameType2RoundsTotal").html(localStorage.getItem("carsTotal"));
+                        $("#carGameType2RoundsRemain").html(localStorage.getItem("currentRound"));
+                    }
+
+
+                    gameId = response.id;
+                    players = [{
+                        "id": parseInt(getCookie("myId")),
+                        "name": getCookie("myName")
+                    }, {
+                        "id": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+                        "name": $('#pl0').val()
+                    }];
+                    localStorage.setItem("players", JSON.stringify(players));
+
+                    activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
+                    if (activePlayer === 1) {
+                        document.getElementById("player1c").className = "active-player";
+                        document.getElementById("player2c").className = "";
+                    }
+                    else {
+                        document.getElementById("player1c").className = "";
+                        document.getElementById("player2c").className = "active-player";
+                    }
+                    localStorage.setItem("activePlayer", activePlayer);
+
+                    $("#helpDiv").html("");
+                    $("#endOfGameDiv").html("");
+
+                    $("#pl1goodc").html("0");
+                    $("#pl2goodc").html("0");
+
+                    $("#timerMc").html("0");
+                    $("#timerSc").html("0");
+                    var savedCounterValues = {
+                        "green1": 0,
+                        "green2": 0
+                    };
+                    localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
+
+                    localStorage.setItem("activeGame", true);
+
+                    localStorage.setItem("savedGame", null);
+                    localStorage.setItem("savedGameInfo", null);
+                    clearTimeout(timerVar);
+                    timerVar = setInterval(countTimer, 1000);
+                    round = 1;
                 }
 
-                gameId = response.id;
-                players = [{
-                    "id": parseInt(getCookie("myId")),
-                    "name": getCookie("myName")
-                }, {
-                    "id": (isSecondPlayerAuthorized == true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
-                    "name": $('#pl0').val()
-                }];
-                localStorage.setItem("players", JSON.stringify(players));
-
-                activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
-                if (activePlayer === 1) {
-                    document.getElementById("player1").className = "active-player";
-                    document.getElementById("player2").className = "";
-                }
-                else {
-                    document.getElementById("player1").className = "";
-                    document.getElementById("player2").className = "active-player";
-                }
-                localStorage.setItem("activePlayer", activePlayer);
-
-                $("#helpDiv").html("");
-                $("#endOfGameDiv").html("");
-
-                $("#pl1good").html("0");
-                $("#pl2good").html("0");
-                $("#pl1bad").html("0");
-                $("#pl2bad").html("0");
-
-                $("#timerM").html("0");
-                $("#timerS").html("0");
-                var savedCounterValues = {
-                    "green1": 0,
-                    "green2": 0,
-                    "red1": 0,
-                    "red2": 0
-                };
-                localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
-
-                localStorage.setItem("activeGame", true);
-
-                localStorage.setItem("savedGame", null);
-                localStorage.setItem("savedGameInfo", null);
-                clearTimeout(timerVar);
-                timerVar = setInterval(countTimer, 1000);
-                round = 1;
             },
             400: function (response) {
                 console.log("400 BAD REQUEST");

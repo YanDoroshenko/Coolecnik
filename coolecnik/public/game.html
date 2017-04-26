@@ -67,7 +67,7 @@
         <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default">8-Pool</span></div>
         <div style="width: 33%; float: left; text-align: center;">
             <label class="switch">
-                <input type="checkbox" id="gameType">
+                <input type="checkbox" id="gameType" checked="false">
                 <div class="slider round"></div>
             </label>
         </div>
@@ -76,14 +76,29 @@
         </div>
 
 
-        <input id="pl0" type="text" placeholder="Jméno/login protihráče" class="form-control"
+        <input id="pl0" type="text" placeholder="Protihráč" class="form-control"
                style="width: 79%; display: inline;">
         <button class="icon-invFriend" id="inviteFriend" data-toggle="dropdown" style="margin-top: -1px;"></button>
-        <div class="dropdown-menu dropdown-menu-right dropdown-toggle" id="friendList" style="margin-top: -18%;">
 
-        </div>
         <button class="icon-key btn" id="authPlayer2btn" style="display: none"></button>
-        <input id='carCount' type='text' placeholder='Počet karambolů' class='form-control collapse'>
+
+        <div id="carambParams" class="col-md-10 mx-auto"
+             style="display:none; border: green solid 1px; padding-bottom: 2%; padding-top: 2%; margin-top: 2%">
+            <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default">Karamboly</span>
+            </div>
+            <div style="width: 33%; float: left; text-align: center;">
+                <label class="switch">
+                    <input type="checkbox" id="karambolGameType">
+                    <div class="slider round"></div>
+                </label>
+            </div>
+            <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
+                <span class="label label-default">Kola</span>
+            </div>
+
+            <input id='carambCount' type='text' placeholder='Počet karambolů' class='form-control'>
+        </div>
+
         <hr class="hr-green" id="hr"/>
         <span id="newGameSpan"></span>
         <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit" id="newGameBtn">Start game</button>
@@ -149,9 +164,64 @@
 
 
 <!--      karambol game control      -->
-<div class="container col-md-3 marg" id="karambolControlDiv" style="display: none">
-<!--    TODO karambol control panel-->
-    <h1>TODO karambol control panel</h1>
+<div class="container col-md-7 marg" id="karambolControlDiv" style="display: none">
+
+    <div class="container col-md-7 marg">
+        <div class="row justify-content-center">
+            <h3 class="h3 ">
+                <img src="" alt="">
+                <span id="player1c"></span>
+                vs
+                <span id="player2c"></span>
+            </h3>
+        </div>
+
+        <div class="row mt-3">
+            <div class="list-group p-0 col-3">
+                <button class="btn btn-lg btn-good-pokes" data-toggle="gp1" title="Good Pokes"
+                        data-content="Number of good pokes" id="pl1goodc">35
+                </button>
+            </div>
+
+            <h5 class="h5 col-6 align-self-center text-center"><span id="timerMc">0</span>m : <span
+                    id="timerSc">0</span>s
+
+                <div id="carGameType2Div" style="display: none">
+                    <p color="yellow"><br>Kola: <span id="carGameType2RoundsTotal">50</span></p>
+                    <p>Zbývá kol: <span id="carGameType2RoundsRemain">15</span></p>
+                </div>
+
+                <div id="carGameType1Div" style="display: none">
+                    <p color="yellow"><br>Karamboly: <span id="carGameType2CarsTotal">100</span></p>
+                    <p>Kolo: <span id="carGameType2CurrentRound">15</span></p>
+                </div>
+
+            </h5>
+
+
+            <div class="list-group p-0 col-3">
+                <button class="btn btn-lg btn-good-pokes" data-toggle="gp2" title="Good Pokes"
+                        data-content="Number of good pokes" id="pl2goodc">18
+                </button>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <div class="row justify-content-center mb-2">
+                <button class="btn btn-outline-info col-5 mx-auto" id="carCorrectBtn">Správný tah</button>
+                <button class="btn btn-outline-danger col-5 mx-auto" id="carFaulBtn">Faul</button>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <button class="btn btn-outline-secondary col-5 mx-auto" id="carRemoveLastBtn">Krok zpět</button>
+            </div>
+
+            <div class="row justify-content-center mt-2">
+                <button class="btn btn-outline-success col-5 mx-auto">Konec hry!</button>
+            </div>
+
+        </div>
+    </div>
+
+
 </div>
 
 
@@ -212,6 +282,7 @@
 
 <script type="text/javascript" src="js/gamesFuncs.js"></script>
 <script type="text/javascript" src="js/gamePoolFuncs.js"></script>
+<script type="text/javascript" src="js/gameCarFuncs.js"></script>
 <script type="text/javascript" src="js/newGamePanel.js"></script>
 <script type="text/javascript" src="js/game.js"></script>
 <script>$("#pl0").val("");</script>

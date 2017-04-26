@@ -4,31 +4,40 @@ String.prototype.replaceAt = function (index, replacement) {
 
 // timer for HTML timer - starts from 0
 function countTimer() {
-    var minute = parseInt($("#timerM").text());
-    var seconds = parseInt($("#timerS").text());
-    seconds++;
-    if (seconds === 60) {
-        minute++;
-        seconds = 0;
+    if (localStorage.getItem("gameType") === "1") {
+
+        var minute = parseInt($("#timerM").text());
+        var seconds = parseInt($("#timerS").text());
+        seconds++;
+        if (seconds === 60) {
+            minute++;
+            seconds = 0;
+        }
+        $("#timerM").html(minute);
+        $("#timerS").html(seconds);
+
+        var timeObj = {
+            "m": $("#timerM").text(),
+            "s": $("#timerS").text()
+        };
     }
-    $("#timerM").html(minute);
-    $("#timerS").html(seconds);
+    else if (localStorage.getItem("gameType") === "2") {
+        var minute = parseInt($("#timerMc").text());
+        var seconds = parseInt($("#timerSc").text());
+        seconds++;
+        if (seconds === 60) {
+            minute++;
+            seconds = 0;
+        }
+        $("#timerMc").html(minute);
+        $("#timerSc").html(seconds);
 
-    var timeObj = {
-        "m": $("#timerM").text(),
-        "s": $("#timerS").text()
-    };
+        var timeObj = {
+            "m": $("#timerMc").text(),
+            "s": $("#timerSc").text()
+        };
+    }
     localStorage.setItem("savedTime", JSON.stringify(timeObj));
-}
-
-// timer for HTML timer - starts from secStart
-function countTimer1() {
-    ++totalSeconds;
-    var hour = Math.floor(totalSeconds / 3600);
-    var minute = Math.floor((totalSeconds - hour * 3600) / 60);
-    var seconds = totalSeconds - (hour * 3600 + minute * 60);
-
-    document.getElementById("timer").innerHTML = minute + "m : " + seconds + "s";
 }
 
 // generate hash for pass
@@ -48,14 +57,25 @@ function hash(str, asString, seed) {
 }
 
 function setActivePlayerOnScreen() {
-    var aab = 0;
-    if (activePlayer === 1) {
-        document.getElementById("player1").className = "active-player";
-        document.getElementById("player2").className = "";
+    if (localStorage.getItem("gameType") === "1") {
+        if (activePlayer === 1) {
+            document.getElementById("player1").className = "active-player";
+            document.getElementById("player2").className = "";
+        }
+        else {
+            document.getElementById("player1").className = "";
+            document.getElementById("player2").className = "active-player";
+        }
     }
-    else {
-        document.getElementById("player1").className = "";
-        document.getElementById("player2").className = "active-player";
+    else if (localStorage.getItem("gameType") === "2") {
+        if (activePlayer === 1) {
+            document.getElementById("player1c").className = "active-player";
+            document.getElementById("player2c").className = "";
+        }
+        else {
+            document.getElementById("player1c").className = "";
+            document.getElementById("player2c").className = "active-player";
+        }
     }
 }
 
