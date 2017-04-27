@@ -1,6 +1,7 @@
 String.prototype.replaceAt = function (index, replacement) {
     return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 };
+var timeVar;
 
 // timer for HTML timer - starts from 0
 function countTimer() {

@@ -263,8 +263,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                         localStorage.setItem("roundsTotal", $("#carambCount").val());
                         localStorage.setItem("roundsRemain", round);
 
-                        $("#carGameType2CarsTotal").html(localStorage.getItem("roundsTotal"));
-                        $("#carGameType2CurrentRound").html(localStorage.getItem("roundsRemain"));
+                        $("#carGameType1CarsTotal").html(localStorage.getItem("roundsTotal"));
+                        $("#carGameType1CurrentRound").html(localStorage.getItem("roundsRemain"));
                     }
                     else if (localStorage.getItem("carType") === "2") {  //round game
                         $("#carGameType2Div").show();
@@ -316,6 +316,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
                     localStorage.setItem("savedGame", null);
                     localStorage.setItem("savedGameInfo", null);
+                    clearTimeout(timerVar);
                     clearTimeout(timerVar);
                     timerVar = setInterval(countTimer, 1000);
                     round = 1;

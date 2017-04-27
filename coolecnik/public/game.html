@@ -74,6 +74,9 @@
         <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
             <span class="label label-default">Karambol</span>
         </div>
+        <script>
+            $("#gameType").prop("checked", false);
+        </script>
 
 
         <input id="pl0" type="text" placeholder="Protihráč" class="form-control"
@@ -186,14 +189,14 @@
             <h5 class="h5 col-6 align-self-center text-center"><span id="timerMc">0</span>m : <span
                     id="timerSc">0</span>s
 
-                <div id="carGameType2Div" style="display: none">
-                    <p color="yellow"><br>Kola: <span id="carGameType2RoundsTotal">50</span></p>
-                    <p>Zbývá kol: <span id="carGameType2RoundsRemain">15</span></p>
+                <div id="carGameType1Div" style="display: none">
+                    <p color="yellow"><br>Karamboly: <span id="carGameType1CarsTotal">6213</span></p>
+                    <p>Kolo: <span id="carGameType1CurrentRound">6213</span></p>
                 </div>
 
-                <div id="carGameType1Div" style="display: none">
-                    <p color="yellow"><br>Karamboly: <span id="carGameType2CarsTotal">100</span></p>
-                    <p>Kolo: <span id="carGameType2CurrentRound">15</span></p>
+                <div id="carGameType2Div" style="display: none">
+                    <p color="yellow"><br>Kola: <span id="carGameType2RoundsTotal">6213</span></p>
+                    <p>Zbývá kol: <span id="carGameType2RoundsRemain">6213</span></p>
                 </div>
 
             </h5>
@@ -215,7 +218,7 @@
             </div>
 
             <div class="row justify-content-center mt-2">
-                <button class="btn btn-outline-success col-5 mx-auto">Konec hry!</button>
+                <button class="btn btn-outline-warning col-5 mx-auto" id="carEndGameBtn">Konec hry!</button>
             </div>
 
         </div>
