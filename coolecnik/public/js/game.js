@@ -23,7 +23,15 @@ var players, activePlayer, gameId, timerVar;
 // Handler for document.ready() called.
 $(function () {
     if (localStorage.getItem("activeGame") === "true") { //there is unended game
-        poolRestoreGame();
+        if (localStorage.getItem("gameType") === "1")
+            poolRestoreGame();
+
+        if (localStorage.getItem("gameType") === "2")
+            carRestoreGame();
+
+        clearTimeout(timerVar);
+        var timerVar = setInterval(countTimer, 1000);
+
     }
 
     else if (localStorage.getItem("savedGame") === "true") { //there is saved unsent game
@@ -158,6 +166,8 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
     clearTimeout(timerVar);
     isSecondPlayerAuthorized = false;
     $("#pl0").val("");
+
+    $("#gameType").prop("checked", false);
 });
 
 
@@ -168,10 +178,71 @@ document.getElementById("carCorrectBtn").addEventListener("click", function (eve
 });
 
 document.getElementById("carFaulBtn").addEventListener("click", function (event) {
-    carGameRoutine(12, "true", "bad");
     round++;
+    carGameRoutine(12, "true", "bad");
 });
 
 document.getElementById("carRemoveLastBtn").addEventListener("click", function (event) {
+    var existingStrikes = JSON.parse(localStorage.getItem("currentGame"));
 
+    if (existingStrikes == null) {
+        existingStrikes = [];
+        return;
+    }
+
+    var lastStrike = existingStrikes.pop();
+
+
+    if (lastStrike.player === parseInt(getCookie("myId"))) {
+        if (lastStrike.strikeType === 11) {
+            $("#pl1goodc").html(parseInt($("#pl1goodc").text()) - 1);
+        }
+        else if (lastStrike.strikeType === 12) {
+            activePlayer = (activePlayer === 1) ? 0 : 1;
+        }
+    }
+    else {
+        if (lastStrike.strikeType === 11) {
+            $("#pl1goodc").html(parseInt($("#pl2goodc").text()) - 1);
+        }
+        else if (lastStrike.strikeType === 12) {
+            activePlayer = (activePlayer === 1) ? 0 : 1;
+        }
+    }
+    setActivePlayerOnScreen();
+
+    round = existingStrikes[existingStrikes.length - 1].round;
+    if (localStorage.getItem("carType") === "1") {
+        $("#carGameType1CurrentRound").html(round);
+    }
+    else if ((localStorage.getItem("carType") === "2")) {
+        $("#carGameType2RoundsRemain").html(parseInt($("#carGameType2RoundsTotal").html()) - round + 1);
+    }
+
+    var savedCounterValues = poolGetSavedCounterValuesObjs();
+    localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
+
+    localStorage.setItem("currentGame", null);
+    localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
+    console.log("STEP BACK");
+    console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));
+
+});
+
+
+document.getElementById("carEndGameBtn").addEventListener("click", function (event) {
+    //if (navigator.onLine === true) // if there is connection to internet
+    //{
+    sendStrikes();
+    sendGameEnd();
+
+    //}
+    clearTimeout(timerVar);
+    isSecondPlayerAuthorized = false;
+    $("#pl0").val("");
+
+    $("#carGameType1Div").hide();
+    $("#carGameType2Div").hide();
+
+    $("#gameType").prop("checked", false);
 });

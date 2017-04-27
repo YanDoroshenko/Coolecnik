@@ -27,7 +27,7 @@ function savePoolStrike(strikeType) {
 
     existingStrikes.push(obj);
     localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
-    console.log("DEBUG ", localStorage.getItem("currentGame"));
+    //console.log("DEBUG ", localStorage.getItem("currentGame"));
 }
 
 function setPoolCounters(goodOrBad) {
@@ -82,6 +82,8 @@ function poolEndGameRoutine(lastStrikeType) {
     clearTimeout(timerVar);
     isSecondPlayerAuthorized = false;
     $("#pl0").val("");
+
+    $("#gameType").prop("checked", false);
 }
 
 function poolRestoreGame() {
@@ -90,9 +92,6 @@ function poolRestoreGame() {
     $("#newGameDiv").css("display", "none");
     if (localStorage.getItem("gameType") === "1") {
         $("#poolControlDiv").css("display", "block");
-    }
-    else if (localStorage.getItem("gameType") === "2") {
-        $("#karambolControlDiv").css("display", "block");
     }
     else {
         $("#helpDiv").html("internal error");
@@ -125,6 +124,7 @@ function poolRestoreGame() {
     round = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].round + 1;
     gameId = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].game;
 }
+
 
 function poolSendSavedGame() {
     // id=savedGameModalDiv  for text
