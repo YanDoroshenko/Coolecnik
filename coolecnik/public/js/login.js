@@ -44,10 +44,14 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
                 if ($("#remembChBox").prop("checked")) {
                     createCookie("myId", response.id, 365);
                     createCookie("myName", vLogin, 365);
+                    createCookie("email", response.email, 365);
+                    createCookie("firstName", response.firstName, 365);
                 }
                 else {
                     createCookie("myId", response.id);
                     createCookie("myName", vLogin);
+                    createCookie("email", response.email);
+                    createCookie("firstName", response.firstName);
                 }
                 localStorage.setItem("myId", response.id);
                 localStorage.setItem("myName", vLogin);
