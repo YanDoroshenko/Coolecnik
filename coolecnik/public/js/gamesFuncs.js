@@ -90,6 +90,7 @@ function sendStrikes() {
             201: function (response) {
                 console.log("201 CREATED");
                 $("#looseModalWindow").modal("hide");
+                $("#carEndModalWindow").modal("hide");
                 $("#poolControlDiv").css("display", "none");
                 $("#karambolControlDiv").css("display", "none");
                 $("#newGameDiv").css("display", "block");
@@ -106,7 +107,7 @@ function sendStrikes() {
     });
 }
 
-function sendGameEnd() {
+function sendGameEnd(ifThereIsWinner) {
     var endpoint = "/api/games/" + gameId + "/end";
     var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
     if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
@@ -115,10 +116,17 @@ function sendGameEnd() {
         dateTime = dateTime.replaceAt(20, "+");
         console.log("new dateTime ", dateTime);
     }
-    var obj = {
-        "end": dateTime,
-        "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
-    };
+    if (ifThereIsWinner === true) {
+        var obj = {
+            "end": dateTime,
+            "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
+        };
+    }
+    else {
+        var obj = {
+            "end": dateTime
+        };
+    }
     $.ajax(endpoint, {
         type: "PUT",
         contentType: "application/json; charset=utf-8",

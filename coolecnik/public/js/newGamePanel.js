@@ -194,6 +194,9 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
             201: function (response) {
                 console.log("201 CREATED");
 
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
                 if (gameType === 1) {
                     localStorage.setItem("currentGame", null);
                     $("#player1").text(getCookie("myName"));

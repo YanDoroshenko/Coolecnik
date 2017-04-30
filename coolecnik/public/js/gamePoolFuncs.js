@@ -73,7 +73,7 @@ function poolEndGameRoutine(lastStrikeType) {
     if (navigator.onLine === true) // if there is connection to internet
     {
         sendStrikes();
-        sendGameEnd();
+        sendGameEnd(true);
     }
 
     else {
@@ -125,12 +125,11 @@ function poolRestoreGame() {
     gameId = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].game;
 }
 
-
 function poolSendSavedGame() {
     // id=savedGameModalDiv  for text
     $("#savedGameModalWindow").modal();
     var gameInfo = JSON.parse(localStorage.getItem("savedGameInfo"));
-    $("#savedGameModalDiv").html("Máte uloženou hru s hráčem " + gameInfo.pl2Name + " od " + gameInfo.dateTimeString);
+    $("#savedGameModalDiv").html("Máte uloženou hru s hráčem  <u>" + gameInfo.pl2Name + "</u>  od " + gameInfo.dateTimeString);
 
     document.getElementById("sendSavedGameBtn").addEventListener("click", function (event) {
         var allStrikes = JSON.parse(localStorage.getItem("currentGame"));

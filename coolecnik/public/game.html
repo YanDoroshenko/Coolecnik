@@ -233,7 +233,7 @@
 
 
 <!-- Modal Loose -->
-<div class="modal fade " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
+<div class="modal " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-pop-up" id="endGameModal">
@@ -258,8 +258,31 @@
     </div>
 </div>
 
+<!-- Carambole game end -->
+<div class="modal " id="carEndModalWindow" tabindex="-1" role="dialog" aria-labelledby="savedGameModalModal"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-pop-up">
+            <div class="modal-header">
+                <h5 class="modal-title" id="carEndModalModal">Konec hry</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body row justify-content-center">Hra byla ukončena.</div>
+            <div class="modal-body row justify-content-center">Výherce je<span>: </span> <span
+                    id="carEndWinnerName"> </span></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-info" data-dismiss="modal" id="sendCarGameBtn">Odeslat tuto
+                    hru na server
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal saved game -->
-<div class="modal fade " id="savedGameModalWindow" tabindex="-1" role="dialog" aria-labelledby="savedGameModalModal"
+<div class="modal " id="savedGameModalWindow" tabindex="-1" role="dialog" aria-labelledby="savedGameModalModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-pop-up">

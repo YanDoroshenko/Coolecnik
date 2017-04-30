@@ -149,7 +149,7 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
 
     if (navigator.onLine === true) {
         sendStrikes();
-        sendGameEnd();
+        sendGameEnd(false);
     }
     else {
         saveGameEnd();
@@ -171,7 +171,7 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
 });
 
 
-/*---------------Pool panel---------------*/
+/*---------------Carambole panel---------------*/
 
 document.getElementById("carCorrectBtn").addEventListener("click", function (event) {
     carGameRoutine(11, "good");
@@ -231,12 +231,15 @@ document.getElementById("carRemoveLastBtn").addEventListener("click", function (
 
 
 document.getElementById("carEndGameBtn").addEventListener("click", function (event) {
-    //if (navigator.onLine === true) // if there is connection to internet
-    //{
-    sendStrikes();
-    sendGameEnd();
+    if (navigator.onLine === true) { // if there is connection to internet
+        sendStrikes();
+        sendGameEnd(false);
+    }
 
-    //}
+    else {
+        saveGameEnd();
+    }
+
     clearTimeout(timerVar);
     isSecondPlayerAuthorized = false;
     $("#pl0").val("");
@@ -245,4 +248,12 @@ document.getElementById("carEndGameBtn").addEventListener("click", function (eve
     $("#carGameType2Div").hide();
 
     $("#gameType").prop("checked", false);
+    $("#carambParams").hide();
+
+});
+
+document.getElementById("sendCarGameBtn").addEventListener("click", function (event) {
+    carEndGame();
+    $("#gameType").prop("checked", false);
+    $("#carambParams").hide();
 });

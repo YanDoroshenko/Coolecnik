@@ -17,10 +17,116 @@ function carGetSavedCounterValuesObjs() {
     return savedCounterValues;
 }
 
+function carCheckIfGameEnded() {
+    $("#carEndWinnerName").html(" ");
+    if (localStorage.getItem("carType") === "1") {
+
+
+        if (parseInt($("#pl1goodc").html()) === parseInt($("#carambCount").val())) {
+            var winner = "<u>";
+            winner += players[0].name;
+            winner += " </u>";
+            $("#carEndWinnerName").html($("#carEndWinnerName").html() + winner);
+
+            $("#carEndModalWindow").modal();
+        }
+        if (parseInt($("#pl2goodc").html()) === parseInt($("#carambCount").val())) {
+            var winner = "<u>";
+            winner += players[1].name;
+            winner += " </u>";
+            $("#carEndWinnerName").html($("#carEndWinnerName").html() + winner);
+
+            $("#carEndModalWindow").modal();
+        }
+    }
+    else if (localStorage.getItem("carType") === "2") {
+        if (parseInt($("#carGameType2RoundsRemain").html()) === 0) {
+            //check who is winner
+            var winner = "<u>";
+            winner += (parseInt($("#pl1goodc").html()) > parseInt($("#pl2goodc").html())) ? players[0].name : players[1].name;
+            winner += " </u>";
+            $("#carEndWinnerName").html($("#carEndWinnerName").html() + winner);
+
+            $("#carEndModalWindow").modal();
+        }
+    }
+}
+
+function carEndGame(winner) {
+    if (navigator.onLine === true) { // if there is connection to internet
+        sendStrikes();
+
+
+        var endpoint = "/api/games/" + gameId + "/end";
+        var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+        if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
+            dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+        if (dateTime[20] === "0") {
+            dateTime = dateTime.replaceAt(20, "+");
+            console.log("new dateTime ", dateTime);
+        }
+
+        if (localStorage.getItem("carType") === "1") {
+            if (parseInt($("#pl1goodc").html()) === parseInt($("#carambCount").val())) {
+                var obj = {
+                    "end": dateTime,
+                    "winner": players[0].id
+                };
+            }
+            else if (parseInt($("#pl2goodc").html()) === parseInt($("#carambCount").val())) {
+                var obj = {
+                    "end": dateTime,
+                    "winner": players[1].id
+                };
+            }
+        }
+        else if (localStorage.getItem("carType") === "2") {
+            var obj = {
+                "end": dateTime,
+                "winner": (parseInt($("#pl1goodc").html()) > parseInt($("#pl2goodc").html())) ? players[0].id : players[1].id
+            };
+        }
+
+
+        $.ajax(endpoint, {
+            type: "PUT",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(obj),
+            statusCode: {
+                200: function (response) {
+                    console.log("200 OK");
+                },
+                400: function (response) {
+                    console.log("400 BAD REQUEST");
+                },
+                409: function (response) {
+                    console.log("409 CONFLICT");
+                },
+                500: function (response) {
+                    console.log("500 INTERNAL SERVER ERROR");
+                    $("#looseModalWindow").modal("hide");
+                    $("#poolControlDiv").css("display", "none");
+                    $("#karambolControlDiv").css("display", "none");
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                    clearTimeout(timerVar);
+                }
+            }
+
+        });
+        localStorage.setItem("currentGame", "null");
+        localStorage.setItem("activeGame", "false");
+
+
+    }
+
+    else {
+        saveGameEnd();
+    }
+}
 
 function carGameRoutine(strikeType, changePlayer, badOrGood) {
     savePoolStrike(strikeType);
-
 
     if (badOrGood !== undefined)
         setCarCounters(badOrGood);
@@ -45,6 +151,8 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
 
     var savedCounterValues = carGetSavedCounterValuesObjs();
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
+
+    carCheckIfGameEnded();
 
     console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));
     console.log("--savedCounterValues ", savedCounterValues);
