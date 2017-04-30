@@ -218,10 +218,10 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
                     if (activePlayer === 1) {
                         document.getElementById("player1").className = "active-player";
-                        document.getElementById("player2").className = "";
+                        document.getElementById("player2").className = "player";
                     }
                     else {
-                        document.getElementById("player1").className = "";
+                        document.getElementById("player1").className = "player";
                         document.getElementById("player2").className = "active-player";
                     }
                     localStorage.setItem("activePlayer", activePlayer);
@@ -293,10 +293,10 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
                     if (activePlayer === 1) {
                         document.getElementById("player1c").className = "active-player";
-                        document.getElementById("player2c").className = "";
+                        document.getElementById("player2c").className = "player";
                     }
                     else {
-                        document.getElementById("player1c").className = "";
+                        document.getElementById("player1c").className = "player";
                         document.getElementById("player2c").className = "active-player";
                     }
                     localStorage.setItem("activePlayer", activePlayer);

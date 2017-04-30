@@ -61,20 +61,20 @@ function setActivePlayerOnScreen() {
     if (localStorage.getItem("gameType") === "1") {
         if (activePlayer === 1) {
             document.getElementById("player1").className = "active-player";
-            document.getElementById("player2").className = "";
+            document.getElementById("player2").className = "player";
         }
         else {
-            document.getElementById("player1").className = "";
+            document.getElementById("player1").className = "player";
             document.getElementById("player2").className = "active-player";
         }
     }
     else if (localStorage.getItem("gameType") === "2") {
         if (activePlayer === 1) {
             document.getElementById("player1c").className = "active-player";
-            document.getElementById("player2c").className = "";
+            document.getElementById("player2c").className = "player";
         }
         else {
-            document.getElementById("player1c").className = "";
+            document.getElementById("player1c").className = "player";
             document.getElementById("player2c").className = "active-player";
         }
     }
