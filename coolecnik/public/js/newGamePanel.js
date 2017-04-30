@@ -179,12 +179,36 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
     localStorage.setItem("secondPlayerName", $('#pl0').val());
 
-    var obj = {
-        "gameType": gameType,
-        "player1": parseInt(getCookie("myId")),
-        "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
-        "beginning": dateTime
-    };
+
+    if (parseInt(localStorage.getItem("carType")) === 1) {
+        var obj = {
+            "gameType": gameType,
+            "player1": parseInt(getCookie("myId")),
+            "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+            "beginning": dateTime,
+            "carambolesToWin": parseInt($("#carambCount").val())
+        };
+    }
+    else if (parseInt(localStorage.getItem("carType")) === 2) {
+        var obj = {
+            "gameType": gameType,
+            "player1": parseInt(getCookie("myId")),
+            "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+            "beginning": dateTime,
+            "rounds": parseInt($("#carambCount").val())
+        };
+    }
+
+    else {
+        var obj = {
+            "gameType": gameType,
+            "player1": parseInt(getCookie("myId")),
+            "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+            "beginning": dateTime
+        };
+    }
+
+
 
     $.ajax("/api/games/new", {
         type: "POST",
