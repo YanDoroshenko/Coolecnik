@@ -250,10 +250,13 @@ document.getElementById("carEndGameBtn").addEventListener("click", function (eve
     $("#gameType").prop("checked", false);
     $("#carambParams").hide();
 
+    round = 0;
+
 });
 
 document.getElementById("sendCarGameBtn").addEventListener("click", function (event) {
     carEndGame();
     $("#gameType").prop("checked", false);
     $("#carambParams").hide();
+    round = 0;
 });
