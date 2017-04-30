@@ -95,6 +95,7 @@ function sendStrikes() {
                 $("#karambolControlDiv").css("display", "none");
                 $("#newGameDiv").css("display", "block");
                 $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                $("#helpDiv").delay(5000).fadeOut(300);
                 clearTimeout(timerVar);
             },
             400: function (response) {
