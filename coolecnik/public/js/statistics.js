@@ -13,26 +13,34 @@ document.getElementById('gameType').addEventListener('change', function () {
 
 });
 
-//opponents fill selectBox
-document.getElementById("playersStatistics").ready(function (){
-    var endpoint = "/api/players/" + getCookie("myId") + "/opponents";
+var endpoint = "/api/players/" + getCookie("myId") + "/opponents";
+var sel = document.getElementById('playersStatistics');
+var fragment = document.createDocumentFragment();
 
-    $.ajax(endpoint, {
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        statusCode: {
-            200: function (response) {
-                var str1 = "<button class='dropdown-item friendBtns' type='button' value='";
-                var str2 = "'>";
-                var str3 = "</button>";
-                var btnArrHtml = [];
+$.ajax(endpoint, {
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    statusCode: {
+        200: function (response) {
+            setOpp(response);
+            response.forEach(function(response, index) {
+                var opt = document.createElement('option');
+                opt.innerHTML = response.login;
+                opt.value = response;
+                fragment.appendChild(opt);
+            });
+            sel.appendChild(fragment);
 
-                response.forEach(function (item, i, response) {
-                    btnArrHtml.push(str1 + item.id + str2 + item.login + str3);
-                    $("#friendList").html($("#friendList").html() + str1 + item.id + str2 + item.login + str3);
-                });
+            // console.log(response);
 
-                }
-            }
-    });
+        },
+        404: function (response) {
+            console.log("404");
+        }
+    }
 });
+
+function setOpp(opponents) {
+    $("#playersStatistics").html(opponents.playersStatistics);
+}
+
