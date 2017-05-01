@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src="js/authCookies.js"></script>
     <title>Profil</title>
 
@@ -63,9 +67,9 @@
         <div class="col-lg-6">
             <form>
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Email</label>
+                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">
-                        <p class="form-control-static">email@example.com</p>
+                        <p class="form-control-static" id="email"></p>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -80,11 +84,11 @@
                         <input type="text" class="form-control" id="surname" placeholder="Příjmení">
                     </div>
                 </div>
-                <button type="submit" class="btn  green-btn">Změnit údaje</button>
+                <button type="submit" class="btn  green-btn" id="changeName">Změnit údaje</button>
             </form>
             <p class="profile-change-pass h4 mt-2" data-toggle="collapse" data-target="#collapseExample"
                aria-expanded="false" aria-controls="collapseExample">
-                Změnit heslo
+                Změnit heslo &#8681;
             </p>
             <div class="collapse" id="collapseExample">
                 <form>
@@ -95,18 +99,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="newPass" class="col-sm-3 col-form-label">Nové heslo</label>
+                        <label for="newPass1" class="col-sm-3 col-form-label">Nové heslo</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="newPass">
+                            <input type="password" class="form-control" id="newPass1">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="newPassConfirm" class="col-sm-3 col-form-label">Potvrdit heslo</label>
+                        <label for="newPass2" class="col-sm-3 col-form-label">Potvrdit heslo</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="newPassConfirm">
+                            <input type="password" class="form-control" id="newPass2">
                         </div>
                     </div>
-                    <button type="submit" class="btn green-btn">Změnit heslo</button>
+                    <div class="alert alert-danger alert-success d-none" role="alert">
+
+                    </div>
+                    <button id="changePass" type="button" class="btn green-btn">Změnit heslo</button>
                 </form>
             </div>
         </div>
@@ -114,49 +121,42 @@
             <h3>Základní statistiky</h3>
             <dl class="row justify-content-end">
                 <dt class="col-7">Celkový čas:</dt>
-                <dd class="col-5 pr-0">80h 25m 16s</dd>
+                <dd class="col-5 pr-0" id="time"></dd>
 
                 <dt class="col-7">Odehrané hry:</dt>
-                <dd class="col-5">134</dd>
+                <dd class="col-5" id="total"></dd>
 
-                <dt class="col-7">Výhry: </dt>
-                <dd class="col-5">90</dd>
+                <dt class="col-7">Výhry:</dt>
+                <dd class="col-5" id="won"></dd>
 
-                <dt class="col-7">Prohry: </dt>
-                <dd class="col-5">32</dd>
+                <dt class="col-7">Prohry:</dt>
+                <dd class="col-5" id="lost"></dd>
 
-                <dt class="col-7">Remízy: </dt>
-                <dd class="col-5">12</dd>
+                <dt class="col-7">Remízy:</dt>
+                <dd class="col-5" id="draws"></dd>
 
-                <dt class="col-7">Výhernost: </dt>
-                <dd class="col-5">71 %</dd>
+                <dt class="col-7">Výhernost:</dt>
+                <dd class="col-5" id="percent"></dd>
                 <hr class="hr-light"/>
-                <dt class="col-7">Turnajové hry: </dt>
+                <dt class="col-7">Turnajové hry:</dt>
                 <dd class="col-5">43</dd>
 
-                <dt class="col-7">Turnajové výhry: </dt>
+                <dt class="col-7">Turnajové výhry:</dt>
                 <dd class="col-5">16</dd>
 
-                <dt class="col-7">Turnajové prohry: </dt>
+                <dt class="col-7">Turnajové prohry:</dt>
                 <dd class="col-5">25</dd>
 
-                <dt class="col-7">Turnajové remízy: </dt>
+                <dt class="col-7">Turnajové remízy:</dt>
                 <dd class="col-5">2</dd>
 
-                <dt class="col-7">Turnajová výhernost: </dt>
+                <dt class="col-7">Turnajová výhernost:</dt>
                 <dd class="col-5">37 %</dd>
             </dl>
         </div>
     </div>
 </div>
 
-
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/profile.js"></script>
 </body>
 </html>
