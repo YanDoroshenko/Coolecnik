@@ -114,11 +114,13 @@
 
 <!--      8pool game control      -->
 <div class="container col-md-7 marg" id="poolControlDiv" style="display: none">
-    <div class="row">
-        <h3 class="h3 col-md-3 mx-auto" style="display: inline-block">
-            <div id="player1" style="display: inline-block">Player1</div>
+    <div class="row justify-content-center">
+        <h3 class="h3 ">
+            <img src="" alt="">
+            <span id="player1">Player1</span>
             vs
-            <div class="active-player" id="player2" style="display: inline-block">Player2</div>
+            <span class="active-player" id="player2">Player2</span>
+            <!-- <img src="res/gambling.png"> -->
         </h3>
     </div>
 
@@ -167,9 +169,9 @@
 <!--      karambol game control      -->
 <div class="container col-md-7 marg" id="karambolControlDiv" style="display: none">
 
-    <div class="container ">
-        <div class="row ">
-            <h3 class="h3 col-md-4 mx-auto">
+    <div class="container col-md-7 marg">
+        <div class="row justify-content-center">
+            <h3 class="h3 ">
                 <img src="" alt="">
                 <span id="player1c"></span>
                 vs
@@ -231,7 +233,7 @@
 
 
 <!-- Modal Loose -->
-<div class="modal " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
+<div class="modal fade " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-pop-up" id="endGameModal">
@@ -256,31 +258,8 @@
     </div>
 </div>
 
-<!-- Carambole game end -->
-<div class="modal " id="carEndModalWindow" tabindex="-1" role="dialog" aria-labelledby="savedGameModalModal"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content modal-pop-up">
-            <div class="modal-header">
-                <h5 class="modal-title" id="carEndModalModal">Konec hry</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body row justify-content-center">Hra byla ukončena.</div>
-            <div class="modal-body row justify-content-center">Výherce je<span>: </span> <span
-                    id="carEndWinnerName"> </span></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-info" data-dismiss="modal" id="sendCarGameBtn">Odeslat tuto
-                    hru na server
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal saved game -->
-<div class="modal " id="savedGameModalWindow" tabindex="-1" role="dialog" aria-labelledby="savedGameModalModal"
+<div class="modal fade " id="savedGameModalWindow" tabindex="-1" role="dialog" aria-labelledby="savedGameModalModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-pop-up">

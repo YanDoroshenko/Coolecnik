@@ -61,20 +61,20 @@ function setActivePlayerOnScreen() {
     if (localStorage.getItem("gameType") === "1") {
         if (activePlayer === 1) {
             document.getElementById("player1").className = "active-player";
-            document.getElementById("player2").className = "player";
+            document.getElementById("player2").className = "";
         }
         else {
-            document.getElementById("player1").className = "player";
+            document.getElementById("player1").className = "";
             document.getElementById("player2").className = "active-player";
         }
     }
     else if (localStorage.getItem("gameType") === "2") {
         if (activePlayer === 1) {
             document.getElementById("player1c").className = "active-player";
-            document.getElementById("player2c").className = "player";
+            document.getElementById("player2c").className = "";
         }
         else {
-            document.getElementById("player1c").className = "player";
+            document.getElementById("player1c").className = "";
             document.getElementById("player2c").className = "active-player";
         }
     }
@@ -90,12 +90,10 @@ function sendStrikes() {
             201: function (response) {
                 console.log("201 CREATED");
                 $("#looseModalWindow").modal("hide");
-                $("#carEndModalWindow").modal("hide");
                 $("#poolControlDiv").css("display", "none");
                 $("#karambolControlDiv").css("display", "none");
                 $("#newGameDiv").css("display", "block");
                 $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
-                $("#helpDiv").delay(5000).fadeOut(300);
                 clearTimeout(timerVar);
             },
             400: function (response) {
@@ -108,7 +106,7 @@ function sendStrikes() {
     });
 }
 
-function sendGameEnd(ifThereIsWinner) {
+function sendGameEnd() {
     var endpoint = "/api/games/" + gameId + "/end";
     var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
     if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
@@ -117,17 +115,10 @@ function sendGameEnd(ifThereIsWinner) {
         dateTime = dateTime.replaceAt(20, "+");
         console.log("new dateTime ", dateTime);
     }
-    if (ifThereIsWinner === true) {
-        var obj = {
-            "end": dateTime,
-            "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
-        };
-    }
-    else {
-        var obj = {
-            "end": dateTime
-        };
-    }
+    var obj = {
+        "end": dateTime,
+        "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
+    };
     $.ajax(endpoint, {
         type: "PUT",
         contentType: "application/json; charset=utf-8",

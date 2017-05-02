@@ -179,36 +179,12 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
     localStorage.setItem("secondPlayerName", $('#pl0').val());
 
-
-    if (parseInt(localStorage.getItem("carType")) === 1) {
-        var obj = {
-            "gameType": gameType,
-            "player1": parseInt(getCookie("myId")),
-            "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
-            "beginning": dateTime,
-            "carambolesToWin": parseInt($("#carambCount").val())
-        };
-    }
-    else if (parseInt(localStorage.getItem("carType")) === 2) {
-        var obj = {
-            "gameType": gameType,
-            "player1": parseInt(getCookie("myId")),
-            "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
-            "beginning": dateTime,
-            "rounds": parseInt($("#carambCount").val())
-        };
-    }
-
-    else {
-        var obj = {
-            "gameType": gameType,
-            "player1": parseInt(getCookie("myId")),
-            "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
-            "beginning": dateTime
-        };
-    }
-
-
+    var obj = {
+        "gameType": gameType,
+        "player1": parseInt(getCookie("myId")),
+        "player2": (isSecondPlayerAuthorized === true) ? parseInt(localStorage.getItem("secondPlayerId")) : -1,
+        "beginning": dateTime
+    };
 
     $.ajax("/api/games/new", {
         type: "POST",
@@ -217,9 +193,6 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
         statusCode: {
             201: function (response) {
                 console.log("201 CREATED");
-
-                $("#carGameType1Div").hide();
-                $("#carGameType2Div").hide();
 
                 if (gameType === 1) {
                     localStorage.setItem("currentGame", null);
@@ -242,10 +215,10 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
                     if (activePlayer === 1) {
                         document.getElementById("player1").className = "active-player";
-                        document.getElementById("player2").className = "player";
+                        document.getElementById("player2").className = "";
                     }
                     else {
-                        document.getElementById("player1").className = "player";
+                        document.getElementById("player1").className = "";
                         document.getElementById("player2").className = "active-player";
                     }
                     localStorage.setItem("activePlayer", activePlayer);
@@ -317,10 +290,10 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
                     if (activePlayer === 1) {
                         document.getElementById("player1c").className = "active-player";
-                        document.getElementById("player2c").className = "player";
+                        document.getElementById("player2c").className = "";
                     }
                     else {
-                        document.getElementById("player1c").className = "player";
+                        document.getElementById("player1c").className = "";
                         document.getElementById("player2c").className = "active-player";
                     }
                     localStorage.setItem("activePlayer", activePlayer);

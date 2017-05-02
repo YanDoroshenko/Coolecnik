@@ -125,6 +125,7 @@ function poolRestoreGame() {
     gameId = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].game;
 }
 
+
 function poolSendSavedGame() {
     // id=savedGameModalDiv  for text
     $("#savedGameModalWindow").modal();
