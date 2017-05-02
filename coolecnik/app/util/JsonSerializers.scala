@@ -47,4 +47,5 @@ object JsonSerializers {
   implicit val cgs: OFormat[CaramboleStats] = Json.format[CaramboleStats]
   implicit val ff: OFormat[Friend] = Json.format[Friend]
   implicit val of: OFormat[Opponent] = Json.format[Opponent]
+  implicit val nuf: OFormat[NameUpdate] = Json.format[NameUpdate]
 }
