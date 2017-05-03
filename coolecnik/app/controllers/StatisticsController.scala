@@ -135,7 +135,7 @@ class StatisticsController extends Controller {
           })
           .result)
           .flatMap {
-            case gs: Seq[Game] if gs.nonEmpty && gameType.isEmpty =>
+            case gs: Seq[Game] if gs.nonEmpty && gameType.isEmpty || gameType.contains("all") =>
               Future(
                 Try(process(gs).map(g => {
                   val number = g._1
