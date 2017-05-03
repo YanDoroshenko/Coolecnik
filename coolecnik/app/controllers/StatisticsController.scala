@@ -110,7 +110,7 @@ class StatisticsController extends Controller {
             case Some(t) => g.beginning.nonEmpty && g.beginning.get.before(new Timestamp(format.parse(t).getTime))
             case _ => true
           })
-        val sorted = filtered.sortWith((l, r) => l.beginning.get.after(r.beginning.get))
+        val sorted = filtered.sortWith((l, r) => l.beginning.get.before(r.beginning.get))
         val numbered = (sorted.size to 1 by -1).zip(sorted)
         val paged =
           if (page.nonEmpty) numbered.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
