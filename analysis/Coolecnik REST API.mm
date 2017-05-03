@@ -93,6 +93,7 @@
 <node TEXT="see friends" ID="ID_919341912" CREATED="1492254881440" MODIFIED="1492255113469" LINK="#ID_866149297"/>
 <node TEXT="see statistics" ID="ID_792691321" CREATED="1492719316783" MODIFIED="1492719385779" LINK="#ID_783291119"/>
 <node TEXT="see opponents" ID="ID_1735935485" CREATED="1492799826697" MODIFIED="1492799882564" LINK="#ID_698026319"/>
+<node TEXT="change name" ID="ID_229013442" CREATED="1493756559269" MODIFIED="1493756582434" LINK="#ID_847068464"/>
 </node>
 <node TEXT="game" FOLDED="true" ID="ID_1819064192" CREATED="1492076754192" MODIFIED="1492076755373">
 <node TEXT="end game" ID="ID_1912113215" CREATED="1491729396685" MODIFIED="1491729915051" LINK="#ID_769937977"/>
@@ -178,8 +179,8 @@
 <node TEXT="202 ACCEPTED" ID="ID_1798796570" CREATED="1490340088426" MODIFIED="1490398548924"/>
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_75597941" CREATED="1490340031618" MODIFIED="1490340533137">
-<node TEXT="User as a JSON" ID="ID_1836523156" CREATED="1490340276338" MODIFIED="1491505135145">
-<node TEXT="example" ID="ID_1550389192" CREATED="1490340294145" MODIFIED="1490340296733">
+<node TEXT="User as a JSON" FOLDED="true" ID="ID_1836523156" CREATED="1490340276338" MODIFIED="1491505135145">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1550389192" CREATED="1490340294145" MODIFIED="1493756866072">
 <node TEXT="{&#xa;  &quot;id&quot;: 123,&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;email&quot;: &quot;user1@coolecnik.com&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;,&#xa;  &quot;firstName&quot;: &quot;User&quot;,&#xa;  &quot;lastName&quot;: &quot;Smith&quot;&#xa;}" ID="ID_367960377" CREATED="1490340036506" MODIFIED="1490340046902"/>
 </node>
 </node>
@@ -492,6 +493,44 @@
 <node TEXT="array of ids and logins" FOLDED="true" ID="ID_530503886" CREATED="1492764929173" MODIFIED="1492799854165">
 <node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1033795308" CREATED="1492764943209" MODIFIED="1492764950715">
 <node TEXT="[{&quot;id&quot;:-1,&quot;login&quot;:&quot;abc&quot;},{&quot;id&quot;:7,&quot;login&quot;:&quot;login1&quot;}]" ID="ID_1208231155" CREATED="1492764965558" MODIFIED="1492799870191"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/$id/nameupdate" FOLDED="true" ID="ID_847068464" CREATED="1493756143292" MODIFIED="1493756164406">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1888203180" CREATED="1493756165684" MODIFIED="1493756180189">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1381420362" CREATED="1493756176285" MODIFIED="1493756184723">
+<node TEXT="PUT" ID="ID_1226957625" CREATED="1493756302710" MODIFIED="1493756306241"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1899541221" CREATED="1493756213340" MODIFIED="1493756218126">
+<node TEXT="application/json" ID="ID_63403151" CREATED="1493756307597" MODIFIED="1493756310535"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_41380118" CREATED="1493756188460" MODIFIED="1493756204696">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/nameupdate.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;firstName&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/firstName&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;id&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/id&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        },&#xa;        &quot;lastName&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/lastName&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        }&#xa;    },&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_286982232" CREATED="1493756433637" MODIFIED="1493756446305"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1130909510" CREATED="1493756185573" MODIFIED="1493756225798">
+<node TEXT="{&#xa;  &quot;id&quot;: 1234,&#xa;  &quot;firstName&quot;: &quot;NewFirst&quot;,&#xa;  &quot;lastName&quot;: &quot;NewLast&quot;&#xa;}" ID="ID_328228175" CREATED="1493756450821" MODIFIED="1493756466841"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_335498395" CREATED="1493756171500" MODIFIED="1493756180437">
+<node TEXT="player not found" FOLDED="true" ID="ID_424661365" CREATED="1493756470773" MODIFIED="1493756475720">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1264974590" CREATED="1493756481421" MODIFIED="1493756500881">
+<node TEXT="404 NOT FOUND" ID="ID_1102587585" CREATED="1493756501597" MODIFIED="1493756504141"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_659975040" CREATED="1493756486981" MODIFIED="1493756500549">
+<node TEXT="Player with id $id not found" ID="ID_318661521" CREATED="1493756489037" MODIFIED="1493756497768"/>
+</node>
+</node>
+<node TEXT="name changed successfully" FOLDED="true" ID="ID_271357948" CREATED="1493756476726" MODIFIED="1493756518482">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_660032775" CREATED="1493756523077" MODIFIED="1493756536441">
+<node TEXT="201 CREATED" ID="ID_15885926" CREATED="1493756537564" MODIFIED="1493756541457"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_444599405" CREATED="1493756833941" MODIFIED="1493756846130">
+<node TEXT="updated player" FOLDED="true" ID="ID_957086275" CREATED="1493756837052" MODIFIED="1493756844734">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1047662380" CREATED="1493756848068" MODIFIED="1493756852266">
+<node TEXT="{&#xa;  &quot;id&quot;: 123,&#xa;  &quot;login&quot;: &quot;user1&quot;,&#xa;  &quot;email&quot;: &quot;user1@coolecnik.com&quot;,&#xa;  &quot;passwordHash&quot;: &quot;@w3s0m3_p4ssw0rd&quot;,&#xa;  &quot;firstName&quot;: &quot;User&quot;,&#xa;  &quot;lastName&quot;: &quot;Smith&quot;&#xa;}" ID="ID_1197314057" CREATED="1490340036506" MODIFIED="1490340046902"/>
 </node>
 </node>
 </node>

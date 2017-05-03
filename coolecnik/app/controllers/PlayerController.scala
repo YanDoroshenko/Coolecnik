@@ -161,4 +161,28 @@ class PlayerController @Inject()(configuration: Configuration) extends Controlle
         case _ => NotFound
       }
   }
+
+  def updateName(id: Int): Action[JsValue] = Action.async(parse.json) {
+    rq =>
+      log.info("Name update:\n" + rq.body)
+      Json.fromJson[NameUpdate](rq.body).asOpt match {
+        case Some(u) =>
+          db.run(
+            players.filter(_.id === id).exists.result
+          )
+            .flatMap {
+              case true => db.run(
+                players.filter(_.id === id).map(p => p.firstName -> p.lastName).update(u.firstName -> u.lastName)
+              )
+                .flatMap(_ =>
+                  db.run(
+                    players.filter(_.id === id).result
+                  )
+                    .map(ps => Created(ps.head))
+                )
+              case false => Future(NotFound("Player with id " + id + "not found"))
+            }
+        case None => Future(BadRequest("Request can't be deserialized"))
+      }
+  }
 }

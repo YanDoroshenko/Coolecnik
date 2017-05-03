@@ -6,7 +6,8 @@ body {
     margin-bottom: 50px;
     min-width: 100%;
     font-family: 'Montserrat', sans-serif;
-
+    background-image: url("../res/background1.png");
+    background-repeat: repeat;
 }
 
 h1 {
@@ -62,6 +63,17 @@ button {
 .active-player {
     color: #419641;
     font-style: inherit;
+    font-weight: bold;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-decoration: none;
+    border-bottom: 5px dotted green;
+}
+
+.player {
+    font-style: inherit;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .modal-pop-up {
