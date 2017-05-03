@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src="js/authCookies.js"></script>
 
     <title>Statistiky</title>
@@ -63,35 +68,40 @@
 
 <!--Filters-->
 <div class="container">
+    <!--<form>-->
     <section class="row justify-content-center m-2">
 
         <div class="row align-content-center">
             <span class="form-control-static">Druh hry: </span>
             <select id="gameType" class="form-select-sm m-1">
-                <option value="0" selected>Vše</option>
-                <option value="1">8-pool</option>
-                <option value="2">Karambol</option>
+                <option value="all" selected>Vše</option>
+                <option value="pool8">8-pool</option>
+                <option value = "carambole">Karambol</option>
             </select>
             <span class="form-control-static">Stav hry: </span>
             <select id="gameStatus" class="form-select-sm m-1">
-                <option value="0" selected>Vše</option>
-                <option value="1">Vyhrané</option>
-                <option value="2">Prohrané</option>
-                <option value="3">Remíza</option>
+                <option value="all" selected>Vše</option>
+                <option value="win">Vyhrané</option>
+                <option value="lose">Prohrané</option>
+                <option value="draw">Remíza</option>
             </select>
             <span class="form-control-static">Hráči: </span>
             <select id="playersStatistics" class="form-select-sm m-1">
+                <option>Vše</option>
             </select>
         </div>
     </section>
     <section class="row justify-content-center m-2">
         <div class="row align-content-center">
             <span class="form-control-static">Datum od </span>
-            <input id="dateFrom" type="date" value="16.04.2017"/>
+            <input id="dateFrom" type="datetime" placeholder="DD.MM.RRRR"/>
             <span class="form-control-static">do </span>
-            <input id="dateTo" type="date" value="16.05.2017"/>
+            <input id="dateTo" type="datetime" placeholder="DD.MM.RRRR"/>
         </div>
+
     </section>
+
+    <!--</form>-->
 
     <!--8-pool and Karambol table-->
     <div id="bothGames">
@@ -184,58 +194,56 @@
                 <th>Faul BK</th>
                 <th>Faul SK</th>
                 <th>Faul iný</th>
-                <!--<th>Faul s 8</th>-->
                 <th class="eight_pool">Detail hry</th> <!--hides details when window is too small-->
             </tr>
             </thead>
             <tbody>
             <tr>
-                <th data-th="#" scope="row">1</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">8-pool</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Corn</td>
-                <td data-th="Délka hry">42:33</td>
-                <td data-th="OK strk">6</td>
-                <td data-th="Zly strk">2</td>
-                <td data-th="Faul BK">1</td>
-                <td data-th="Faul SK">2</td>
-                <td data-th="Faul iný">3</td>
-                <!--<td data-th="Faul s 8">5</td>-->
-                <td class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>
+                <th data-th="#" scope="row" id="number_of_game"></th>
+                <td data-th="Datum hry" id="date_of_start"></td>
+                <td data-th="Typ hry" id="game_type"></td>
+                <td data-th="Protihráč" id="opponent"></td>
+                <td data-th="Vítěz" id="winner"></td>
+                <td data-th="Délka hry" id="time_of_game"></td>
+                <td data-th="OK strk" id="ok_strike"></td>
+                <td data-th="Zly strk" id="bad_strike"></td>
+                <td data-th="Faul BK" id="faul_bk"></td>
+                <td data-th="Faul SK" id="faul_sk"></td>
+                <td data-th="Faul iný" id="other_faul"></td>
+                <td id="modal_8pool" class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>
             </tr>
 
-            <tr>
-                <th data-th="#" scope="row">2</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">8-pool</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Corn</td>
-                <td data-th="Délka hry">42:33</td>
-                <td data-th="OK strk">6</td>
-                <td data-th="Zly strk">2</td>
-                <td data-th="Faul BK">1</td>
-                <td data-th="Faul SK">2</td>
-                <td data-th="Faul iný">3</td>
-                <!--<td data-th="Faul s 8">5</td>-->
-                <td class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>
-            </tr>
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row">2</th>-->
+                <!--<td data-th="Datum hry">01.01.2017</td>-->
+                <!--<td data-th="Typ hry">8-pool</td>-->
+                <!--<td data-th="Protihráč">Potato</td>-->
+                <!--<td data-th="Vítěz">Corn</td>-->
+                <!--<td data-th="Délka hry">42:33</td>-->
+                <!--<td data-th="OK strk">6</td>-->
+                <!--<td data-th="Zly strk">2</td>-->
+                <!--<td data-th="Faul BK">1</td>-->
+                <!--<td data-th="Faul SK">2</td>-->
+                <!--<td data-th="Faul iný">3</td>-->
+                <!--&lt;!&ndash;<td data-th="Faul s 8">5</td>&ndash;&gt;-->
+                <!--<td class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>-->
+            <!--</tr>-->
 
-            <tr>
-                <th data-th="#" scope="row">3</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">8-pool</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Corn</td>
-                <td data-th="Délka hry">42:33</td>
-                <td data-th="OK strk">6</td>
-                <td data-th="Zly strk">2</td>
-                <td data-th="Faul BK">1</td>
-                <td data-th="Faul SK">2</td>
-                <td data-th="Faul iný">3</td>
-                <!--<td data-th="Faul s 8">5</td>-->
-                <td class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>
-            </tr>
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row">3</th>-->
+                <!--<td data-th="Datum hry">01.01.2017</td>-->
+                <!--<td data-th="Typ hry">8-pool</td>-->
+                <!--<td data-th="Protihráč">Potato</td>-->
+                <!--<td data-th="Vítěz">Corn</td>-->
+                <!--<td data-th="Délka hry">42:33</td>-->
+                <!--<td data-th="OK strk">6</td>-->
+                <!--<td data-th="Zly strk">2</td>-->
+                <!--<td data-th="Faul BK">1</td>-->
+                <!--<td data-th="Faul SK">2</td>-->
+                <!--<td data-th="Faul iný">3</td>-->
+                <!--&lt;!&ndash;<td data-th="Faul s 8">5</td>&ndash;&gt;-->
+                <!--<td class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>-->
+            <!--</tr>-->
             </tbody>
         </table>
         <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -276,7 +284,7 @@
     </div>
 
     <!--Karambol table-->
-    <div id="karambolGame" style="display: none">
+    <div id="caramboleGame" style="display: none">
         <div class="row justify-content-center m-1">
             <h2><a id="3"></a>Statistiky her Karambol</h2>
         </div>
@@ -598,14 +606,7 @@
         </div>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/statistics.js"></script>
+<script type="text/javascript" src="js/statistics.js"></script>
 
 
 </body>

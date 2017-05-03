@@ -100,9 +100,9 @@ function updatePassword() {
 
 $("#changeName").click(function () {
     var obj = {
-        email:getCookie("email");
-        name: $("name").val();
-        surName: $("surname").val();
+        email:getCookie("email"),
+        name: $("name").val(),
+        surName: $("surname").val(),
     }
     //TODO
     $.ajax("/api/ ", {
