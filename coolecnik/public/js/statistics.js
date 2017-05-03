@@ -17,9 +17,10 @@ document.getElementById('gameType').addEventListener('change', function () {
 
 });
 
+
 //opponents to select box
 var endpoint = "/api/players/" + getCookie("myId") + "/opponents";
-var sel = document.getElementById('playersStatistics');
+var sel = document.getElementById('opponent');
 var fragment = document.createDocumentFragment();
 
 $.ajax(endpoint, {
@@ -46,26 +47,33 @@ $.ajax(endpoint, {
 });
 
 function setOpp(opponents) {
-    $("#playersStatistics").html(opponents.playersStatistics);
+    $("#opponent").html(opponents.playersStatistics);
 }
 
 
 
 //statistics filtering
+function myFunc() {
+    // var x = document.getElementById("gameStatus").value;
+
 
 // var endpoint = "/api/players/" + getCookie("myId") + "/statistics?gameType=pool8&opponent=60&page=2&pageSize=1";
-// var endpoint = "/api/players/" + getCookie("myId") + "/statistics?gameType="+$("#gameType").val()+"&result="+
-//     $("#gameStatus").val()+"&opponent="+ $("#opponents").val() + "&page=1&pageSize=15";
-var endpoint = "/api/players/" + getCookie("myId") + "/statistics?gameType=pool8&opponent=60";
+// var endpoint = "/api/players/" + getCookie("myId") + "/statistics?&result=" + $("#gameStatus").val()+"&opponent="+ $("#opponents").id + "&page=1&pageSize=15";
+    var endpoint = "/api/players/" + getCookie("myId") + "/statistics?";
+    endpoint += "&gameType=" + $("#gameType").val();
+    endpoint += "&result=" + $("#gameStatus").val();
+    endpoint += "&opponent=" + $("#opponent").id;
+// endpoint += "&from=" + dateFrom;
+// endpoint += "&to=" + dateTo;
+    endpoint += "&page=1";
+    endpoint += "&pageSize=20";
 
-// &from=" +$("#dateFrom").val();
 
-
-$.ajax(endpoint, {
-    type: "GET",
-    contentType: "application/json; charset=utf-8",
-    statusCode: {
-        200: function (response) { 
+    $.ajax(endpoint, {
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        statusCode: {
+            200: function (response) {
 
                 for (var i = 0; i < response.length; i++) {
                     $("#caramboleGame tbody").append($("<tr><th>" + response[i].gameId +
@@ -75,10 +83,10 @@ $.ajax(endpoint, {
                         "</td><td>" + response[i].winner + "</td>" +
                         "</td><td>" + response[i].end + "</td>" +
                         "</td><td>" + response[i].rounds + "</td>" +
-                        // "</td><td>" + response[i].myCarambole + "</td>" +
-                        // "</td><td>" + response[i].othersCarambole + "</td>" +
-                        // "</td><td>" + response[i].myFauls + "</td>" +
-                        // "<td>" + response[i].othersFauls + "</td>" +
+                        "</td><td>" + response[i].myCarambole + "</td>" +
+                        "</td><td>" + response[i].othersCarambole + "</td>" +
+                        "</td><td>" + response[i].myFauls + "</td>" +
+                        "<td>" + response[i].othersFauls + "</td>" +
                         "</tr>"));
                 }
 
@@ -106,30 +114,31 @@ $.ajax(endpoint, {
                         "</td><td>" + response[i].winner + "</td>" +
                         "</td><td>" + response[i].end + "</td></tr>"));
 
+                }
+
+                console.log(response);
+
+                // if($("#gameType") == all){
+                //
+                // }
+
+                // if($("#gameType") == pool8){
+                //
+                // }
+                //
+                // if($("#gameType") == carambole){
+                //
+                // }
+
+                // console.log(response);
+
+            },
+            400: function (response) {
+                console.log("400 BAD REQUEST");
+            },
+            404: function (response) {
+                console.log("404 NOT FOUND");
             }
-
-            console.log(response);
-
-            // if($("#gameType") == all){
-            //
-            // }
-
-            // if($("#gameType") == pool8){
-            //
-            // }
-            //
-            // if($("#gameType") == carambole){
-            //
-            // }
-
-            // console.log(response);
-
-        },
-        400: function (response) {
-            console.log("400 BAD REQUEST");
-        },
-        404: function (response) {
-            console.log("404 NOT FOUND");
         }
-    }
     });
+};
