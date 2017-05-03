@@ -69,26 +69,28 @@
 <!--Filters-->
 <div class="container">
     <!--<form>-->
+    <div id="filters">
     <section class="row justify-content-center m-2">
 
         <div class="row align-content-center">
             <span class="form-control-static">Druh hry: </span>
-            <select id="gameType" class="form-select-sm m-1">
+            <select id="gameType" class="form-select-sm m-1" onchange="myFunc()">
                 <option value="all" selected>Vše</option>
                 <option value="pool8">8-pool</option>
                 <option value = "carambole">Karambol</option>
             </select>
             <span class="form-control-static">Stav hry: </span>
-            <select id="gameStatus" class="form-select-sm m-1">
+            <select id="gameStatus" class="form-select-sm m-1" onchange="myFunc()">
                 <option value="all" selected>Vše</option>
                 <option value="win">Vyhrané</option>
                 <option value="lose">Prohrané</option>
                 <option value="draw">Remíza</option>
             </select>
             <span class="form-control-static">Hráči: </span>
-            <select id="playersStatistics" class="form-select-sm m-1">
-                <option>Vše</option>
+            <select id="opponent" class="form-select-sm m-1" onchange="myFunc()">
+                <option value="all">Vše</option>
             </select>
+
         </div>
     </section>
     <section class="row justify-content-center m-2">
@@ -98,17 +100,17 @@
             <span class="form-control-static">do </span>
             <input id="dateTo" type="datetime" placeholder="DD.MM.RRRR"/>
         </div>
-
     </section>
+    </div>
 
     <!--</form>-->
 
     <!--8-pool and Karambol table-->
-    <div id="bothGames">
+    <div id="bothGames" >
         <div class="row justify-content-center m-1">
             <h2><a id="1"></a>Statistiky her 8-pool a karambol</h2>
         </div>
-        <table class="table rwd-table table-bordered table-hover">
+        <table  class="table rwd-table table-bordered table-hover">
             <thead>
             <tr>
                 <th>#</th>
@@ -121,58 +123,58 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th data-th="#" scope="row">1</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">8-pool</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Corn</td>
-                <td data-th="Délka hry">42:33</td>
-                <td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a>
-                </td>
-            </tr>
-            <tr>
-                <th data-th="#" scope="row">2</th>
-                <td data-th="Datum hry">04.04.2017</td>
-                <td data-th="Typ hry">Karambol</td>
-                <td data-th="Protihráč">Onion</td>
-                <td data-th="Vítěz">Onion</td>
-                <td data-th="Délka hry">22:13</td>
-                <td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>
-            </tr>
-            <tr>
-                <th data-th="#" scope="row">3</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">8-pool</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Corn</td>
-                <td data-th="Délka hry">42:33</td>
-                <td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>
-            </tr>
-            <tr>
-                <th data-th="#" scope="row">4</th>
-                <td data-th="Datum hry">04.04.2017</td>
-                <td data-th="Typ hry">Karambol</td>
-                <td data-th="Protihráč">Onion</td>
-                <td data-th="Vítěz">Onion</td>
-                <td data-th="Délka hry">22:13</td>
-                <td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>
-            </tr>
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row"></th>-->
+                <!--<td data-th="Datum hry"></td>-->
+                <!--<td data-th="Typ hry"></td>-->
+                <!--<td data-th="Protihráč"></td>-->
+                <!--<td data-th="Vítěz"></td>-->
+                <!--<td data-th="Délka hry"></td>-->
+                <!--<td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row">2</th>-->
+                <!--<td data-th="Datum hry">04.04.2017</td>-->
+                <!--<td data-th="Typ hry">Karambol</td>-->
+                <!--<td data-th="Protihráč">Onion</td>-->
+                <!--<td data-th="Vítěz">Onion</td>-->
+                <!--<td data-th="Délka hry">22:13</td>-->
+                <!--<td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row">3</th>-->
+                <!--<td data-th="Datum hry">01.01.2017</td>-->
+                <!--<td data-th="Typ hry">8-pool</td>-->
+                <!--<td data-th="Protihráč">Potato</td>-->
+                <!--<td data-th="Vítěz">Corn</td>-->
+                <!--<td data-th="Délka hry">42:33</td>-->
+                <!--<td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row">4</th>-->
+                <!--<td data-th="Datum hry">04.04.2017</td>-->
+                <!--<td data-th="Typ hry">Karambol</td>-->
+                <!--<td data-th="Protihráč">Onion</td>-->
+                <!--<td data-th="Vítěz">Onion</td>-->
+                <!--<td data-th="Délka hry">22:13</td>-->
+                <!--<td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>-->
+            <!--</tr>-->
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <!--<nav aria-label="Page navigation example">-->
+            <!--<ul class="pagination justify-content-center">-->
+                <!--<li class="page-item disabled">-->
+                    <!--<a class="page-link" href="#" tabindex="-1">Previous</a>-->
+                <!--</li>-->
+                <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+                <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+                <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                <!--<li class="page-item">-->
+                    <!--<a class="page-link" href="#">Next</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</nav>-->
     </div>
 
     <!--8-pool table-->
@@ -198,20 +200,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th data-th="#" scope="row" id="number_of_game"></th>
-                <td data-th="Datum hry" id="date_of_start"></td>
-                <td data-th="Typ hry" id="game_type"></td>
-                <td data-th="Protihráč" id="opponent"></td>
-                <td data-th="Vítěz" id="winner"></td>
-                <td data-th="Délka hry" id="time_of_game"></td>
-                <td data-th="OK strk" id="ok_strike"></td>
-                <td data-th="Zly strk" id="bad_strike"></td>
-                <td data-th="Faul BK" id="faul_bk"></td>
-                <td data-th="Faul SK" id="faul_sk"></td>
-                <td data-th="Faul iný" id="other_faul"></td>
-                <td id="modal_8pool" class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>
-            </tr>
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row" id="number_of_game"></th>-->
+                <!--<td data-th="Datum hry" id="date_of_start"></td>-->
+                <!--<td data-th="Typ hry" id="game_type"></td>-->
+                <!--<td data-th="Protihráč" id="opponent"></td>-->
+                <!--<td data-th="Vítěz" id="winner"></td>-->
+                <!--<td data-th="Délka hry" id="time_of_game"></td>-->
+                <!--<td data-th="OK strk" id="ok_strike"></td>-->
+                <!--<td data-th="Zly strk" id="bad_strike"></td>-->
+                <!--<td data-th="Faul BK" id="faul_bk"></td>-->
+                <!--<td data-th="Faul SK" id="faul_sk"></td>-->
+                <!--<td data-th="Faul iný" id="other_faul"></td>-->
+                <!--<td id="modal_8pool" class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>-->
+            <!--</tr>-->
 
             <!--<tr>-->
                 <!--<th data-th="#" scope="row">2</th>-->
@@ -307,50 +309,50 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th data-th="#" scope="row">1</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">Karambol</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Potato</td>
-                <td data-th="Kola">20</td>
-                <td data-th="Délka hry">22:33</td>
-                <td data-th="Moje karamboly<">54</td>
-                <td data-th="Soupeřovy karamboli">45</td>
-                <td data-th="Moje fauly">11</td>
-                <td data-th="Soupeřovy fauly">16</td>
-                <td class="karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>
-            </tr>
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row"></th>-->
+                <!--<td data-th="Datum hry"></td>-->
+                <!--<td data-th="Typ hry"></td>-->
+                <!--<td data-th="Protihráč"></td>-->
+                <!--<td data-th="Vítěz"></td>-->
+                <!--<td data-th="Kola"></td>-->
+                <!--<td data-th="Délka hry"></td>-->
+                <!--<td data-th="Moje karamboly<"></td>-->
+                <!--<td data-th="Soupeřovy karamboli"></td>-->
+                <!--<td data-th="Moje fauly"></td>-->
+                <!--<td data-th="Soupeřovy fauly"></td>-->
+                <!--<td class="karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>-->
+            <!--</tr>-->
 
-            <tr>
-                <th data-th="#" scope="row">1</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">Karambol</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Potato</td>
-                <td data-th="Kola">20</td>
-                <td data-th="Délka hry">22:33</td>
-                <td data-th="Moje karamboly<">54</td>
-                <td data-th="Soupeřovy karamboli">45</td>
-                <td data-th="Moje fauly">11</td>
-                <td data-th="Soupeřovy fauly">16</td>
-                <td class="karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>
-            </tr>
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row">1</th>-->
+                <!--<td data-th="Datum hry">01.01.2017</td>-->
+                <!--<td data-th="Typ hry">Karambol</td>-->
+                <!--<td data-th="Protihráč">Potato</td>-->
+                <!--<td data-th="Vítěz">Potato</td>-->
+                <!--<td data-th="Kola">20</td>-->
+                <!--<td data-th="Délka hry">22:33</td>-->
+                <!--<td data-th="Moje karamboly<">54</td>-->
+                <!--<td data-th="Soupeřovy karamboli">45</td>-->
+                <!--<td data-th="Moje fauly">11</td>-->
+                <!--<td data-th="Soupeřovy fauly">16</td>-->
+                <!--<td class="karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>-->
+            <!--</tr>-->
 
-            <tr>
-                <th data-th="#" scope="row">1</th>
-                <td data-th="Datum hry">01.01.2017</td>
-                <td data-th="Typ hry">Karambol</td>
-                <td data-th="Protihráč">Potato</td>
-                <td data-th="Vítěz">Potato</td>
-                <td data-th="Kola">20</td>
-                <td data-th="Délka hry">22:33</td>
-                <td data-th="Moje karamboly<">54</td>
-                <td data-th="Soupeřovy karamboli">45</td>
-                <td data-th="Moje fauly">11</td>
-                <td data-th="Soupeřovy fauly">16</td>
-                <td class="karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>
-            </tr>
+            <!--<tr>-->
+                <!--<th data-th="#" scope="row">1</th>-->
+                <!--<td data-th="Datum hry">01.01.2017</td>-->
+                <!--<td data-th="Typ hry">Karambol</td>-->
+                <!--<td data-th="Protihráč">Potato</td>-->
+                <!--<td data-th="Vítěz">Potato</td>-->
+                <!--<td data-th="Kola">20</td>-->
+                <!--<td data-th="Délka hry">22:33</td>-->
+                <!--<td data-th="Moje karamboly<">54</td>-->
+                <!--<td data-th="Soupeřovy karamboli">45</td>-->
+                <!--<td data-th="Moje fauly">11</td>-->
+                <!--<td data-th="Soupeřovy fauly">16</td>-->
+                <!--<td class="karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>-->
+            <!--</tr>-->
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
