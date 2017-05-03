@@ -100,6 +100,7 @@ class StatisticsController extends Controller {
             case Some("win") => g.winner.nonEmpty && g.winner.get == id
             case Some("lose") => g.winner.nonEmpty && g.winner.get != id
             case Some("draw") => g.winner.isEmpty
+            case Some("all") => g.id == g.id
             case None => g.id == g.id
           })
           .filter(g => from match {
@@ -125,6 +126,7 @@ class StatisticsController extends Controller {
           .filter(g => (gameType: @unchecked) match {
             case Some("pool8") => g.gameType === 1
             case Some("carambole") => g.gameType === 2
+            case Some("all") => g.id == g.id
             case None => g.id === g.id
           })
           .filter(g => opponent match {
