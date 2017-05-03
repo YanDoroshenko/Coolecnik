@@ -22,4 +22,4 @@ document.getElementById("addFriend").addEventListener("click", function (event) 
             }
         }
     });
-}
+})
