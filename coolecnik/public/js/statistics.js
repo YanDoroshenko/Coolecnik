@@ -65,7 +65,7 @@ $.ajax(endpoint, {
     type: "GET",
     contentType: "application/json; charset=utf-8",
     statusCode: {
-        200: function (response) {
+        200: function (response) { 
 
                 for (var i = 0; i < response.length; i++) {
                     $("#caramboleGame tbody").append($("<tr><th>" + response[i].gameId +
