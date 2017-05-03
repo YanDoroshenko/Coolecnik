@@ -33,8 +33,7 @@ const passChanged = "<strong>Heslo změněno.</strong>";
 
 $("#email").html(getCookie("email"));
 $("#name").attr("value", getCookie("firstName"));
-//TODO add surname to cookies
-//$("#surname").attr("value", getCookie("secondName"));
+$("#surname").attr("value", getCookie("lastName"));
 
 
 $.ajax(endpointLoad, {
@@ -43,7 +42,6 @@ $.ajax(endpointLoad, {
     statusCode: {
         200: function (response) {
             setStats(response);
-            console.log(response);
         },
         404: function (response) {
             console.log("404");
@@ -98,31 +96,43 @@ function updatePassword() {
     });
 }
 
-$("#changeName").click(function () {
+var changeNameAlert = $("#nameAlert");
+
+$("#changeName").click(function (e) {
+    e.preventDefault();
     var obj = {
-        email:getCookie("email"),
+        id:getCookie("myId"),
         name: $("name").val(),
-        surName: $("surname").val(),
+        surName: $("surname").val()
     }
-    //TODO
-    $.ajax("/api/ ", {
+    $.ajax("/api/players/"+getCookie("myId")+"/nameupdate", {
         type: "PUT",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(obj),
         statusCode: {
             201: function (response) {
                 console.log("200 Name and Surname changed");
-
+                changeBadgeState(true);
             },
-            400: function (response) {
-
-                console.log("400 BAD REQUEST");
-            },
-            409: function (response) {
-
-                console.log("409 CONFLICT");
+            404: function (response) {
+                console.log("404 BAD REQUEST");
+                changeBadgeState(false);
             }
         }
     });
 
 });
+
+function changeBadgeState(good) {
+    if (good) {
+        changeNameAlert.removeClass("d-none");
+        changeNameAlert.addClass("badge-success");
+        changeNameAlert.html("Uspěšně změněno");
+    } else {
+        changeNameAlert.removeClass("d-none");
+        changeNameAlert.addClass("badge-danger");
+        changeNameAlert.html("Chyba");
+    }
+
+
+}
