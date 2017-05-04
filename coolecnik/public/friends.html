@@ -57,7 +57,7 @@
 <div class="container col-md-8">
     <div class="row justify-content-between m-2"><h2 class="h2">Přátelé</h2><button class="btn btn-outline-secondary" data-toggle="modal" data-target="#addFriendModal">&#10010;</button></div>
 
-    <div class="list-group">
+    <div class="list-group" id="friendList">
         <li class="list-group-item list-group-item-action friend"><a href=""> Cras justo odio</a><button class="btn btn-outline-danger btn-sm">&#10008;</button></li>
         <li class="list-group-item list-group-item-action friend"><a href=""> Cras justo odio</a><button class="btn btn-outline-danger btn-sm">&#10008;</button></li>
         <li class="list-group-item list-group-item-action friend"><a href=""> Cras justo odio</a><button class="btn btn-outline-danger btn-sm">&#10008;</button></li>
@@ -77,8 +77,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="friendName" class="modal-body row justify-content-center">
-                <input type="text" class="form-control m-2">
+            <div class="modal-body row justify-content-center">
+                <input type="text" class="form-control m-2" id="friendName">
             </div>
             <div class="modal-footer">
                 <button class="col-8 btn btn-outline-warning" id="addFriend">Přidat</button>
@@ -88,8 +88,9 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/friends.js"></script>
 </body>
 </html>

@@ -46,12 +46,14 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
                     createCookie("myName", vLogin, 365);
                     createCookie("email", response.email, 365);
                     createCookie("firstName", response.firstName, 365);
+                    createCookie("lastName", response.lastName, 365);
                 }
                 else {
                     createCookie("myId", response.id);
                     createCookie("myName", vLogin);
                     createCookie("email", response.email);
                     createCookie("firstName", response.firstName);
+                    createCookie("lastName", response.lastName);
                 }
                 localStorage.setItem("myId", response.id);
                 localStorage.setItem("myName", vLogin);
