@@ -88,7 +88,7 @@ function myFunc() {
                         "<td data-th=\"Soupeřovy karamboli\">" + response[i].opponentsCaramboles + "</td>" +
                         "<td data-th=\"Moje fauly\">" + response[i].myFouls + "</td>" +
                         "<td data-th=\"Soupeřovy fauly\">" + response[i].opponentsFouls + "</td>" +
-                        "<td class=\"karambol\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#myModalKarambol\">detail\</a></td>"+
+                        "<td class=\"karambol\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#" + response[i].gameType+ "\">detail\</a></td>"+
                         "</tr>"));
                 }
 
@@ -106,7 +106,7 @@ function myFunc() {
                         "<td data-th=\"Faul BK\">" + response[i].faulsWithWhite + "</td>" +
                         "<td data-th=\"Faul SK\">" + response[i].faulsWithOthers + "</td>" +
                         "<td data-th=\"Faul iný\">" + response[i].faulsOther + "</td>" +
-                        "<td id=\"modal_8pool\" class=\"eight_pool\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#myModal8Pool\">detail</a></td>"+
+                        "<td id=\"modal_8pool\" class=\"eight_pool\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#" + response[i].gameType+ "\">detail</a></td>"+
                         "</tr>"));
                 }
 
@@ -119,10 +119,7 @@ function myFunc() {
                         "<td data-th=\"Protihráč\">" + response[i].opponent + "</td>" +
                         "<td data-th=\"Vítěz\">" + response[i].winner + "</td>" +
                         "<td data-th=\"Délka hry\">" + response[i].end + "</td>" +
-                        "<td class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#myModal8Pool\">detail</a> " +
-                        "<a class=\"nav-link\" data-toggle=\"modal\" href=\"#myModalKarambol\">detail\</a></td>" +
-
-                        // "<td class=\"pool_and_karambol\">if(gameType == 1) {<a class=\"nav-link\" data-toggle=\"modal\" href=\"#myModal8Pool\" >detail</a>} else {<a class=\"nav-link\" data-toggle=\"modal\" href=\"#myModalKarambol\">detail\</a>}</td>" +
+                        "<td class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\"  href=\"#" + response[i].gameType+ "\">detail</a></td>"+
                         "</tr>"));
                 }
 
@@ -138,14 +135,3 @@ function myFunc() {
         }
     });
 };
-
-function openModal() {
-    if(gameType == 1){
-        href= "#myModal8Pool"
-    }
-    else if(gameType == 2){
-        href="#myModalKarambol"
-    }
-};
-
-
