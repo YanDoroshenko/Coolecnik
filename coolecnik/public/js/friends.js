@@ -11,7 +11,7 @@ $.ajax(friendPoint, {
             console.log("200 OK");
         },
         404: function (response) {
-            console.log("404 NOT FOUND");
+            console.log("friends 404 NOT FOUND");
         }
 
     }

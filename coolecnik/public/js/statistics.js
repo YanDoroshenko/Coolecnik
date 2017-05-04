@@ -62,7 +62,7 @@ function myFunc() {
     var endpoint = "/api/players/" + getCookie("myId") + "/statistics?";
     endpoint += "&gameType=" + $("#gameType").val();
     endpoint += "&result=" + $("#gameStatus").val();
-    endpoint += "&opponent=" + $("#opponent").id;
+    // endpoint += "&opponent=" + $("#opponent").id;
 // endpoint += "&from=" + dateFrom;
 // endpoint += "&to=" + dateTo;
     endpoint += "&page=1";
@@ -76,43 +76,51 @@ function myFunc() {
             200: function (response) {
 
                 for (var i = 0; i < response.length; i++) {
-                    $("#caramboleGame tbody").append($("<tr><th>" + response[i].gameId +
-                        "</th><td>" + response[i].beginning + "</td>" +
-                        "</td><td>" + response[i].gameType + "</td>" +
-                        "</td><td>" + response[i].opponent + "</td>" +
-                        "</td><td>" + response[i].winner + "</td>" +
-                        "</td><td>" + response[i].end + "</td>" +
-                        "</td><td>" + response[i].rounds + "</td>" +
-                        "</td><td>" + response[i].myCarambole + "</td>" +
-                        "</td><td>" + response[i].othersCarambole + "</td>" +
-                        "</td><td>" + response[i].myFauls + "</td>" +
-                        "<td>" + response[i].othersFauls + "</td>" +
+                    $("#caramboleGame tbody").append($("<tr>" +
+                        "<th data-th=\"#\" scope=\"row\">" + response[i].gameId + "</th>" +
+                        "<td data-th=\"Datum hry\">" + response[i].beginning + "</td>" +
+                        "<td data-th=\"Typ hry\">" + response[i].gameType + "</td>" +
+                        "<td data-th=\"Protihráč\">" + response[i].opponent + "</td>" +
+                        "<td data-th=\"Vítěz\">" + response[i].winner + "</td>" +
+                        "<td data-th=\"Kola\">" + response[i].rounds + "</td>" +
+                        "<td data-th=\"Délka hry\">" + response[i].end + "</td>" +
+                        "<td data-th=\"Moje karamboly\">" + response[i].myCaramboles + "</td>" +
+                        "<td data-th=\"Soupeřovy karamboli\">" + response[i].opponentsCaramboles + "</td>" +
+                        "<td data-th=\"Moje fauly\">" + response[i].myFouls + "</td>" +
+                        "<td data-th=\"Soupeřovy fauly\">" + response[i].opponentsFouls + "</td>" +
+                        // <!--<td class="karambol"><a class="nav-link" data-toggle="modal" href="#myModalKarambol">detail</a></td>-->
                         "</tr>"));
                 }
 
 
                 for (var i = 0; i < response.length; i++) {
-                    $("#8poolGame tbody").append($("<tr><th>" + response[i].gameId +
-                        "</th><td>" + response[i].beginning + "</td>" +
-                        "</td><td>" + response[i].gameType + "</td>" +
-                        "</td><td>" + response[i].opponent + "</td>" +
-                        "</td><td>" + response[i].winner + "</td>" +
-                        "</td><td>" + response[i].end + "</td>" +
-                        "</td><td>" + response[i].correctStrikes + "</td>" +
-                        "</td><td>" + response[i].wrongStrikes + "</td>" +
-                        "</td><td>" + response[i].faulsWithWhite + "</td>" +
-                        "</td><td>" + response[i].faulsWithOthers + "</td>" +
-                        "<td>" + response[i].faulsOther + "</td></tr>"));
+                    $("#8poolGame tbody").append($("<tr>" +
+                        "<th data-th=\"#\" scope=\"row\">" + response[i].gameId +"</th>" +
+                        "<td data-th=\"Datum hry\">" + response[i].beginning + "</td>" +
+                        "<td data-th=\"Typ hry\">" + response[i].gameType + "</td>" +
+                        "<td data-th=\"Protihráč\">" + response[i].opponent + "</td>" +
+                        "<td data-th=\"Vítěz\">" + response[i].winner + "</td>" +
+                        "<td data-th=\"Délka hry\">" + response[i].end + "</td>" +
+                        "<td data-th=\"OK strk\">" + response[i].correctStrikes + "</td>" +
+                        "<td data-th=\"Zly strk\">" + response[i].wrongStrikes + "</td>" +
+                        "<td data-th=\"Faul BK\">" + response[i].faulsWithWhite + "</td>" +
+                        "<td data-th=\"Faul SK\">" + response[i].faulsWithOthers + "</td>" +
+                        "<td data-th=\"Faul iný\">" + response[i].faulsOther + "</td>" +
+                        // <!--<td id="modal_8pool" class="eight_pool"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a></td>-->
+                        "</tr>"));
                 }
 
 
                 for (var i = 0; i < response.length; i++) {
-                    $("#bothGames tbody").append($("<tr><th>" + response[i].gameId +
-                        "</th><td>" + response[i].beginning + "</td>" +
-                        "</td><td>" + response[i].gameType + "</td>" +
-                        "</td><td>" + response[i].opponent + "</td>" +
-                        "</td><td>" + response[i].winner + "</td>" +
-                        "</td><td>" + response[i].end + "</td></tr>"));
+                    $("#bothGames tbody").append($("<tr>" +
+                        "<th data-th=\"#\" scope=\"row\">" + response[i].gameId +
+                        "<td data-th=\"Datum hry\">" + response[i].beginning + "</td>" +
+                        "<td data-th=\"Typ hry\">" + response[i].gameType + "</td>" +
+                        "<td data-th=\"Protihráč\">" + response[i].opponent + "</td>" +
+                        "<td data-th=\"Vítěz\">" + response[i].winner + "</td>" +
+                        "<td data-th=\"Délka hry\">" + response[i].end + "</td>" +
+                        // <!--<td class="pool_and_karambol"><a class="nav-link" data-toggle="modal" href="#myModal8Pool">detail</a>-->
+                        "</tr>"));
 
                 }
 

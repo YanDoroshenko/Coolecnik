@@ -400,9 +400,7 @@ h4 {
     text-decoration: underline;
 }
 
-.rwd-table td:before {
-    display: none;
-}
+
 
 .rwd-table th, .rwd-table td {
     display: table-cell;
