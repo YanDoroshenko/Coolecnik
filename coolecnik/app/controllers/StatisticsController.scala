@@ -193,7 +193,8 @@ class StatisticsController extends Controller {
                     game.gameType,
                     opp,
                     game.winner,
-                    game.rounds.get,
+                    if (gameShots.isEmpty) 0
+                    else gameShots.maxBy(_.round).round,
                     game.beginning.get,
                     game.end.get,
                     gameShots.count(s => s.player == id && s.strikeType == 11),
