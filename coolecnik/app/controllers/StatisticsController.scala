@@ -136,76 +136,117 @@ class StatisticsController extends Controller {
           .result)
           .flatMap {
             case gs: Seq[Game] if gs.nonEmpty && gameType.isEmpty || gameType.contains("all") =>
-              Future(
-                Try(process(gs).map(g => {
-                  val number = g._1
-                  val game = g._2
-                  val opp = if (game.player1 == id) game.player2 else game.player1
-                  GameStats(number, game.id, game.gameType, opp, game.winner, game.beginning.get, game.end.get)
-                })) match {
-                  case Success(stats) => Ok(stats)
-                  case Failure(e) => BadRequest(e.getMessage)
-                }
+              db.run(
+                (for ((p, t) <- players joinFull gameTypes) yield (p, t)
+                  ).result
               )
+                .map(s =>
+                  Try(process(gs).map(g => {
+                    val number = g._1
+                    val game = g._2
+                    val opp = if (game.player1 == id) game.player2 else game.player1
+                    GameStats(
+                      number,
+                      game.id,
+                      game.gameType,
+                      s.map(_._2).filter(_.nonEmpty).map(_.get).find(_.id == game.gameType).get.title,
+                      opp,
+                      s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == opp).get.login,
+                      game.winner,
+                      if (game.winner.nonEmpty)
+                        Some(s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == game.winner.get).get.login)
+                      else
+                        None,
+                      game.beginning.get,
+                      game.end.get)
+                  })) match {
+                    case Success(stats) => Ok(stats)
+                    case Failure(e) => BadRequest(e.getMessage)
+                  }
+                )
             case gs: Seq[Game] if gs.nonEmpty && gameType.contains("pool8") =>
               val shots = db.run(
                 strikes.filter(_.strikeType <= 5).result
               )
 
-              shots.map(ss =>
-                Try(process(gs).map(g => {
-                  val number = g._1
-                  val game = g._2
-                  val gameShots = ss.filter(_.game == game.id)
-                  val opp = if (game.player1 == id) game.player2 else game.player1
-                  Pool8Stats(
-                    number,
-                    game.id,
-                    game.gameType,
-                    opp,
-                    game.winner.get,
-                    game.beginning.get,
-                    game.end.get,
-                    gameShots.count(_.strikeType == 1),
-                    gameShots.count(_.strikeType == 2),
-                    gameShots.count(_.strikeType == 3),
-                    gameShots.count(_.strikeType == 4),
-                    gameShots.count(_.strikeType == 5))
-                }
-                )) match {
-                  case Success(s) => Ok(s)
-                  case Failure(e) => BadRequest(e.getMessage)
-                })
+              shots.flatMap(ss =>
+                db.run(
+                  (for ((p, t) <- players joinFull gameTypes) yield (p, t)
+                    ).result
+                )
+                  .map(s =>
+                    Try(process(gs).map(g => {
+                      val number = g._1
+                      val game = g._2
+                      val gameShots = ss.filter(_.game == game.id)
+                      val opp = if (game.player1 == id) game.player2 else game.player1
+                      Pool8Stats(
+                        number,
+                        game.id,
+                        game.gameType,
+                        s.map(_._2).filter(_.nonEmpty).map(_.get).find(_.id == game.gameType).get.title,
+                        opp,
+                        s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == opp).get.login,
+                        game.winner,
+                        if (game.winner.nonEmpty)
+                          Some(s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == game.winner.get).get.login)
+                        else
+                          None,
+                        game.beginning.get,
+                        game.end.get,
+                        gameShots.count(_.strikeType == 1),
+                        gameShots.count(_.strikeType == 2),
+                        gameShots.count(_.strikeType == 3),
+                        gameShots.count(_.strikeType == 4),
+                        gameShots.count(_.strikeType == 5))
+                    }
+                    )) match {
+                      case Success(s_) => Ok(s_)
+                      case Failure(e) => BadRequest(e.getMessage)
+                    })
+              )
             case gs: Seq[Game] if gs.nonEmpty && gameType.contains("carambole") =>
               val shots = db.run(
                 strikes.filter(s => s.strikeType === 11 || s.strikeType === 12).result
               )
 
-              shots.map(ss =>
-                Try(process(gs).map(g => {
-                  val number = g._1
-                  val game = g._2
-                  val gameShots = ss.filter(_.game == game.id)
-                  val opp = if (game.player1 == id) game.player2 else game.player1
-                  CaramboleStats(
-                    number,
-                    game.id,
-                    game.gameType,
-                    opp,
-                    game.winner,
-                    if (gameShots.isEmpty) 0
-                    else gameShots.maxBy(_.round).round,
-                    game.beginning.get,
-                    game.end.get,
-                    gameShots.count(s => s.player == id && s.strikeType == 11),
-                    gameShots.count(s => s.player == opp && s.strikeType == 11),
-                    gameShots.count(s => s.player == id && s.strikeType == 12),
-                    gameShots.count(s => s.player == opp && s.strikeType == 12))
-                }
-                )) match {
-                  case Success(s) => Ok(s)
-                  case Failure(e) => BadRequest(e.getMessage)
-                })
+              shots.flatMap(ss =>
+                db.run(
+                  (for ((p, t) <- players joinFull gameTypes) yield (p, t)
+                    ).result
+                )
+                  .map(s =>
+                    Try(process(gs).map(g => {
+                      val number = g._1
+                      val game = g._2
+                      val gameShots = ss.filter(_.game == game.id)
+                      val opp = if (game.player1 == id) game.player2 else game.player1
+                      CaramboleStats(
+                        number,
+                        game.id,
+                        game.gameType,
+                        s.map(_._2).filter(_.nonEmpty).map(_.get).find(_.id == game.gameType).get.title,
+                        opp,
+                        s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == opp).get.login,
+                        game.winner,
+                        if (game.winner.nonEmpty)
+                          Some(s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == game.winner.get).get.login)
+                        else
+                          None,
+                        if (gameShots.isEmpty) 0
+                        else gameShots.maxBy(_.round).round,
+                        game.beginning.get,
+                        game.end.get,
+                        gameShots.count(s => s.player == id && s.strikeType == 11),
+                        gameShots.count(s => s.player == opp && s.strikeType == 11),
+                        gameShots.count(s => s.player == id && s.strikeType == 12),
+                        gameShots.count(s => s.player == opp && s.strikeType == 12))
+                    }
+                    )) match {
+                      case Success(s_) => Ok(s_)
+                      case Failure(e) => BadRequest(e.getMessage)
+                    })
+              )
             case _: Iterable[Any] => Future(NotFound)
           }) match {
         case Success(r) => r
