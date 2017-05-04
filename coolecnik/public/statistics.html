@@ -69,13 +69,13 @@
 <!--Filters-->
 <div class="container">
     <!--<form>-->
-    <div id="filters">
+    <div id="filters" >
     <section class="row justify-content-center m-2">
 
         <div class="row align-content-center">
             <span class="form-control-static">Druh hry: </span>
-            <select id="gameType" class="form-select-sm m-1" onchange="myFunc()">
-                <option value="all" selected>Vše</option>
+            <select id="gameType" class="form-select-sm m-1" onchange="myFunc()" >
+                <option value="all">Vše</option>
                 <option value="pool8">8-pool</option>
                 <option value = "carambole">Karambol</option>
             </select>
@@ -89,6 +89,8 @@
             <span class="form-control-static">Hráči: </span>
             <select id="opponent" class="form-select-sm m-1" onchange="myFunc()">
                 <option value="all">Vše</option>
+                <!--<option value="" ></option>-->
+
             </select>
 
         </div>
@@ -248,7 +250,7 @@
 
 
     <!-- Modal 8-pool -->
-    <div class="modal fade" id="1" role="dialog">
+    <div class="modal fade" id="Eight-pool" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -376,7 +378,7 @@
     </div>
 
     <!-- Modal Karambol -->
-    <div class="modal fade" id="2" role="dialog">
+    <div class="modal fade" id="Carambole" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">

@@ -34,11 +34,12 @@ $.ajax(endpoint, {
                 opt.innerHTML = response.login;
                 opt.value = response;
                 fragment.appendChild(opt);
+
+                console.log(opt);
             });
             sel.appendChild(fragment);
 
-            console.log(response);
-
+            console.log(sel);
         },
         404: function (response) {
             console.log("404");
@@ -47,22 +48,23 @@ $.ajax(endpoint, {
 });
 
 function setOpp(opponents) {
-    $("#opponent").html(opponents.playersStatistics);
+    $("#opponent").html(opponents.opponent);
+    console.log(opponents);
 }
-
 
 
 //statistics filtering
 function myFunc() {
-    // var x = document.getElementById("gameStatus").value;
-
+    $("#caramboleGame tbody").html("");
+    $("#bothGames tbody").html("");
+    $("#8poolGame tbody").html("");
 
 // var endpoint = "/api/players/" + getCookie("myId") + "/statistics?gameType=pool8&opponent=60&page=2&pageSize=1";
 // var endpoint = "/api/players/" + getCookie("myId") + "/statistics?&result=" + $("#gameStatus").val()+"&opponent="+ $("#opponents").id + "&page=1&pageSize=15";
     var endpoint = "/api/players/" + getCookie("myId") + "/statistics?";
     endpoint += "&gameType=" + $("#gameType").val();
     endpoint += "&result=" + $("#gameStatus").val();
-    // endpoint += "&opponent=" + $("#opponent").id;
+    // endpoint += "&opponent=" + $("#opponent").attr('id');
 // endpoint += "&from=" + dateFrom;
 // endpoint += "&to=" + dateTo;
     endpoint += "&page=1";
@@ -79,16 +81,16 @@ function myFunc() {
                     $("#caramboleGame tbody").append($("<tr>" +
                         "<th data-th=\"#\" scope=\"row\">" + response[i].gameId + "</th>" +
                         "<td data-th=\"Datum hry\">" + response[i].beginning + "</td>" +
-                        "<td data-th=\"Typ hry\">" + response[i].gameType + "</td>" +
-                        "<td data-th=\"Protihráč\">" + response[i].opponent + "</td>" +
-                        "<td data-th=\"Vítěz\">" + response[i].winner + "</td>" +
+                        "<td data-th=\"Typ hry\">" + response[i].typeTitle + "</td>" +
+                        "<td data-th=\"Protihráč\">" + response[i].opponentLogin + "</td>" +
+                        "<td data-th=\"Vítěz\">" + response[i].winnerLogin + "</td>" +
                         "<td data-th=\"Kola\">" + response[i].rounds + "</td>" +
                         "<td data-th=\"Délka hry\">" + response[i].end + "</td>" +
                         "<td data-th=\"Moje karamboly\">" + response[i].myCaramboles + "</td>" +
                         "<td data-th=\"Soupeřovy karamboli\">" + response[i].opponentsCaramboles + "</td>" +
                         "<td data-th=\"Moje fauly\">" + response[i].myFouls + "</td>" +
                         "<td data-th=\"Soupeřovy fauly\">" + response[i].opponentsFouls + "</td>" +
-                        "<td class=\"karambol\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#" + response[i].gameType+ "\">detail\</a></td>"+
+                        "<td class=\"karambol\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#" + response[i].typeTitle+ "\">detail\</a></td>"+
                         "</tr>"));
                 }
 
@@ -97,16 +99,16 @@ function myFunc() {
                     $("#8poolGame tbody").append($("<tr>" +
                         "<th data-th=\"#\" scope=\"row\">" + response[i].gameId +"</th>" +
                         "<td data-th=\"Datum hry\">" + response[i].beginning + "</td>" +
-                        "<td data-th=\"Typ hry\">" + response[i].gameType + "</td>" +
-                        "<td data-th=\"Protihráč\">" + response[i].opponent + "</td>" +
-                        "<td data-th=\"Vítěz\">" + response[i].winner + "</td>" +
+                        "<td data-th=\"Typ hry\">" + response[i].typeTitle + "</td>" +
+                        "<td data-th=\"Protihráč\">" + response[i].opponentLogin + "</td>" +
+                        "<td data-th=\"Vítěz\">" + response[i].winnerLogin + "</td>" +
                         "<td data-th=\"Délka hry\">" + response[i].end + "</td>" +
                         "<td data-th=\"OK strk\">" + response[i].correctStrikes + "</td>" +
                         "<td data-th=\"Zly strk\">" + response[i].wrongStrikes + "</td>" +
                         "<td data-th=\"Faul BK\">" + response[i].faulsWithWhite + "</td>" +
                         "<td data-th=\"Faul SK\">" + response[i].faulsWithOthers + "</td>" +
                         "<td data-th=\"Faul iný\">" + response[i].faulsOther + "</td>" +
-                        "<td id=\"modal_8pool\" class=\"eight_pool\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#" + response[i].gameType+ "\">detail</a></td>"+
+                        "<td class=\"eight_pool\"><a class=\"nav-link\" data-toggle=\"modal\" href=\"#" + response[i].typeTitle+ "\">detail</a></td>"+
                         "</tr>"));
                 }
 
@@ -115,15 +117,16 @@ function myFunc() {
                     $("#bothGames tbody").append($("<tr>" +
                         "<th data-th=\"#\" scope=\"row\">" + response[i].gameId +
                         "<td data-th=\"Datum hry\">" + response[i].beginning + "</td>" +
-                        "<td data-th=\"Typ hry\">" + response[i].gameType + "</td>" +
-                        "<td data-th=\"Protihráč\">" + response[i].opponent + "</td>" +
-                        "<td data-th=\"Vítěz\">" + response[i].winner + "</td>" +
+                        "<td data-th=\"Typ hry\">" + response[i].typeTitle + "</td>" +
+                        "<td data-th=\"Protihráč\">" + response[i].opponentLogin + "</td>" +
+                        "<td data-th=\"Vítěz\">" + response[i].winnerLogin + "</td>" +
                         "<td data-th=\"Délka hry\">" + response[i].end + "</td>" +
-                        "<td class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\"  href=\"#" + response[i].gameType+ "\">detail</a></td>"+
+                        "<td class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\"  href=\"#" + response[i].typeTitle+ "\">detail</a></td>"+
                         "</tr>"));
                 }
 
                 console.log(response);
+                console.log(response.opt);
 
             },
             400: function (response) {
