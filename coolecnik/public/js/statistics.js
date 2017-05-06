@@ -70,8 +70,26 @@ function myFunc() {
     endpoint += "&gameType=" + $("#gameType").val();
     endpoint += "&result=" + $("#gameStatus").val();
     // endpoint += "&opponent=" + $("#opponent").attr('id');
-// endpoint += "&from=" + dateFrom;
-// endpoint += "&to=" + dateTo;
+
+    // if( $("#opponent").val() == ""){
+    //
+    // }else{
+    //     endpoint += "&opponent=" + $("#opponent").attr('id');
+    // }
+
+    if( $("#dateFrom").val() == ""){
+
+    }else{
+        endpoint += "&from=" + $("#dateFrom").val() + "T00:00:00Z+0200";
+    }
+
+    if( $("#dateTo").val() == ""){
+
+    }else{
+        endpoint += "&from=" + $("#dateTo").val() + "T00:00:00Z+0200";
+    }
+
+
     endpoint += "&page=1";
     endpoint += "&pageSize=20";
 
@@ -81,7 +99,6 @@ function myFunc() {
         contentType: "application/json; charset=utf-8",
         statusCode: {
             200: function (response) {
-
                 for (var i = 0; i < response.length; i++) {
                     //date of game formation
                     var gameBeg = response[i].beginning;
@@ -238,29 +255,53 @@ function msToTime(s) {
 //get ID of game when we click on detail
 function getIdOfGame(elem) {
     var id = $(elem).attr("id");
-    alert(id);
+    // alert(id);
 }
 
+//insert table row to modal 8POOL
+$("#8poolGame").on('click','.nav-link',function() {
+    var $row = $(this).closest("tr");    // Find the row
+    var $tds = $row.find("td");
+    $.each($tds, function () {
 
-// $(".use-address").click(function() {
-//     var $row = $(this).closest("tr");    // Find the row
-//     var $tds = $row.find("td");
-//     $.each($tds, function() {
-//         console.log($(this).text());
-//     });
-//
-// });
+        // for (var i = 0; i < $tds; i++) {
+        $("#Eight-pool tbody").append($("<tr>" +
+            "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            // "<td>" + $(this).text() + "</td>" +
+            "</tr>"));
+        // }
 
-//should write data between TR's  --> could be useful in modal
-// $(".use-address").click(function() {
-//     var $row = $(this).closest("tr"),       // Finds the closest row <tr>
-//         $tds = $row.find("td");             // Finds all children <td> elements
-//
-//     $.each($tds, function() {               // Visits every single <td> element
-//         console.log($(this).text());        // Prints out the text within the <td>
-    // });
-    // $(this).closest('tr').find('td').each(function() {
-    //     var textval = $(this).text(); // this will be the text of each <td>
-    //     alert(textval);
-    // });
-// });
+    });
+});
+
+//insert table row to modal KARAMBOL
+$("#caramboleGame").on('click','.nav-link',function() {
+    var $row = $(this).closest("tr");    // Find the row
+    var $tds = $row.find("td");
+    $.each($tds, function () {
+
+        // for (var i = 0; i < $tds; i++) {
+            $("#Carambole tbody").append($("<tr>" +
+                "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                // "<td>" + $(this).text() + "</td>" +
+                "</tr>"));
+        // }
+
+    });
+});

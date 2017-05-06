@@ -101,9 +101,9 @@
     <section class="row justify-content-center m-2">
         <div class="row align-content-center">
             <span class="form-control-static">Datum od </span>
-            <input id="dateFrom" type="datetime" placeholder="DD.MM.RRRR"/>
+            <input id="dateFrom" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}" onchange="myFunc()"/>
             <span class="form-control-static">do </span>
-            <input id="dateTo" type="datetime" placeholder="DD.MM.RRRR"/>
+            <input id="dateTo" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}" onchange="myFunc()"/>
         </div>
     </section>
     </div>
@@ -279,19 +279,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>04.04.2017</td>
-                                <td>8-pool</td>
-                                <td>Potato</td>
-                                <td>Koko</td>
-                                <td>55:00</td>
-                                <td>6</td>
-                                <td>2</td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <!--<td>5</td>-->
-                            </tr>
+
                             </tbody>
                         </table>
                         <h4>Dataily hry po strkoch</h4>
@@ -405,18 +393,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>01.01.2017</td>
-                            <td>Karambol</td>
-                            <td>Potato</td>
-                            <td>Potato</td>
-                            <td>20</td>
-                            <td>22:33</td>
-                            <td>54</td>
-                            <td>45</td>
-                            <td>11</td>
-                            <td>16</td>
-                        </tr>
+
                         </tbody>
                     </table>
                     <h4>Dataily kol</h4>
