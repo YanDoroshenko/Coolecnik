@@ -75,12 +75,14 @@
         <div class="row align-content-center">
             <span class="form-control-static">Druh hry: </span>
             <select id="gameType" class="form-select-sm m-1" onchange="myFunc()" >
-                <option value="all">Vše</option>
+                <!--<option selected></option>-->
+                <option value="all" selected>Vše</option>
                 <option value="pool8">8-pool</option>
                 <option value = "carambole">Karambol</option>
             </select>
             <span class="form-control-static">Stav hry: </span>
             <select id="gameStatus" class="form-select-sm m-1" onchange="myFunc()">
+                <!--<option selected></option>-->
                 <option value="all" selected>Vše</option>
                 <option value="win">Vyhrané</option>
                 <option value="lose">Prohrané</option>
@@ -88,7 +90,8 @@
             </select>
             <span class="form-control-static">Hráči: </span>
             <select id="opponent" class="form-select-sm m-1" onchange="myFunc()">
-                <option value="all">Vše</option>
+                <!--<option selected></option>-->
+                <option value="all" selected>Vše</option>
                 <!--<option value="" ></option>-->
 
             </select>
