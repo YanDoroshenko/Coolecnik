@@ -64,8 +64,6 @@ function myFunc() {
     $("#bothGames tbody").html("");
     $("#8poolGame tbody").html("");
 
-// var endpoint = "/api/players/" + getCookie("myId") + "/statistics?gameType=pool8&opponent=60&page=2&pageSize=1";
-// var endpoint = "/api/players/" + getCookie("myId") + "/statistics?&result=" + $("#gameStatus").val()+"&opponent="+ $("#opponents").id + "&page=1&pageSize=15";
     var endpoint = "/api/players/" + getCookie("myId") + "/statistics?";
     endpoint += "&gameType=" + $("#gameType").val();
     endpoint += "&result=" + $("#gameStatus").val();
@@ -80,13 +78,13 @@ function myFunc() {
     if( $("#dateFrom").val() == ""){
 
     }else{
-        endpoint += "&from=" + $("#dateFrom").val() + "T00:00:00Z+0200";
+        endpoint += "&from=" + $("#dateFrom").val() + "T00:00:00Z%2B0200";
     }
 
     if( $("#dateTo").val() == ""){
 
     }else{
-        endpoint += "&from=" + $("#dateTo").val() + "T00:00:00Z+0200";
+        endpoint += "&to=" + $("#dateTo").val() + "T00:00:00Z%2B0200";
     }
 
 
@@ -288,7 +286,7 @@ $("#caramboleGame").on('click','.nav-link',function() {
     var $tds = $row.find("td");
     $.each($tds, function () {
 
-        // for (var i = 0; i < $tds; i++) {
+        // for (var i = 0; i < $tds.length; i++) {
             $("#Carambole tbody").append($("<tr>" +
                 "<td>" + $(this).text() + "</td>" +
                 // "<td>" + $(this).text() + "</td>" +
