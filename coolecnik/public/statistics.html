@@ -61,7 +61,6 @@
     </div>
 </nav>
 
-
 <section class="row justify-content-center m-2">
     <h1>Statistiky her</h1>
 </section>
@@ -74,7 +73,7 @@
 
         <div class="row align-content-center">
             <span class="form-control-static">Druh hry: </span>
-            <select id="gameType" class="form-select-sm m-1" onchange="myFunc()" >
+            <select id="gameType" class="form-select-sm m-1" onchange="myFunc()">
                 <!--<option selected></option>-->
                 <option value="all" selected>Vše</option>
                 <option value="pool8">8-pool</option>
@@ -251,7 +250,117 @@
         </nav>
     </div>
 
+    <!-- Modal 8-pool -->
+    <div class="modal fade" id="both-modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Detailní výsledky hry 8-pool</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div id="both-main">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Datum hry</th>
+                                    <th>Typ hry</th>
+                                    <th>Protihráč</th>
+                                    <th>Vítěz</th>
+                                    <th>Délka hry</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Dataily hry po strkoch</h4>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Číslo strku</th>
+                                <th>Hráč</th>
+                                <th>Akce</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#1</th>
+                                <td>Koko</td>
+                                <td>Faul s bielou koulí</td>
+                            </tr>
+                            <tr>
+                                <th>#2</th>
+                                <td>Potato</td>
+                                <td>Faul iný</td>
+                            </tr>
+                            <tr>
+                                <th>#3</th>
+                                <td>Koko</td>
+                                <td>Správny strk</td>
+                            </tr>
+                            <tr>
+                                <th>#4</th>
+                                <td>Koko</td>
+                                <td>Zlý strk</td>
+                            </tr>
+                            <tr>
+                                <th>#5</th>
+                                <td>Potato</td>
+                                <td>Správny strk</td>
+                            </tr>
+                            <tr>
+                                <th>#6</th>
+                                <td>Potato</td>
+                                <td>Utopení černé koule príliš skoro</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal 8-pool -->
     <div class="modal fade" id="Eight-pool" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -262,6 +371,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-body">
+                        <div id="eight-pool-main">
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -282,6 +392,7 @@
 
                             </tbody>
                         </table>
+                    </div>
                         <h4>Dataily hry po strkoch</h4>
                         <table class="table table-striped">
                             <thead>
@@ -377,6 +488,7 @@
                     <h4 class="modal-title">Detailní výsledky hry Karambol</h4>
                 </div>
                 <div class="modal-body">
+                    <div id="carambol-main">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -396,6 +508,7 @@
 
                         </tbody>
                     </table>
+                    </div>
                     <h4>Dataily kol</h4>
                     <table class="table table-striped">
                         <thead>
@@ -467,7 +580,6 @@
     </div>
 
 <script type="text/javascript" src="js/statistics.js"></script>
-
 
 </body>
 </html>
