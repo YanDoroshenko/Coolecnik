@@ -164,6 +164,63 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
             changeRound = 0;
             $("#carGameType2RoundsRemain").html(parseInt($("#carGameType2RoundsRemain").html()) - 1);
         }
+
+        if ($("#carGameType2RoundsRemain").html() === "0") {
+            if (parseInt($("#pl1goodc").html()) === parseInt($("#pl2goodc").html())) {
+                // draw
+                console.log("-------DRAW");
+                //if (navigator.onLine === true) // if there is connection to internet
+                sendStrikes();
+                sendGameEnd(parseInt(-42));
+                //endif
+                clearTimeout(timerVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+            else if (parseInt($("#pl1goodc").html()) > parseInt($("#pl2goodc").html())) {
+                // pl1 win
+                console.log("-------PL1 W");
+                //if (navigator.onLine === true) // if there is connection to internet
+                sendStrikes();
+                sendGameEnd(parseInt(players[0].id));
+                //endif
+                clearTimeout(timerVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+            else {
+                // pl2 win
+                console.log("-------PL2 W");
+                //if (navigator.onLine === true) // if there is connection to internet
+                sendStrikes();
+                sendGameEnd(parseInt(players[1].id));
+                //endif
+                clearTimeout(timerVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+        }
     }
 
     localStorage.setItem("activePlayer", activePlayer);
