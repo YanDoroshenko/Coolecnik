@@ -162,7 +162,7 @@ function sendGameEnd(winnerId) {
     localStorage.setItem("activeGame", "false");
 }
 
-function saveGameEnd() {
+function saveGameEnd(winnerId) {
     $("#looseModalWindow").modal("hide");
     $("#poolControlDiv").css("display", "none");
     $("#karambolControlDiv").css("display", "none");
@@ -183,16 +183,41 @@ function saveGameEnd() {
         + currentdate.getFullYear() + "  "
         + h + ":"
         + m;
-    obj = {
-        "gameId": gameId,
-        "gameType": localStorage.getItem("gameType"),
-        "pl2Name": players[1].name,
-        "pl2Id": players[1].id,
-        "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
-        "dateTimeString": datetime,
-        "winner": (activePlayer === 1) ? players[0].id : players[1].id,
-        "round": round
-    };
+    if (winnerId === undefined) {
+        obj = {
+            "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
+            "pl2Name": players[1].name,
+            "pl2Id": players[1].id,
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime,
+            "winner": (activePlayer === 1) ? players[0].id : players[1].id,
+            "round": round
+        };
+    }
+    else if (winnerId === -42) {
+        obj = {
+            "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
+            "pl2Name": players[1].name,
+            "pl2Id": players[1].id,
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime,
+            "round": round
+        };
+    }
+    else {
+        obj = {
+            "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
+            "pl2Name": players[1].name,
+            "pl2Id": players[1].id,
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime,
+            "winner": winnerId,
+            "round": round
+        };
+    }
     localStorage.setItem("savedGameInfo", JSON.stringify(obj));
     localStorage.setItem("activeGame", "false");
 

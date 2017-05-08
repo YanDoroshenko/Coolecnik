@@ -54,10 +54,13 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
         else if (changeRound === 1 && lastRound === 0) {
             if (parseInt($("#pl1goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
                 console.log("---------END GAME PL1W");
-                //if (navigator.onLine === true) // if there is connection to internet
-                sendStrikes();
-                sendGameEnd(parseInt(players[0].id));
-                //endif
+                if (navigator.onLine === true) {// if there is connection to internet
+                    sendStrikes();
+                    sendGameEnd(parseInt(players[0].id));
+                }
+                else {
+                    saveGameEnd(parseInt(players[0].id));
+                }
                 clearTimeout(timerVar);
                 isSecondPlayerAuthorized = false;
                 $("#pl0").val("");
@@ -71,10 +74,13 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
             }
             else if (parseInt($("#pl2goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
                 console.log("---------END GAME PL2W");
-                //if (navigator.onLine === true) // if there is connection to internet
-                sendStrikes();
-                sendGameEnd(parseInt(players[1].id));
-                //endif
+                if (navigator.onLine === true) {// if there is connection to internet
+                    sendStrikes();
+                    sendGameEnd(parseInt(players[1].id));
+                }
+                else {
+                    saveGameEnd(parseInt(players[1].id))
+                }
                 clearTimeout(timerVar);
                 isSecondPlayerAuthorized = false;
                 $("#pl0").val("");
@@ -92,10 +98,13 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
             if ((parseInt($("#pl1goodc").html()) === parseInt($("#carGameType1CarsTotal").html()) ) &&
                 (parseInt($("#pl2goodc").html()) === parseInt($("#carGameType1CarsTotal").html()) )) {
                 console.log("---------END GAME DRAW");
-                //if (navigator.onLine === true) // if there is connection to internet
-                sendStrikes();
-                sendGameEnd(-42);
-                //endif
+                if (navigator.onLine === true) {// if there is connection to internet
+                    sendStrikes();
+                    sendGameEnd(-42);
+                }
+                else {
+                    saveGameEnd(-42);
+                }
                 clearTimeout(timerVar);
                 isSecondPlayerAuthorized = false;
                 $("#pl0").val("");
@@ -118,10 +127,13 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
 
         if (parseInt($("#pl1goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
             console.log("---------END GAME PL1W");
-            //if (navigator.onLine === true) // if there is connection to internet
-            sendStrikes();
-            sendGameEnd(parseInt(players[0].id));
-            //endif
+            if (navigator.onLine === true) { // if there is connection to internet
+                sendStrikes();
+                sendGameEnd(parseInt(players[0].id));
+            }
+            else {
+                saveGameEnd(parseInt(players[0].id));
+            }
             clearTimeout(timerVar);
             isSecondPlayerAuthorized = false;
             $("#pl0").val("");
@@ -135,10 +147,13 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
         }
         else if (parseInt($("#pl2goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
             console.log("---------END GAME PL2W");
-            //if (navigator.onLine === true) // if there is connection to internet
-            sendStrikes();
-            sendGameEnd(parseInt(players[1].id));
-            //endif
+            if (navigator.onLine === true) {// if there is connection to internet
+                sendStrikes();
+                sendGameEnd(parseInt(players[1].id));
+            }
+            else {
+                saveGameEnd(parseInt(players[1].id));
+            }
             clearTimeout(timerVar);
             isSecondPlayerAuthorized = false;
             $("#pl0").val("");
@@ -169,10 +184,14 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
             if (parseInt($("#pl1goodc").html()) === parseInt($("#pl2goodc").html())) {
                 // draw
                 console.log("-------DRAW");
-                //if (navigator.onLine === true) // if there is connection to internet
-                sendStrikes();
-                sendGameEnd(parseInt(-42));
-                //endif
+                if (navigator.onLine === true) { // if there is connection to internet
+                    sendStrikes();
+                    sendGameEnd(parseInt(-42));
+                }
+                else {
+                    saveGameEnd(-42);
+                }
+
                 clearTimeout(timerVar);
                 isSecondPlayerAuthorized = false;
                 $("#pl0").val("");
@@ -187,10 +206,13 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
             else if (parseInt($("#pl1goodc").html()) > parseInt($("#pl2goodc").html())) {
                 // pl1 win
                 console.log("-------PL1 W");
-                //if (navigator.onLine === true) // if there is connection to internet
-                sendStrikes();
-                sendGameEnd(parseInt(players[0].id));
-                //endif
+                if (navigator.onLine === true) {// if there is connection to internet
+                    sendStrikes();
+                    sendGameEnd(parseInt(players[0].id));
+                }
+                else {
+                    saveGameEnd(parseInt(players[0].id));
+                }
                 clearTimeout(timerVar);
                 isSecondPlayerAuthorized = false;
                 $("#pl0").val("");
@@ -205,10 +227,13 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
             else {
                 // pl2 win
                 console.log("-------PL2 W");
-                //if (navigator.onLine === true) // if there is connection to internet
-                sendStrikes();
-                sendGameEnd(parseInt(players[1].id));
-                //endif
+                if (navigator.onLine === true) { // if there is connection to internet
+                    sendStrikes();
+                    sendGameEnd(parseInt(players[1].id));
+                }
+                else {
+                    saveGameEnd(parseInt(players[1].id));
+                }
                 clearTimeout(timerVar);
                 isSecondPlayerAuthorized = false;
                 $("#pl0").val("");
