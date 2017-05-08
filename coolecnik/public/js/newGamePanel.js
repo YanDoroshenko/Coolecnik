@@ -146,6 +146,9 @@ document.getElementById("inviteFriend").addEventListener("click", function (even
     })
 });
 
+var changeRound = 0; // for carambol. increment on every player change. If changeRound == 2 then changeRound = 0 and round++
+var lastRound = 0; // for carambol. ==1 if this is the last turn for second player
+
 document.getElementById("newGameBtn").addEventListener("click", function (event) {
     event.preventDefault();
     $("#newGameSpan").val = "";
@@ -249,6 +252,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     timerVar = setInterval(countTimer, 1000);
                     round = 1;
                 }
+
                 else if (gameType === 2) {
                     localStorage.setItem("currentGame", null);
                     $("#player1c").text(getCookie("myName"));
@@ -256,6 +260,9 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     $("#newGameDiv").css("display", "none");
 
                     $("#karambolControlDiv").css("display", "block");
+
+                    changeRound = 0;
+                    lastRound = 0;
 
                     if (localStorage.getItem("carType") === "1") { //carambol game
                         $("#carGameType1Div").show();
