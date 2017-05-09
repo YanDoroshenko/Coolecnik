@@ -1,11 +1,11 @@
 package controllers
 
 import models.Queries._
-import models.{NewStrike, NewStrikeType}
+import models._
 import org.postgresql.util.PSQLException
 import org.slf4j.LoggerFactory
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{Action, AnyContent, Controller}
 import slick.driver.PostgresDriver.api._
 import util.Database
 import util.HttpWriters._
@@ -65,5 +65,26 @@ class StrikeController extends Controller {
         case None => Future(BadRequest("Request can't be deserialized"))
       }
     }
+  }
+
+  def getStrikes(id: Int): Action[AnyContent] = Action.async {
+    log.info("Strikes for the game " + id)
+    db.run(
+      games.filter(_.id === id).result
+    )
+      .flatMap {
+        case gs: Seq[Game] if gs.nonEmpty =>
+          db.run(((for ((s, p) <- strikes.filter(_.game === id) join players on (_.player === _.id)) yield
+            Tuple6(s.id, s.strikeType, s.game, s.player, p.login, s.round)) joinFull strikeTypes.map(t => t.id -> t.title)).result)
+            .map {
+              case ss: Seq[(Option[(Int, Int, Int, Int, String, Int)], Option[(Int, String)])] if ss.nonEmpty =>
+                val strikes = ss.map(_._1).filter(_.nonEmpty).map(_.get).distinct
+                val types = ss.map(_._2).filter(_.nonEmpty).map(_.get).distinct
+                Ok(strikes.map(s =>
+                  StrikeDetail(s._1, s._2, types.find(_._1 == s._2).get._2, s._3, s._4, s._5, s._6)))
+              case _ => NotFound("Game has no strikes")
+            }
+        case _ => Future(NotFound("Game with id " + id + " not found"))
+      }
   }
 }

@@ -77,8 +77,16 @@ case class CaramboleStats(
                            myCaramboles: Int,
                            opponentsCaramboles: Int,
                            myFouls: Int,
-                           opponentsFouls: Int
-                         )
+                           opponentsFouls: Int)
+
+case class StrikeDetail(
+                         id: Int,
+                         strikeTypeId: Int,
+                         strikeTypeTitle: String,
+                         game: Int,
+                         playerId: Int,
+                         playerLogin: String,
+                         round: Int)
 
 case class Friend(id: Int, login: String, firstName: Option[String], lastName: Option[String])
 

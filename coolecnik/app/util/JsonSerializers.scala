@@ -48,4 +48,5 @@ object JsonSerializers {
   implicit val ff: OFormat[Friend] = Json.format[Friend]
   implicit val of: OFormat[Opponent] = Json.format[Opponent]
   implicit val nuf: OFormat[NameUpdate] = Json.format[NameUpdate]
+  implicit val sdf: OFormat[StrikeDetail] = Json.format[StrikeDetail]
 }
