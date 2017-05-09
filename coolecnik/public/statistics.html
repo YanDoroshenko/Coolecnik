@@ -113,7 +113,7 @@
     <div id="bothGames" >
         <div class="row justify-content-center m-1">
             <h2><a id="koko"></a>Statistiky her 8-pool a karambol</h2>
-        </div>
+
         <table  class="table rwd-table table-bordered table-hover">
             <thead>
             <tr>
@@ -144,13 +144,14 @@
             </ul>
         </nav>
     </div>
+    </div>
 
     <!--8-pool table-->
     <div id="8poolGame" style="display: none">
         <div class="row justify-content-center m-1">
             <h2><a id="lolo"></a>Statistiky her 8-pool</h2>
-        </div>
-        <table class="table rwd-table table-bordered table-hover">
+
+        <table class="table rwd-table table-bordered table-hover justify-content-center m-1">
             <thead>
             <tr>
                 <th data-th="#" scope="row" id="number_of_game">#</th>
@@ -171,6 +172,7 @@
 
             </tbody>
         </table>
+        </div>
         <div id="accordion" role="tablist" aria-multiselectable="true">
             <div class="card-statistics">
                 <div class="card-header-statistics" role="tab" id="headingOne">
@@ -192,19 +194,20 @@
                     </div>
                 </div>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+            <!--<nav aria-label="Page navigation example">-->
+                <!--<ul class="pagination justify-content-center">-->
+                    <!--<li class="page-item disabled">-->
+                        <!--<a class="page-link" href="#" tabindex="-1">Previous</a>-->
+                    <!--</li>-->
+                    <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+                    <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+                    <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                    <!--<li class="page-item">-->
+                        <!--<a class="page-link" href="#">Next</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</nav>-->
+
         </div>
     </div>
 
@@ -212,9 +215,8 @@
     <div id="caramboleGame" style="display: none">
         <div class="row justify-content-center m-1">
             <h2><a id="3"></a>Statistiky her Karambol</h2>
-        </div>
-        <table class="table rwd-table table-bordered table-hover">
 
+        <table class="table rwd-table table-bordered table-hover ">
             <thead>
             <tr>
                 <th>#</th>
@@ -248,9 +250,10 @@
                 </li>
             </ul>
         </nav>
+        </div>
     </div>
 
-    <!-- Modal 8-pool -->
+    <!-- Modal Both games -->
     <div class="modal fade" id="both-modal" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -277,82 +280,25 @@
                             </table>
                         </div>
                         <h4>Dataily hry po strkoch</h4>
+                        <div id="both-strikes">
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Číslo strku</th>
+                                <th>Číslo kola</th>
                                 <th>Hráč</th>
                                 <th>Akce</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <th>#1</th>
+                                <th>1</th>
                                 <td>Koko</td>
                                 <td>Faul s bielou koulí</td>
                             </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#2</th>
-                                <td>Potato</td>
-                                <td>Faul iný</td>
-                            </tr>
-                            <tr>
-                                <th>#3</th>
-                                <td>Koko</td>
-                                <td>Správny strk</td>
-                            </tr>
-                            <tr>
-                                <th>#4</th>
-                                <td>Koko</td>
-                                <td>Zlý strk</td>
-                            </tr>
-                            <tr>
-                                <th>#5</th>
-                                <td>Potato</td>
-                                <td>Správny strk</td>
-                            </tr>
-                            <tr>
-                                <th>#6</th>
-                                <td>Potato</td>
-                                <td>Utopení černé koule príliš skoro</td>
-                            </tr>
+
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -360,7 +306,9 @@
                 </div>
             </div>
         </div>
+
     </div>
+
     <!-- Modal 8-pool -->
     <div class="modal fade" id="Eight-pool" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -385,7 +333,6 @@
                                 <th>Faul BK</th>
                                 <th>Faul SK</th>
                                 <th>Faul iný</th>
-                                <!--<th>Faul s 8</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -394,82 +341,20 @@
                         </table>
                     </div>
                         <h4>Dataily hry po strkoch</h4>
+                        <div id="eight-pool-strikes">
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Číslo strku</th>
+                                <th>Číslo Kola</th>
                                 <th>Hráč</th>
                                 <th>Akce</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-                            <tr>
-                                <th>#2</th>
-                                <td>Potato</td>
-                                <td>Faul iný</td>
-                            </tr>
-                            <tr>
-                                <th>#3</th>
-                                <td>Koko</td>
-                                <td>Správny strk</td>
-                            </tr>
-                            <tr>
-                                <th>#4</th>
-                                <td>Koko</td>
-                                <td>Zlý strk</td>
-                            </tr>
-                            <tr>
-                                <th>#5</th>
-                                <td>Potato</td>
-                                <td>Správny strk</td>
-                            </tr>
-                            <tr>
-                                <th>#6</th>
-                                <td>Potato</td>
-                                <td>Utopení černé koule príliš skoro</td>
-                            </tr>
+
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -510,66 +395,21 @@
                     </table>
                     </div>
                     <h4>Dataily kol</h4>
+                    <div id="carambole-strikes">
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>Číslo kola</th>
                             <th>Hráč</th>
                             <th>Akce</th>
-                            <th>Počet Karambolov</th>
+                            <!--<th>Počet Karambolov</th>-->
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th>#1</th>
-                            <td>Koko</td>
-                            <td>Karambol</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <th>#1</th>
-                            <td>Koko</td>
-                            <td>Faul</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <th>#1</th>
-                            <td>Potato</td>
-                            <td>Karambol</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <th>#1</th>
-                            <td>Potato</td>
-                            <td>Faul</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <th>#2</th>
-                            <td>Koko</td>
-                            <td>Karambol</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <th>#2</th>
-                            <td>Koko</td>
-                            <td>Faul</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <th>#2</th>
-                            <td>Potato</td>
-                            <td>Karambol</td>
-                            <td>33</td>
-                        </tr>
-                        <tr>
-                            <th>#2</th>
-                            <td>Potato</td>
-                            <td>Faul</td>
-                            <td>0</td>
-                        </tr>
+
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
                     <div class="modal-footer">
