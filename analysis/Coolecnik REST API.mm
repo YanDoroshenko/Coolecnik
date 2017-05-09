@@ -99,6 +99,7 @@
 <node TEXT="end game" ID="ID_1912113215" CREATED="1491729396685" MODIFIED="1491729915051" LINK="#ID_769937977"/>
 <node TEXT="create new game" ID="ID_1332294221" CREATED="1490898911508" MODIFIED="1490898944599" LINK="#ID_1206525773"/>
 <node TEXT="create new game type" ID="ID_682704610" CREATED="1490898901764" MODIFIED="1490898925849" LINK="#ID_1582186992"/>
+<node TEXT="get strikes" ID="ID_1040430144" CREATED="1494340783445" MODIFIED="1494340805673" LINK="#ID_750468211"/>
 </node>
 <node TEXT="strike" FOLDED="true" ID="ID_332650716" CREATED="1492076767374" MODIFIED="1492076769131">
 <node TEXT="add strikes" ID="ID_952272187" CREATED="1490898911508" MODIFIED="1490974191352" LINK="#ID_486238382"/>
@@ -688,6 +689,43 @@
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1819425361" CREATED="1490730065473" MODIFIED="1490730103319">
 <node TEXT="message from DB exception" ID="ID_1147282586" CREATED="1490875844521" MODIFIED="1490875849772"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/$id/strikes" FOLDED="true" ID="ID_750468211" CREATED="1494340486782" MODIFIED="1494340493624">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_172894367" CREATED="1494340494324" MODIFIED="1494340507636">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1544768119" CREATED="1494340512055" MODIFIED="1494340517282">
+<node TEXT="GET" ID="ID_531625192" CREATED="1494340514284" MODIFIED="1494340516205"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1104847039" CREATED="1494340499444" MODIFIED="1494340507836">
+<node TEXT="game not found" FOLDED="true" ID="ID_645975345" CREATED="1494340520005" MODIFIED="1494340522381">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1214581850" CREATED="1494340539924" MODIFIED="1494340543804">
+<node TEXT="404 NOT FOUND" ID="ID_753421579" CREATED="1494340548284" MODIFIED="1494340555809"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_602709214" CREATED="1494340544477" MODIFIED="1494340547610">
+<node TEXT="Game with id $id not found" ID="ID_1383773630" CREATED="1494340557100" MODIFIED="1494340564178"/>
+</node>
+</node>
+<node TEXT="game has no strikes" FOLDED="true" ID="ID_432269370" CREATED="1494340523085" MODIFIED="1494340526362">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_947298344" CREATED="1494340565916" MODIFIED="1494340584985">
+<node TEXT="404 NOT FOUND" ID="ID_1170588456" CREATED="1494340587899" MODIFIED="1494340594628"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_510966684" CREATED="1494340568628" MODIFIED="1494340585192">
+<node TEXT="Game has no strikes" ID="ID_180629194" CREATED="1494340595876" MODIFIED="1494340602561"/>
+</node>
+</node>
+<node TEXT="list of strikes" FOLDED="true" ID="ID_983540040" CREATED="1494340533260" MODIFIED="1494340538586">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1227158750" CREATED="1494340571054" MODIFIED="1494340585631">
+<node TEXT="200 OK" ID="ID_965386883" CREATED="1494340604709" MODIFIED="1494340605938"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_898373076" CREATED="1494340572580" MODIFIED="1494340586080">
+<node TEXT="list of strike details" FOLDED="true" ID="ID_709430985" CREATED="1494340607111" MODIFIED="1494340612278">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_596787499" CREATED="1494340612828" MODIFIED="1494340616610">
+<node TEXT="[&#xa;  {&#xa;    &quot;id&quot;: 2913,&#xa;    &quot;strikeTypeId&quot;: 1,&#xa;    &quot;strikeTypeTitle&quot;: &quot;correct_8pool&quot;,&#xa;    &quot;game&quot;: 480,&#xa;    &quot;playerId&quot;: 1,&#xa;    &quot;playerLogin&quot;: &quot;Ptasya&quot;,&#xa;    &quot;round&quot;: 1&#xa;  },&#xa;  {&#xa;    &quot;id&quot;: 2914,&#xa;    &quot;strikeTypeId&quot;: 1,&#xa;    &quot;strikeTypeTitle&quot;: &quot;correct_8pool&quot;,&#xa;    &quot;game&quot;: 480,&#xa;    &quot;playerId&quot;: 1,&#xa;    &quot;playerLogin&quot;: &quot;Ptasya&quot;,&#xa;    &quot;round&quot;: 2&#xa;  }&#xa;]" ID="ID_1328778358" CREATED="1494340635844" MODIFIED="1494340776087"/>
+</node>
+</node>
 </node>
 </node>
 </node>
