@@ -106,7 +106,7 @@ function sendStrikes() {
     });
 }
 
-function sendGameEnd() {
+function sendGameEnd(winnerId) {
     var endpoint = "/api/games/" + gameId + "/end";
     var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
     if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
@@ -115,10 +115,23 @@ function sendGameEnd() {
         dateTime = dateTime.replaceAt(20, "+");
         console.log("new dateTime ", dateTime);
     }
-    var obj = {
-        "end": dateTime,
-        "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
-    };
+    if (winnerId === undefined) {
+        var obj = {
+            "end": dateTime,
+            "winner": (activePlayer === 1) ? parseInt(players[0].id) : parseInt(players[1].id)
+        };
+    }
+    else if (winnerId === -42) {
+        var obj = {
+            "end": dateTime
+        };
+    }
+    else {
+        var obj = {
+            "end": dateTime,
+            "winner": winnerId
+        };
+    }
     $.ajax(endpoint, {
         type: "PUT",
         contentType: "application/json; charset=utf-8",
@@ -149,7 +162,7 @@ function sendGameEnd() {
     localStorage.setItem("activeGame", "false");
 }
 
-function saveGameEnd() {
+function saveGameEnd(winnerId) {
     $("#looseModalWindow").modal("hide");
     $("#poolControlDiv").css("display", "none");
     $("#karambolControlDiv").css("display", "none");
@@ -170,16 +183,41 @@ function saveGameEnd() {
         + currentdate.getFullYear() + "  "
         + h + ":"
         + m;
-    obj = {
-        "gameId": gameId,
-        "gameType": localStorage.getItem("gameType"),
-        "pl2Name": players[1].name,
-        "pl2Id": players[1].id,
-        "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
-        "dateTimeString": datetime,
-        "winner": (activePlayer === 1) ? players[0].id : players[1].id,
-        "round": round
-    };
+    if (winnerId === undefined) {
+        obj = {
+            "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
+            "pl2Name": players[1].name,
+            "pl2Id": players[1].id,
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime,
+            "winner": (activePlayer === 1) ? players[0].id : players[1].id,
+            "round": round
+        };
+    }
+    else if (winnerId === -42) {
+        obj = {
+            "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
+            "pl2Name": players[1].name,
+            "pl2Id": players[1].id,
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime,
+            "round": round
+        };
+    }
+    else {
+        obj = {
+            "gameId": gameId,
+            "gameType": localStorage.getItem("gameType"),
+            "pl2Name": players[1].name,
+            "pl2Id": players[1].id,
+            "endOfGameTime": dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00",
+            "dateTimeString": datetime,
+            "winner": winnerId,
+            "round": round
+        };
+    }
     localStorage.setItem("savedGameInfo", JSON.stringify(obj));
     localStorage.setItem("activeGame", "false");
 
