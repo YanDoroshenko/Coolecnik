@@ -32,11 +32,9 @@ $.ajax(endpoint, {
                 opt.value = response.id;
                 fragment.appendChild(opt);
 
-                console.log(opt);
             });
             sel.appendChild(fragment);
 
-            console.log(sel);
         },
         404: function (response) {
             console.log("404");
@@ -117,7 +115,7 @@ function setOpp(opponents) {
                             "<td data-th=\"Soupeřovy karamboli\">" + response[i].opponentsCaramboles + "</td>" +
                             "<td data-th=\"Moje fauly\">" + response[i].myFouls + "</td>" +
                             "<td data-th=\"Soupeřovy fauly\">" + response[i].opponentsFouls + "</td>" +
-                            "<th class=\"karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id=\"#" + response[i].gameId + "\" href=\"#" + response[i].typeTitle + "\">detail\</a></th>" +
+                            "<th class=\"karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id_of_game=\"" + response[i].gameId + "\" href=\"#" + response[i].typeTitle + "\">detail\</a></th>" +
                             "</tr>"));
                     }
 
@@ -147,7 +145,7 @@ function setOpp(opponents) {
                             "<td data-th=\"Faul BK\">" + response[i].faulsWithWhite + "</td>" +
                             "<td data-th=\"Faul SK\">" + response[i].faulsWithOthers + "</td>" +
                             "<td data-th=\"Faul iný\">" + response[i].faulsOther + "</td>" +
-                            "<th class=\"eight_pool\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id=\"#" + response[i].gameId + "\" href=\"#" + response[i].typeTitle + "\">detail</a></th>" +
+                            "<th class=\"eight_pool\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id_of_game=\"" + response[i].gameId + "\" href=\"#" + response[i].typeTitle + "\">detail</a></th>" +
                             "</tr>"));
                     }
 
@@ -172,9 +170,8 @@ function setOpp(opponents) {
                             "<td data-th=\"Protihráč\">" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
                             "<td data-th=\"Vítěz\">" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
                             "<td data-th=\"Délka hry\">" + playedTime(begTime,endTime) + "</td>" +
-                            "<th class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id=\"#" + response[i].gameId + "\" href=\"#both-modal\">detail</a></th>" +
+                            "<th class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id_of_game=\"" + response[i].gameId + "\" href=\"#both-modal\">detail</a></th>" +
                             // "<td class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id=\"#" + response[i].gameId + "\" href=\"#" + response[i].typeTitle + "\">detail</a></td>" +
-
                             "</tr>"));
                     }
                 },
@@ -188,15 +185,19 @@ function setOpp(opponents) {
         });
     };
 
+
 //change guest winner name from -1 to something else
 function changeGuestWinnerName(guestWinnerPlayer) {
     if(guestWinnerPlayer == -1) {
         guestWinnerPlayer = "neznámy";
     }
+    if(guestWinnerPlayer == null){
+        guestWinnerPlayer = "remíza";
+    }
     return guestWinnerPlayer
 }
 
-//change guest opponent name from -1 to something else
+//change guest opponent name from -1 to something else or draw
 function changeGuestOpponentName(guestOpponentPlayer) {
     if(guestOpponentPlayer == -1) {
         guestOpponentPlayer = "neznámy";
@@ -259,8 +260,60 @@ function msToTime(s) {
 
 //get ID of game when we click on detail
 function getIdOfGame(elem) {
-    var id = $(elem).attr("id");
-    // alert(id);
+    var id_of_game = $(elem).attr("id_of_game");
+    console.log(id_of_game);
+    var endpoint = "/api/games/"+ id_of_game+"/strikes";
+//todo modal strikes ID
+
+    $("#both-strikes tbody").html(""); //to clear data previous session from table
+    $("#eight-pool-strikes tbody").html(""); //to clear data previous session from table
+    $("#both-strikes tbody").html(""); //to clear data previous session from table
+
+    $.ajax(endpoint, {
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        statusCode: {
+            200: function (response) {
+
+                for (var i = 0; i < response.length; i++) {
+
+                    var guestOpponentPlayer = response[i].playerLogin;
+
+                    $("#both-strikes tbody").append($("<tr>" +
+                        "<td>" + response[i].round + "</td>" +
+                        "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                        "<td>" + response[i].strikeTypeTitle + "</td>" +
+                        "</tr>"));
+                }
+
+                for (var i = 0; i < response.length; i++) {
+
+                    var guestOpponentPlayer = response[i].playerLogin;
+
+                    $("#eight-pool-strikes tbody").append($("<tr>" +
+                        "<td>" + response[i].round + "</td>" +
+                        "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                        "<td>" + response[i].strikeTypeTitle + "</td>" +
+                        "</tr>"));
+                }
+
+                for (var i = 0; i < response.length; i++) {
+
+                    var guestOpponentPlayer = response[i].playerLogin;
+
+                    $("#carambole-strikes tbody").append($("<tr>" +
+                        "<td>" + response[i].round + "</td>" +
+                        "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                        "<td>" + response[i].strikeTypeTitle + "</td>" +
+                        "</tr>"));
+                }
+                console.log(response);
+            }
+        },
+        404: function (response) {
+            console.log("404 NOT FOUND");
+        }
+    });
 }
 
 //insert table row into modal bothGames
@@ -301,3 +354,6 @@ $("#caramboleGame").on('click', '.nav-link', function () {
         ));
     });
 });
+
+
+// var endpoint = "/api/games/" + $("#id").id  + "/strikes";
