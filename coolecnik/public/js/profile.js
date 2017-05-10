@@ -31,6 +31,7 @@ const endpointLoad = "/api/players/" + getCookie("myId") + "/statistics/basicGam
 const passMatch = "<strong>Hesla se neshodují.</strong>";
 const passChanged = "<strong>Heslo změněno.</strong>";
 
+$("#nickname").html(getCookie("myName"));
 $("#email").html(getCookie("email"));
 $("#name").attr("value", getCookie("firstName"));
 $("#surname").attr("value", getCookie("lastName"));
@@ -101,17 +102,18 @@ var changeNameAlert = $("#nameAlert");
 $("#changeName").click(function (e) {
     e.preventDefault();
     var obj = {
-        id:getCookie("myId"),
-        name: $("name").val(),
-        surName: $("surname").val()
-    }
+        firstName: $("#name").val(),
+        id: getCookie("myId"),
+        lastName: $("#surname").val()
+    };
+    console.log(obj.firstName + " " + obj.lastName + " " + obj.id);
     $.ajax("/api/players/"+getCookie("myId")+"/nameupdate", {
         type: "PUT",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(obj),
         statusCode: {
             201: function (response) {
-                console.log("200 Name and Surname changed");
+                console.log("201 Name and Surname changed" + obj.toLocaleString());
                 changeBadgeState(true);
             },
             404: function (response) {
