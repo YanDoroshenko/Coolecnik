@@ -254,4 +254,68 @@ class StatisticsController extends Controller {
       }
     }
   }
+
+  def pages(
+             id: Int,
+             gameType: Option[String],
+             opponent: Option[Int],
+             result: Option[String],
+             from: Option[String],
+             to: Option[String],
+             pageSize: Int
+           ): Action[AnyContent] = Action.async {
+    if (gameType.nonEmpty && gameType.get == "pool8" && result.nonEmpty && result.get == "draw")
+      Future(BadRequest("There are no draws in 8-pool"))
+    else if (opponent.nonEmpty && opponent.get == id)
+      Future(BadRequest("One can't play with oneself"))
+    else {
+
+      def process(gs: Seq[Game]) = {
+        val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
+        val filtered = gs
+          .filter(g => (result: @unchecked) match {
+            case Some("win") => g.winner.nonEmpty && g.winner.get == id
+            case Some("lose") => g.winner.nonEmpty && g.winner.get != id
+            case Some("draw") => g.winner.isEmpty
+            case Some("all") => g.id == g.id
+            case None => g.id == g.id
+          })
+          .filter(g => from match {
+            case Some(t) => g.beginning.nonEmpty && g.beginning.get.after(new Timestamp(format.parse(t).getTime))
+            case _ => true
+          })
+          .filter(g => to match {
+            case Some(t) => g.beginning.nonEmpty && g.beginning.get.before(new Timestamp(format.parse(t).getTime))
+            case _ => true
+          })
+        val sorted = filtered.sortWith((l, r) => l.beginning.get.after(r.beginning.get))
+        val numbered = (sorted.size to 1 by -1).zip(sorted)
+        numbered
+      }
+
+      Try(
+        db.run(games
+          .filter(_.end.nonEmpty)
+          .filter(g => g.player1 === id || g.player2 === id)
+          .filter(g => (gameType: @unchecked) match {
+            case Some("pool8") => g.gameType === 1
+            case Some("carambole") => g.gameType === 2
+            case Some("all") => g.id === g.id
+            case None => g.id === g.id
+          })
+          .filter(g => opponent match {
+            case Some(i) => g.player1 === i || g.player2 === i
+            case None => g.id === g.id
+          })
+          .result)
+          .flatMap {
+            case gs: Seq[Game] if gs.nonEmpty =>
+              Future(Ok(Math.ceil(process(gs).size.toDouble / pageSize)))
+            case _: Iterable[Any] => Future(NotFound)
+          }) match {
+        case Success(r) => r
+        case Failure(e) => Future(BadRequest(e.getMessage))
+      }
+    }
+  }
 }
