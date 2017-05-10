@@ -181,7 +181,7 @@ class StatisticsController extends Controller {
                       val gameShots = ss.filter(_.game == game.id)
                       val opp = if (game.player1 == id) game.player2 else game.player1
                       Pool8Stats(
-                        number,
+                        Some(number),
                         game.id,
                         game.gameType,
                         s.map(_._2).filter(_.nonEmpty).map(_.get).find(_.id == game.gameType).get.title,
@@ -222,7 +222,7 @@ class StatisticsController extends Controller {
                       val gameShots = ss.filter(_.game == game.id)
                       val opp = if (game.player1 == id) game.player2 else game.player1
                       CaramboleStats(
-                        number,
+                        Some(number),
                         game.id,
                         game.gameType,
                         s.map(_._2).filter(_.nonEmpty).map(_.get).find(_.id == game.gameType).get.title,
@@ -317,5 +317,117 @@ class StatisticsController extends Controller {
         case Failure(e) => Future(BadRequest(e.getMessage))
       }
     }
+  }
+
+  def details(playerId: Int, gameId: Int) = Action.async {
+    db.run(
+      players.filter(_.id === playerId).exists.result
+    )
+      .flatMap {
+        case true =>
+          db.run(
+            games.filter(g => g.id === gameId && (g.player1 === playerId || g.player2 === playerId)).result
+          )
+            .flatMap {
+              case gs: Seq[Game] if gs.size == 1 =>
+                val g = gs.head
+                val opp = if (g.player1 == playerId) g.player2 else g.player1
+                db.run(
+                  (for ((p, t) <- players.filter(
+                    if (g.winner.nonEmpty)
+                      p => p.id === opp || p.id === g.winner.get
+                    else
+                      p => p.id === opp
+                  ).joinFull(gameTypes.filter(_.id === g.gameType))
+                  ) yield
+                    p -> t
+                    ).result
+                )
+                  .flatMap(pts => {
+                    val ps = pts.map(_._1).filter(_.nonEmpty).map(_.get)
+                    val t = pts.map(_._2).map(_.get).head
+                    val shots = db.run(
+                      strikes.filter(s => s.strikeType <= 5 && s.game === g.id).result
+                    )
+
+                    shots.flatMap(ss =>
+                      db.run(
+                        (for ((p, t) <- players joinFull gameTypes) yield (p, t)
+                          ).result
+                      )
+                        .map(s => {
+                          Ok(Pool8Stats(
+                            None,
+                            g.id,
+                            g.gameType,
+                            s.map(_._2).filter(_.nonEmpty).map(_.get).find(_.id == g.gameType).get.title,
+                            opp,
+                            s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == opp).get.login,
+                            g.winner,
+                            if (g.winner.nonEmpty)
+                              Some(s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == g.winner.get).get.login)
+                            else
+                              None,
+                            g.beginning.get,
+                            g.end.get,
+                            ss.count(_.strikeType == 1),
+                            ss.count(_.strikeType == 2),
+                            ss.count(_.strikeType == 3),
+                            ss.count(_.strikeType == 4),
+                            ss.count(_.strikeType == 5)))
+                        }))
+                  })
+              case gs: Seq[Game] if gs.size == 2 =>
+                val g = gs.head
+                val opp = if (g.player1 == playerId) g.player2 else g.player1
+                db.run(
+                  (for ((p, t) <- players.filter(
+                    if (g.winner.nonEmpty)
+                      p => p.id === opp || p.id === g.winner.get
+                    else
+                      p => p.id === opp
+                  ).joinFull(gameTypes.filter(_.id === g.gameType))
+                  ) yield
+                    p -> t
+                    ).result
+                )
+                  .flatMap(pts => {
+                    val ps = pts.map(_._1).filter(_.nonEmpty).map(_.get)
+                    val t = pts.map(_._2).map(_.get).head
+                    val shots = db.run(
+                      strikes.filter(s => (s.strikeType === 11 || s.strikeType === 12) && s.game === g.id).result
+                    )
+
+                    shots.flatMap(ss =>
+                      db.run(
+                        (for ((p, t) <- players joinFull gameTypes) yield (p, t)
+                          ).result)
+                        .map(s => {
+                          Ok(CaramboleStats(
+                            None,
+                            g.id,
+                            g.gameType,
+                            s.map(_._2).filter(_.nonEmpty).map(_.get).find(_.id == g.gameType).get.title,
+                            opp,
+                            s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == opp).get.login,
+                            g.winner,
+                            if (g.winner.nonEmpty)
+                              Some(s.map(_._1).filter(_.nonEmpty).map(_.get).find(_.id == g.winner.get).get.login)
+                            else
+                              None,
+                            if (ss.isEmpty) 0
+                            else ss.maxBy(_.round).round,
+                            g.beginning.get,
+                            g.end.get,
+                            ss.count(s => s.player == playerId && s.strikeType == 11),
+                            ss.count(s => s.player == opp && s.strikeType == 11),
+                            ss.count(s => s.player == playerId && s.strikeType == 12),
+                            ss.count(s => s.player == opp && s.strikeType == 12)))
+                        }))
+                  })
+              case _ => Future(NotFound("Game with id " + gameId + " not found for player " + playerId))
+            }
+        case false => Future(NotFound("Player with id " + playerId + " not found"))
+      }
   }
 }

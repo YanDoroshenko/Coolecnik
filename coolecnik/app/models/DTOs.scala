@@ -45,7 +45,7 @@ case class GameStats(
                       end: Timestamp)
 
 case class Pool8Stats(
-                       gameNumber: Int,
+                       gameNumber: Option[Int],
                        gameId: Int,
                        typeId: Int,
                        typeTitle: String,
@@ -63,7 +63,7 @@ case class Pool8Stats(
                      )
 
 case class CaramboleStats(
-                           gameNumber: Int,
+                           gameNumber: Option[Int],
                            gameId: Int,
                            typeId: Int,
                            typeTitle: String,
