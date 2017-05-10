@@ -171,9 +171,9 @@ function setOpp(opponents) {
                             "<td data-th=\"Vítěz\">" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
                             "<td data-th=\"Délka hry\">" + playedTime(begTime,endTime) + "</td>" +
                             "<th class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id_of_game=\"" + response[i].gameId + "\" href=\"#both-modal\">detail</a></th>" +
-                            // "<td class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id=\"#" + response[i].gameId + "\" href=\"#" + response[i].typeTitle + "\">detail</a></td>" +
                             "</tr>"));
                     }
+                    console.log(response);
                 },
                 400: function (response) {
                     console.log("400 BAD REQUEST");
@@ -261,15 +261,79 @@ function msToTime(s) {
 //get ID of game when we click on detail
 function getIdOfGame(elem) {
     var id_of_game = $(elem).attr("id_of_game");
-    console.log(id_of_game);
-    var endpoint = "/api/games/"+ id_of_game+"/strikes";
-//todo modal strikes ID
 
     $("#both-strikes tbody").html(""); //to clear data previous session from table
     $("#eight-pool-strikes tbody").html(""); //to clear data previous session from table
     $("#both-strikes tbody").html(""); //to clear data previous session from table
+    $("#both-main tbody").html(""); //to clear data previous session from table
+    $("#carambol-main tbody").html(""); //to clear data previous session from table
+    $("#eight-pool-main tbody").html(""); //to clear data previous session from table
 
-    $.ajax(endpoint, {
+    // //game by id
+    // var endpoint_single_game = "/api/players/" + getCookie("myId") +"/games/" + id_of_game;
+    // // console.log(endpoint_single_game);
+    // $.ajax(endpoint_single_game, {
+    //     type: "GET",
+    //     contentType: "application/json; charset=utf-8",
+    //     statusCode: {
+    //         200: function (response) {
+    //
+    //             for (var i = 0; i < response.length; i++) {
+    //
+    //                 //game beginning date formatting
+    //                 var dateBeginning = response[i].beginning;
+    //
+    //                 //changes guest players -1 name to "neznámy"
+    //                 var guestWinnerPlayer = response[i].winnerLogin;
+    //                 var guestOpponentPlayer = response[i].opponentLogin;
+    //
+    //                 //time played counting
+    //                 var begTime = response[i].beginning;
+    //                 var endTime = response[i].end;
+    //
+    //
+    //                 if (response[i].typeId = "1") {
+    //                     $("#both-main-eight tbody").append($("<tr>" +
+    //                         "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
+    //                         "<td>" + response[i].typeTitle + "</td>" +
+    //                         "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+    //                         "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+    //                         "<td>" + playedTime(begTime, endTime) + "</td>" +
+    //                         "<td>" + response[i].correctStrikes + "</td>" +
+    //                         "<td>" + response[i].wrongStrikes + "</td>" +
+    //                         "<td>" + response[i].faulsWithWhite + "</td>" +
+    //                         "<td>" + response[i].faulsWithOthers + "</td>" +
+    //                         "<td>" + response[i].faulsOther + "</td>" +
+    //                         "</tr>"));
+    //                 } else if(response[i].typeId = "2"){
+    //                     $("#both-main-carambole tbody").append($("<tr>" +
+    //                         "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
+    //                         "<td>" + response[i].typeTitle + "</td>" +
+    //                         "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+    //                         "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+    //                         "<td>" + response[i].rounds + "</td>" +
+    //                         "<td>" + playedTime(begTime,endTime) + "</td>" +
+    //                         "<td>" + response[i].myCaramboles + "</td>" +
+    //                         "<td>" + response[i].opponentsCaramboles + "</td>" +
+    //                         "<td>" + response[i].myFouls + "</td>" +
+    //                         "<td>" + response[i].opponentsFouls + "</td>" +
+    //                         "</tr>"));
+    //                 }
+    //                 console.log(response[i].typeTitle);
+    //             }
+    //             console.log(response);
+    //         }
+    //     },
+    //     404: function (response) {
+    //         console.log("404 NOT FOUND");
+    //     }
+    // });
+
+
+    //single strikes
+    var endpoint_strikes = "/api/games/"+ id_of_game+"/strikes";
+
+    $.ajax(endpoint_strikes, {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         statusCode: {
