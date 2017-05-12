@@ -73,7 +73,13 @@ function poolEndGameRoutine(lastStrikeType) {
     if (navigator.onLine === true) // if there is connection to internet
     {
         sendStrikes();
-        sendGameEnd(true);
+        // here activePlayer shows the non-active player. dont know why
+        if (lastStrikeType === 6) {
+            sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
+        }
+        else {
+            sendGameEnd(players[activePlayer].id);
+        }
     }
 
     else {
