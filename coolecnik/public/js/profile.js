@@ -58,7 +58,34 @@ function setStats(stats) {
     $("#draws").html(stats.draws);
     var percent = stats.won/((stats.won+stats.lost)/100);
     $("#percent").html(percent.toFixed(2) + " %");
+
+
+    var chart = new CanvasJS.Chart("chartContainer_games",
+        {
+            theme: "theme2",
+            title:{
+                text: "Všechny hry"
+            },
+            data: [
+                {
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{y} - #percent %",
+                    yValueFormatString: "#0.#",
+                    legendText: "{indexLabel}",
+                    dataPoints: [
+                        {  y: stats.won, indexLabel: "Výhry" },
+                        {  y: stats.lost, indexLabel: "Prohry" },
+                        {  y: stats.draws, indexLabel: "Remízy" },
+
+                    ]
+                }
+            ]
+        });
+    chart.render();
 }
+
+
 
 $("#changePass").click(function () {
    if ($("#newPass1").val() == $("#newPass2").val()){

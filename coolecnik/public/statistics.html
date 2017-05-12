@@ -68,82 +68,84 @@
 <!--Filters-->
 <div class="container">
     <!--<form>-->
-    <div id="filters" >
-    <section class="row justify-content-center m-2">
+    <div id="filters">
+        <section class="row justify-content-center m-2">
 
-        <div class="row align-content-center">
-            <span class="form-control-static">Druh hry: </span>
-            <select id="gameType" class="form-select-sm m-1" onchange="myFunc()">
-                <!--<option selected></option>-->
-                <option value="all" selected>Vše</option>
-                <option value="pool8">8-pool</option>
-                <option value = "carambole">Karambol</option>
-            </select>
-            <span class="form-control-static">Stav hry: </span>
-            <select id="gameStatus" class="form-select-sm m-1" onchange="myFunc()">
-                <!--<option selected></option>-->
-                <option value="all" selected>Vše</option>
-                <option value="win">Vyhrané</option>
-                <option value="lose">Prohrané</option>
-                <option value="draw">Remíza</option>
-            </select>
-            <span class="form-control-static">Hráči: </span>
-            <select id="opponent" class="form-select-sm m-1" onchange="myFunc()">
-                <!--<option selected></option>-->
-                <option value="all" selected>Vše</option>
-                <!--<option value="" ></option>-->
+            <div class="row align-content-center">
+                <span class="form-control-static">Druh hry: </span>
+                <select id="gameType" class="form-select-sm m-1" onchange="myFunc()">
+                    <!--<option selected></option>-->
+                    <option value="all" selected>Vše</option>
+                    <option value="pool8">8-pool</option>
+                    <option value="carambole">Karambol</option>
+                </select>
+                <span class="form-control-static">Stav hry: </span>
+                <select id="gameStatus" class="form-select-sm m-1" onchange="myFunc()">
+                    <!--<option selected></option>-->
+                    <option value="all" selected>Vše</option>
+                    <option value="win">Vyhrané</option>
+                    <option value="lose">Prohrané</option>
+                    <option value="draw">Remíza</option>
+                </select>
+                <span class="form-control-static">Hráči: </span>
+                <select id="opponent" class="form-select-sm m-1" onchange="myFunc()">
+                    <!--<option selected></option>-->
+                    <option value="all" selected>Vše</option>
+                    <!--<option value="" ></option>-->
 
-            </select>
+                </select>
 
-        </div>
-    </section>
-    <section class="row justify-content-center m-2">
-        <div class="row align-content-center">
-            <span class="form-control-static">Datum od </span>
-            <input id="dateFrom" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}" onchange="myFunc()"/>
-            <span class="form-control-static">do </span>
-            <input id="dateTo" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}" onchange="myFunc()"/>
-        </div>
-    </section>
+            </div>
+        </section>
+        <section class="row justify-content-center m-2">
+            <div class="row align-content-center">
+                <span class="form-control-static">Datum od </span>
+                <input id="dateFrom" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}"
+                       onchange="myFunc()"/>
+                <span class="form-control-static">do </span>
+                <input id="dateTo" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}"
+                       onchange="myFunc()"/>
+            </div>
+        </section>
     </div>
 
     <!--</form>-->
 
     <!--8-pool and Karambol table-->
-    <div id="bothGames" >
+    <div id="bothGames">
         <div class="row justify-content-center m-1">
             <h2><a id="koko"></a>Statistiky her 8-pool a karambol</h2>
 
-        <table  class="table rwd-table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Datum hry</th>
-                <th>Typ hry</th>
-                <th>Protihráč</th>
-                <th>Vítěz</th>
-                <th>Délka hry</th>
-                <th class="pool_and_karambol">Detail hry</th> <!--hides details when window is too small-->
-            </tr>
-            </thead>
-            <tbody>
+            <table class="table rwd-table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Datum hry</th>
+                    <th>Typ hry</th>
+                    <th>Protihráč</th>
+                    <th>Vítěz</th>
+                    <th>Délka hry</th>
+                    <th class="pool_and_karambol">Detail hry</th> <!--hides details when window is too small-->
+                </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 
     <!--8-pool table-->
@@ -151,27 +153,27 @@
         <div class="row justify-content-center m-1">
             <h2><a id="lolo"></a>Statistiky her 8-pool</h2>
 
-        <table class="table rwd-table table-bordered table-hover justify-content-center m-1">
-            <thead>
-            <tr>
-                <th data-th="#" scope="row" id="number_of_game">#</th>
-                <th data-th="Datum hry" id="date_of_start">Datum hry</th>
-                <th>Typ hry</th>
-                <th>Protihráč</th>
-                <th>Vítěz</th>
-                <th>Délka hry</th>
-                <th>OK strk</th>
-                <th>Zly strk</th>
-                <th>Faul BK</th>
-                <th>Faul SK</th>
-                <th>Faul iný</th>
-                <th class="eight_pool">Detail hry</th> <!--hides details when window is too small-->
-            </tr>
-            </thead>
-            <tbody>
+            <table class="table rwd-table table-bordered table-hover justify-content-center m-1">
+                <thead>
+                <tr>
+                    <th data-th="#" scope="row" id="number_of_game">#</th>
+                    <th data-th="Datum hry" id="date_of_start">Datum hry</th>
+                    <th>Typ hry</th>
+                    <th>Protihráč</th>
+                    <th>Vítěz</th>
+                    <th>Délka hry</th>
+                    <th>OK strk</th>
+                    <th>Zly strk</th>
+                    <th>Faul BK</th>
+                    <th>Faul SK</th>
+                    <th>Faul iný</th>
+                    <th class="eight_pool">Detail hry</th> <!--hides details when window is too small-->
+                </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         </div>
         <div id="accordion" role="tablist" aria-multiselectable="true">
             <div class="card-statistics">
@@ -195,17 +197,17 @@
                 </div>
             </div>
             <!--<nav aria-label="Page navigation example">-->
-                <!--<ul class="pagination justify-content-center">-->
-                    <!--<li class="page-item disabled">-->
-                        <!--<a class="page-link" href="#" tabindex="-1">Previous</a>-->
-                    <!--</li>-->
-                    <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
-                    <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
-                    <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                    <!--<li class="page-item">-->
-                        <!--<a class="page-link" href="#">Next</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
+            <!--<ul class="pagination justify-content-center">-->
+            <!--<li class="page-item disabled">-->
+            <!--<a class="page-link" href="#" tabindex="-1">Previous</a>-->
+            <!--</li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--<li class="page-item">-->
+            <!--<a class="page-link" href="#">Next</a>-->
+            <!--</li>-->
+            <!--</ul>-->
             <!--</nav>-->
 
         </div>
@@ -216,40 +218,40 @@
         <div class="row justify-content-center m-1">
             <h2><a id="3"></a>Statistiky her Karambol</h2>
 
-        <table class="table rwd-table table-bordered table-hover ">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Datum hry</th>
-                <th>Typ hry</th>
-                <th>Protihráč</th>
-                <th>Vítěz</th>
-                <th>Kola</th>
-                <th>Délka hry</th>
-                <th>Moje karamboly</th>
-                <th>Soupeřovy karamboli</th>
-                <th>Moje fauly</th>
-                <th>Soupeřovy fauly</th>
-                <th class="karambol">Detail hry</th> <!--hides details when window is too small-->
-            </tr>
-            </thead>
-            <tbody>
+            <table class="table rwd-table table-bordered table-hover ">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Datum hry</th>
+                    <th>Typ hry</th>
+                    <th>Protihráč</th>
+                    <th>Vítěz</th>
+                    <th>Kola</th>
+                    <th>Délka hry</th>
+                    <th>Moje karamboly</th>
+                    <th>Soupeřovy karamboli</th>
+                    <th>Moje fauly</th>
+                    <th>Soupeřovy fauly</th>
+                    <th class="karambol">Detail hry</th> <!--hides details when window is too small-->
+                </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 
@@ -264,86 +266,66 @@
                 <div class="modal-body">
                     <div class="modal-body">
 
-                        <div id="both-main">
-                            <table class="table table-bordered">
+                        <div id="both_select">
+                            <div id="both-main-eight" style="display: none">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Datum hry</th>
+                                        <th>Typ hry</th>
+                                        <th>Protihráč</th>
+                                        <th>Vítěz</th>
+                                        <th>Délka hry</th>
+                                        <th>OK strk</th>
+                                        <th>Zly strk</th>
+                                        <th>Faul BK</th>
+                                        <th>Faul SK</th>
+                                        <th>Faul iný</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="both-main-carambole" style="display: none">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Datum hry</th>
+                                        <th>Typ hry</th>
+                                        <th>Protihráč</th>
+                                        <th>Vítěz</th>
+                                        <th>Kola</th>
+                                        <th>Délka hry</th>
+                                        <th>Moje karamboly</th>
+                                        <th>Soupeřovy karamboli</th>
+                                        <th>Moje fauly</th>
+                                        <th>Soupeřovy fauly</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h4>Dataily hry po strkoch</h4>
+                        <div id="both-strikes">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Datum hry</th>
-                                    <th>Typ hry</th>
-                                    <th>Protihráč</th>
-                                    <th>Vítěz</th>
-                                    <th>Délka hry</th>
+                                    <th>Číslo kola</th>
+                                    <th>Hráč</th>
+                                    <th>Akce</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
                                 </tbody>
                             </table>
-                        </div>
-
-                        <!--<div id="both-main-eight">-->
-                            <!--<table class="table table-bordered">-->
-                                <!--<thead>-->
-                                <!--<tr>-->
-                                    <!--<th>Datum hry</th>-->
-                                    <!--<th>Typ hry</th>-->
-                                    <!--<th>Protihráč</th>-->
-                                    <!--<th>Vítěz</th>-->
-                                    <!--<th>Délka hry</th>-->
-                                    <!--<th>OK strk</th>-->
-                                    <!--<th>Zly strk</th>-->
-                                    <!--<th>Faul BK</th>-->
-                                    <!--<th>Faul SK</th>-->
-                                    <!--<th>Faul iný</th>-->
-                                <!--</tr>-->
-                                <!--</thead>-->
-                                <!--<tbody>-->
-
-                                <!--</tbody>-->
-                            <!--</table>-->
-                        <!--</div>-->
-
-                        <!--<div id="both-main-carambole">-->
-                            <!--<table class="table table-bordered">-->
-                                <!--<thead>-->
-                                <!--<tr>-->
-                                    <!--<th>Datum hry</th>-->
-                                    <!--<th>Typ hry</th>-->
-                                    <!--<th>Protihráč</th>-->
-                                    <!--<th>Vítěz</th>-->
-                                    <!--<th>Kola</th>-->
-                                    <!--<th>Délka hry</th>-->
-                                    <!--<th>Moje karamboly</th>-->
-                                    <!--<th>Soupeřovy karamboli</th>-->
-                                    <!--<th>Moje fauly</th>-->
-                                    <!--<th>Soupeřovy fauly</th>-->
-                                <!--</tr>-->
-                                <!--</thead>-->
-                                <!--<tbody>-->
-
-                                <!--</tbody>-->
-                            <!--</table>-->
-                        <!--</div>-->
-
-                        <h4>Dataily hry po strkoch</h4>
-                        <div id="both-strikes">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Číslo kola</th>
-                                <th>Hráč</th>
-                                <th>Akce</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Koko</td>
-                                <td>Faul s bielou koulí</td>
-                            </tr>
-
-                            </tbody>
-                        </table>
                         </div>
                     </div>
                 </div>
@@ -366,40 +348,40 @@
                 <div class="modal-body">
                     <div class="modal-body">
                         <div id="eight-pool-main">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Datum hry</th>
-                                <th>Typ hry</th>
-                                <th>Protihráč</th>
-                                <th>Vítěz</th>
-                                <th>Délka hry</th>
-                                <th>OK strk</th>
-                                <th>Zly strk</th>
-                                <th>Faul BK</th>
-                                <th>Faul SK</th>
-                                <th>Faul iný</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Datum hry</th>
+                                    <th>Typ hry</th>
+                                    <th>Protihráč</th>
+                                    <th>Vítěz</th>
+                                    <th>Délka hry</th>
+                                    <th>OK strk</th>
+                                    <th>Zly strk</th>
+                                    <th>Faul BK</th>
+                                    <th>Faul SK</th>
+                                    <th>Faul iný</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
                         <h4>Dataily hry po strkoch</h4>
                         <div id="eight-pool-strikes">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Číslo Kola</th>
-                                <th>Hráč</th>
-                                <th>Akce</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Číslo Kola</th>
+                                    <th>Hráč</th>
+                                    <th>Akce</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -420,50 +402,50 @@
                 </div>
                 <div class="modal-body">
                     <div id="carambol-main">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Datum hry</th>
-                            <th>Typ hry</th>
-                            <th>Protihráč</th>
-                            <th>Vítěz</th>
-                            <th>Kola</th>
-                            <th>Délka hry</th>
-                            <th>Moje karamboly</th>
-                            <th>Soupeřovy karamboli</th>
-                            <th>Moje fauly</th>
-                            <th>Soupeřovy fauly</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Datum hry</th>
+                                <th>Typ hry</th>
+                                <th>Protihráč</th>
+                                <th>Vítěz</th>
+                                <th>Kola</th>
+                                <th>Délka hry</th>
+                                <th>Moje karamboly</th>
+                                <th>Soupeřovy karamboli</th>
+                                <th>Moje fauly</th>
+                                <th>Soupeřovy fauly</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
                     </div>
                     <h4>Dataily kol</h4>
                     <div id="carambole-strikes">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Číslo kola</th>
-                            <th>Hráč</th>
-                            <th>Akce</th>
-                            <!--<th>Počet Karambolov</th>-->
-                        </tr>
-                        </thead>
-                        <tbody>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Číslo kola</th>
+                                <th>Hráč</th>
+                                <th>Akce</th>
+                                <!--<th>Počet Karambolov</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
 <script type="text/javascript" src="js/statistics.js"></script>
 

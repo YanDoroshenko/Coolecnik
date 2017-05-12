@@ -44,7 +44,7 @@ $.ajax(endpoint, {
 
 function setOpp(opponents) {
     $("#opponent").html(opponents.opponent);
-    console.log(opponents);
+    // console.log(opponents);
 }
 
 //statistics filtering
@@ -104,7 +104,7 @@ function setOpp(opponents) {
                         var endTime = response[i].end;
 
                         $("#caramboleGame tbody").append($("<tr>" +
-                            "<th data-th=\"#\" scope=\"row\">" + response[i].gameId + "</th>" +
+                            "<th data-th=\"#\" scope=\"row\">" + response[i].gameNumber + "</th>" +
                             "<td data-th=\"Datum hry\">" + dateCorrectFormat(dateBeginning) + "</td>" +
                             "<td data-th=\"Typ hry\">" + response[i].typeTitle + "</td>" +
                             "<td data-th=\"Protihráč\">" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
@@ -134,7 +134,7 @@ function setOpp(opponents) {
                         var endTime = response[i].end;
 
                         $("#8poolGame tbody").append($("<tr>" +
-                            "<th data-th=\"#\" scope=\"row\">" + response[i].gameId + "</th>" +
+                            "<th data-th=\"#\" scope=\"row\">" + response[i].gameNumber + "</th>" +
                             "<td data-th=\"Datum hry\">" + dateCorrectFormat(dateBeginning) + "</td>" +
                             "<td data-th=\"Typ hry\">" + response[i].typeTitle + "</td>" +
                             "<td data-th=\"Protihráč\">" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
@@ -164,7 +164,7 @@ function setOpp(opponents) {
                         var endTime = response[i].end;
 
                         $("#bothGames tbody").append($("<tr>" +
-                            "<th data-th=\"#\" scope=\"row\">" + response[i].gameId + "</th>" +
+                            "<th data-th=\"#\" scope=\"row\">" + response[i].gameNumber + "</th>" +
                             "<td data-th=\"Datum hry\">" + dateCorrectFormat(dateBeginning) + "</td>" +
                             "<td data-th=\"Typ hry\">" + response[i].typeTitle + "</td>" +
                             "<td data-th=\"Protihráč\">" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
@@ -173,7 +173,6 @@ function setOpp(opponents) {
                             "<th class=\"pool_and_karambol\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id_of_game=\"" + response[i].gameId + "\" href=\"#both-modal\">detail</a></th>" +
                             "</tr>"));
                     }
-                    console.log(response);
                 },
                 400: function (response) {
                     console.log("400 BAD REQUEST");
@@ -262,76 +261,110 @@ function msToTime(s) {
 function getIdOfGame(elem) {
     var id_of_game = $(elem).attr("id_of_game");
 
-    $("#both-strikes tbody").html(""); //to clear data previous session from table
-    $("#eight-pool-strikes tbody").html(""); //to clear data previous session from table
-    $("#both-strikes tbody").html(""); //to clear data previous session from table
-    $("#both-main tbody").html(""); //to clear data previous session from table
-    $("#carambol-main tbody").html(""); //to clear data previous session from table
+
+
+    $("#both-main-eight tbody").html(""); //to clear data previous session from table
+    $("#both-main-carambole tbody").html(""); //to clear data previous session from table
     $("#eight-pool-main tbody").html(""); //to clear data previous session from table
+    $("#carambol-main tbody").html(""); //to clear data previous session from table
 
     // //game by id
-    // var endpoint_single_game = "/api/players/" + getCookie("myId") +"/games/" + id_of_game;
-    // // console.log(endpoint_single_game);
-    // $.ajax(endpoint_single_game, {
-    //     type: "GET",
-    //     contentType: "application/json; charset=utf-8",
-    //     statusCode: {
-    //         200: function (response) {
-    //
-    //             for (var i = 0; i < response.length; i++) {
-    //
-    //                 //game beginning date formatting
-    //                 var dateBeginning = response[i].beginning;
-    //
-    //                 //changes guest players -1 name to "neznámy"
-    //                 var guestWinnerPlayer = response[i].winnerLogin;
-    //                 var guestOpponentPlayer = response[i].opponentLogin;
-    //
-    //                 //time played counting
-    //                 var begTime = response[i].beginning;
-    //                 var endTime = response[i].end;
-    //
-    //
-    //                 if (response[i].typeId = "1") {
-    //                     $("#both-main-eight tbody").append($("<tr>" +
-    //                         "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
-    //                         "<td>" + response[i].typeTitle + "</td>" +
-    //                         "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
-    //                         "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
-    //                         "<td>" + playedTime(begTime, endTime) + "</td>" +
-    //                         "<td>" + response[i].correctStrikes + "</td>" +
-    //                         "<td>" + response[i].wrongStrikes + "</td>" +
-    //                         "<td>" + response[i].faulsWithWhite + "</td>" +
-    //                         "<td>" + response[i].faulsWithOthers + "</td>" +
-    //                         "<td>" + response[i].faulsOther + "</td>" +
-    //                         "</tr>"));
-    //                 } else if(response[i].typeId = "2"){
-    //                     $("#both-main-carambole tbody").append($("<tr>" +
-    //                         "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
-    //                         "<td>" + response[i].typeTitle + "</td>" +
-    //                         "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
-    //                         "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
-    //                         "<td>" + response[i].rounds + "</td>" +
-    //                         "<td>" + playedTime(begTime,endTime) + "</td>" +
-    //                         "<td>" + response[i].myCaramboles + "</td>" +
-    //                         "<td>" + response[i].opponentsCaramboles + "</td>" +
-    //                         "<td>" + response[i].myFouls + "</td>" +
-    //                         "<td>" + response[i].opponentsFouls + "</td>" +
-    //                         "</tr>"));
-    //                 }
-    //                 console.log(response[i].typeTitle);
-    //             }
-    //             console.log(response);
-    //         }
-    //     },
-    //     404: function (response) {
-    //         console.log("404 NOT FOUND");
-    //     }
-    // });
+    var endpoint_single_game = "/api/players/" + getCookie("myId") + "/games/" + id_of_game;
+    $.ajax(endpoint_single_game, {
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        statusCode: {
+            200: function (response) {
 
+                //game beginning date formatting
+                var dateBeginning = response.beginning;
+
+                //changes guest players -1 name to "neznámy"
+                var guestWinnerPlayer = response.winnerLogin;
+                var guestOpponentPlayer = response.opponentLogin;
+
+                //time played counting
+                var begTime = response.beginning;
+                var endTime = response.end;
+
+                //which table to show
+                if (response.typeId == 1) {
+                    var style = response.typeId == 1 ? 'block' : 'none';
+                    document.getElementById('both-main-eight').style.display = style
+
+                }else if(response.typeId == 2){
+                        var style = response.typeId == 2 ? 'block' : 'none';
+                        document.getElementById('both-main-carambole').style.display = style
+                    }
+
+
+                    $("#both-main-eight tbody").append($("<tr>" +
+                        "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
+                        "<td>" + response.typeTitle + "</td>" +
+                        "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                        "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+                        "<td>" + playedTime(begTime, endTime) + "</td>" +
+                        "<td>" + response.correctStrikes + "</td>" +
+                        "<td>" + response.wrongStrikes + "</td>" +
+                        "<td>" + response.faulsWithWhite + "</td>" +
+                        "<td>" + response.faulsWithOthers + "</td>" +
+                        "<td>" + response.faulsOther + "</td>" +
+                        "</tr>"));
+
+                    $("#both-main-carambole tbody").append($("<tr>" +
+                        "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
+                        "<td>" + response.typeTitle + "</td>" +
+                        "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                        "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+                        "<td>" + response.rounds + "</td>" +
+                        "<td>" + playedTime(begTime, endTime) + "</td>" +
+                        "<td>" + response.myCaramboles + "</td>" +
+                        "<td>" + response.opponentsCaramboles + "</td>" +
+                        "<td>" + response.myFouls + "</td>" +
+                        "<td>" + response.opponentsFouls + "</td>" +
+                        "</tr>"));
+
+                //carambole game
+                $("#carambol-main tbody").append($("<tr>" +
+                    "<td data-th=\"Datum hry\">" + dateCorrectFormat(dateBeginning) + "</td>" +
+                    "<td data-th=\"Typ hry\">" + response.typeTitle + "</td>" +
+                    "<td data-th=\"Protihráč\">" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                    "<td data-th=\"Vítěz\">" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+                    "<td data-th=\"Kola\">" + response.rounds + "</td>" +
+                    "<td data-th=\"Délka hry\">" + playedTime(begTime, endTime) + "</td>" +
+                    "<td data-th=\"Moje karamboly\">" + response.myCaramboles + "</td>" +
+                    "<td data-th=\"Soupeřovy karamboli\">" + response.opponentsCaramboles + "</td>" +
+                    "<td data-th=\"Moje fauly\">" + response.myFouls + "</td>" +
+                    "<td data-th=\"Soupeřovy fauly\">" + response.opponentsFouls + "</td>" +
+                    "</tr>"));
+
+                //8pool game
+                $("#eight-pool-main tbody").append($("<tr>" +
+                    "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
+                    "<td>" + response.typeTitle + "</td>" +
+                    "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                    "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+                    "<td>" + playedTime(begTime, endTime) + "</td>" +
+                    "<td>" + response.correctStrikes + "</td>" +
+                    "<td>" + response.wrongStrikes + "</td>" +
+                    "<td>" + response.faulsWithWhite + "</td>" +
+                    "<td>" + response.faulsWithOthers + "</td>" +
+                    "<td>" + response.faulsOther + "</td>" +
+                    "</tr>"));
+            }
+        },
+        404: function (response) {
+            console.log("404 NOT FOUND");
+        }
+    });
+
+
+    $("#both-strikes tbody").html(""); //to clear data previous session from table
+    $("#eight-pool-strikes tbody").html(""); //to clear data previous session from table
+    $("#carambole-strikes tbody").html(""); //to clear data previous session from table
 
     //single strikes
-    var endpoint_strikes = "/api/games/"+ id_of_game+"/strikes";
+    var endpoint_strikes = "/api/games/" + id_of_game + "/strikes";
 
     $.ajax(endpoint_strikes, {
         type: "GET",
@@ -343,21 +376,27 @@ function getIdOfGame(elem) {
 
                     var guestOpponentPlayer = response[i].playerLogin;
 
+                    //strike id to change name
+                    var strikeRename = response[i].strikeTypeId;
+
                     $("#both-strikes tbody").append($("<tr>" +
                         "<td>" + response[i].round + "</td>" +
                         "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
-                        "<td>" + response[i].strikeTypeTitle + "</td>" +
+                        "<td>" + strikeTypeRename(strikeRename) + "</td>" +
                         "</tr>"));
                 }
 
                 for (var i = 0; i < response.length; i++) {
 
                     var guestOpponentPlayer = response[i].playerLogin;
+
+                    //strike id to change name
+                    var strikeRename = response[i].strikeTypeId;
 
                     $("#eight-pool-strikes tbody").append($("<tr>" +
                         "<td>" + response[i].round + "</td>" +
                         "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
-                        "<td>" + response[i].strikeTypeTitle + "</td>" +
+                        "<td>" + strikeTypeRename(strikeRename) + "</td>" +
                         "</tr>"));
                 }
 
@@ -365,13 +404,15 @@ function getIdOfGame(elem) {
 
                     var guestOpponentPlayer = response[i].playerLogin;
 
+                    //strike id to change name
+                    var strikeRename = response[i].strikeTypeId;
+
                     $("#carambole-strikes tbody").append($("<tr>" +
                         "<td>" + response[i].round + "</td>" +
                         "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
-                        "<td>" + response[i].strikeTypeTitle + "</td>" +
+                        "<td>" + strikeTypeRename(strikeRename) + "</td>" +
                         "</tr>"));
                 }
-                console.log(response);
             }
         },
         404: function (response) {
@@ -380,44 +421,30 @@ function getIdOfGame(elem) {
     });
 }
 
-//insert table row into modal bothGames
-$("#bothGames").on('click', '.nav-link', function () {
-    var $row = $(this).closest("tr");    // Find the row
-    var $tds = $row.find("td" );
-    $("#both-main tbody").html(""); //to clear data previous session from table
-    $.each($tds, function () {
-
-        $("#both-main tbody").append($(
-            "<td>" + $(this).text() + "</td>"
-        ));
-    });
-});
-
-//insert table row into modal 8POOL
-$("#8poolGame").on('click', '.nav-link', function () {
-    var $row = $(this).closest("tr");    // Find the row
-    var $tds = $row.find("td");
-    $("#eight-pool-main tbody").html(""); //to clear data previous session from table
-    $.each($tds, function () {
-
-        $("#eight-pool-main tbody").append($(
-            "<td>" + $(this).text() + "</td>"
-        ));
-    });
-});
-
-//insert table row into modal KARAMBOL
-$("#caramboleGame").on('click', '.nav-link', function () {
-    var $row = $(this).closest("tr");    // Find the row
-    var $tds = $row.find("td");
-    $("#carambol-main tbody").html(""); //to clear data previous session from table
-    $.each($tds, function () {
-
-        $("#carambol-main tbody").append($(
-            "<td>" + $(this).text() + "</td>"
-        ));
-    });
-});
-
-
-// var endpoint = "/api/games/" + $("#id").id  + "/strikes";
+function strikeTypeRename(strikeTypeId) {
+    if(strikeTypeId == 1){
+        return strikeTypeTitle = "Správny strk";
+    }else if(strikeTypeId == 2) {
+        return strikeTypeTitle = "Špatný strk";
+    }else if(strikeTypeId == 3) {
+        return strikeTypeTitle = "Faul s bílou koulí";
+    }else if(strikeTypeId == 4) {
+        return strikeTypeTitle = "Faul s koulí protiháče";
+    }else if(strikeTypeId == 5) {
+        return strikeTypeTitle = "Jiný faul";
+    }else if(strikeTypeId == 6) {
+        return strikeTypeTitle = "Hra ukončená v pořádku - výhra hráče";
+    }else if(strikeTypeId == 7) {
+        return strikeTypeTitle = "Faul s koulí 8- faul při potápění koule č.8 --> výhra protihráče";
+    }else if(strikeTypeId == 8) {
+        return strikeTypeTitle = "Faul s koulí 8- potopená příliš brzy --> výhra protihráče";
+    }else if(strikeTypeId == 9) {
+        return strikeTypeTitle = "Faul s koulí 8- do nehlášené kapsy --> výhra protihráče";
+    }else if(strikeTypeId == 10) {
+        return strikeTypeTitle = "Faul s koulí 8- vyhozená ze stola --> výhra protihráče";
+    }else if(strikeTypeId == 11) {
+        return strikeTypeTitle = "Karambol";
+    }else if(strikeTypeId == 12) {
+        return strikeTypeTitle = "Faul";
+    }
+}
