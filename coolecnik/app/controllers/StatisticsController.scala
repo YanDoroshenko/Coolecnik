@@ -319,7 +319,7 @@ class StatisticsController extends Controller {
     }
   }
 
-  def details(playerId: Int, gameId: Int) = Action.async {
+  def details(playerId: Int, gameId: Int): Action[AnyContent] = Action.async {
     db.run(
       players.filter(_.id === playerId).exists.result
     )
@@ -329,7 +329,7 @@ class StatisticsController extends Controller {
             games.filter(g => g.id === gameId && (g.player1 === playerId || g.player2 === playerId)).result
           )
             .flatMap {
-              case gs: Seq[Game] if gs.size == 1 =>
+              case gs: Seq[Game] if gs.size == 1 && gs.head.gameType == 1 =>
                 val g = gs.head
                 val opp = if (g.player1 == playerId) g.player2 else g.player1
                 db.run(
@@ -377,7 +377,7 @@ class StatisticsController extends Controller {
                             ss.count(_.strikeType == 5)))
                         }))
                   })
-              case gs: Seq[Game] if gs.size == 2 =>
+              case gs: Seq[Game] if gs.size == 1 && gs.head.gameType == 2 =>
                 val g = gs.head
                 val opp = if (g.player1 == playerId) g.player2 else g.player1
                 db.run(
