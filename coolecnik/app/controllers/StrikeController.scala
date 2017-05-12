@@ -75,7 +75,7 @@ class StrikeController extends Controller {
       .flatMap {
         case gs: Seq[Game] if gs.nonEmpty =>
           db.run(((for ((s, p) <- strikes.filter(_.game === id) join players on (_.player === _.id)) yield
-            Tuple6(s.id, s.strikeType, s.game, s.player, p.login, s.round)) joinFull strikeTypes.map(t => t.id -> t.title)).result)
+            (s.id, s.strikeType, s.game, s.player, p.login, s.round)) joinFull strikeTypes.map(t => t.id -> t.title)).result)
             .map {
               case ss: Seq[(Option[(Int, Int, Int, Int, String, Int)], Option[(Int, String)])] if ss.nonEmpty =>
                 val strikes = ss.map(_._1).filter(_.nonEmpty).map(_.get).distinct
