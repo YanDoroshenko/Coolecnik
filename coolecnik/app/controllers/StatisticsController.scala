@@ -47,10 +47,13 @@ class StatisticsController extends Controller {
         .filter(_.player === id)
         .groupBy(_.strikeType)
         .map { case (strikeType, ss) => strikeType -> ss.length }
-        join strikeTypes on (_._1 === _.id) if t.gameType === 1) yield (s._2, t.id, t.title))
+        joinRight strikeTypes on (_._1 === _.id) if t.gameType === 1) yield (
+        t.id,
+        t.title,
+        s.map { case (_, c) => c }))
         .result)
       .map {
-        case s: Seq[(Int, Int, String)] if s.nonEmpty => Ok(s.map(u => "\"" + u._3 + "\":" + u._1).mkString("{\n", ",\n", "\n}"))
+        case s: Seq[(Int, String, Option[Int])] if s.nonEmpty => Ok(s.map(u => "\"" + u._2 + "\":" + u._3.getOrElse(0)).mkString("{\n", ",\n", "\n}"))
         case _ => NotFound("Basic 8-pool statistics for the player with id " + id + " not found")
       }
   }
