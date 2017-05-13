@@ -3,17 +3,16 @@
 # ~~~~
 
 # Home page
-GET         /                                                 controllers.Assets.at(path = "/public", file ="index.html")
+GET           /                                                controllers.Assets.at(path = "/public", file ="index.html")
 
 # Statistics
-GET         /api/players/:id/statistics/basicGames            controllers.StatisticsController.basicGameStats(id: Int)
-GET         /api/players/:id/statistics/basic8Pool            controllers.StatisticsController.basicStrike8Stats(id: Int)
-GET         /api/players/:id/statistics/basicCarambole        controllers.StatisticsController.basicStrikeCaramboleStats(id: Int)
-GET         /api/players/:id/statistics                       controllers.StatisticsController.statistics(id: Int, gameType: Option[String], opponent: Option[Int], result: Option[String], from: Option[String], to: Option[String], pageSize: Option[Int], page: Option[Int])
-GET         /api/players/:id/pages                            controllers.StatisticsController.pages(id: Int, gameType: Option[String], opponent: Option[Int], result: Option[String], from: Option[String], to: Option[String], pageSize: Int)
-GET         /api/players/:id/opponents                        controllers.StatisticsController.opponents(id: Int)
-GET         /api/games/:id/strikes                            controllers.StrikeController.getStrikes(id: Int)
-GET         /api/players/:playerId/games/:gameId              controllers.StatisticsController.details(playerId: Int, gameId: Int)
+GET           /api/players/:id/statistics/basic                controllers.StatisticsController.basicGameStats(id: Int)
+GET           /api/players/:id/statistics/strikes              controllers.StatisticsController.basicStrikeStats(id: Int)
+GET           /api/players/:id/statistics                      controllers.StatisticsController.statistics(id: Int, gameType: Option[String], opponent: Option[Int], result: Option[String], from: Option[String], to: Option[String], pageSize: Option[Int], page: Option[Int])
+GET           /api/players/:id/pages                           controllers.StatisticsController.pages(id: Int, gameType: Option[String], opponent: Option[Int], result: Option[String], from: Option[String], to: Option[String], pageSize: Int)
+GET           /api/players/:id/opponents                       controllers.StatisticsController.opponents(id: Int)
+GET           /api/games/:id/strikes                           controllers.StrikeController.getStrikes(id: Int)
+GET           /api/players/:playerId/games/:gameId             controllers.StatisticsController.details(playerId: Int, gameId: Int)
 
 # Populate DB
 #GET           /createSchema                                     controllers.DBController.createSchema
@@ -21,27 +20,27 @@ GET         /api/players/:playerId/games/:gameId              controllers.Statis
 #GET           /createTestUsers                                  controllers.DBController.createTestUsers
 
 # Player management
-POST        /api/register                                     controllers.PlayerController.register
-POST        /api/login                                        controllers.PlayerController.login
-PUT           /api/passwdreset                                  controllers.PlayerController.resetPassword
-PUT           /api/passwdupdate                                 controllers.PlayerController.updatePassword
-POST          /api/players/:playerId/befriend/:friendId         controllers.PlayerController.befriend(playerId: Int, friendId: Int)
-DELETE        /api/players/:playerId/unfriend/:friendId         controllers.PlayerController.unfriend(playerId:Int, friendId: Int)
-GET           /api/players/:id/friends                          controllers.PlayerController.getFriends(id: Int)
-PUT           /api/players/:id/nameupdate                       controllers.PlayerController.updateName(id: Int)
+POST          /api/register                                    controllers.PlayerController.register
+POST          /api/login                                       controllers.PlayerController.login
+PUT           /api/passwdreset                                 controllers.PlayerController.resetPassword
+PUT           /api/passwdupdate                                controllers.PlayerController.updatePassword
+POST          /api/players/:playerId/befriend/:friendId        controllers.PlayerController.befriend(playerId: Int, friendId: Int)
+DELETE        /api/players/:playerId/unfriend/:friendId        controllers.PlayerController.unfriend(playerId:Int, friendId: Int)
+GET           /api/players/:id/friends                         controllers.PlayerController.getFriends(id: Int)
+PUT           /api/players/:id/nameupdate                      controllers.PlayerController.updateName(id: Int)
 
 # Game type
-POST          /api/games/types/new                              controllers.GameController.newGameType
+POST          /api/games/types/new                             controllers.GameController.newGameType
 
 # Game
-POST          /api/games/new                                    controllers.GameController.newGame
-PUT           /api/games/:id/end                                controllers.GameController.endGame(id: Int)
+POST          /api/games/new                                   controllers.GameController.newGame
+PUT           /api/games/:id/end                               controllers.GameController.endGame(id: Int)
 
 # Strike type
-POST          /api/strikes/types/new                            controllers.StrikeController.newStrikeType
+POST          /api/strikes/types/new                           controllers.StrikeController.newStrikeType
 
 # Strike
-POST          /api/strikes/new                                  controllers.StrikeController.addStrikes
+POST          /api/strikes/new                                 controllers.StrikeController.addStrikes
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /*file                                            controllers.Assets.at(path="/public", file)
+GET           /*file                                           controllers.Assets.at(path="/public", file)

@@ -41,13 +41,13 @@ class StatisticsController extends Controller {
       }
   }
 
-  def basicStrike8Stats(id: Int): Action[AnyContent] = Action.async {
+  def basicStrikeStats(id: Int): Action[AnyContent] = Action.async {
     db.run(
       (for ((s, t) <- strikes
         .filter(_.player === id)
         .groupBy(_.strikeType)
         .map { case (strikeType, ss) => strikeType -> ss.length }
-        joinRight strikeTypes on (_._1 === _.id) if t.gameType === 1) yield (
+        joinRight strikeTypes on (_._1 === _.id)) yield (
         t.id,
         t.title,
         s.map { case (_, c) => c }))
@@ -58,16 +58,6 @@ class StatisticsController extends Controller {
       }
   }
 
-  def basicStrikeCaramboleStats(id: Int): Action[AnyContent] = Action.async {
-    val s = for ((s, st) <- strikes.filter(_.player === id) join strikeTypes on (_.strikeType === _.id) if st.gameType === 2) yield st.correct
-    val correct = s.filter(_ === true).size.result
-    db.run(s.size.result)
-      .flatMap {
-        case 0 => Future(NotFound)
-        case _s =>
-          db.run(correct).map(s_ => Ok(s_.toDouble / _s))
-      }
-  }
 
   def opponents(id: Int): Action[AnyContent] = Action.async {
     db.run((for ((g, p) <- games.filter(_.player2 === id) join players on (_.player1 === _.id)) yield p.id -> p.login).result)
