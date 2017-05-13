@@ -297,15 +297,15 @@
 </node>
 </node>
 <node TEXT="success" FOLDED="true" ID="ID_1873321394" CREATED="1492077965946" MODIFIED="1492077972714">
-<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1722856407" CREATED="1492077086489" MODIFIED="1492077171482">
-<node TEXT="ratio" FOLDED="true" ID="ID_1087833672" CREATED="1492077172763" MODIFIED="1492079325594">
-<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_186933728" CREATED="1492077205420" MODIFIED="1492077454559">
-<node TEXT="0.56" OBJECT="java.lang.Double|0.56" ID="ID_358301831" CREATED="1492077954028" MODIFIED="1492079331228"/>
-</node>
-</node>
-</node>
 <node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_579491758" CREATED="1492077981732" MODIFIED="1492077991968">
 <node TEXT="200 OK" ID="ID_101744990" CREATED="1492077993128" MODIFIED="1492077996346"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_1722856407" CREATED="1492077086489" MODIFIED="1492077171482">
+<node TEXT="JSON object with enumeration of strike types found for the player together with their counts" FOLDED="true" ID="ID_199088786" CREATED="1494679651135" MODIFIED="1494679678030">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1527442646" CREATED="1494679679735" MODIFIED="1494679681914">
+<node TEXT="{&#xa;&quot;correct_8pool&quot;:33,&#xa;&quot;foul_with_white&quot;:9,&#xa;&quot;game_end_correctly&quot;:4,&#xa;&quot;wrong_shot_8pool&quot;:1&#xa;}" ID="ID_950080644" CREATED="1494679682144" MODIFIED="1494679684018"/>
+</node>
+</node>
 </node>
 </node>
 </node>

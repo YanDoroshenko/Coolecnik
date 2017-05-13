@@ -42,13 +42,16 @@ class StatisticsController extends Controller {
   }
 
   def basicStrike8Stats(id: Int): Action[AnyContent] = Action.async {
-    val s = for ((s, st) <- strikes.filter(_.player === id) join strikeTypes on (_.strikeType === _.id) if st.gameType === 1) yield st.correct
-    val correct = s.filter(_ === true).size.result
-    db.run(s.size.result)
-      .flatMap {
-        case 0 => Future(NotFound)
-        case _s =>
-          db.run(correct).map(s_ => Ok(s_.toDouble / _s))
+    db.run(
+      (for ((s, t) <- strikes
+        .filter(_.player === id)
+        .groupBy(_.strikeType)
+        .map { case (strikeType, ss) => strikeType -> ss.length }
+        join strikeTypes on (_._1 === _.id) if t.gameType === 1) yield (s._2, t.id, t.title))
+        .result)
+      .map {
+        case s: Seq[(Int, Int, String)] if s.nonEmpty => Ok(s.map(u => "\"" + u._3 + "\":" + u._1).mkString("{\n", ",\n", "\n}"))
+        case _ => NotFound("Basic 8-pool statistics for the player with id " + id + " not found")
       }
   }
 
