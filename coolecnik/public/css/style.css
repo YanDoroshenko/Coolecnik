@@ -81,6 +81,10 @@ button {
     color: #d9edf7;
 }
 
+.btn {
+    white-space: normal;
+}
+
 .btn-good-pokes {
     margin: 3px;
     background-color: transparent;
@@ -399,8 +403,6 @@ h4 {
 .profile-change-pass:hover {
     text-decoration: underline;
 }
-
-
 
 .rwd-table th, .rwd-table td {
     display: table-cell;

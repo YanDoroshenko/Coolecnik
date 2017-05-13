@@ -24,6 +24,9 @@ function deleteCookie(name) {
 function unauthorize() {
     deleteCookie("myName");
     deleteCookie("myId");
+    deleteCookie("lastName");
+    deleteCookie("firstName");
+    deleteCookie("email");
     window.location.replace("/");
 }
 
