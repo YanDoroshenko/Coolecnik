@@ -110,6 +110,7 @@ function updatePassword() {
             201: function (response) {
                 $(".alert").html(passChanged);
                 $( ".alert" ).removeClass( "alert-danger d-none" );
+                unauthorize();
                 console.log("201 CREATED");
             },
             400: function (response) {
