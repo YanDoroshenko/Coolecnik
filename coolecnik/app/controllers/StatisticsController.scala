@@ -33,7 +33,7 @@ class StatisticsController extends Controller {
         case gs: Seq[Game] if gs.nonEmpty =>
           val total = gs.size
           val won = gs.count(_.winner.contains(id))
-          val draws = gs.count(_.winner == null)
+          val draws = gs.count(_.winner.isEmpty)
           val lost = total - won - draws
           val totalSecs = gs.map(g => g.end.get.toInstant.getEpochSecond - g.beginning.get.toInstant.getEpochSecond).sum
           Ok(BasicGameStats(total, won, draws, lost, totalSecs))
