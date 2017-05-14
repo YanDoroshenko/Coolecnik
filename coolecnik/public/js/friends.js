@@ -40,7 +40,8 @@ function parseFriends(friends) {
     document.getElementById("friendList").innerHTML = "";
     for (var i in friends) {
         $("#friendList").append(
-            "<li class=\"list-group-item list-group-item-action friend\"><a href=\"\">" + friends[i].login
+            "<li class=\"list-group-item list-group-item-action friend\"><a href='friendProfile.html?id="+friends[i].id+"&nick="+
+            friends[i].login+"'>" + friends[i].login
             + "</a><button class=\"btn btn-outline-danger btn-sm removeBtn\" id=\"" + friends[i].id
             + "\">&#10008;</button></li>"
         )
