@@ -274,14 +274,12 @@ function msToTime(s) {
 function getIdOfGame(elem) {
     var id_of_game = $(elem).attr("id_of_game");
 
-
-
     $("#both-main-eight tbody").html(""); //to clear data previous session from table
     $("#both-main-carambole tbody").html(""); //to clear data previous session from table
     $("#eight-pool-main tbody").html(""); //to clear data previous session from table
     $("#carambol-main tbody").html(""); //to clear data previous session from table
 
-    // //game by id
+    //game by id
     var endpoint_single_game = "/api/players/" + getCookie("myId") + "/games/" + id_of_game;
     $.ajax(endpoint_single_game, {
         type: "GET",
@@ -301,15 +299,15 @@ function getIdOfGame(elem) {
                 var endTime = response.end;
 
                 //which table to show
-                if (response.typeId == 1) {
-                    var style = response.typeId == 1 ? 'block' : 'none';
-                    document.getElementById('both-main-eight').style.display = style
+                if (response.typeId == "1") {
+                    document.getElementById("both-main-carambole").style.display = "none";
+                    document.getElementById("both-main-eight").style.display = "";
+                }
 
-                }else if(response.typeId == 2){
-                        var style = response.typeId == 2 ? 'block' : 'none';
-                        document.getElementById('both-main-carambole').style.display = style
-                    }
-
+                if (response.typeId == "2") {
+                    document.getElementById("both-main-carambole").style.display = "";
+                    document.getElementById("both-main-eight").style.display = "none";
+                }
 
                     $("#both-main-eight tbody").append($("<tr>" +
                         "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
