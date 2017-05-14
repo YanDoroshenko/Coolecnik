@@ -422,6 +422,26 @@ h4 {
     color: #23b326;
 }
 
+#chartContainer_games {
+    height: 400px;
+    margin: 5px;
+}
+
+#chartPoolStrikes {
+    height: 400px;
+    margin: 5px;
+}
+
+#chartPoolEndStrikes {
+    height: 400px;
+    margin: 5px;
+}
+
+#chartCarambolStrikes {
+    height: 400px;
+    margin: 5px;
+}
+
 @media (max-width: 770px) {
 
     .rwd-table td:before {

@@ -118,26 +118,27 @@
                 </form>
             </div>
         </div>
+        <!-- BASIC STATISTICS -->
         <div class="col-lg-5 offset-lg-1">
             <h3>Základní statistiky</h3>
             <dl class="row justify-content-end">
                 <dt class="col-7">Celkový čas:</dt>
-                <dd class="col-5 pr-0" id="time"></dd>
+                <dd class="col-5 pr-0" id="time">0</dd>
 
                 <dt class="col-7">Odehrané hry:</dt>
-                <dd class="col-5" id="total"></dd>
+                <dd class="col-5" id="total">0</dd>
 
                 <dt class="col-7">Výhry:</dt>
-                <dd class="col-5" id="won"></dd>
+                <dd class="col-5" id="won">0</dd>
 
                 <dt class="col-7">Prohry:</dt>
-                <dd class="col-5" id="lost"></dd>
+                <dd class="col-5" id="lost">0</dd>
 
                 <dt class="col-7">Remízy:</dt>
-                <dd class="col-5" id="draws"></dd>
+                <dd class="col-5" id="draws">0</dd>
 
                 <dt class="col-7">Výhernost:</dt>
-                <dd class="col-5" id="percent"></dd>
+                <dd class="col-5" id="percent">0 %</dd>
                 <hr class="hr-light"/>
                 <dt class="col-7">Turnajové hry:</dt>
                 <dd class="col-5">43</dd>
@@ -157,7 +158,16 @@
         </div>
     </div>
 </div>
-<div id="chartContainer_games" style="height: 400px; width: 100%;"></div>
+
+<!-- DIAGRAMS -->
+<div class="container col-xl-12 col-md-9">
+    <div class="row justify-content-center">
+    <div class="col-xl-5" id="chartContainer_games"></div>
+    <div class="col-xl-5" id="chartPoolStrikes"></div>
+    <div class="col-xl-5" id="chartPoolEndStrikes"></div>
+    <div class="col-xl-5" id="chartCarambolStrikes"></div>
+    </div>
+</div>
 
 <script type="text/javascript" src="js/profile.js"></script>
 <script type="text/javascript" src="js/canvasjs.min.js"></script>
