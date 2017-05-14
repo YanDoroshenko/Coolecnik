@@ -59,11 +59,14 @@ $.ajax(endpointLoad, {
     statusCode: {
         200: function (response) {
             setStats(response);
+            console.log(response);
         },
         404: function (response) {
             console.log("404");
         }
+
     }
+
 });
 
 function setStats(stats) {
