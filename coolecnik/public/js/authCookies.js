@@ -34,3 +34,7 @@ function checkAuth() {
     if (getCookie("myId") == null || getCookie("myName") == null)
         window.location.replace("/");
 }
+
+window.onload = function () {
+    $("#dropdown03").html(getCookie("myName"));
+};
