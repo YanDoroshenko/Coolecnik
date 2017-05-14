@@ -1,6 +1,8 @@
 /**
  * Created by Erik on 17. 4. 2017.
  */
+//actual page
+var actualPage = 1;
 
 //table switch
 document.getElementById('gameType').addEventListener('change', function () {
@@ -55,15 +57,19 @@ function setOpp(opponents) {
         $("#bothGames tbody").html("");
         $("#8poolGame tbody").html("");
 
+        var pagesEndpoint = "/api/players/" + getCookie("myId") + "/pages?";
         var endpoint = "/api/players/" + getCookie("myId") + "/statistics?";
         endpoint += "&gameType=" + $("#gameType").val();
+        pagesEndpoint += "&gameType=" + $("#gameType").val();
         endpoint += "&result=" + $("#gameStatus").val();
+        pagesEndpoint += "&result=" + $("#gameStatus").val();
 
         //opponent endpoint
         if ($("#opponent").val() == "all") {
 
         } else {
             endpoint += "&opponent=" + $("#opponent").val();
+            pagesEndpoint += "&opponent=" + $("#opponent").val();
         }
 
         //dateFrom endpoint
@@ -71,6 +77,7 @@ function setOpp(opponents) {
 
         } else {
             endpoint += "&from=" + $("#dateFrom").val() + "T00:00:00Z%2B0200";
+            pagesEndpoint += "&from=" + $("#dateFrom").val() + "T00:00:00Z%2B0200";
         }
 
         //dateTo endpoint
@@ -78,10 +85,16 @@ function setOpp(opponents) {
 
         } else {
             endpoint += "&to=" + $("#dateTo").val() + "T00:00:00Z%2B0200";
+            pagesEndpoint += "&to=" + $("#dateTo").val() + "T00:00:00Z%2B0200";
         }
 
-        endpoint += "&page=1";
         endpoint += "&pageSize=20";
+        pagesEndpoint += "&pageSize=20";
+
+        getPages(pagesEndpoint);
+
+        endpoint += "&page=" + actualPage;
+
 
         $.ajax(endpoint, {
             type: "GET",
@@ -447,4 +460,42 @@ function strikeTypeRename(strikeTypeId) {
     }else if(strikeTypeId == 12) {
         return strikeTypeTitle = "Faul";
     }
+}
+
+//pages
+function getPages(endpoint) {
+
+    $.ajax(endpoint, {
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        statusCode: {
+            200: function (response) {
+                createPagination(response, endpoint);
+            },
+            404: function (response) {
+                console.log("404");
+            }
+        }
+    });
+}
+
+function createPagination(number, endpoint) {
+    var pages = "<li class=\"page-item\">"+
+        "<a class=\"page-link\" href=\"#\" id='1' tabindex=\"-1\">First</a></li>";
+
+    //shows only -2 +2 pages, only +2 when actual is 1
+    for (var i = -2; i < 3; i++){
+        var num = actualPage+i;
+        if(num > number) {break;}
+        if(num < 1){continue;}
+        pages += "<li class=\"page-item";
+        if(num == actualPage) {pages += " active "}
+        pages += "\"><a class=\"page-link\" href=\"#\" id='"+num+"'>"+num+"</a></li>";
+    }
+
+    pages += "<li class=\"page-item\"> <a class=\"page-link\" href=\"#\" id='"+number+"'>Last</a> </li>";
+    $("#statsPaginationAll").html(pages).click(function (e) {
+        actualPage = Number(e.target.id);
+        myFunc();
+    });
 }
