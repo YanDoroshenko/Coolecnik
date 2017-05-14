@@ -106,6 +106,8 @@ function setStats(stats) {
         });
     if(stats.total != 0) {
         chart.render();
+    } else {
+        $("#chartContainer_games").addClass("d-none");
     }
 }
 
@@ -161,8 +163,10 @@ function createStrikeCharts(data) {
                 }
             ]
         });
-    if(poolStrikes != 0) {
+    if(poolStrikes.total != 0) {
         chartPool.render();
+    } else {
+        $("#chartPoolStrikes").addClass("d-none");
     }
 
     var chartEndPool = new CanvasJS.Chart("chartPoolEndStrikes",
@@ -193,8 +197,10 @@ function createStrikeCharts(data) {
                 }
             ]
         });
-    if(poolStrikes != 0) {
+    if(poolStrikes.total != 0) {
         chartEndPool.render();
+    } else {
+        $("#chartPoolEndStrikes").addClass("d-none");
     }
 
     var chartCarambol = new CanvasJS.Chart("chartCarambolStrikes",
@@ -224,6 +230,8 @@ function createStrikeCharts(data) {
         });
     if(carambolStrikes.total != 0) {
         chartCarambol.render();
+    } else {
+        $("#chartCarambolStrikes").addClass("d-none");
     }
 
 }
