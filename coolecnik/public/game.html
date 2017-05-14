@@ -67,8 +67,8 @@
         <div style="width: 33%; float: left; text-align: center;margin-top:2%;"><span class="label label-default">8-Pool</span></div>
         <div style="width: 33%; float: left; text-align: center;">
             <label class="switch">
-                <input type="checkbox" id="gameType" checked="false">
-                <div class="slider round"></div>
+                <input type="checkbox" id="gameType">
+                <span class="slider round"></span>
             </label>
         </div>
         <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
@@ -92,7 +92,7 @@
             <div style="width: 33%; float: left; text-align: center;">
                 <label class="switch">
                     <input type="checkbox" id="karambolGameType">
-                    <div class="slider round"></div>
+                    <span class="slider round"></span>
                 </label>
             </div>
             <div style="width: 33%; float: right; text-align: center;margin-top:2%;">
@@ -116,7 +116,6 @@
 <div class="container col-md-7 marg" id="poolControlDiv" style="display: none">
     <div class="row justify-content-center">
         <h3 class="h3 ">
-            <img src="" alt="">
             <span id="player1">Player1</span>
             vs
             <span class="active-player" id="player2">Player2</span>
@@ -172,7 +171,6 @@
     <div class="container col-md-7 marg">
         <div class="row justify-content-center">
             <h3 class="h3 ">
-                <img src="" alt="">
                 <span id="player1c"></span>
                 vs
                 <span id="player2c"></span>
@@ -186,20 +184,20 @@
                 </button>
             </div>
 
-            <h5 class="h5 col-6 align-self-center text-center"><span id="timerMc">0</span>m : <span
+            <div class="h5 col-6 align-self-center text-center"><span id="timerMc">0</span>m : <span
                     id="timerSc">0</span>s
 
                 <div id="carGameType1Div" style="display: none">
-                    <p color="yellow"><br>Karamboly: <span id="carGameType1CarsTotal">6213</span></p>
+                    <p><br>Karamboly: <span id="carGameType1CarsTotal">6213</span></p>
                     <p>Kolo: <span id="carGameType1CurrentRound">6213</span></p>
                 </div>
 
                 <div id="carGameType2Div" style="display: none">
-                    <p color="yellow"><br>Kola: <span id="carGameType2RoundsTotal">6213</span></p>
+                    <p><br>Kola: <span id="carGameType2RoundsTotal">6213</span></p>
                     <p>Zbývá kol: <span id="carGameType2RoundsRemain">6213</span></p>
                 </div>
 
-            </h5>
+            </div>
 
 
             <div class="list-group p-0 col-3">
