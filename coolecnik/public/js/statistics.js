@@ -52,7 +52,6 @@ function setOpp(opponents) {
 //statistics filtering
     function myFunc() {
 
-        console.log("nuluju");
         //to clear tables when selecting filters
         $("#caramboleGame tbody").html("");
         $("#bothGames tbody").html("");
@@ -498,7 +497,6 @@ function createPagination(number, endpoint) {
 }
 
 $("#statsPaginationAll").click(function (e) {
-    console.log("clicked on pages");
     actualPage = Number(e.target.id);
     myFunc();
 });
