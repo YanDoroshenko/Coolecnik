@@ -8,7 +8,7 @@ var players, activePlayer, gameId, timerVar;
  activeGame: bool
  savedGame: bool
  savedGameInfo: obj("gameId","pl2Name","pl2Id","endOfGameTime", "winner", "round")
- activePlayer: 1 or 2
+ activePlayer: 0 or 1
  gameType: 1 or 2
  savedTime: obj("m", "s")
  savedCounterValues: obj("green1", "green2", "red1", "red2")
@@ -147,7 +147,7 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
 
     if (navigator.onLine === true) {
         sendStrikes();
-        sendGameEnd();
+        sendGameEnd(-42);
     }
     else {
         saveGameEnd();
@@ -169,7 +169,7 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
 });
 
 
-/*---------------Pool panel---------------*/
+/*---------------Carambol panel---------------*/
 
 document.getElementById("carCorrectBtn").addEventListener("click", function (event) {
     carGameRoutine(11, "good");
@@ -222,8 +222,8 @@ document.getElementById("carRemoveLastBtn").addEventListener("click", function (
 
     localStorage.setItem("currentGame", null);
     localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
-    console.log("STEP BACK");
-    console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));
+    /*    console.log("STEP BACK");
+     console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));*/
 
 });
 

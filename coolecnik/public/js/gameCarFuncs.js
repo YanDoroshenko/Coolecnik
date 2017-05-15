@@ -165,13 +165,6 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
             $("#carambParams").hide();
             return;
         }
-
-
-
-
-
-
-
     }
 
     if (localStorage.getItem("carType") === "2" && strikeType === 12) {
@@ -253,8 +246,8 @@ function carGameRoutine(strikeType, changePlayer, badOrGood) {
     var savedCounterValues = carGetSavedCounterValuesObjs();
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
-    console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));
-    console.log("--savedCounterValues ", savedCounterValues);
+    /*    console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));
+     console.log("--savedCounterValues ", savedCounterValues);*/
 
 }
 

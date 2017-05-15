@@ -59,7 +59,7 @@ function hash(str, asString, seed) {
 
 function setActivePlayerOnScreen() {
     if (localStorage.getItem("gameType") === "1") {
-        if (activePlayer === 1) {
+        if (activePlayer === 0) {
             document.getElementById("player1").className = "active-player";
             document.getElementById("player2").className = "";
         }
@@ -69,7 +69,7 @@ function setActivePlayerOnScreen() {
         }
     }
     else if (localStorage.getItem("gameType") === "2") {
-        if (activePlayer === 1) {
+        if (activePlayer === 0) {
             document.getElementById("player1c").className = "active-player";
             document.getElementById("player2c").className = "";
         }
@@ -82,28 +82,30 @@ function setActivePlayerOnScreen() {
 
 function sendStrikes() {
     var allStrikes = JSON.parse(localStorage.getItem("currentGame"));
-    $.ajax("/api/strikes/new", {
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(allStrikes),
-        statusCode: {
-            201: function (response) {
-                console.log("201 CREATED");
-                $("#looseModalWindow").modal("hide");
-                $("#poolControlDiv").css("display", "none");
-                $("#karambolControlDiv").css("display", "none");
-                $("#newGameDiv").css("display", "block");
-                $("#helpDiv").html("Hra byla ukončena a uložena na serveru!");
-                clearTimeout(timerVar);
-            },
-            400: function (response) {
-                console.log("400 BAD REQUEST");
-            },
-            409: function (response) {
-                console.log("409 CONFLICT");
+    if (allStrikes !== null) {
+        $.ajax("/api/strikes/new", {
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(allStrikes),
+            statusCode: {
+                201: function (response) {
+                    console.log("201 CREATED");
+                    $("#looseModalWindow").modal("hide");
+                    $("#poolControlDiv").css("display", "none");
+                    $("#karambolControlDiv").css("display", "none");
+                    $("#newGameDiv").css("display", "block");
+                    $("#helpDiv").html("Hra byla ukončena a uložena na serveru!");
+                    clearTimeout(timerVar);
+                },
+                400: function (response) {
+                    console.log("400 BAD REQUEST");
+                },
+                409: function (response) {
+                    console.log("409 CONFLICT");
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function sendGameEnd(winnerId) {

@@ -215,8 +215,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     }];
                     localStorage.setItem("players", JSON.stringify(players));
 
-                    activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
-                    if (activePlayer === 1) {
+                    activePlayer = Math.floor(Math.random() * (3 - 1)); // 0 for 1st player, 1 for second
+                    if (activePlayer === 0) {
                         document.getElementById("player1").className = "active-player";
                         document.getElementById("player2").className = "";
                     }
@@ -294,8 +294,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     }];
                     localStorage.setItem("players", JSON.stringify(players));
 
-                    activePlayer = Math.floor(Math.random() * (3 - 1)) + 1; // 1 for 1st player, 2 for second
-                    if (activePlayer === 1) {
+                    activePlayer = Math.floor(Math.random() * (3 - 1)); // 1 for 1st player, 2 for second
+                    if (activePlayer === 0) {
                         document.getElementById("player1c").className = "active-player";
                         document.getElementById("player2c").className = "";
                     }

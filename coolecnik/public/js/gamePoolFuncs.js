@@ -31,7 +31,7 @@ function savePoolStrike(strikeType) {
 }
 
 function setPoolCounters(goodOrBad) {
-    if (activePlayer === 1) {
+    if (activePlayer === 0) {
         var preparedStr = "#pl1" + goodOrBad;
         $(preparedStr).html(parseInt($(preparedStr).text()) + 1);
     }
@@ -63,8 +63,8 @@ function poolGameRoutine(strikeTime, changePlayer, badOrGood) {
 
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
-    console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));
-    console.log("--savedCounterValues ", savedCounterValues);
+    /*    console.log("--currentGame        ", JSON.parse(localStorage.getItem("currentGame")));
+     console.log("--savedCounterValues ", savedCounterValues);*/
 
 }
 
@@ -73,12 +73,18 @@ function poolEndGameRoutine(lastStrikeType) {
     if (navigator.onLine === true) // if there is connection to internet
     {
         sendStrikes();
-        // here activePlayer shows the non-active player. dont know why
+        // here activePlayer shows the non-active player. Or doesnt. dont know why
         if (lastStrikeType === 6) {
-            sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
+            if (players[1].id === -1)
+                sendGameEnd(players[activePlayer].id);
+            else
+                sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
         }
         else {
-            sendGameEnd(players[activePlayer].id);
+            if (players[1].id === -1)
+                sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
+            else
+                sendGameEnd(players[activePlayer].id);
         }
     }
 
