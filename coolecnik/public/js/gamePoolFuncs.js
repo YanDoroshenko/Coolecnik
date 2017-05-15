@@ -151,7 +151,7 @@ function poolSendSavedGame() {
                     $("#poolControlDiv").css("display", "none");
                     $("#karambolControlDiv").css("display", "none");
                     $("#endOfGameDiv").css("display", "block");
-                    $("#endOfGameDiv").html("Hra je ukoncena a ulozena na serveru")
+                    $("#endOfGameDiv").html("Hra byla ukončena a uložena na serveru!")
                 },
                 400: function (response) {
                     console.log("400 BAD REQUEST");

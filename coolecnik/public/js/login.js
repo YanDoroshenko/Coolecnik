@@ -21,7 +21,7 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
 
     // check for required fields non-emptiness
     if ($('#loginLogin').val().length === 0 || $('#loginPass').val() === 0) {
-        $("#loginSpan").text("Jedno z povinných polí je nevyplněno");
+        $("#loginSpan").text("Jedno z povinných polí není vyplněno!");
         return;
     }
 
@@ -64,7 +64,7 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
                 console.log("400 BAD REQUEST");
             },
             401: function (response) {
-                $("#loginSpan").text("Špatný login nebo heslo. Zkuste ještě jednou. ");
+                $("#loginSpan").text("Špatný login nebo heslo. Zkuste ještě jednou.");
                 console.log("401 UNAUTHORIZED");
             }
         }

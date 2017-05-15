@@ -93,7 +93,7 @@ function sendStrikes() {
                 $("#poolControlDiv").css("display", "none");
                 $("#karambolControlDiv").css("display", "none");
                 $("#newGameDiv").css("display", "block");
-                $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                $("#helpDiv").html("Hra byla ukončena a uložena na serveru!");
                 clearTimeout(timerVar);
             },
             400: function (response) {
@@ -152,7 +152,7 @@ function sendGameEnd(winnerId) {
                 $("#poolControlDiv").css("display", "none");
                 $("#karambolControlDiv").css("display", "none");
                 $("#newGameDiv").css("display", "block");
-                $("#helpDiv").html("Hra byla ukončená a uložená na serveru");
+                $("#helpDiv").html("Hra byla ukončena a uložena na serveru!");
                 clearTimeout(timerVar);
             }
         }
@@ -167,8 +167,8 @@ function saveGameEnd(winnerId) {
     $("#poolControlDiv").css("display", "none");
     $("#karambolControlDiv").css("display", "none");
     $("#endOfGameDiv").css("display", "block");
-    $("#endOfGameDiv").html("Hra je ukoncena, ale neni odeslana z duvovu toho ze <u>neni pripojeni k intrnetu</u>." +
-        "Hra bude odeslana na server az otevrete tuto stranku pri aktivnem internet pripojeni.");
+    $("#endOfGameDiv").html("Hra je ukončena, ale neni odeslana z důvodu toho, že <u>neni připojeni k intrnetu</u>." +
+        "Hra bude odeslána na server až otevřete tuto stránku pri aktívnem připojení na internet.");
     localStorage.setItem("savedGame", "true");
     var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
     var currentdate = new Date();

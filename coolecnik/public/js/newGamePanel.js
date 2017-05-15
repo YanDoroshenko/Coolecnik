@@ -48,7 +48,7 @@ document.getElementById("authPlayer2btn").addEventListener("click", function (ev
                 202: function (response) {
                     console.log("202 ACCEPTED");
                     if (getCookie("myId") == response.id) {
-                        $("#newGameSpan").text("Nelze hrát s sebou. Fakt nemáte kamarádi na to? Je to smůla");
+                        $("#newGameSpan").text("Nelze hrát se sebou. Fakt nemáte kamarády na to? Je to smůla.");
                         document.getElementById("authBtn").className = "icon-key";
                         return;
                     }
@@ -153,7 +153,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
     event.preventDefault();
     $("#newGameSpan").val = "";
     if ($("#pl0").val().length == 0) {
-        $("#newGameSpan").text("Jméno musí být neprazdné");
+        $("#newGameSpan").text("Jméno musí být vyplněné.");
         return;
     }
 
