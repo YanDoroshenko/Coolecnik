@@ -38,3 +38,5 @@ function checkAuth() {
 window.onload = function () {
     $("#dropdown03").html(getCookie("myName"));
 };
+
+$('#tournament-link').addClass('disabled');
