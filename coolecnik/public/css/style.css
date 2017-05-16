@@ -70,6 +70,15 @@ button {
     border-bottom: 5px dotted green;
 }
 
+.nonactive-player {
+    color: inherit;
+    font-style: inherit;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-decoration: none;
+    border-bottom: 5px dotted transparent;
+}
+
 .player {
     font-style: inherit;
     padding-left: 5%;

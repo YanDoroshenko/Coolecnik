@@ -172,12 +172,13 @@ document.getElementById("endGameBtn").addEventListener("click", function (event)
 /*---------------Carambol panel---------------*/
 
 document.getElementById("carCorrectBtn").addEventListener("click", function (event) {
-    carGameRoutine(11, "good");
+    carGameRoutine(11, "false", "good");
 });
 
 document.getElementById("carFaulBtn").addEventListener("click", function (event) {
-    round++;
+
     carGameRoutine(12, "true", "bad");
+
 });
 
 document.getElementById("carRemoveLastBtn").addEventListener("click", function (event) {
@@ -232,7 +233,7 @@ document.getElementById("carEndGameBtn").addEventListener("click", function (eve
     //if (navigator.onLine === true) // if there is connection to internet
     //{
     sendStrikes();
-    sendGameEnd();
+    sendGameEnd(-42);
 
     //}
     clearTimeout(timerVar);
