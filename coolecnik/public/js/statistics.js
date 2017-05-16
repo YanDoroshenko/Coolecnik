@@ -157,7 +157,7 @@ function setOpp(opponents) {
                             "<td data-th=\"Zly strk\">" + response[i].wrongStrikes + "</td>" +
                             "<td data-th=\"Faul BK\">" + response[i].faulsWithWhite + "</td>" +
                             "<td data-th=\"Faul SK\">" + response[i].faulsWithOthers + "</td>" +
-                            "<td data-th=\"Faul iný\">" + response[i].faulsOther + "</td>" +
+                            "<td data-th=\"Faul jiný\">" + response[i].faulsOther + "</td>" +
                             "<th class=\"eight_pool\"><a class=\"nav-link\" data-toggle=\"modal\" onclick='getIdOfGame(this)' id_of_game=\"" + response[i].gameId + "\" href=\"#" + response[i].typeTitle + "\">detail</a></th>" +
                             "</tr>"));
                     }

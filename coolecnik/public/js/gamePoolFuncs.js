@@ -77,14 +77,18 @@ function poolEndGameRoutine(lastStrikeType) {
         if (lastStrikeType === 6) {
             if (players[1].id === -1)
                 sendGameEnd(players[activePlayer].id);
-            else
-                sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
+            else {
+                if (localStorage.getItem("currentGame") === null)
+                    sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
+                else
+                    sendGameEnd(players[(activePlayer === 1) ? 1 : 0].id);
+            }
         }
         else {
             if (players[1].id === -1)
                 sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
             else
-                sendGameEnd(players[activePlayer].id);
+                sendGameEnd(players[(activePlayer === 0) ? 1 : 0].id);
         }
     }
 
