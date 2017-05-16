@@ -201,7 +201,7 @@ function setOpp(opponents) {
 //change guest winner name from -1 to something else
 function changeGuestWinnerName(guestWinnerPlayer) {
     if(guestWinnerPlayer == -1) {
-        guestWinnerPlayer = "neznámy";
+        guestWinnerPlayer = "'Host'";
     }
     if(guestWinnerPlayer == null){
         guestWinnerPlayer = "remíza";
@@ -212,7 +212,7 @@ function changeGuestWinnerName(guestWinnerPlayer) {
 //change guest opponent name from -1 to something else or draw
 function changeGuestOpponentName(guestOpponentPlayer) {
     if(guestOpponentPlayer == -1) {
-        guestOpponentPlayer = "neznámy";
+        guestOpponentPlayer = "'Host'";
     }
     return guestOpponentPlayer
 }
