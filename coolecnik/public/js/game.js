@@ -243,5 +243,10 @@ document.getElementById("carEndGameBtn").addEventListener("click", function (eve
     $("#carGameType1Div").hide();
     $("#carGameType2Div").hide();
 
+    $("#karambolControlDiv").hide();
+    $("#carambParams").hide();
+
     $("#gameType").prop("checked", false);
+    $("#newGameDiv").show();
+    localStorage.clear();
 });
