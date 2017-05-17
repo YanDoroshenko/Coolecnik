@@ -81,7 +81,7 @@ class StrikeController extends Controller {
                 val strikes = ss.map(_._1).filter(_.nonEmpty).map(_.get).distinct
                 val types = ss.map(_._2).filter(_.nonEmpty).map(_.get).distinct
                 Ok(strikes.map(s =>
-                  StrikeDetail(s._1, s._2, types.find(_._1 == s._2).get._2, s._3, s._4, s._5, s._6)))
+                  StrikeDetail(s._1, s._2, types.find(_._1 == s._2).get._2, s._3, s._4, s._5, s._6)).sortBy(_.round))
               case _ => NotFound("Game has no strikes")
             }
         case _ => Future(NotFound("Game with id " + id + " not found"))
