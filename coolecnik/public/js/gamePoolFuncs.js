@@ -11,7 +11,7 @@ function poolGetSavedCounterValuesObjs() {
 }
 
 function savePoolStrike(strikeType) {
-    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+    //var activePlayer = parseInt(localStorage.getItem("activePlayer"));
 
     var obj = {
         "strikeType": parseInt(strikeType),

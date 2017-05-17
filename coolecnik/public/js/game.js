@@ -60,21 +60,23 @@ document.getElementById("poolWrBallBtn").addEventListener("click", function (eve
 });
 
 document.getElementById("removeLastBtn").addEventListener("click", function (event) {
-    var activePlayer = parseInt(localStorage.getItem("activePlayer"));
+    //var activePlayer = parseInt(localStorage.getItem("activePlayer"));
 
-	var existingStrikes = JSON.parse(localStorage.getItem("currentGame")); 
+	var existingStrikes = JSON.parse(localStorage.getItem("currentGame"));
 
-	if (existingStrikes == null) {
+    if (existingStrikes === null) {
 		existingStrikes = [];
 		return;
 	}
 	round = round - 1;
 
 	var lastStrike = existingStrikes.pop();
+    if (lastStrike === undefined)
+        return;
 
     if (lastStrike.player === parseInt(getCookie("myId"))) {
         if (lastStrike.strikeType === 1) {
-			$("#pl1good").html( parseInt($("#pl1good").text()) - 1 );
+            $("#pl2good").html(parseInt($("#pl2good").text()) - 1);
 		}
 		else if (lastStrike.strikeType == 3){
             activePlayer = (activePlayer === 1) ? 0 : 1;
@@ -82,7 +84,7 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
             setActivePlayerOnScreen();
 		}
 		else {
-			$("#pl1bad").html( parseInt($("#pl1bad").text()) - 1 );
+            $("#pl2bad").html(parseInt($("#pl2bad").text()) - 1);
             activePlayer = (activePlayer === 1) ? 0 : 1;
 
             setActivePlayerOnScreen();
@@ -90,14 +92,14 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 	}
 	else {
         if (lastStrike.strikeType === 1)
-			$("#pl2good").html( parseInt($("#pl2good").text()) - 1 );
+            $("#pl1good").html(parseInt($("#pl1good").text()) - 1);
         else if (lastStrike.strikeType === 3) {
             activePlayer = (activePlayer === 1) ? 0 : 1;
 
             setActivePlayerOnScreen();
 		}
 		else {
-			$("#pl2bad").html( parseInt($("#pl2bad").text()) - 1 );
+            $("#pl1bad").html(parseInt($("#pl1bad").text()) - 1);
             activePlayer = (activePlayer === 1) ? 0 : 1;
 
             setActivePlayerOnScreen();
@@ -110,7 +112,7 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
     var savedCounterValues = poolGetSavedCounterValuesObjs();
     localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
 
-	console.log(JSON.parse(localStorage.getItem("currentGame"))); 
+    console.log("Step back   ", localStorage.getItem("currentGame"));
 });
 
 document.getElementById("poolOthFaulBtn").addEventListener("click", function (event) {
