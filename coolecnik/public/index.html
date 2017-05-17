@@ -118,7 +118,7 @@
         </div>
         <hr class="hr-green"/>
         <span id="newGameSpan"></span>
-        <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit" id="startAnonBtn">Start game</button>
+        <button class="btn btn-lg btn-secondary green-btn btn-block" type="submit" id="startAnonBtn">Začat hru</button>
     </form>
 </div>
 
@@ -216,15 +216,18 @@
             <button class="btn btn-outline-danger col-5 mx-auto" id="poolWrBallBtn">Faul: cizí koule</button>
         </div>
         <div class="row justify-content-end mb-2">
-            <button class="btn btn-outline-secondary col-5 mx-auto" id="removeLastBtn" style="display:none">Krok zpět
-            </button>
-            <button class="btn btn-outline-danger col-5 mr-5" id="poolOthFaulBtn">Faul: jiný</button>
-        </div>
-        <div class="row justify-content-center mt-2">
+            <!--<button class="btn btn-outline-secondary col-5 mx-auto" id="removeLastBtn" style="display:none">Krok zpět</button>-->
             <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto" data-toggle="modal"
                     data-target="#looseModalWindow">
                 Konec hry!
             </button>
+            <button class="btn btn-outline-danger col-5 mx-auto" id="poolOthFaulBtn">Faul: jiný</button>
+        </div>
+        <!--<div class="row justify-content-center mt-2">-->
+            <!--<button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto" data-toggle="modal"-->
+                    <!--data-target="#looseModalWindow">-->
+                <!--Konec hry!-->
+            <!--</button>-->
         </div>
     </div>
 </div>
@@ -290,7 +293,8 @@
 
 
 <!--      end of game block      -->
-<div class="container col-md-3 marg" id="endOfGameDiv" style="display: none"></div>
+<div class="container col-md-3" id="endOfGameDiv" style="display: none"></div>
+<div class="container col-md-3" id="endOfGameDivButton"style="display: none"><button type="button" class="btn btn-success" onclick="location.href='index.html'">Zpět na začátek</button></div>
 
 
 <!-- Modal Loose -->

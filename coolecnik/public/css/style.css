@@ -506,3 +506,12 @@ td.karambol:nth-child(n+11), th.karambol:nth-child(n+11) {
 display: none
 }
 }
+
+#endOfGameDivButton {
+     width: 100px;
+     margin: 0 auto;
+ }
+
+#endOfGameDiv {
+    text-align: center;
+}

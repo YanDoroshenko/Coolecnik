@@ -77,7 +77,7 @@ $("#startAnonBtn").on("click", function (e) {
         return;
     }
     if ($("#gameType").prop("checked") && (isNaN(parseInt($("#carambCount").val())) || parseInt($("#carambCount").val()) < 1)) {
-        $("#newGameSpan").text("Žádejte správný počet karambolu nebo kol");
+        $("#newGameSpan").text("Zadejte správny počet karambolu nebo kol");
         return;
     }
 
@@ -157,40 +157,47 @@ $("#correctEndBtn").on("click", function () {
     $("#poolControlDiv").hide();
     $("#looseModalWindow").modal("hide");
     $("#endOfGameDiv").show();
-    $("#endOfGameDiv").html("Hra byla ukoncena, vyherce je " + String((activePlayer === 0) ? $("#player1").html() : $("#player2").html()));
+    $("#endOfGameDivButton").show();
+    $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String((activePlayer === 0) ? $("#player1").html() : $("#player2").html()));
+
 });
 
 $("#poolFaul8Btn").on("click", function () {
     $("#poolControlDiv").hide();
     $("#looseModalWindow").modal("hide");
     $("#endOfGameDiv").show();
-    $("#endOfGameDiv").html("Hra byla ukoncena, vyherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
+    $("#endOfGameDivButton").show();
+    $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
 });
 
 $("#pool8tooSoonBtn").on("click", function () {
     $("#poolControlDiv").hide();
     $("#looseModalWindow").modal("hide");
     $("#endOfGameDiv").show();
-    $("#endOfGameDiv").html("Hra byla ukoncena, vyherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
+    $("#endOfGameDivButton").show();
+    $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
 });
 
 $("#pool8WrHoleBtn").on("click", function () {
     $("#poolControlDiv").hide();
     $("#looseModalWindow").modal("hide");
     $("#endOfGameDiv").show();
-    $("#endOfGameDiv").html("Hra byla ukoncena, vyherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
+    $("#endOfGameDivButton").show();
+    $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
 });
 
 $("#pool8OfTableBtn").on("click", function () {
     $("#poolControlDiv").hide();
     $("#looseModalWindow").modal("hide");
     $("#endOfGameDiv").show();
-    $("#endOfGameDiv").html("Hra byla ukoncena, vyherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
+    $("#endOfGameDivButton").show();
+    $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String((activePlayer === 1) ? $("#player1").html() : $("#player2").html()));
 });
 
 $("#endGameBtn").on("click", function () {
     $("#poolControlDiv").hide();
     $("#looseModalWindow").modal("hide");
     $("#endOfGameDiv").show();
-    $("#endOfGameDiv").html("Hra byla ukoncena");
+    $("#endOfGameDivButton").show();
+    $("#endOfGameDiv").html("Hra byla ukončena");
 });
