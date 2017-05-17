@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<div class="container login-form col-md-7">
+<div class="container login-form col-md-7" id="loginPanel">
     
     <button class="btn btn-lg btn-outline-primary green-btn btn-block" type="button" data-toggle="collapse" href="#signin" aria-expanded="false" aria-controls="signin" id="signinCollapseBtn">
         Přihlásit se
@@ -215,9 +215,10 @@
             <button class="btn btn-outline-warning col-5 mx-auto" id="poolIncorrectBtn">Nesprávný strk</button>
             <button class="btn btn-outline-danger col-5 mx-auto" id="poolWrBallBtn">Faul: cizí koule</button>
         </div>
-        <div class="row justify-content-center mb-2">
-            <button class="btn btn-outline-secondary col-5 mx-auto" id="removeLastBtn">Krok zpět</button>
-            <button class="btn btn-outline-danger col-5 mx-auto" id="poolOthFaulBtn">Faul: jiný</button>
+        <div class="row justify-content-end mb-2">
+            <button class="btn btn-outline-secondary col-5 mx-auto" id="removeLastBtn" style="display:none">Krok zpět
+            </button>
+            <button class="btn btn-outline-danger col-5 mr-5" id="poolOthFaulBtn">Faul: jiný</button>
         </div>
         <div class="row justify-content-center mt-2">
             <button id="looseModalBtn" type="button" class="btn btn-outline-success col-5 mx-auto" data-toggle="modal"
@@ -293,7 +294,7 @@
 
 
 <!-- Modal Loose -->
-<div class="modal  " id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
+<div class="modal" id="looseModalWindow" tabindex="-1" role="dialog" aria-labelledby="looseModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-pop-up" id="endGameModal">
