@@ -15,7 +15,7 @@ document.getElementById('gameType').addEventListener('change', function () {
 });
 
 //onload of page show default filtered data
-window.onload = myFunc();
+window.onload = myFunc(1);
 
 //opponents to select box
 var endpoint = "/api/players/" + getCookie("myId") + "/opponents";
@@ -50,8 +50,8 @@ function setOpp(opponents) {
 }
 
 //statistics filtering
-    function myFunc() {
-
+    function myFunc(page) {
+        actualPage = page;
         //to clear tables when selecting filters
         $("#caramboleGame tbody").html("");
         $("#bothGames tbody").html("");
@@ -93,7 +93,7 @@ function setOpp(opponents) {
 
         getPages(pagesEndpoint);
 
-        endpoint += "&page=" + actualPage;
+        endpoint += "&page=" + page;
 
 
         $.ajax(endpoint, {
@@ -494,9 +494,22 @@ function createPagination(number, endpoint) {
     pages += "<li class=\"page-item\"> <a class=\"page-link\" href=\"#\" id='"+number+"'>Last</a> </li>";
 
     $("#statsPaginationAll").html(pages);
+    $("#statsPaginationPool").html(pages);
+    $("#statsPaginationKarambol").html(pages);
+
 }
 
 $("#statsPaginationAll").click(function (e) {
     actualPage = Number(e.target.id);
-    myFunc();
+    myFunc(actualPage);
+});
+
+$("#statsPaginationPool").click(function (e) {
+    actualPage = Number(e.target.id);
+    myFunc(actualPage);
+});
+
+$("#statsPaginationKarambol").click(function (e) {
+    actualPage = Number(e.target.id);
+    myFunc(actualPage);
 });

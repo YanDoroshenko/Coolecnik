@@ -72,14 +72,14 @@
 
             <div class="row align-content-center">
                 <span class="form-control-static">Druh hry: </span>
-                <select id="gameType" class="form-select-sm m-1" onchange="myFunc()">
+                <select id="gameType" class="form-select-sm m-1" onchange="myFunc(1)">
                     <!--<option selected></option>-->
                     <option value="all" selected>Vše</option>
                     <option value="pool8">8-pool</option>
                     <option value="carambole">Karambol</option>
                 </select>
                 <span class="form-control-static">Stav hry: </span>
-                <select id="gameStatus" class="form-select-sm m-1" onchange="myFunc()">
+                <select id="gameStatus" class="form-select-sm m-1" onchange="myFunc(1)">
                     <!--<option selected></option>-->
                     <option value="all" selected>Vše</option>
                     <option value="win">Vyhrané</option>
@@ -87,7 +87,7 @@
                     <option value="draw">Remíza</option>
                 </select>
                 <span class="form-control-static">Hráči: </span>
-                <select id="opponent" class="form-select-sm m-1" onchange="myFunc()">
+                <select id="opponent" class="form-select-sm m-1" onchange="myFunc(1)">
                     <!--<option selected></option>-->
                     <option value="all" selected>Vše</option>
                     <!--<option value="" ></option>-->
@@ -100,10 +100,10 @@
             <div class="row align-content-center">
                 <span class="form-control-static">Datum od </span>
                 <input id="dateFrom" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}"
-                       onchange="myFunc()"/>
+                       onchange="myFunc(1)"/>
                 <span class="form-control-static">do </span>
                 <input id="dateTo" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}"
-                       onchange="myFunc()"/>
+                       onchange="myFunc(1)"/>
             </div>
         </section>
     </div>
@@ -164,6 +164,10 @@
 
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" id="statsPaginationPool">
+                </ul>
+            </nav>
         </div>
         <div id="accordion" role="tablist" aria-multiselectable="true">
             <div class="card-statistics">
@@ -215,7 +219,10 @@
 
                 </tbody>
             </table>
-
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" id="statsPaginationKarambol">
+                </ul>
+            </nav>
         </div>
     </div>
 

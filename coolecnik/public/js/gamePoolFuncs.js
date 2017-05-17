@@ -27,7 +27,7 @@ function savePoolStrike(strikeType) {
 
     existingStrikes.push(obj);
     localStorage.setItem("currentGame", JSON.stringify(existingStrikes));
-    //console.log("DEBUG ", localStorage.getItem("currentGame"));
+    console.log("DEBUG ", localStorage.getItem("currentGame"));
 }
 
 function setPoolCounters(goodOrBad) {

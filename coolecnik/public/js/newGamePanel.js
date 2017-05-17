@@ -159,6 +159,11 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
     if (document.getElementById('gameType').checked) {
         var gameType = 2; //karambol
+        if (isNaN(parseInt($("#carambCount").val())) || parseInt($("#carambCount").val()) < 1) {
+            $("#newGameSpan").text("Žádejte správný počet karambolu nebo kol");
+            return;
+        }
+
         if ($("#karambolGameType").prop("checked")) {
             localStorage.setItem("carType", "2"); //round game
         }
@@ -215,13 +220,15 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     }];
                     localStorage.setItem("players", JSON.stringify(players));
 
+                    round = 1;
+
                     activePlayer = Math.floor(Math.random() * (3 - 1)); // 0 for 1st player, 1 for second
                     if (activePlayer === 0) {
                         document.getElementById("player1").className = "active-player";
-                        document.getElementById("player2").className = "";
+                        document.getElementById("player2").className = "nonactive-player";
                     }
                     else {
-                        document.getElementById("player1").className = "";
+                        document.getElementById("player1").className = "nonactive-player";
                         document.getElementById("player2").className = "active-player";
                     }
                     localStorage.setItem("activePlayer", activePlayer);
@@ -250,7 +257,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     localStorage.setItem("savedGameInfo", null);
                     clearTimeout(timerVar);
                     timerVar = setInterval(countTimer, 1000);
-                    round = 1;
+
                 }
 
                 else if (gameType === 2) {
@@ -263,6 +270,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
                     changeRound = 0;
                     lastRound = 0;
+                    round = 1;
 
                     if (localStorage.getItem("carType") === "1") { //carambol game
                         $("#carGameType1Div").show();
@@ -294,13 +302,13 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     }];
                     localStorage.setItem("players", JSON.stringify(players));
 
-                    activePlayer = Math.floor(Math.random() * (3 - 1)); // 1 for 1st player, 2 for second
+                    activePlayer = Math.floor(Math.random() * (3 - 1)); // 0 for 1st player, 1 for second
                     if (activePlayer === 0) {
                         document.getElementById("player1c").className = "active-player";
-                        document.getElementById("player2c").className = "";
+                        document.getElementById("player2c").className = "nonactive-player";
                     }
                     else {
-                        document.getElementById("player1c").className = "";
+                        document.getElementById("player1c").className = "nonactive-player";
                         document.getElementById("player2c").className = "active-player";
                     }
                     localStorage.setItem("activePlayer", activePlayer);
@@ -326,7 +334,7 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     clearTimeout(timerVar);
                     clearTimeout(timerVar);
                     timerVar = setInterval(countTimer, 1000);
-                    round = 1;
+
                 }
 
             },

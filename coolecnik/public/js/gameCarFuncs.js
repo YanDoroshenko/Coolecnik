@@ -1,5 +1,5 @@
 function setCarCounters(goodOrBad) {
-    if (activePlayer === 1) {
+    if (activePlayer === 0) {
         var preparedStr = "#pl1" + goodOrBad + "c";
         $(preparedStr).html(parseInt($(preparedStr).text()) + 1);
     }
@@ -19,6 +19,11 @@ function carGetSavedCounterValuesObjs() {
 
 
 function carGameRoutine(strikeType, changePlayer, badOrGood) {
+    if (localStorage.getItem("carType") === "1")
+        round = parseInt($("#carGameType1CurrentRound").html());
+    else if (localStorage.getItem("carType") === "2") {
+        round = parseInt($("#carGameType2RoundsTotal").html()) - parseInt($("#carGameType2RoundsRemain").html()) + 1;
+    }
     savePoolStrike(strikeType);
 
 
