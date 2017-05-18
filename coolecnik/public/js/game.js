@@ -78,9 +78,9 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
         if (lastStrike.strikeType === 1) {
             $("#pl2good").html(parseInt($("#pl2good").text()) - 1);
 		}
-		else if (lastStrike.strikeType == 3){
+        else if (lastStrike.strikeType === 3) {
             activePlayer = (activePlayer === 1) ? 0 : 1;
-
+            $("#pl2bad").html(parseInt($("#pl2bad").text()) - 1);
             setActivePlayerOnScreen();
 		}
 		else {
@@ -95,7 +95,7 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
             $("#pl1good").html(parseInt($("#pl1good").text()) - 1);
         else if (lastStrike.strikeType === 3) {
             activePlayer = (activePlayer === 1) ? 0 : 1;
-
+            $("#pl1bad").html(parseInt($("#pl1bad").text()) - 1);
             setActivePlayerOnScreen();
 		}
 		else {
