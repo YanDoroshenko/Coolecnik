@@ -15,8 +15,8 @@ GET         /api/games/:id/strikes                      controllers.StrikeContro
 GET         /api/players/:playerId/games/:gameId        controllers.StatisticsController.details(playerId: Int, gameId: Int)
 
 # Populate DB
-GET         /createSchema                               controllers.DBController.createSchema
-GET         /createData                                 controllers.DBController.createData
+#GET         /createSchema                               controllers.DBController.createSchema
+#GET         /createData                                 controllers.DBController.createData
 #GET           /createTestUsers                                  controllers.DBController.createTestUsers
 
 # Player management
