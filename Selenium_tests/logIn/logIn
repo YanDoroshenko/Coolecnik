@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="001.html">TC: 001 - Přihlášení do aplikace, úvod</a></td></tr>
+<tr><td><a href="002.html">TC: 002 - Přihlášení do aplikace, neplatný login 1</a></td></tr>
+<tr><td><a href="003.html">TC: 003 - Přihlášení do aplikace, neplatný login 2</a></td></tr>
+<tr><td><a href="004.html">TC: 004 - Přihlášení do aplikace, neplatné heslo 1</a></td></tr>
+<tr><td><a href="005.html">TC: 005 - Přihlášení do aplikace, neplatné heslo 2</a></td></tr>
+<tr><td><a href="006.html">TC: 006 - Přihlášení do aplikace, nesprávný login i heslo</a></td></tr>
+<tr><td><a href="007.html">TC: 007 - Přihlášení do aplikace, úspěch</a></td></tr>
+<tr><td><a href="008.html">TC: 008 - Zapomenuté heslo, neúspěch</a></td></tr>
+</tbody></table>
+</body>
+</html>
