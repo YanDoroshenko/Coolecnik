@@ -80,7 +80,6 @@ document.getElementById("removeLastBtn").addEventListener("click", function (eve
 		}
 		else if (lastStrike.strikeType == 3){
             activePlayer = (activePlayer === 1) ? 0 : 1;
-
             setActivePlayerOnScreen();
 		}
 		else {
