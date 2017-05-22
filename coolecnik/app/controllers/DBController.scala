@@ -1,7 +1,7 @@
 package controllers
 
-import models.Queries._
-import models.{GameType, Player, StrikeType}
+import models.Queries.{tournamentTypes, _}
+import models._
 import play.api.mvc.{Action, _}
 import slick.driver.PostgresDriver.api._
 import util.Database
@@ -23,6 +23,7 @@ class DBController extends Controller {
   def createData: Action[AnyContent] = Action.async {
     createGameTypes
       .flatMap(_ => createStrikeTypes)
+      .flatMap(_ => createTournamentTypes)
       .flatMap(_ => createGuest)
       .map(_ => Created)
   }
@@ -35,15 +36,17 @@ class DBController extends Controller {
       .map(_ => Created)
   }
 
-  private def createTables = db.run(DBIO.seq(
-    tournamentTypes.schema.create,
-    tournaments.schema.create,
-    players.schema.create,
-    friendList.schema.create,
-    gameTypes.schema.create,
-    games.schema.create,
-    strikeTypes.schema.create,
-    strikes.schema.create)
+  private def createTables = db.run(
+    DBIO.seq(
+      gameTypes.schema.create,
+      strikeTypes.schema.create,
+      tournamentTypes.schema.create,
+      players.schema.create,
+      tournaments.schema.create,
+      games.schema.create,
+      strikes.schema.create,
+      friendList.schema.create
+    )
   )
 
   private def createGameTypes = {
@@ -55,7 +58,7 @@ class DBController extends Controller {
     )
   }
 
-  private def createStrikeTypes = {
+  private def createStrikeTypes =
     db.run(
       strikeTypes ++= Seq(
         StrikeType(1, true, 1, "correct_pool", Some("player shot the correct ball, same player continues"), false),
@@ -73,7 +76,11 @@ class DBController extends Controller {
         StrikeType(12, false, 2, "foul_carambole", Some("foul at shot, other players turn"), false)
       )
     )
-  }
+
+  private def createTournamentTypes =
+    db.run(
+      tournamentTypes += TournamentType(1, "Table", Some("Type of tournament, where everyone plays a single game with everyone else"))
+    )
 
   private def createGuest =
     db.run(
