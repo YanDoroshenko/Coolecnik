@@ -65,4 +65,7 @@ object HttpWriters {
 
   implicit val sdw = new Writeable[Seq[StrikeDetail]](
     sds => ByteString(Json.toJson(sds).toString()), Some("application/json"))
+
+  implicit val tw = new Writeable[Tournament](
+    t => ByteString(Json.toJson(t).toString()), Some("application/json"))
 }

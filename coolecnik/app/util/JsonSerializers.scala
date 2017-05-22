@@ -30,6 +30,7 @@ object JsonSerializers {
   implicit val stf: OFormat[StrikeType] = Json.format[StrikeType]
   implicit val sf: OFormat[Strike] = Json.format[Strike]
   implicit val flf: OFormat[Friendship] = Json.format[Friendship]
+  implicit val tf: OFormat[Tournament] = Json.format[Tournament]
 
 
   implicit val pjf: OFormat[Registration] = Json.format[Registration]
@@ -49,4 +50,5 @@ object JsonSerializers {
   implicit val of: OFormat[Opponent] = Json.format[Opponent]
   implicit val nuf: OFormat[NameUpdate] = Json.format[NameUpdate]
   implicit val sdf: OFormat[StrikeDetail] = Json.format[StrikeDetail]
+  implicit val tdf: OFormat[NewTournament] = Json.format[NewTournament]
 }

@@ -106,6 +106,9 @@
 <node TEXT="add strikes" ID="ID_952272187" CREATED="1490898911508" MODIFIED="1490974191352" LINK="#ID_486238382"/>
 <node TEXT="create new strike type" ID="ID_1037871574" CREATED="1490971710589" MODIFIED="1490971723595" LINK="#ID_71683048"/>
 </node>
+<node TEXT="tournament" FOLDED="true" ID="ID_1963569048" CREATED="1495473837704" MODIFIED="1495473839439">
+<node TEXT="create" ID="ID_1926190432" CREATED="1495473840152" MODIFIED="1495473852873" LINK="#ID_1844208473"/>
+</node>
 </node>
 <node TEXT="endpoints" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" POSITION="right" ID="ID_598258874" CREATED="1490339036906" MODIFIED="1490340558307">
 <node TEXT="/api" FOLDED="true" ID="ID_1702402510" CREATED="1492076459204" MODIFIED="1492076462679">
@@ -1006,6 +1009,50 @@
 </node>
 <node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_349593624" CREATED="1490340253026" MODIFIED="1490340539716">
 <node TEXT="Request can&apos;t be deserialized" ID="ID_204486036" CREATED="1490340257682" MODIFIED="1490340258861"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/tournaments" FOLDED="true" ID="ID_1844208473" CREATED="1495473825689" MODIFIED="1495473859783">
+<node TEXT="/new" FOLDED="true" ID="ID_857419486" CREATED="1495473860496" MODIFIED="1495473861683">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_876449048" CREATED="1495473866112" MODIFIED="1495473872195">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1261218156" CREATED="1495473873305" MODIFIED="1495473909014">
+<node TEXT="POST" ID="ID_508611700" CREATED="1495473907024" MODIFIED="1495473907843"/>
+</node>
+<node TEXT="content-type" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1867917661" CREATED="1495473895576" MODIFIED="1495473905765">
+<node TEXT="application-json" ID="ID_1878630390" CREATED="1495473900169" MODIFIED="1495473904267"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_800365329" CREATED="1495473875808" MODIFIED="1495473982135">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/newTournament.json&quot;,&#xa;    &quot;properties&quot;: {&#xa;        &quot;caramboles&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/caramboles&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        },&#xa;        &quot;gameType&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/gameType&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        },&#xa;        &quot;players&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/players&quot;,&#xa;            &quot;items&quot;: {&#xa;                &quot;id&quot;: &quot;/properties/players/items&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;type&quot;: &quot;array&quot;&#xa;        },&#xa;        &quot;rounds&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/rounds&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        },&#xa;        &quot;title&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/title&quot;,&#xa;            &quot;type&quot;: &quot;string&quot;&#xa;        },&#xa;        &quot;tournamentType&quot;: {&#xa;            &quot;id&quot;: &quot;/properties/tournamentType&quot;,&#xa;            &quot;type&quot;: &quot;integer&quot;&#xa;        }&#xa;    },&#xa;    &quot;type&quot;: &quot;object&quot;&#xa;}" ID="ID_988127429" CREATED="1495473974096" MODIFIED="1495473980020"/>
+</node>
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1421947143" CREATED="1495473878848" MODIFIED="1495473930839">
+<node TEXT="{&#xa;  &quot;title&quot;: &quot;Title&quot;,&#xa;  &quot;tournamentType&quot;: 1,&#xa;  &quot;gameType&quot;: 2,&#xa;  &quot;rounds&quot;: 12,&#xa;  &quot;players&quot;: [&#xa;    1,&#xa;    2,&#xa;    3,&#xa;    4,&#xa;    5&#xa;  ]&#xa;}" ID="ID_981150468" CREATED="1495473911960" MODIFIED="1495473928936"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_920144245" CREATED="1495473869040" MODIFIED="1495473872405">
+<node TEXT="bad request" FOLDED="true" ID="ID_249001728" CREATED="1495473984112" MODIFIED="1495474024339">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_852682934" CREATED="1495474025008" MODIFIED="1495474045523">
+<node TEXT="400 BAD REQUEST" ID="ID_1580583651" CREATED="1495474033608" MODIFIED="1495474036650"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1695415520" CREATED="1495474042352" MODIFIED="1495474046612">
+<node TEXT="description of bad request" FOLDED="true" ID="ID_469087996" CREATED="1495474048383" MODIFIED="1495474057397">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_462954585" CREATED="1495474061056" MODIFIED="1495474081403">
+<node TEXT="Rounds and caramboles can be set for carambole game only" ID="ID_357361655" CREATED="1495474065048" MODIFIED="1495474078731"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="success" FOLDED="true" ID="ID_845122498" CREATED="1495474083744" MODIFIED="1495474086900">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1456493055" CREATED="1495474090664" MODIFIED="1495474111277">
+<node TEXT="201 CREATED" ID="ID_284045234" CREATED="1495474092240" MODIFIED="1495474094667"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_103108423" CREATED="1495474098384" MODIFIED="1495474172126">
+<node TEXT="created tournament object" FOLDED="true" ID="ID_1807072387" CREATED="1495474099912" MODIFIED="1495474106828">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1346575371" CREATED="1495474107600" MODIFIED="1495474113069">
+<node TEXT="{&#xa;  &quot;id&quot;: 4,&#xa;  &quot;title&quot;: &quot;abc&quot;,&#xa;  &quot;gameType&quot;: 2,&#xa;  &quot;tournamentType&quot;: 1&#xa;}" ID="ID_262648877" CREATED="1495474113728" MODIFIED="1495474170269"/>
+</node>
+</node>
+</node>
 </node>
 </node>
 </node>
