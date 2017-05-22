@@ -123,6 +123,8 @@ function createStrikeCharts(data) {
         total: data.eightball_foul_at_racking+data.eightball_racked_too_early+data.eightball_to_wrong_hole+
         data.eightball_out_of_table+data.wrong_shot_pool+data.foul_with_white+data.foul_with_others_ball+
         data.foul_other+data.game_end_correctly+data.correct_pool,
+        totalEndStrikes: data.eightball_foul_at_racking + data.eightball_racked_too_early + data.eightball_to_wrong_hole
+        + data.eightball_out_of_table + data.game_end_correctly
     };
 
     var carambolStrikes = {
@@ -193,7 +195,7 @@ function createStrikeCharts(data) {
                 }
             ]
         });
-    if(poolStrikes.total != 0) {
+    if(poolStrikes.totalEndStrikes != 0) {
         chartEndPool.render();
     } else {
         $("#chartPoolEndStrikes").addClass("d-none");
