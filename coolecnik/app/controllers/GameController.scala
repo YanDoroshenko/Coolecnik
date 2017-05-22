@@ -64,9 +64,14 @@ class GameController extends Controller {
           case Some(g) =>
             db.run(
               games.map(
-                g_ => {
-                  (g_.gameType, g_.player1, g_.player2, g_.beginning, g_.tournament, g_.rounds, g_.carambolesToWin)
-                }) +=
+                g_ => (
+                  g_.gameType,
+                  g_.player1,
+                  g_.player2,
+                  g_.beginning,
+                  g_.tournament,
+                  g_.rounds,
+                  g_.carambolesToWin)) +=
                 (g.gameType, g.player1, g.player2, Some(g.beginning), g.tournament, g.rounds, g.carambolesToWin)
             )
               .recover {
