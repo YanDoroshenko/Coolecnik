@@ -88,11 +88,11 @@ function tempFunc(event, btnArrHtml, btnArr, i) {
         var plname = String(btnArrHtml[i]).slice(65);
         plname = plname.slice(0, -9);
         plname = btnArr[i].innerHTML;
-        console.log(btnArr[i]);
+        console.log(btnArr[i].value);
         var plid = btnArr[i].value;
         localStorage.setItem("secondPlayerId", btnArr[i].value);
         isSecondPlayerAuthorized = true;
-        $("#pl0").val(plname);
+        $("#pl0").html(plname);
         $("#authPlayer2btn").css("display", "none");
     }
     else {
