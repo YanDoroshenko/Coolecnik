@@ -4,7 +4,7 @@ import java.sql.Timestamp
 
 import models.{Game, Player, Queries, Tournament}
 import slick.driver.PostgresDriver.api._
-import slick.lifted.{ForeignKeyQuery, Index, ProvenShape}
+import slick.lifted.{ForeignKeyQuery, ProvenShape}
 
 /**
   * Created by Yan Doroshenko (yandoroshenko@protonmail.com) on 18.03.2017.
@@ -56,7 +56,4 @@ class GamesTable(tag: Tag) extends Table[Game](tag, "t_game") {
 
   def tournamentFk: ForeignKeyQuery[TournamentsTable, Tournament] =
     foreignKey("game_tournament_fk", tournament, Queries.tournaments)(_.id.?, onUpdate = ForeignKeyAction.Restrict, onDelete = ForeignKeyAction.Cascade)
-
-  def game_idx: Index =
-    index("game_idx", (player1, player2, beginning), unique = true)
 }
