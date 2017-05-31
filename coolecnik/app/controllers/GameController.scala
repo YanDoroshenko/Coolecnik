@@ -63,7 +63,7 @@ class GameController extends Controller {
         Json.fromJson[NewGame](rq.body).asOpt match {
           case Some(g) =>
             db.run(
-              games.map(
+              (games.map(
                 g_ => (
                   g_.gameType,
                   g_.player1,
@@ -71,7 +71,8 @@ class GameController extends Controller {
                   g_.beginning,
                   g_.tournament,
                   g_.rounds,
-                  g_.carambolesToWin)) +=
+                  g_.carambolesToWin))
+                returning games.map(_.id)) +=
                 (g.gameType, g.player1, g.player2, Some(g.beginning), g.tournament, g.rounds, g.carambolesToWin)
             )
               .recover {
@@ -79,10 +80,8 @@ class GameController extends Controller {
               }
               .flatMap {
                 case e: PSQLException => Future(Conflict(e.getMessage))
-                case _ =>
-                  db.run(games.filter(
-                    g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === g.beginning)
-                    .result)
+                case id: Int =>
+                  db.run(games.filter(_.id === id).result)
                     .map(gs => Created(gs.head))
               }
           case None => Future(BadRequest("Request can't be deserialized"))
