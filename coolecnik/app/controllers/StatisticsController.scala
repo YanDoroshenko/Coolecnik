@@ -45,7 +45,7 @@ class StatisticsController extends Controller {
   def basicStrikeStats(id: Int): Action[AnyContent] = Action.async {
     db.run(
       (for ((s, t) <-
-            (for ((_, s) <- games.filter(_.tournament.isEmpty) join strikes on (_.id == _.game)) yield s)
+            (for ((_, s) <- games.filter(_.tournament.isEmpty) join strikes on (_.id === _.game)) yield s)
               .filter(_.player === id)
               .groupBy(_.strikeType)
               .map { case (strikeType, ss) => strikeType -> ss.length }
