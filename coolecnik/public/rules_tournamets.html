@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="res/favicon.png"/>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="js/authCookies.js"></script>
+    <title>Turnajové pravidla</title>
+
+    <script>
+        checkAuth();
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-inverse green-nav navbar-toggleable-sm">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse justify-content-md-center collapse" role="navigation" id="navbar" aria-expanded="false">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link">Hra</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tournaments.html">Turnaje</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="friends.html">Přátelé</a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Pravidla</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown02">
+                    <a class="dropdown-item" href="rules_8pool.html">Osmička</a>
+                    <a class="dropdown-item " href="rules_karambol.html">Karambol</a>
+                    <a class="dropdown-item active" href="rules_tournaments.html">Turnaje</a>
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Profil</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown03">
+                    <a class="dropdown-item" href="profile.html">Profil</a>
+                    <a class="dropdown-item" href="statistics.html">Statistiky her</a>
+                    <a class="dropdown-item" href="statistics_tournamets.html">Statistiky turnajových her</a>
+                    <a class="dropdown-item" id="logout" href="#" onclick="unauthorize()">Odhlásit se</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <section role="main" class="pageContent clear">
+        <div class="rules-spec">
+
+
+            <!--<h1>Standardizovaná pravidla Karambol světové pool-billiardové asociace (WPA)</h1>-->
+            <!--<article class="modulePage">-->
+                <!--<div class="rules-text">-->
+                    <!--<p><strong>Kapitola I. Nástroje</strong></p>-->
+                    <!--<p>-->
+                        <!--<a href="rules_karambol.html#herna">Herna a její vybavení</a><br/>-->
+                        <!--<a href="rules_karambol.html#rozdeleni">Rozdělení kulečníkových stolů podle velikosti</a><br/>-->
+                        <!--<a href="rules_karambol.html#stoly">Kulečníkové stoly, mantinely a sukno</a><br/>-->
+                        <!--<a href="rules_karambol.html#koule">Kulečníkové koule a křídy</a><br/>-->
+                        <!--<a href="rules_karambol.html#taga">Tága</a><br/>-->
+                        <!--<a href="rules_karambol.html#osvetleni">Osvětlení kulečníkového stolu</a><br/>-->
+                        <!--<a href="rules_karambol.html#tecky">Tečky a startovní čára</a></p>-->
+                    <!--<p><strong>Kapitola II. Společná ustanovení pro všechny druhy her</strong></p>-->
+                    <!--<p>-->
+                        <!--<a href="rules_karambol.html#provedeni_strku">Provedení rozhodovacího strku</a><br/>-->
+                        <!--<a href="rules_karambol.html#zacatecni_strk">Začáteční strk</a><br/>-->
+                        <!--<a href="rules_karambol.html#strk">Strk ( karambol )</a><br/>-->
+                        <!--<a href="rules_karambol.html#nazvoslovi">Základní pravidlové názvosloví</a><br/>-->
+                        <!--<a href="rules_karambol.html#lpici_koule">Lpící koule</a><br/>-->
+                        <!--<a href="rules_karambol.html#vyhozena_koule">Koule vyhozené z kulečníkového stolu</a><br/>-->
+                        <!--<a href="rules_karambol.html#tago">Tágo</a><br/>-->
+                        <!--<a href="rules_karambol.html#konec_partie">Konec partie ( utkání ) a výsledek zápasu</a><br/>-->
+                        <!--<a href="rules_karambol.html#chyby">Chyby</a></p>-->
+                    <!--<p><strong>Kapitola III. Zvláštní ustanovení pro jednotlivé druhy kulečníkové hry</strong></p>-->
+                    <!--<p>-->
+                        <!--<a href="rules_karambol.html#volna_hra">Volná hra</a><br/></p>-->
+                    <!--<p><strong>Kapitola IV. Zakreslení čar a bodů na hrací ploše</strong></p>-->
+                    <!--<p>-->
+                        <!--<a href="rules_karambol.html#zakresleni_1">Zakreslení základních čar a bodů na hrací ploše-->
+                            <!--malého kulečníkového stolu</a><br/>-->
+                        <!--<a href="rules_karambol.html#zakresleni_2">Zakreslení základních čar a bodů i zakázaných polí na-->
+                            <!--malém kulečníkovém stole při tzv. volné hře.</a><br/>-->
+                        <!--<a href="rules_karambol.html#zakresleni_3">Zakreslení základních bodů, čar, kádrových polí a-->
+                            <!--kotvových čtverců při tzv. velkém kádru 47, 5/2 a 47, 5/1 na hrací ploše malého-->
+                            <!--kulečníkového stolu</a><br/>-->
+                        <!--<a href="rules_karambol.html#zakresleni_4">Umístění koulí při čtyřlomu na kulečníkovém stole po-->
+                            <!--vyhození koulí z hrací plochy</a></p>-->
+                    <!--<h2>I. NÁSTROJE</h2>-->
+                    <!--<h3><a id="herna"></a>Herna a její vybavení</h3>-->
+                    <!--<p>Podlahu herny kolem kulečníkových stolů je nutno opatřit neklouzavou krytinou či kobercem. V-->
+                        <!--hernách by měl být volný prostor kolem každého kulečníkového stolu minimálně 1,2 m a vzdálenost-->
+                        <!--kulečníkových stolů od stěny místnosti nejméně 1,5 m.-->
+                    <!--</p>-->
+                    <!--<h3><a id="rozdeleni"></a>Rozdělení kulečníkových stolů podle velikosti</h3>-->
+                    <!--<p>CEB (Confédération Européenne de Billard) i UMB (Union mondiale de Billard) pořádají všechny své-->
+                        <!--soutěže pouze na kulečníkovém stole 284 x 142 cm, přesto ale uznávají a přepočtem i porovnávají-->
+                        <!--výsledky docílené na kulečníkových stolech těchto rozměrů:-->
+                    <!--</p>-->
+                    <!--<ol class="alfa">-->
+                        <!--<li>Halbmatchbillard 255 x 127,5 cm</li>-->
+                        <!--<li>Deminatchbillard 230 x 115 cm</li>-->
+                        <!--<li>malý stůl 210 x 105 cm </li>-->
+                        <!--<li>Rozměry malých kulečníkových stolů používaných v ČR jsou 190 x 95 cm až 210 x 105 cm.</li>-->
+                    <!--</ol>-->
+                    <!--<h3>-->
+                        <!--<a id="stoly"></a>Kulečníkové stoly, mantinely a sukno</h3>-->
+                    <!--<p>Kulečníkový stůl se skládá z masivního podstavce, desky a rámu s nalepenými gumovými mantinely.-->
+                        <!--Pevnost podstavce ale i jeho hmotnost přispívá k lepší stabilitě celého stolu.-->
+                    <!--</p>-->
+                    <!--<p>Deska kulečníkového stolu je z břidlice o síle minim. 45 mm. Tento předpis platí pro všechny-->
+                        <!--mezinárodní turnaje CEB. Pro soutěže organizované v ČR, pokud nepůjde o mezinárodní turnaj CEB,-->
+                        <!--lze nahradit břidlici materiálem schváleným výkonným výborem ČMBS (např. mramorem).-->
+                    <!--</p>-->
+                    <!--<p>Hrací plocha desky je ohraničena gumovými mantinely, které jsou nalepeny na rámu stolu. Vrchol-->
+                        <!--gumového mantinelu, který přichází do styku s koulí musí být vždy o 4 - 5 mm vyšší než je-->
+                        <!--poloměr koulí, tj. cca 35 - 37 mm nad hrací plochou. Rám je dřevěný, jeho povrch hladký a-->
+                        <!--jednobarevný. Musí však mít ozdobné vykládání (značky, diamanty), a to v 1/8 hrací plochy od-->
+                        <!--sebe.-->
+                    <!--</p>-->
+                    <!--<p>Výška nejvyššího bodu kulečníkového stolu měřená od podlahy je stanovena v rozmezí 79 až 80 cm.-->
+                    <!--</p>-->
+                    <!--<p>Kulečníkové sukno, jímž je deska potažená, má mít pokud možno zelenou barvu, být maximálně-->
+                        <!--rychloběžné, na stole dokonale a na gumovém mantinelu přiměřeně vypnuté a před každým zápasem-->
+                        <!--pečlivě vyčištěné.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="koule"></a>Kulečníkové koule a křídy</h3>-->
+                    <!--<p>Kulečníkové koule jsou tři (sada) a výrobce/dodavatel musí být schválen CEB. Dvě z nich mají-->
+                        <!--barvu bílou odstínu slonoviny, třetí je zbarvená červeně. Jedna z bílých koulí má na-->
+                        <!--protilehlých místech nesmazatelnou značku (tečku). Pro lepší rozlišení je pro televizní přenos-->
+                        <!--povoleno nahradit bílou kouli žlutou stejných parametrů.-->
+                    <!--</p>-->
+                    <!--<p>Koule musí být hladké, lesklé a přesně kulaté s průměrem 61 až 61,5 mm. Hmotnost jedné koule může-->
+                        <!--být 205 až 220 gramů, přičemž rozdíl mezi jednotlivými koulemi nesmí překročit 2 gramy (u-->
+                        <!--turnajů CEB 1 gram). Vyjímku tvoří koule pro trojmantinelovou hru (kvarty), které mohou mít-->
+                        <!--hmotnost až 240 gramů pro jednu kouli. Ostatní parametry jsou stejné jak je shora uvedeno.-->
+                    <!--</p>-->
+                    <!--<p>Kulečníková křída slouží k mazání kůžičky tága proti skluzu. Používá se křída schválená CEB.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="taga"></a>Tága</h3>-->
+                    <!--<p>Obvyklým materiálem na výrobu tág je dřevo, může však být použito i jiného materiálu. Tágo je pro-->
+                        <!--lepší skladnost půlené (může být i více dílů), přičemž spodní půlka je z těžšího materiálu-->
+                        <!--(palisandr, mahagon, eben, cedr, javor, ořech apod.), popříp. je zatěžována přidáváním kovových-->
+                        <!--kroužků; vrchní díl tága je z pružného materiálu (javor, jasan, hruška, ořech, zimostráz apod.)-->
+                        <!--a na konci je opatřen kůžičkou. Hráč smí hrát výhradně touto kůžičkou. Hráč má právo i v průběhu-->
+                        <!--své série střídat tága různých délek a hmotností.-->
+                    <!--</p>-->
+                    <!--<p>Obvyklá délka tága je 140 cm s těžištěm v 95 cm. Hmotnost se pohybuje mezi 400 až 500 gramy. Pro-->
+                        <!--trojmantinelovou hru a artistický billiard je hmotnost vyšší - až 700 gramů.-->
+                    <!--</p>-->
+                    <!--<p>Při obtížných karambolech na velkém kulečníkovém stole může hráč použít podpěrky tága jako-->
+                        <!--náhradu za vodící ruku.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="osvetleni"></a>Osvětlení kulečníkového stolu</h3>-->
+                    <!--<p>K osvětlení kulečníkových stolů se nejčastěji používá elektrické žárovky. Pro stejnoměrné-->
+                        <!--osvětlení hrací plochy se doporučuje umístit nad malý stůl 2 svítidla, nad velký stůl 3-->
+                        <!--svítidla, a to vždy nad tečkami stolů.-->
+                    <!--</p>-->
+                    <!--<p>Výška svítidel od hrací plochy má být v rozmezí 80 - 150 cm. Pokud bude použito svítidel s-->
+                        <!--halogenní žárovkou, musejí být umístěna nejméně 400 cm od hrací plochy.-->
+                    <!--</p>-->
+                    <!--<p>Pokud je normální elektrická žárovka umístěna nad kulečníkovým stolem, musí být zabudována do-->
+                        <!--stínidla tak hluboko, aby přímým světlem hráče ani okolí neoslňovala.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="tecky"></a>Tečky a startovní čára</h3>-->
+                    <!--<p>Pod pojmem tečky se rozumějí výchozí místa, která musí zaujímat kulečníkové koule:-->
+                    <!--</p>-->
+                    <!--<ol class="alfa">-->
+                        <!--<li>na začátku partie (utkání)-->
+                        <!--</li>-->
+                        <!--<li>v průběhu utkání, jakmile se koule zastavily při vzájemném dotyku - lpící koule-->
+                        <!--</li>-->
+                        <!--<li>v případě, že koule byly vyhozeny mimo kulečníkový stůl-->
+                        <!--</li>-->
+                    <!--</ol>-->
+                    <!--<p>Tyto tečky se vyznačují co nejtenčím křížkem křídou nebo bílou tužkou. Označení pomocí nalepeného-->
+                        <!--dykytového kolečka je zakázáno.-->
+                    <!--</p>-->
+                    <!--<p>Tři z pěti teček jsou umístěny na svislé ose malého kulečníkového stolu tak, že ji dělí na čtyři-->
+                        <!--stejné části. Další dvě tečky jsou umístěny na startovní čáře, která tvoří kolmici ke svislé ose-->
+                        <!--kulečníkového stolu vztyčenou v místě dolní tečky. Obě startovní tečky jsou umístěny ve-->
+                        <!--vzdálenosti 13,5 cm nalevo a napravo od této dolní tečky.-->
+                    <!--</p>-->
+                    <!--<h2>II. SPOLEČNÁ USTANOVENÍ PRO VŠECHNY DRUHY HER</h2>-->
+                    <!--<h3>-->
+                        <!--<a id="provedeni_strku"></a>Provedení rozhodovacího strku</h3>-->
+                    <!--<p>Utkání začíná, jakmile rozhodčí rozestaví obě bílé koule k rozhodovacímu strku na startovní čáru-->
+                        <!--vlevo a vpravo od obou startovních teček k odrazníkům a červenou kouli na horní tečku.-->
+                    <!--</p>-->
+                    <!--<p>Oba hráči zahrají každý svou koulí na horní odrazník. Ten jehož koule se po návratu zastavila-->
+                        <!--blíže k dolnímu odrazníku, má právo volby začátku.-->
+                    <!--</p>-->
+                    <!--<p>Jestliže se koule při rozhodovacím strku srazily nebo zastavily ve stejné vzdálenosti od dolního-->
+                        <!--odrazníku, dá rozhodčí rozhodovací strk opakovat.-->
+                    <!--</p>-->
+                    <!--<p>Jestliže koule jednoho z hráčů narazí na červenou kouli, považuje se to za chybu a právo volby-->
+                        <!--začátku partie náleží druhému hráči, který se chyby nedopustil.-->
+                    <!--</p>-->
+                    <!--<p>Jestliže koule některého hráče nedoběhne na horní mantinel, musí se rozhodovací strk rovněž-->
+                        <!--opakovat. Při druhé takové chybě téhož hráče ztrácí chybující hráč právo rozhodnout, kdo zahájí-->
+                        <!--zápas.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="zacatecni_strk"></a>Začáteční strk</h3>-->
+                    <!--<p>Koule pro začáteční strk rozmístí rozhodčí takto:-->
+                    <!--</p>-->
+                    <!--<ol class="alfa">-->
+                        <!--<li>červenou kouli na horní tečku,-->
+                        <!--</li>-->
+                        <!--<li>soupeřovu bílou kouli (kouli s tečkou nebo žlutou kouli) na dolní tečku-->
+                        <!--</li>-->
+                        <!--<li>hráčovu bílou kouli (bez tečky) na jednu z obou startovních teček podle volby hráče.-->
+                        <!--</li>-->
+                    <!--</ol>-->
+                    <!--<p>Začáteční strk je nutno hrát bílou koulí bez tečky od červené koule buď přímo, nebo od odrazníku.-->
+                        <!--Každý z obou hráčů musí hrát stejnou koulí po celou dobu zápasu.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="strk"></a>Strk (karambol)</h3>-->
+                    <!--<p>Účelem hry je dosáhnout (sehrát) co nejvíce strků.-->
+                    <!--</p>-->
+                    <!--<p>Strk (karambol) zidná, že se hráčova koule dotkne obou ostatních koulí, tedy protihráčovy a-->
+                        <!--červené koule (bez ohledu na pořadí koulí), v některých případech podle druhu hry (disciplíny)-->
+                        <!--za dalších podmínek určených těmito pravidly hry.-->
+                    <!--</p>-->
+                    <!--<p>Partie (utkání) spočívá v provedení určitého počtu strků (stanovené výše hry), různého podle-->
+                        <!--disciplíny hry. Všeobecně se každý strk počítá za jeden bod.-->
+                    <!--</p>-->
+                    <!--<p>Hráči musí zachovat tutéž kouli po celou dobu utkání.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="nazvoslovi"></a>Základní pravidlové názvosloví</h3>-->
+                    <!--<p>Označení koulí se upřesňuje takto:-->
+                    <!--</p>-->
+                    <!--<ol class="alfa">-->
+                        <!--<li>koule hrajícího hráče uvádíme pod číslem 1 (tzv. hráčova koule)-->
+                        <!--</li>-->
+                        <!--<li>první zasažená koule má číslo 2-->
+                        <!--</li>-->
+                        <!--<li>druhá zasažená koule je uvedena jako koule číslo 3-->
+                        <!--</li>-->
+                        <!--<li>koule č.2 a č.3 jsou také uváděny jako "cizí koule"-->
+                        <!--</li>-->
+                    <!--</ol>-->
+                    <!--<p>Účelem hry je sehrát co nejvíce karambolů, přičemž každý zahraný karambol má hodnotu 1 bod.-->
+                    <!--</p>-->
+                    <!--<p>Náběh je pokus hráče o dosažení karambolu. Počet náběhů v jedné hře je různý podle soutěžní-->
+                        <!--disciplíny (např. 30).-->
+                    <!--</p>-->
+                    <!--<p>Vyrovnávací náběh je závěrečný náběh, kterým hráč s bílou koulí označenou tečkou dosáhl stejného-->
+                        <!--počtu náběhů jako jeho soupeř (viz. "Konec a výsledek zápasu").-->
+                    <!--</p>-->
+                    <!--<p>Série je počet karambolů dosažený hráčem v jednom náběhu.-->
+                    <!--</p>-->
+                    <!--<p>Pro jednotlivé soutěžní disciplíny a soutěžní třídy se stanoví předem počet karambolů, tzv. výše-->
+                        <!--hry (např. u volné hry - 200, 300, 400, u kádrových her - 200, 250, 300, u jednobandu - 120, 80-->
+                        <!--a u trojbandu - 40, 30).-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="lpici_koule"></a>Lpící koule</h3>-->
+                    <!--<p>Když hráčova koule lpí, tj. dotýká se jedné nebo obou dalších koulí, řídí se hráčova práva-->
+                        <!--ustanoveními odchylnými pro různé druhy hry (disciplíny).-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="vyhozena_koule"></a>Koule vyhozené z kulečníkového stolu</h3>-->
+                    <!--<p>Vypadne-li jedna kulečníková koule (nebo více koulí) mimo kulečníkový stůl, postaví se na tečky-->
+                        <!--odchylně při jednotlivých druzích (disciplínách) hry.-->
+                    <!--</p>-->
+                    <!--<p>Koule se považuje za vyhozenou mimo kulečníkový stůl, jakmile dopadla mimo ohraničení stolu-->
+                        <!--(přesněji ohraničení hrací plochy), popřípadě se dotkla dřevěné části tohoto ohraničení.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="tago"></a>Tágo</h3>-->
+                    <!--<p>Hráč má právo hrát vlastním tágem.-->
+                    <!--</p>-->
+                    <!--<p>Hráč smí hrát výhradně kůžičkou tága.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="konec_partie"></a>Konec partie (utkání) a výsledek zápasu</h3>-->
+                    <!--<p>Každá započatá partie (utkání) musí být sehrána do posledního karambolu nebo je-li stanoven-->
+                        <!--limitovaný počet náběhů (tzv. limit), musí se dohrát do posledního náběhu.-->
+                    <!--</p>-->
+                    <!--<p>Jakmile rozhodčí po ohlášení posledního karambolu uzná i tento poslední za platný, zidná to-->
+                        <!--přiznání plného počtu karambolů, který byl pro příslušný zápas stanoven (výše hry),a to i v-->
+                        <!--případě, že by se dodatečně zjistila chyba v zápise o průběhu zápasu.-->
+                    <!--</p>-->
+                    <!--<p>Vítězství v zápase se určuje podle těchto kritérií:-->
+                    <!--</p>-->
+                    <!--<ol class="alfa">-->
+                        <!--<li>V zápase vítězí hráč, který při stejném počtu náběhů se svým soupeřem (do stanoveného-->
+                            <!--limitu) dosáhl stanovenou výši hry. Dosáhnou-li oba hráči při stejném počtu náběhů (do-->
+                            <!--stanoveného limitu) stanovenou výši hry, je výsledek zápasu nerozhodný.-->
+                        <!--</li>-->
+                        <!--<li>Při limitovaném počtu náběhů a nedosažením stanovené výše hry vítězí hráč, který po odehrání-->
+                            <!--limitovaného počtu náběhů nahrál vyšší počet karambolů. Dosáhnou-li oba hráči po odehrání-->
+                            <!--limitovaného počtu náběhů stejný počet karambolů, je výsledek zápasu nerozhodný.-->
+                        <!--</li>-->
+                    <!--</ol>-->
+                    <!--<p>Pozn.: Oba hráči musejí absolvovat stejný počet náběhů, pokud není určeno v rozpisu soutěže-->
+                        <!--jinak.-->
+                    <!--</p>-->
+                    <!--<p>Jestliže hráč s bílou koulí (zahajoval zápas) dosáhl stanovenou výši hry, tj. nahrál předepsaný-->
+                        <!--počet karambolů nebo sehrál poslední náběh (při stanoveném limitu), musí jeho soupeř (tj. hráč s-->
+                        <!--bílou koulí s tečkou) sehrát ještě vyrovnávací náběh, který se hraje ve všech soutěžních-->
+                        <!--disciplínách z pozice začátečního karambolu.-->
+                    <!--</p>-->
+                    <!--<p>Dosáhne-li v průběhu vyrovnávacího náběhu i druhý hráč stanoveného počtu strků (výše hry), je-->
+                        <!--partie (utkání) prohlášena za nerozhodnou.-->
+                    <!--</p>-->
+                    <!--<h3>-->
+                        <!--<a id="chyby"></a>Chyby</h3>-->
+                    <!--<p>Karambol (strk) je platný teprve tehdy, když se všechny tři kulečníkové koule zastavily, aniž-->
+                        <!--hráč v mezidobí udělá chybu.-->
+                    <!--</p>-->
+                    <!--<p>Hráč udělá chybu a pozbývá práva pokračovat ve hře (v sérii, náběhu) v těchto případech:-->
+                    <!--</p>-->
+                    <!--<ol class="alfa">-->
+                        <!--<li>Když hráč neuspěje v provedení karambolu (strku). Rozhodčí oznámí "Nebyl" nebo "Vynecháno".-->
+                        <!--</li>-->
+                        <!--<li>Když při provedení strku jedna koule, popřípadě více koulí opustí kulečníkový stůl, ať již-->
+                            <!--bylo dosaženo karambolu nebo nebylo. Rozhodčí oznámí "Vyhozená koule".-->
+                        <!--</li>-->
+                        <!--<li>Když hráč hraje další strk, aniž se koule zastavily po provedení předcházejícího strku.-->
+                            <!--Rozhodčí oznámí "Koule v pohybu".-->
+                        <!--</li>-->
+                        <!--<li>Když se hráč dotkne ("tušuje") kterékoli koule buď rukou, nebo tágem, popřípadě jakýmkoli-->
+                            <!--jiným předmětem. V každém případě zůstává "tušovaná" koule na místě, které zaujala. Rozhodčí-->
+                            <!--oznámí "Dotyk" nebo "Tušováno".-->
+                        <!--</li>-->
+                        <!--<li>Když se hráč dotkne koule, aby odstranil cizí tělísko, které na ni ulpělo, místo aby požádal-->
+                            <!--rozhodčího o odstranění závady. Rozhodčí oznámí "Dotyk" nebo "Tušováno".-->
+                        <!--</li>-->
+                        <!--<li>Když hráč přemístí kouli přímým nebo nepřímým dotykem. Rozhodčí oznámí "Dotyk" nebo-->
+                            <!--"Tušováno".-->
+                        <!--</li>-->
+                        <!--<li>Když hráč prostrčí kouli. Prostrčením se rozumí:-->
+
+                            <!--<ul>-->
+                                <!--<li>když je kůžička tága ještě v dotyku s hráčovou koulí v okamžiku, kdy hráčova koule-->
+                                    <!--naráží na druhou kouli,-->
+                                <!--</li>-->
+                                <!--<li>když je kůžička hráčova tága ještě v dotyku s hráčovou koulí v okamžiku, kdy hráčova-->
+                                    <!--koule naráží na mantinel,-->
+                                <!--</li>-->
+                                <!--<li>když je přímo zasažena koule, která lpí s hráčovou koulí, vyjma oddělení obou koulí-->
+                                    <!--od sebe sbodcem.-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--Rozhodčí oznámí "Prostrk".-->
+                        <!--</li>-->
+                        <!--<li>Když se hráč v okamžiku zasažení koule nedotýká země alespoň jednou nohou. Rozhodčí oznámí-->
+                            <!--"Noha na zemi".-->
+                        <!--</li>-->
+                        <!--<li>Když hráč vyznačuje na odrazníku viditelné značky (zidní). Rozhodčí oznámí "Značkování-->
+                            <!--odrazníku".-->
+                        <!--</li>-->
+                        <!--<li>Když hráč při zahájení náběhu nebo v jeho průběhu hraje podle zjištění rozhodčího-->
+                            <!--protivníkovou (tzv. cizí) koulí. V tomto případě ztrácí hráč ihned právo pokračovat v náběhu-->
+                            <!--(sérii). Koule zůstávají v pozici (postavě), kterou zaujaly, a hry se ujímá protivník. Počet-->
+                            <!--strků dosažených v průběhu série (náběhu) před zjištěním této chyby se hráči uzná. Rozhodčí-->
+                            <!--oznámí "Soupeřova (cizí) koule".-->
+                        <!--</li>-->
+                    <!--</ol>-->
+                    <!--<p>Dosáhne-li hráč dalšího strku potom, když se při provedení předcházejícího karambolu dopustil-->
+                        <!--chyby, kterou rozhodčí nezjistil, je strk platný a hráč smí ve své sérii (náběhu) pokračovat.-->
+                    <!--</p>-->
+                    <!--<p>Jakákoli chyba zaviněná třetí osobou, popřípadě i rozhodčím, která přivodí přemístění koulí, se-->
+                        <!--nepřičítá hráči. V tomto případě vrátí rozhodčí koule do postavy (pozice), ve které byly před-->
+                        <!--chybou, a to co nejpřesněji. Naproti tomu je však hráč postižen v případě, že rozhodčí špatně-->
+                        <!--rozestavil bílé koule na základní tečky (při začátečním strku).-->
+                    <!--</p>-->
+                    <!--<h2>III. ZVLÁŠTNÍ USTANOVENÍ PRO JEDNOTLIVÉ DRUHY (DISCIPLÍNY) KULEČNÍKOVÉ HRY</h2>-->
+                    <!--<h3>-->
+                        <!--<a id="volna_hra"></a>Volná hra</h3>-->
+                    <!--<p>Při volné hře může hráč v jednom sledu (jedné sérii či jednom náběhu) sehrát neomezený počet-->
+                        <!--strků (karambolů) na celé ploše kulečníkového stolu (přesněji na hrací ploše) vyjma rohová-->
+                        <!--zakázaná pole.-->
+                    <!--</p>-->
+                    <!--<h3>Zakázaná pole</h3>-->
+                    <!--<p>Tato pole jsou ohraničena co nejtenšími čarami křídou.-->
+                    <!--</p>-->
+                    <!--<p>V každém z těchto zakázaných polí smí hráč sehrát v průběhu svého náběhu nejvýše dva po sobě-->
+                        <!--následující strky, přičemž při druhém z nich musí alespoň jedna z obou cizích koulí, buď-->
+                        <!--protihráčova bílá, nebo červená, opustit zakázané pole, v němž byly.-->
+                    <!--</p>-->
+                    <!--<p>Jedna, popřípadě obě cizí koule se mohou po opuštění zakázaného pole ihned do téhož pole vrátit.-->
+                        <!--V tomto případě získává hráč znovu právo na provedení prvého karambolu uvnitř zakázaného pole.-->
+                    <!--</p>-->
+                    <!--<p>Jestliže při zahraném karambolu, při němž měla koule pole opustit, žádná z koulí č.2 nebo č.3 tak-->
+                        <!--neučinila, je karambol neplatný (chyba) a ve hře pokračuje soupeř.-->
+                    <!--</p>-->
+                    <!--<h3>O partii (utkání)</h3>-->
+                    <!--<ol>-->
+                        <!--<li>Lpící koule<br/>všechny tři koule musí být rozestaveny na tečky do postavy jako při-->
+                            <!--začátečním strku.-->
+                        <!--</li>-->
+                        <!--<li>Koule vyhozené mimo kulečníkový stůl<br/>všechny tři koule musí být rozestaveny na tečky do-->
+                            <!--postavy jako při začátečním strku.-->
+                        <!--</li>-->
+                        <!--<li>Koule na čáře zakázaného pole<br/>koule na čáře ohraničující zakázané pole se posuzují v-->
+                            <!--neprospěch hráče.-->
+                        <!--</li>-->
+                    <!--</ol>-->
+
+
+                    <!--&lt;!&ndash; <h3>Zakreslení čar a bodů na hrací ploše malého kulečníkového stolu u jednotlivých disciplín</h3> &ndash;&gt;-->
+                    <!--<h4>-->
+                        <!--<a id="zakresleni_1"></a>Zakreslení základních čar a bodů na hrací ploše malého kulečníkového-->
+                        <!--stolu</h4>-->
+                    <!--<p>-->
+                        <!--<img src="res/volna_hra.jpg"-->
+                             <!--alt="Zakreslení základních čar a bodů na hrací ploše malého  kulečníkového  stolu"-->
+                             <!--width="450" height="280"/></p>-->
+                    <!--<p class="popiska">1. svislá osa hrací plochy<br/>2. horní tečka<br/>3. střední tečka<br/>4. dolní-->
+                        <!--tečka<br/>5. pravá startovní tečka vzdálená 13,5 cm od dolní tečky (4)<br/>6. levá startovní-->
+                        <!--tečka vzdálená 13,5 cm od dolní tečky (4)<br/>7. startovní čára<br/>8. prostor nalevo a napravo-->
+                        <!--od startovních teček (5,6) směrem k bočním odrazníkům, do kterého staví rozhodčí koule obou-->
+                        <!--hráčů k provedení rozhodovacího strku.-->
+                    <!--</p>-->
+                    <!--<h4>-->
+                        <!--<a id="zakresleni_2"></a>Zakreslení základních čar a bodů i zakázaných polí na malém-->
+                        <!--kulečníkovém stole při tzv. volné hře</h4>-->
+                    <!--<p>-->
+                        <!--<img src="res/zakresleni_bodu_1.jpg"-->
+                             <!--alt="Zakreslení základních čar a bodů i zakázaných polí na malém  kulečníkovém  stole při tzv. volné hře"-->
+                             <!--width="450" height="280"/></p>-->
+                    <!--<p class="popiska">1. čtyři pravoúhlé trojúhelníky v rozích, tzv. zakázaná pole<br/>2. horní-->
+                        <!--tečka<br/>3. střední tečka<br/>4. dolní tečka<br/>5. pravá startovní tečka vzdálená 13,5 cm od-->
+                        <!--dolní tečky (4)<br/>6. levá startovní tečka vzdálená 13,5 cm od dolní tečky (4)<br/>7. prostor-->
+                        <!--nalevo a napravo od startovních teček (5,6) směrem k bočním odrazníkům, do kterého staví-->
+                        <!--rozhodčí koule obou hráčů k provedení rozhodovacího strku.-->
+                    <!--</p>-->
+                    <!--<h4>-->
+                        <!--<a id="zakresleni_3"></a>Zakreslení základních bodů, čar, kádrových polí a kotvových čtverců-->
+                        <!--při tzv. velkém kádru 47,5/2 a 47,5/1 na hrací ploše malého kulečníkového stolu</h4>-->
+                    <!--<p>-->
+                        <!--<img src="res/kvadrove_zakreslenie.jpg"-->
+                             <!--alt="Zakreslení základních bodů, čar, kádrových polí a kotvových čtverců  při tzv. velkém kádru 47,5/2 a 47,5/1 na hrací ploše malého  kulečníkového  stolu"-->
+                             <!--width="450" height="280"/></p>-->
+                    <!--<p class="popiska">1. svislá osa středem hrací plochy a současně středová kádrová čára, která půlí-->
+                        <!--šířku hrací plochy (přesně 47,5 - 50 - 52,5 cm)<br/>2. horní tečka<br/>3. střední tečka<br/>4.-->
+                        <!--dolní tečka<br/>5. a 6. pravá a levá startovní tečka, vzdálená 13,5 cm od dolní tečky (4)<br/>7.-->
+                        <!--šest kotvových čtverců (o straně 17,8 cm) u odrazníků na kádrových čarách , které tyto kotvové-->
+                        <!--čtverce půlí<br/>8., 9., 12., a 13. čtyři kádrové čtverce (o straně 47,5 - 50 - 52,5 cm) u-->
+                        <!--krátkých mantinelů<br/>10. a 11. dvě obdélníková kádrová pole ve střední části hrací plochy<br/>14.-->
+                        <!--horní kádrová čára našíř hrací plochy, vzdálená 47,5 - 50 - 52,5 cm od hrany krátkého-->
+                        <!--odrazníku<br/>15. dolní kádrová čára našíř hrací plochy, vzdálená 47,5 - 50 - 52,5 cm od hrany-->
+                        <!--dolního krátkého odrazníku-->
+                    <!--</p>-->
+
+                    <!--<h4>-->
+                        <!--<a id="zakresleni_4"></a>Umístění koulí při čtyřlomu na kulečníkovém stole po vyhození koulí z-->
+                        <!--hrací plochy</h4>-->
+                    <!--<p>-->
+                        <!--<img src="res/umistneni.jpg"-->
+                             <!--alt="Umístění koulí při čtyřlomu na kulečníkovém stole po vyhození koulí  z  hrací plochy"-->
+                             <!--width="450" height="280"/></p>-->
+                    <!--<p class="popiska">1. horní tečka, na kterou rozhodčí staví vyhozenou červenou kouli<br/>2. střední-->
+                        <!--tečka, na kterou rozhodčí staví vyhozenou kouli protihráče<br/>3. dolní tečka, na kterou-->
+                        <!--rozhodčí staví hráčovu kouli<br/>4., 5. pravá a levá startovní tečka, vzdálené od dolní tečky-->
+                        <!--13,5 cm vlevo a vpravo<br/>6. svislá (podélná) osa hrací plochy vzdálená od hran postranních-->
+                        <!--odrazníků 47,5 - 50 - 52,5 cm<br/>7. startovní čára spojuje hrany obou postranních mantinelů,-->
+                        <!--prochází dolní tečkou (3) a oběma startovními tečkami (4,5)<br/>8. horní krátký mantinel<br/>9.-->
+                        <!--dolní krátký mantinel-->
+                    <!--</p>-->
+
+                    <!--<p>Pradidlá probrána ze stránky <a-->
+                            <!--href="http://www.heltakoop.cz/pravidla/pravidla-kulecniku-karambol" target="_blank">http://www.heltakoop.cz/pravidla/pravidla-kulecniku-karambol.</a>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</article>-->
+        </div>
+    </section>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+</body>
+</html>
