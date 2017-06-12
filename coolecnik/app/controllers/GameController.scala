@@ -120,9 +120,9 @@ class GameController extends Controller {
                               db.run(
                                 tournaments.filter(_.id === t).map(_.end).update(Some(Timestamp.valueOf(LocalDateTime.now())))
                               )
-                            case _ => Future()
+                            case _ => Future(None)
                           }
-                      case _ => Future()
+                      case _ => Future(None)
                     })
               case _ =>
                 new IllegalStateException("Game has already been ended")
