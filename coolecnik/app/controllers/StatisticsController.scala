@@ -26,8 +26,9 @@ class StatisticsController extends Controller {
 
   def basicGameStats(id: Int): Action[AnyContent] = Action.async { _ =>
     db.run(
-      games.filter(g =>
-        (g.player1 === id || g.player2 === id) && g.end.nonEmpty)
+      games
+        .filter(_.tournament.isEmpty)
+        .filter(g => (g.player1 === id || g.player2 === id) && g.end.nonEmpty)
         .result)
       .map {
         case gs: Seq[Game] if gs.nonEmpty =>
@@ -43,11 +44,12 @@ class StatisticsController extends Controller {
 
   def basicStrikeStats(id: Int): Action[AnyContent] = Action.async {
     db.run(
-      (for ((s, t) <- strikes
-        .filter(_.player === id)
-        .groupBy(_.strikeType)
-        .map { case (strikeType, ss) => strikeType -> ss.length }
-        joinRight strikeTypes on (_._1 === _.id)) yield (
+      (for ((s, t) <-
+            (for ((_, s) <- games.filter(_.tournament.isEmpty) join strikes on (_.id == _.game)) yield s)
+              .filter(_.player === id)
+              .groupBy(_.strikeType)
+              .map { case (strikeType, ss) => strikeType -> ss.length }
+              joinRight strikeTypes on (_._1 === _.id)) yield (
         t.id,
         t.title,
         s.map { case (_, c) => c }))
@@ -60,7 +62,10 @@ class StatisticsController extends Controller {
 
 
   def opponents(id: Int): Action[AnyContent] = Action.async {
-    db.run((for ((g, p) <- games.filter(_.player2 === id) join players on (_.player1 === _.id)) yield p.id -> p.login).result)
+    db.run((for ((g, p) <-
+                 games
+                   .filter(_.tournament.isEmpty)
+                   .filter(_.player2 === id) join players on (_.player1 === _.id)) yield p.id -> p.login).result)
       .zip(db.run((for ((g, p) <- games.filter(_.player1 === id) join players on (_.player2 === _.id)) yield p.id -> p.login).result))
       .map(z => (z._1 ++ z._2).distinct.map((Opponent.apply _).tupled(_)))
       .map {
@@ -92,6 +97,7 @@ class StatisticsController extends Controller {
       def process(gs: Seq[Game]) = {
         val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
         val filtered = gs
+          .filter(_.tournament.isEmpty)
           .filter(g => (result: @unchecked) match {
             case Some("win") => g.winner.nonEmpty && g.winner.get == id
             case Some("lose") => g.winner.nonEmpty && g.winner.get != id
@@ -269,6 +275,7 @@ class StatisticsController extends Controller {
       def process(gs: Seq[Game]) = {
         val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
         val filtered = gs
+          .filter(_.tournament.isEmpty)
           .filter(g => (result: @unchecked) match {
             case Some("win") => g.winner.nonEmpty && g.winner.get == id
             case Some("lose") => g.winner.nonEmpty && g.winner.get != id
