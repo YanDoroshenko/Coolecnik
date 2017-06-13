@@ -1,5 +1,8 @@
 package controllers
 
+import java.sql.Timestamp
+import java.time.LocalDateTime
+
 import models.Queries._
 import models._
 import org.postgresql.util.PSQLException
@@ -100,10 +103,27 @@ class GameController extends Controller {
         case Some(e) =>
           db.run(
             games.filter(r => r.id === id && r.end.isEmpty).result.map {
-              case rs: Iterable[Game] if rs.nonEmpty =>
+              case rs: Iterable[Game] if rs.size == 1 =>
                 db.run(
-                  (for (g <- games.filter(r => r.id === id)) yield g.end -> g.winner)
+                  games.filter(r => r.id === id).map(g => g.end -> g.winner)
                     .update(Some(e.end) -> e.winner))
+                  .flatMap(_ =>
+                    rs.head match {
+                      case Game(id_, _, _, _, _, Some(t), _, None, _, _) =>
+                        db.run(
+                          ((games.filter(g => g.tournament === t && g.end.isEmpty).exists === false) ==
+                            (tournaments.filter(t_ => t_.id === t && t_.end.isEmpty).exists === true))
+                            .result
+                        )
+                          .flatMap {
+                            case true =>
+                              db.run(
+                                tournaments.filter(_.id === t).map(_.end).update(Some(Timestamp.valueOf(LocalDateTime.now())))
+                              )
+                            case _ => Future(None)
+                          }
+                      case _ => Future(None)
+                    })
               case _ =>
                 new IllegalStateException("Game has already been ended")
             })

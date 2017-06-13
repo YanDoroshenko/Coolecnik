@@ -32,7 +32,13 @@ class DBController extends Controller {
     db.run(
       players ++= Seq(
         Player(1337, "login1", "none1", "d19dd94b", Some("Login1"), None),
-        Player(1488, "login2", "none2", "d29ddade", Some("Login2"), None)))
+        Player(1488, "login2", "none2", "d29ddade", Some("Login2"), None),
+        Player(1488, "login3", "none3", "d29ddade", Some("Login3"), None),
+        Player(1488, "login4", "none4", "d29ddade", Some("Login4"), None),
+        Player(1488, "login5", "none5", "d29ddade", Some("Login5"), None),
+        Player(1488, "login6", "none6", "d29ddade", Some("Login6"), None),
+        Player(1488, "login7", "none7", "d29ddade", Some("Login7"), None),
+        Player(1488, "login8", "none8", "d29ddade", Some("Login8"), None)))
       .map(_ => Created)
   }
 
