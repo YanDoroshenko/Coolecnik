@@ -13,6 +13,7 @@ GET           /api/players/:id/pages                           controllers.Stati
 GET           /api/players/:id/opponents                       controllers.StatisticsController.opponents(id: Int)
 GET           /api/games/:id/strikes                           controllers.StrikeController.getStrikes(id: Int)
 GET           /api/players/:playerId/games/:gameId             controllers.StatisticsController.details(playerId: Int, gameId: Int)
+GET           /api/tournaments                                 controllers.StatisticsController.basicTournaments(gameType: Option[String])
 
 # Populate DB
 #GET         /createSchema                               controllers.DBController.createSchema

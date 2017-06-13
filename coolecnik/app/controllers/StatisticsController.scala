@@ -3,7 +3,7 @@ package controllers
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
-import models.Queries._
+import models.Queries.{tournaments, _}
 import models._
 import org.slf4j.LoggerFactory
 import play.api.mvc.{Action, AnyContent, Controller}
@@ -432,5 +432,63 @@ class StatisticsController extends Controller {
             }
         case false => Future(NotFound("Player with id " + playerId + " not found"))
       }
+  }
+
+  def basicTournaments(gameType: Option[String]): Action[AnyContent] = Action.async {
+    val all = for ((t, g) <-
+                   (for ((t, g) <-
+                         (for ((tp, gt) <- (
+                           ((for ((t, g) <- tournaments join games on (_.id === _.tournament)) yield t -> g.player1)
+                             ++
+                             (for ((t, g) <- tournaments join games on (_.id === _.tournament)) yield t -> g.player2))
+                             .groupBy(_._1)
+                             .map { case (t, group) => t -> group.map(_._2).countDistinct }
+                             join gameTypes on (_._1.gameType === _.id))) yield (tp._1, gt.id, gt.title, tp._2))
+                           joinLeft games.filter(_.end.nonEmpty) on (_._1.id === _.tournament)) yield t -> g)
+                     joinLeft games.filter(_.end.isEmpty) on (_._1._1.id === _.tournament)) yield t -> g
+
+    gameType match {
+      case Some("pool8") => Future(NotImplemented)
+      case Some("carambole") => Future(NotImplemented)
+      case o if o.contains("all") || o.isEmpty =>
+
+        db.run(all.result)
+          .map(ts =>
+            ts
+              .sortWith((l, r) =>
+                l._1._1._1.beginning.after(r._1._1._1.beginning))
+              .groupBy(_._1)
+              .map(p => (
+                p._1._1._1.id,
+                p._1._1._1.title,
+                p._1._1._2,
+                p._1._1._3,
+                p._1._1._4,
+                p._2.map(_._2).map {
+                  case Some(_) => 1
+                  case None => 0
+                }.sum
+              ) ->
+                p._1._2
+              )
+              .groupBy(_._1)
+              .map(p => TournamentStats(
+                p._1._1,
+                p._1._2,
+                p._1._3,
+                p._1._4,
+                p._1._5,
+                p._2.values.map {
+                  case Some(_) => 1
+                  case None => 0
+                }.sum,
+                p._1._6,
+                None,
+                None
+              )
+              )
+          )
+          .map(r => Ok(r.toSeq))
+    }
   }
 }

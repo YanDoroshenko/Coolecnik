@@ -313,7 +313,7 @@
 </node>
 </node>
 </node>
-<node TEXT="?" FOLDED="true" ID="ID_1141614835" CREATED="1492719353654" MODIFIED="1492719357323">
+<node TEXT="?" ID="ID_1141614835" CREATED="1492719353654" MODIFIED="1492719357323">
 <node TEXT="query parameters" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_358334949" CREATED="1492719357959" MODIFIED="1492719456985">
 <node TEXT="gameType" FOLDED="true" ID="ID_1212491360" CREATED="1492719389695" MODIFIED="1492719452154">
 <node TEXT="values" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_555830312" CREATED="1492719491551" MODIFIED="1492719498382">
@@ -434,6 +434,72 @@
 </node>
 <node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1785006882" CREATED="1493926279596" MODIFIED="1493926281624">
 <node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://coolecnik.felk.cvut.cz/pool8Stats.json&quot;,&#xa;    &quot;items&quot;: {&#xa;        &quot;id&quot;: &quot;/items&quot;,&#xa;        &quot;properties&quot;: {&#xa;            &quot;beginning&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/beginning&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;correctStrikes&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/correctStrikes&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;end&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/end&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;faulsOther&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/faulsOther&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;faulsWithOthers&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/faulsWithOthers&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;faulsWithWhite&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/faulsWithWhite&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;gameId&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/gameId&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;gameNumber&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/gameNumber&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;opponentId&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/opponentId&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;opponentLogin&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/opponentLogin&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;typeId&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/typeId&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;typeTitle&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/typeTitle&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;winnerId&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/winnerId&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;winnerLogin&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/winnerLogin&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;wrongStrikes&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/wrongStrikes&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            }&#xa;        },&#xa;        &quot;type&quot;: &quot;object&quot;&#xa;    },&#xa;    &quot;type&quot;: &quot;array&quot;&#xa;}" ID="ID_1762047476" CREATED="1493926284700" MODIFIED="1493926285535"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="/tournaments" FOLDED="true" ID="ID_1305384185" CREATED="1497363233114" MODIFIED="1497363236922">
+<node TEXT="?" ID="ID_1407030995" CREATED="1497363200050" MODIFIED="1497363201466">
+<node TEXT="query parameters" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1293445357" CREATED="1497363202114" MODIFIED="1497363208402">
+<node TEXT="gameType" FOLDED="true" ID="ID_316693243" CREATED="1497363210194" MODIFIED="1497375304398">
+<node TEXT="possible values" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1040686353" CREATED="1497375305051" MODIFIED="1497375309112">
+<node TEXT="all" ID="ID_1923726927" CREATED="1497375309842" MODIFIED="1497375310701"/>
+<node TEXT="pool8" ID="ID_1951766691" CREATED="1497375311443" MODIFIED="1497375313328"/>
+<node TEXT="carambole" ID="ID_911493844" CREATED="1497375314003" MODIFIED="1497375315813"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_460095463" CREATED="1497363262058" MODIFIED="1497363264999">
+<node TEXT="bad request" FOLDED="true" ID="ID_300105104" CREATED="1492719703775" MODIFIED="1492719720697">
+<node TEXT="bad value for enumeration" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_780397440" CREATED="1492759927230" MODIFIED="1492760094896">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1346268829" CREATED="1492719721414" MODIFIED="1492719724534">
+<node TEXT="400 BAD REQUEST" ID="ID_965113981" CREATED="1492719725254" MODIFIED="1492719728914"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1801477519" CREATED="1492759903909" MODIFIED="1492760068029">
+<node TEXT="Some(????) (of class scala.Some)" ID="ID_1855338023" CREATED="1492760098566" MODIFIED="1492760132396"/>
+</node>
+</node>
+<node TEXT="unparsable date" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1797989125" CREATED="1492760073241" MODIFIED="1492760095243">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1205248051" CREATED="1492760137391" MODIFIED="1492760145848">
+<node TEXT="400 BAD REQUEST" ID="ID_1113048069" CREATED="1492760140665" MODIFIED="1492760143928"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_752196811" CREATED="1492760147629" MODIFIED="1492760150576">
+<node TEXT="Unparseable date: &quot;????&quot;" ID="ID_416725710" CREATED="1492760159070" MODIFIED="1492760163025"/>
+</node>
+</node>
+<node TEXT="semantic error" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_756117271" CREATED="1492760081691" MODIFIED="1492760095514">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1255589374" CREATED="1492760167368" MODIFIED="1492760172652">
+<node TEXT="400 BAD REQUEST" ID="ID_1455347834" CREATED="1492760174758" MODIFIED="1492760179787"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_958714773" CREATED="1492760185164" MODIFIED="1492760190102">
+<node TEXT="Semantic error description" ID="ID_1037518540" CREATED="1492760190991" MODIFIED="1492760200806"/>
+</node>
+</node>
+<node TEXT="not implemented yet" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_660280784" CREATED="1497375321258" MODIFIED="1497375349328">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_651609125" CREATED="1497375326699" MODIFIED="1497375346335">
+<node TEXT="501 NOT IMPLEMENTED" ID="ID_373946546" CREATED="1497375331914" MODIFIED="1497375345331"/>
+</node>
+</node>
+</node>
+<node TEXT="nothing found" FOLDED="true" ID="ID_586186799" CREATED="1492719737302" MODIFIED="1492719742129">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_663458775" CREATED="1492719742815" MODIFIED="1492719757569">
+<node TEXT="404 NOT FOUND" ID="ID_1803567800" CREATED="1492719758750" MODIFIED="1492719762208"/>
+</node>
+</node>
+<node TEXT="all tournaments filtered" FOLDED="true" ID="ID_331105481" CREATED="1492726162879" MODIFIED="1497363288044">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1157856816" CREATED="1492726170183" MODIFIED="1492726173124">
+<node TEXT="200 OK" ID="ID_388777692" CREATED="1492726175799" MODIFIED="1492726177186"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1254273263" CREATED="1492726178431" MODIFIED="1492726184368">
+<node TEXT="list of tournaments, latest first" FOLDED="true" ID="ID_1179946206" CREATED="1492719783511" MODIFIED="1497363323733">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1454730933" CREATED="1497375898379" MODIFIED="1497375901730">
+<node TEXT="[&#xa;  {&#xa;    &quot;id&quot;: 1,&#xa;    &quot;title&quot;: &quot;haha&quot;,&#xa;    &quot;gameType&quot;: 1,&#xa;    &quot;gameTypeTitle&quot;: &quot;8pool&quot;,&#xa;    &quot;playerCount&quot;: 2,&#xa;    &quot;finished&quot;: 0,&#xa;    &quot;unfinished&quot;: 1&#xa;  },&#xa;  {&#xa;    &quot;id&quot;: 2,&#xa;    &quot;title&quot;: &quot;haha&quot;,&#xa;    &quot;gameType&quot;: 1,&#xa;    &quot;gameTypeTitle&quot;: &quot;8pool&quot;,&#xa;    &quot;playerCount&quot;: 2,&#xa;    &quot;finished&quot;: 0,&#xa;    &quot;unfinished&quot;: 1&#xa;  }&#xa;]" ID="ID_1363129979" CREATED="1497375923490" MODIFIED="1497375924627"/>
+</node>
+<node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1246332166" CREATED="1497375904714" MODIFIED="1497375907984">
+<node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://example.com/example.json&quot;,&#xa;    &quot;items&quot;: {&#xa;        &quot;id&quot;: &quot;/items&quot;,&#xa;        &quot;properties&quot;: {&#xa;            &quot;finished&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/finished&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;gameType&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/gameType&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;gameTypeTitle&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/gameTypeTitle&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;id&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/id&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;playerCount&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/playerCount&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;title&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/title&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;unfinished&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/unfinished&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            }&#xa;        },&#xa;        &quot;type&quot;: &quot;object&quot;&#xa;    },&#xa;    &quot;type&quot;: &quot;array&quot;&#xa;}&#xa;vertical_align_top" ID="ID_1352071472" CREATED="1497375934947" MODIFIED="1497375935716"/>
 </node>
 </node>
 </node>
