@@ -434,13 +434,13 @@ class StatisticsController extends Controller {
       }
   }
 
-  def basicTournaments(gameType: Option[String]): Action[AnyContent] = Action.async {
+  def basicTournaments(id: Int, gameType: Option[String], title: Option[String], result: Option[String]): Action[AnyContent] = Action.async {
     val all = for ((t, g) <-
                    (for ((t, g) <-
                          (for ((tp, gt) <- (
-                           ((for ((t, g) <- tournaments join games on (_.id === _.tournament)) yield t -> g.player1)
+                           ((for ((t, g) <- tournaments join games.filter(_.player1 === id) on (_.id === _.tournament)) yield t -> g.player1)
                              ++
-                             (for ((t, g) <- tournaments join games on (_.id === _.tournament)) yield t -> g.player2))
+                             (for ((t, g) <- tournaments join games.filter(_.player2 === id) on (_.id === _.tournament)) yield t -> g.player2))
                              .groupBy(_._1)
                              .map { case (t, group) => t -> group.map(_._2).countDistinct }
                              join gameTypes on (_._1.gameType === _.id))) yield (tp._1, gt.id, gt.title, tp._2))
@@ -488,7 +488,11 @@ class StatisticsController extends Controller {
               )
               )
           )
-          .map(r => Ok(r.toSeq))
+          .map(r =>
+            if (r.nonEmpty)
+              Ok(r.toSeq)
+            else
+              NotFound)
     }
   }
 }

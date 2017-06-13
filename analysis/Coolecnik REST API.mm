@@ -313,7 +313,7 @@
 </node>
 </node>
 </node>
-<node TEXT="?" ID="ID_1141614835" CREATED="1492719353654" MODIFIED="1492719357323">
+<node TEXT="?" FOLDED="true" ID="ID_1141614835" CREATED="1492719353654" MODIFIED="1492719357323">
 <node TEXT="query parameters" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_358334949" CREATED="1492719357959" MODIFIED="1492719456985">
 <node TEXT="gameType" FOLDED="true" ID="ID_1212491360" CREATED="1492719389695" MODIFIED="1492719452154">
 <node TEXT="values" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_555830312" CREATED="1492719491551" MODIFIED="1492719498382">
@@ -441,7 +441,8 @@
 </node>
 </node>
 <node TEXT="/tournaments" FOLDED="true" ID="ID_1305384185" CREATED="1497363233114" MODIFIED="1497363236922">
-<node TEXT="?" ID="ID_1407030995" CREATED="1497363200050" MODIFIED="1497363201466">
+<node TEXT="/basic" FOLDED="true" ID="ID_403701984" CREATED="1497381925595" MODIFIED="1497381928177">
+<node TEXT="?" FOLDED="true" ID="ID_1407030995" CREATED="1497363200050" MODIFIED="1497363201466">
 <node TEXT="query parameters" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1293445357" CREATED="1497363202114" MODIFIED="1497363208402">
 <node TEXT="gameType" FOLDED="true" ID="ID_316693243" CREATED="1497363210194" MODIFIED="1497375304398">
 <node TEXT="possible values" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1040686353" CREATED="1497375305051" MODIFIED="1497375309112">
@@ -449,6 +450,18 @@
 <node TEXT="pool8" ID="ID_1951766691" CREATED="1497375311443" MODIFIED="1497375313328"/>
 <node TEXT="carambole" ID="ID_911493844" CREATED="1497375314003" MODIFIED="1497375315813"/>
 </node>
+</node>
+<node TEXT="title" FOLDED="true" ID="ID_189867483" CREATED="1497382750114" MODIFIED="1497382763214">
+<node TEXT="description" LOCALIZED_STYLE_REF="styles.subtopic" ID="ID_303362668" CREATED="1497382768474" MODIFIED="1497382776143">
+<node TEXT="String to search in tournament titles for" ID="ID_279447961" CREATED="1497382776915" MODIFIED="1497382829444"/>
+</node>
+</node>
+<node TEXT="result" FOLDED="true" ID="ID_1051959364" CREATED="1497382837186" MODIFIED="1497382839548">
+<node TEXT="possible values" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_668713885" CREATED="1497382840346" MODIFIED="1497382871072">
+<node TEXT="won" ID="ID_1921736704" CREATED="1497382846906" MODIFIED="1497382867877"/>
+<node TEXT="unfinished" ID="ID_115060187" CREATED="1497382851578" MODIFIED="1497382856437"/>
+<node TEXT="finished" ID="ID_1017598375" CREATED="1497382857515" MODIFIED="1497382859756"/>
+<node TEXT="lost" ID="ID_1175825384" CREATED="1497382868890" MODIFIED="1497382869748"/>
 </node>
 </node>
 </node>
@@ -500,6 +513,8 @@
 </node>
 <node TEXT="schema" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1246332166" CREATED="1497375904714" MODIFIED="1497375907984">
 <node TEXT="{&#xa;    &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,&#xa;    &quot;definitions&quot;: {},&#xa;    &quot;id&quot;: &quot;http://example.com/example.json&quot;,&#xa;    &quot;items&quot;: {&#xa;        &quot;id&quot;: &quot;/items&quot;,&#xa;        &quot;properties&quot;: {&#xa;            &quot;finished&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/finished&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;gameType&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/gameType&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;gameTypeTitle&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/gameTypeTitle&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;id&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/id&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;playerCount&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/playerCount&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            },&#xa;            &quot;title&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/title&quot;,&#xa;                &quot;type&quot;: &quot;string&quot;&#xa;            },&#xa;            &quot;unfinished&quot;: {&#xa;                &quot;id&quot;: &quot;/items/properties/unfinished&quot;,&#xa;                &quot;type&quot;: &quot;integer&quot;&#xa;            }&#xa;        },&#xa;        &quot;type&quot;: &quot;object&quot;&#xa;    },&#xa;    &quot;type&quot;: &quot;array&quot;&#xa;}&#xa;vertical_align_top" ID="ID_1352071472" CREATED="1497375934947" MODIFIED="1497375935716"/>
+</node>
+</node>
 </node>
 </node>
 </node>
