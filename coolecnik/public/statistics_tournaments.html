@@ -100,14 +100,23 @@
             </div>
         </section>
         <section class="row justify-content-center m-2">
+
             <div class="row align-content-center">
+                <select id="tournament" class="form-select-sm m-1" onchange="myFunc(1)">
+                    <!--<option selected></option>-->
+                    <option value="all" selected>Vše</option>
+                    <!--<option value="" ></option>-->
+
+                </select>
                 <span class="form-control-static">Datum od </span>
                 <input id="dateFrom" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}"
                        onchange="myFunc(1)"/>
                 <span class="form-control-static">do </span>
                 <input id="dateTo" type="date" placeholder="DD.MM.YYYY" pattern="\d{1,2}/\d{1,2}/\d{4}"
                        onchange="myFunc(1)"/>
+                <span class="form-control-static">Hráči: </span>
             </div>
+
         </section>
     </div>
 
@@ -122,6 +131,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Název turnaje</th>
                     <th>Datum hry</th>
                     <th>Typ hry</th>
                     <th>Protihráč</th>
@@ -150,6 +160,7 @@
                 <thead>
                 <tr>
                     <th data-th="#" scope="row" id="number_of_game">#</th>
+                    <th>Název turnaje</th>
                     <th data-th="Datum hry" id="date_of_start">Datum hry</th>
                     <th>Typ hry</th>
                     <th>Protihráč</th>
@@ -205,6 +216,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Název turnaje</th>
                     <th>Datum hry</th>
                     <th>Typ hry</th>
                     <th>Protihráč</th>
@@ -245,6 +257,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    <th>Název turnaje</th>
                                     <th>Datum hry</th>
                                     <th>Typ hry</th>
                                     <th>Protihráč</th>
@@ -267,6 +280,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    <th>Název turnaje</th>
                                     <th>Datum hry</th>
                                     <th>Typ hry</th>
                                     <th>Protihráč</th>
@@ -325,6 +339,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    <th>Název turnaje</th>
                                     <th>Datum hry</th>
                                     <th>Typ hry</th>
                                     <th>Protihráč</th>
@@ -379,6 +394,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
+                                <th>Název turnaje</th>
                                 <th>Datum hry</th>
                                 <th>Typ hry</th>
                                 <th>Protihráč</th>
