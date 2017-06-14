@@ -9,11 +9,12 @@ GET           /                                                    controllers.A
 GET           /api/players/:id/statistics/basic                    controllers.StatisticsController.basicGameStats(id: Int)
 GET           /api/players/:id/statistics/strikes                  controllers.StatisticsController.basicStrikeStats(id: Int)
 GET           /api/players/:id/statistics                          controllers.StatisticsController.statistics(id: Int, gameType: Option[String], opponent: Option[Int], result: Option[String], from: Option[String], to: Option[String], pageSize: Option[Int], page: Option[Int])
-GET           /api/players/:id/pages                               controllers.StatisticsController.pages(id: Int, gameType: Option[String], opponent: Option[Int], result: Option[String], from: Option[String], to: Option[String], pageSize: Int)
-GET           /api/players/:id/opponents                           controllers.StatisticsController.opponents(id: Int)
-GET           /api/games/:id/strikes                               controllers.StrikeController.getStrikes(id: Int)
-GET           /api/players/:playerId/games/:gameId                 controllers.StatisticsController.details(playerId: Int, gameId: Int)
-GET           /api/players/:id/statistics/tournaments/basic        controllers.StatisticsController.basicTournaments(id: Int, gameType: Option[String], title: Option[String], result: Option[String])
+GET         /api/players/:id/pages                               controllers.StatisticsController.pages(id: Int, gameType: Option[String], opponent: Option[Int], result: Option[String], from: Option[String], to: Option[String], pageSize: Int)
+GET         /api/players/:id/opponents                           controllers.StatisticsController.opponents(id: Int)
+GET         /api/games/:id/strikes                               controllers.StrikeController.getStrikes(id: Int)
+GET         /api/players/:playerId/games/:gameId                 controllers.StatisticsController.details(playerId: Int, gameId: Int)
+GET         /api/players/:id/statistics/tournaments/basic        controllers.StatisticsController.basicTournaments(id: Int, gameType: Option[String], title: Option[String], result: Option[String], page: Option[Int], pageSize: Option[Int])
+GET         /api/players/:id/statistics/tournaments/pages        controllers.StatisticsController.tournamentPages(id: Int, gameType: Option[String], title: Option[String], result: Option[String], pageSize: Int)
 
 # Populate DB
 #GET         /createSchema                               controllers.DBController.createSchema
@@ -21,8 +22,8 @@ GET           /api/players/:id/statistics/tournaments/basic        controllers.S
 #GET           /createTestUsers                                  controllers.DBController.createTestUsers
 
 # Player management
-POST          /api/register                                        controllers.PlayerController.register
-POST          /api/login                                           controllers.PlayerController.login
+POST        /api/register                                        controllers.PlayerController.register
+POST        /api/login                                           controllers.PlayerController.login
 PUT           /api/passwdreset                                     controllers.PlayerController.resetPassword
 PUT           /api/passwdupdate                                    controllers.PlayerController.updatePassword
 POST          /api/players/:playerId/befriend/:friendId            controllers.PlayerController.befriend(playerId: Int, friendId: Int)

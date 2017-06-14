@@ -434,7 +434,7 @@ class StatisticsController extends Controller {
       }
   }
 
-  def basicTournaments(id: Int, gameType: Option[String], title: Option[String], result: Option[String]): Action[AnyContent] = Action.async {
+  def basicTournaments(id: Int, gameType: Option[String], title: Option[String], result: Option[String], page: Option[Int], pageSize: Option[Int]): Action[AnyContent] = Action.async {
     if (result.nonEmpty)
       Future(NotImplemented)
     else {
@@ -459,7 +459,7 @@ class StatisticsController extends Controller {
             .filter(v =>
               title match {
                 case Some(t) => v._1._1._1.title.nonEmpty &&
-                  title.get.toLowerCase.getBytes.toSet.forall(b => v._1._1._1.title.get.toLowerCase.getBytes.toSet.contains(b))
+                  t.toLowerCase.getBytes.toSet.forall(b => v._1._1._1.title.get.toLowerCase.getBytes.toSet.contains(b))
                 case None => true
               })
             .filter(v =>
@@ -468,6 +468,13 @@ class StatisticsController extends Controller {
                 case Some("carambole") => v._1._1._1.gameType == 2
                 case o if o.contains("all") || o.isEmpty => true
               })
+            .filter(v =>
+              result match {
+                case Some("unfinished") => v._2.isEmpty
+                case Some("finished") => v._1._2.isEmpty
+                case None => true
+              }
+            )
 
           filtered
             .sortWith((l, r) =>
@@ -510,11 +517,65 @@ class StatisticsController extends Controller {
             )
         }
         )
-        .map(r =>
-          if (r.nonEmpty)
-            Ok(r.toSeq)
+        .map(r => {
+          val paged =
+            if (page.nonEmpty && pageSize.nonEmpty)
+              r.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
+            else Seq()
+          if (paged.nonEmpty)
+            Ok(paged.toSeq)
           else
-            NotFound)
+            NotFound
+        }
+        )
     }
   }
+
+  def tournamentPages(
+                       id: Int,
+                       gameType: Option[String],
+                       title: Option[String],
+                       result: Option[String],
+                       pageSize: Int
+                     ): Action[AnyContent] = Action.async {
+    Try(
+      db.run(
+        (for ((g, t) <- games
+          .filter(g => g.player1 === id || g.player2 === id)
+          join tournaments on (_.tournament === _.id)) yield g -> t)
+          .result)
+        .flatMap(ps => {
+          val filtered = ps.filter(p =>
+            gameType match {
+              case Some("pool8") => p._2.gameType == 1
+              case Some("carambole") => p._2.gameType == 2
+              case o if o.isEmpty || o.contains("all") => true
+            }
+          )
+            .filter(p =>
+              title match {
+                case Some(t) => p._2.title.nonEmpty &&
+                  t.toLowerCase.getBytes.toSet.forall(b => p._2.title.get.toLowerCase.getBytes.toSet.contains(b))
+                case None => true
+              }
+            )
+          val filteredGrouped = filtered
+            .groupBy(_._2)
+            .filter(p =>
+              result match {
+                case Some("finished") => p._2.map(_._1).forall(_.end.nonEmpty)
+                case Some("unfinished") => p._2.map(_._1).exists(_.end.isEmpty)
+                case None => true
+              }
+            )
+          Future(Ok(Math.ceil(filteredGrouped.size / pageSize)))
+        }
+        )
+    )
+    match {
+      case Success(r) => r
+      case Failure(e) => Future(BadRequest(e.getMessage))
+    }
+  }
+
 }
