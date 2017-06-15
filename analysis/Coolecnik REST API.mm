@@ -1167,6 +1167,34 @@
 </node>
 </node>
 </node>
+<node TEXT="/$id" FOLDED="true" ID="ID_57438717" CREATED="1497538584786" MODIFIED="1497538592360">
+<node TEXT="/details" FOLDED="true" ID="ID_1226022367" CREATED="1497538594795" MODIFIED="1497538597444">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_272512982" CREATED="1497538610291" MODIFIED="1497538616403">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_867287368" CREATED="1497538624130" MODIFIED="1497538625923">
+<node TEXT="GET" ID="ID_679178357" CREATED="1497538627482" MODIFIED="1497538628319"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1449406943" CREATED="1497538613618" MODIFIED="1497538616757">
+<node TEXT="tournament details" FOLDED="true" ID="ID_857669863" CREATED="1497538598250" MODIFIED="1497538606796">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1356331926" CREATED="1497538646274" MODIFIED="1497538666290">
+<node TEXT="200 OK" ID="ID_1329951729" CREATED="1497538666890" MODIFIED="1497538668159"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_221723596" CREATED="1497538651435" MODIFIED="1497538665822">
+<node TEXT="tournament with games included" FOLDED="true" ID="ID_561057408" CREATED="1497538669698" MODIFIED="1497538679439">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_306375217" CREATED="1497538656435" MODIFIED="1497538687688">
+<node TEXT="{&quot;id&quot;:1,&quot;title&quot;:&quot;haha&quot;,&quot;tournamentType&quot;:1,&quot;gameType&quot;:1,&quot;gameTypeTitle&quot;:&quot;8pool&quot;,&quot;beginning&quot;:&quot;2017-06-12T17:06:59Z+0200&quot;,&quot;games&quot;:[{&quot;id&quot;:1,&quot;gameType&quot;:1,&quot;player1&quot;:3,&quot;player2&quot;:19,&quot;tournament&quot;:1}]}" ID="ID_335117271" CREATED="1497538688402" MODIFIED="1497538714319"/>
+</node>
+</node>
+</node>
+</node>
+<node TEXT="not found" FOLDED="true" ID="ID_1979882194" CREATED="1497538633610" MODIFIED="1497538636046">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1994565662" CREATED="1497538636691" MODIFIED="1497538643879">
+<node TEXT="404 NOT FOUND" ID="ID_980769128" CREATED="1497538638370" MODIFIED="1497538642629"/>
+</node>
+</node>
+</node>
+</node>
+</node>
 </node>
 </node>
 </node>

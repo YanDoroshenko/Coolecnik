@@ -574,4 +574,23 @@ class StatisticsController extends Controller {
     }
   }
 
+
+  def tournamentDetails(id: Int): Action[AnyContent] = Action.async {
+    db.run(
+      (for ((t, gt) <- tournaments.filter(_.id === id) join gameTypes on (_.gameType === _.id))
+        yield (t.id, t.title, t.tournamentType, t.gameType, gt.title, t.beginning, t.end)
+        ).result
+    )
+      .flatMap {
+        case Seq(t) =>
+          db.run(
+            games
+              .filter(_.tournament === id)
+              .result
+          )
+            .map(gs =>
+              Ok(TournamentDetails(t._1, t._2, t._3, t._4, t._5, t._6, t._7, gs)))
+        case _ => Future(NotFound)
+      }
+  }
 }

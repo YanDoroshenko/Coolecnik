@@ -98,3 +98,5 @@ case class NameUpdate(firstName: Option[String], lastName: Option[String])
 case class NewTournament(gameType: Int, tournamentType: Int, title: Option[String], players: Seq[Int], rounds: Option[Int], caramboles: Option[Int])
 
 case class TournamentStats(id: Int, title: Option[String], gameType: Int, gameTypeTitle: String, playerCount: Int, finished: Int, unfinished: Int, rounds: Option[Int], caramboles: Option[Int])
+
+case class TournamentDetails(id: Int, title: Option[String], tournamentType: Int, gameType: Int, gameTypeTitle: String, beginning: Timestamp, end: Option[Timestamp], games: Seq[Game])

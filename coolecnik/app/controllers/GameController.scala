@@ -111,7 +111,7 @@ class GameController extends Controller {
                     rs.head match {
                       case Game(id_, _, _, _, _, Some(t), _, None, _, _) =>
                         db.run(
-                          ((games.filter(g => g.tournament === t && g.end.isEmpty).exists === false) ==
+                          ((games.filter(g => g.tournament === t && g.end.isEmpty).exists === false) &&
                             (tournaments.filter(t_ => t_.id === t && t_.end.isEmpty).exists === true))
                             .result
                         )
