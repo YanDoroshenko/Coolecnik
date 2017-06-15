@@ -291,7 +291,6 @@ input:checked + .slider:before {
 
 .tournament-card a:hover h4 {
     color: white;
-    font-size: 1.6em;
 }
 
 .tournament-card:hover {
