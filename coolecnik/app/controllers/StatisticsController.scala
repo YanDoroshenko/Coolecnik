@@ -435,100 +435,96 @@ class StatisticsController extends Controller {
   }
 
   def basicTournaments(id: Int, gameType: Option[String], title: Option[String], result: Option[String], page: Option[Int], pageSize: Option[Int]): Action[AnyContent] = Action.async {
-    if (result.nonEmpty)
-      Future(NotImplemented)
-    else {
-      val all = for ((t, g) <-
-                     (for ((t, g) <-
-                           (for ((tp, gt) <- (
-                             ((for ((t, g) <- tournaments join
+    val all = for ((t, g) <-
+                   (for ((t, g) <-
+                         (for ((tp, gt) <- (
+                           ((for ((t, g) <- tournaments join
+                             games.filter(g => g.player1 === id || g.player2 === id) on
+                             (_.id === _.tournament)) yield t -> g.player1)
+                             ++
+                             (for ((t, g) <- tournaments join
                                games.filter(g => g.player1 === id || g.player2 === id) on
-                               (_.id === _.tournament)) yield t -> g.player1)
-                               ++
-                               (for ((t, g) <- tournaments join
-                                 games.filter(g => g.player1 === id || g.player2 === id) on
-                                 (_.id === _.tournament)) yield t -> g.player2))
-                               .groupBy(_._1)
-                               .map { case (t, group) => t -> group.map(_._2).countDistinct }
-                               join gameTypes on (_._1.gameType === _.id))) yield (tp._1, gt.id, gt.title, tp._2))
-                             joinLeft games.filter(_.end.nonEmpty) on (_._1.id === _.tournament)) yield t -> g)
-                       joinLeft games.filter(_.end.isEmpty) on (_._1._1.id === _.tournament)) yield t -> g
-      db.run(all.result)
-        .map(ts => {
-          val filtered = ts
-            .filter(v =>
-              title match {
-                case Some(t) => v._1._1._1.title.nonEmpty &&
-                  t.toLowerCase.getBytes.toSet.forall(b => v._1._1._1.title.get.toLowerCase.getBytes.toSet.contains(b))
-                case None => true
-              })
-            .filter(v =>
-              gameType match {
-                case Some("pool8") => v._1._1._1.gameType == 1
-                case Some("carambole") => v._1._1._1.gameType == 2
-                case o if o.contains("all") || o.isEmpty => true
-              })
-            .filter(v =>
-              result match {
-                case Some("unfinished") => v._2.isEmpty
-                case Some("finished") => v._1._2.isEmpty
-                case None => true
-              }
-            )
+                               (_.id === _.tournament)) yield t -> g.player2))
+                             .groupBy(_._1)
+                             .map { case (t, group) => t -> group.map(_._2).countDistinct }
+                             join gameTypes on (_._1.gameType === _.id))) yield (tp._1, gt.id, gt.title, tp._2))
+                           joinLeft games.filter(_.end.nonEmpty) on (_._1.id === _.tournament)) yield t -> g)
+                     joinLeft games.filter(_.end.isEmpty) on (_._1._1.id === _.tournament)) yield t -> g
+    db.run(all.result)
+      .map(ts => {
+        val filtered = ts
+          .filter(v =>
+            title match {
+              case Some(t) => v._1._1._1.title.nonEmpty &&
+                t.toLowerCase.getBytes.toSet.forall(b => v._1._1._1.title.get.toLowerCase.getBytes.toSet.contains(b))
+              case None => true
+            })
+          .filter(v =>
+            gameType match {
+              case Some("pool8") => v._1._1._1.gameType == 1
+              case Some("carambole") => v._1._1._1.gameType == 2
+              case o if o.contains("all") || o.isEmpty => true
+            })
+          .filter(v =>
+            result match {
+              case Some("unfinished") => v._2.isEmpty
+              case Some("finished") => v._1._2.isEmpty
+              case None => true
+            }
+          )
 
-          filtered
-            .sortWith((l, r) =>
-              l._1._1._1.beginning.after(r._1._1._1.beginning))
-            .groupBy(_._1)
-            .map(p => (
-              p._1._1._1.id,
-              p._1._1._1.title,
-              p._1._1._2,
-              p._1._1._3,
-              p._1._1._4,
-              p._2.map(_._2).map {
-                case Some(_) => 1
-                case None => 0
-              }.sum
-            ) ->
-              p._1._2
-            )
-            .groupBy(_._1)
-            .map(p => TournamentStats(
-              p._1._1,
-              p._1._2,
-              p._1._3,
-              p._1._4,
-              p._1._5,
-              p._2.values.map {
-                case Some(_) => 1
-                case None => 0
-              }.sum,
-              p._1._6,
-              p._2.values.head match {
-                case Some(g) => g.rounds
-                case _ => None
-              },
-              p._2.values.head match {
-                case Some(g) => g.carambolesToWin
-                case _ => None
-              }
-            )
-            )
-        }
-        )
-        .map(r => {
-          val paged =
-            if (page.nonEmpty && pageSize.nonEmpty)
-              r.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
-            else Seq()
-          if (paged.nonEmpty)
-            Ok(paged.toSeq)
-          else
-            NotFound
-        }
-        )
-    }
+        filtered
+          .sortWith((l, r) =>
+            l._1._1._1.beginning.after(r._1._1._1.beginning))
+          .groupBy(_._1)
+          .map(p => (
+            p._1._1._1.id,
+            p._1._1._1.title,
+            p._1._1._2,
+            p._1._1._3,
+            p._1._1._4,
+            p._2.map(_._2).map {
+              case Some(_) => 1
+              case None => 0
+            }.sum
+          ) ->
+            p._1._2
+          )
+          .groupBy(_._1)
+          .map(p => TournamentStats(
+            p._1._1,
+            p._1._2,
+            p._1._3,
+            p._1._4,
+            p._1._5,
+            p._2.values.map {
+              case Some(_) => 1
+              case None => 0
+            }.sum,
+            p._1._6,
+            p._2.values.head match {
+              case Some(g) => g.rounds
+              case _ => None
+            },
+            p._2.values.head match {
+              case Some(g) => g.carambolesToWin
+              case _ => None
+            }
+          )
+          )
+      }
+      )
+      .map(r => {
+        val paged =
+          if (page.nonEmpty && pageSize.nonEmpty)
+            r.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
+          else Seq()
+        if (paged.nonEmpty)
+          Ok(paged.toSeq)
+        else
+          NotFound
+      }
+      )
   }
 
   def tournamentPages(
