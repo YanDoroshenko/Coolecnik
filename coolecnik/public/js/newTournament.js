@@ -2,8 +2,12 @@
  * Created by hodek on 30.05.2017.
  */
 
-//players for tournament
+//players for tournaments
 var allPlayers = [];
+allPlayers.push({
+    id: getCookie("myId"),
+    name: getCookie("myName")
+});
 
 $("#gameType").change(function () {
     if (this.checked) {
@@ -61,11 +65,11 @@ $.ajax(endpoint, {
 
 // callbacked function for addEventListeners of friends
 function tempFunc(event, btnArrHtml, btnArr, i) {
-    console.log(btnArrHtml, i);
-    var plname = String(btnArrHtml[i]).slice(65);
-    plname = plname.slice(0, -9);
+    //console.log(btnArrHtml, i);
+    var plname = $.parseHTML(btnArrHtml[i]);
+    plname = plname[0].innerText;
     var plid = btnArr[i].value;
-    console.log(plname + " " + plid);
+    //console.log(plname + " " + plid);
 
     $("#player").html(plname).attr("value", plid);
 
@@ -90,10 +94,12 @@ function showPlayers() {
     var list = $("#playerslist");
     list.html("");
     allPlayers.forEach(function (player) {
-        var pattern = "<li class='list-group-item list-group-item-action justify-content-between friend'>" +
-            "<a href=friendProfile.html?id=" + player.id + "&nick=" + player.name + ">" + player.name + "</a>" +
-            "<button type='button' class='btn btn-outline-danger btn-sm removeBtn' id=" + player.id + ">✘</button></li>";
-        list.append(pattern);
+        if(player.id != getCookie("myId")) {
+            var pattern = "<li class='list-group-item list-group-item-action justify-content-between friend'>" +
+                "<a href=friendProfile.html?id=" + player.id + "&nick=" + player.name + ">" + player.name + "</a>" +
+                "<button type='button' class='btn btn-outline-danger btn-sm removeBtn' id=" + player.id + ">✘</button></li>";
+            list.append(pattern);
+        }
     });
 }
 
