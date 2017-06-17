@@ -100,3 +100,7 @@ case class NewTournament(gameType: Int, tournamentType: Int, title: Option[Strin
 case class TournamentStats(id: Int, title: Option[String], gameType: Int, gameTypeTitle: String, playerCount: Int, finished: Int, unfinished: Int, rounds: Option[Int], caramboles: Option[Int])
 
 case class TournamentDetails(id: Int, title: Option[String], tournamentType: Int, gameType: Int, gameTypeTitle: String, beginning: Timestamp, end: Option[Timestamp], games: Seq[Game])
+
+case class PlayerTournamentStats(id: Int, login: String, won: Int, lost: Int, draws: Int, points: Int)
+
+case class TournamentTable(id: Int, title: Option[String], table: Seq[PlayerTournamentStats])

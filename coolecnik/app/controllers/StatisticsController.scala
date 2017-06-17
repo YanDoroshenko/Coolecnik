@@ -593,4 +593,37 @@ class StatisticsController extends Controller {
         case _ => Future(NotFound)
       }
   }
+
+  def tournamentTable(id: Int): Action[AnyContent] = Action.async {
+    db.run(tournaments.filter(_.id === id).result)
+      .flatMap {
+        case Seq(t) =>
+          db.run(games.filter(g => g.tournament === id).result)
+            .flatMap(gs =>
+              db.run(
+                (for ((g, p) <-
+                      games.filter(g => g.tournament === id).map(_.player1) ++
+                        games.filter(g => g.tournament === id).map(_.player2)
+                        join players on (_ === _.id)) yield p)
+                  .result)
+                .map(ps => {
+                  val groupedByPlayer = ps.map(p => p -> gs.filter(g => g.player1 == p.id || g.player2 == p.id))
+                  val pStats = groupedByPlayer.map(p => {
+                    val player = p._1
+                    val pid = player.id
+                    val games = p._2.filter(_.end.nonEmpty)
+                    val won = games.filter(_.winner.contains(pid))
+                    val lost = games.filter(g => g.winner.nonEmpty && !g.winner.contains(pid))
+                    val draws = games.filter(_.winner.isEmpty)
+                    val points = won.length * 3 + draws.length
+                    PlayerTournamentStats(pid, player.login, won.length, lost.length, draws.length, points)
+                  }
+                  )
+                  Ok(TournamentTable(t.id, t.title, pStats))
+                }
+                )
+            )
+        case Seq() => Future(NotFound)
+      }
+  }
 }
