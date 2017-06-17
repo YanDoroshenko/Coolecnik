@@ -1194,6 +1194,32 @@
 </node>
 </node>
 </node>
+<node TEXT="/table" FOLDED="true" ID="ID_81018974" CREATED="1497708347829" MODIFIED="1497708350055">
+<node TEXT="request" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_698933430" CREATED="1497708351621" MODIFIED="1497708364114">
+<node TEXT="method" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1510898346" CREATED="1497708357798" MODIFIED="1497708361921">
+<node TEXT="GET" ID="ID_1198417431" CREATED="1497708359678" MODIFIED="1497708360864"/>
+</node>
+</node>
+<node TEXT="response" LOCALIZED_STYLE_REF="styles.subsubtopic" FOLDED="true" ID="ID_1403553934" CREATED="1497708354549" MODIFIED="1497708364450">
+<node TEXT="nothing found" FOLDED="true" ID="ID_1965738942" CREATED="1497708365302" MODIFIED="1497708369883">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1913924705" CREATED="1497708370646" MODIFIED="1497708377458">
+<node TEXT="404 NOT FOUND" ID="ID_784620215" CREATED="1497708372358" MODIFIED="1497708376028"/>
+</node>
+</node>
+<node TEXT="tournament table" FOLDED="true" ID="ID_573066124" CREATED="1497708382527" MODIFIED="1497708389139">
+<node TEXT="status" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1625239452" CREATED="1497708450485" MODIFIED="1497708455176">
+<node TEXT="200 OK" ID="ID_1391927653" CREATED="1497708460574" MODIFIED="1497708462834"/>
+</node>
+<node TEXT="body" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_1411458921" CREATED="1497708452686" MODIFIED="1497708454880">
+<node TEXT="DTO with tournament id, title and sequence of players&apos; stats" FOLDED="true" ID="ID_781189360" CREATED="1497708402741" MODIFIED="1497708427503">
+<node TEXT="example" LOCALIZED_STYLE_REF="styles.subtopic" FOLDED="true" ID="ID_405469423" CREATED="1497708428213" MODIFIED="1497708434817">
+<node TEXT="{&quot;id&quot;:6,&quot;title&quot;:&quot;t3&quot;,&quot;table&quot;:[{&quot;id&quot;:1,&quot;login&quot;:&quot;koko&quot;,&quot;won&quot;:0,&quot;lost&quot;:0,&quot;draws&quot;:0,&quot;points&quot;:0},{&quot;id&quot;:1,&quot;login&quot;:&quot;koko&quot;,&quot;won&quot;:0,&quot;lost&quot;:0,&quot;draws&quot;:0,&quot;points&quot;:0},{&quot;id&quot;:3,&quot;login&quot;:&quot;lolo&quot;,&quot;won&quot;:0,&quot;lost&quot;:0,&quot;draws&quot;:0,&quot;points&quot;:0},{&quot;id&quot;:3,&quot;login&quot;:&quot;lolo&quot;,&quot;won&quot;:0,&quot;lost&quot;:0,&quot;draws&quot;:0,&quot;points&quot;:0},{&quot;id&quot;:19,&quot;login&quot;:&quot;dodo&quot;,&quot;won&quot;:0,&quot;lost&quot;:0,&quot;draws&quot;:0,&quot;points&quot;:0},{&quot;id&quot;:19,&quot;login&quot;:&quot;dodo&quot;,&quot;won&quot;:0,&quot;lost&quot;:0,&quot;draws&quot;:0,&quot;points&quot;:0}]}" ID="ID_809237904" CREATED="1497708431141" MODIFIED="1497708432064"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+</node>
 </node>
 </node>
 </node>
