@@ -141,7 +141,7 @@ $("#createTournament").click(function (e) {
         var gameType = 1; //pool
     }
 
-    if(allPlayers.length < 2) {
+    if(allPlayers.length < 3) {
         $("#newGameSpan").text("Přidejte alespoň 2 hráče").removeClass("d-none");
         e.preventDefault();
         return;
@@ -149,16 +149,41 @@ $("#createTournament").click(function (e) {
         $("#newGameSpan").text("").addClass("d-none");
     }
 
+    if($("#tournamentTitle")[0].value.length < 1){
+        $("#newGameSpan").text("Zadejte název turnaje").removeClass("d-none");
+        e.preventDefault();
+        return;
+    } else {
+        $("#newGameSpan").text("").addClass("d-none");
+    }
+
     var endpoint = "/api/tournaments/new";
-    var data = {
-        title: $("#tournamentTitle").val(),
-        tournamentType: 1,
-        gameType: gameType,
-        rounds: parseInt($("#carambCount").val()),
-        players: allPlayers.map(function (player) {
-            return parseInt(player.id);
-        })
-    };
+    var data;
+    if ($("#karambolGameType").prop("checked")) {
+        //round game
+        data = {
+            title: $("#tournamentTitle").val(),
+            tournamentType: 1,
+            gameType: gameType,
+            rounds: parseInt($("#carambCount").val()),
+            players: allPlayers.map(function (player) {
+                return parseInt(player.id);
+            })
+        };
+    }
+    else {
+        //carambol game
+        data = {
+            title: $("#tournamentTitle").val(),
+            tournamentType: 1,
+            gameType: gameType,
+            caramboles: parseInt($("#carambCount").val()),
+            players: allPlayers.map(function (player) {
+                return parseInt(player.id);
+            })
+        };
+    }
+
 
     console.log(JSON.stringify(data));
 
