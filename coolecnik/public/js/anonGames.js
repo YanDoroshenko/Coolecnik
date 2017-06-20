@@ -46,7 +46,8 @@ function setActivePlayerOnScreen() {
             $("#player2").removeClass("active-player").addClass("nonactive-player");
         }
         else {
-
+            $("#player1c").removeClass("nonactive-player").addClass("active-player");
+            $("#player2c").removeClass("active-player").addClass("nonactive-player");
         }
     }
     else {
@@ -55,7 +56,8 @@ function setActivePlayerOnScreen() {
             $("#player1").removeClass("active-player").addClass("nonactive-player");
         }
         else {
-
+            $("#player2c").removeClass("nonactive-player").addClass("active-player");
+            $("#player1c").removeClass("active-player").addClass("nonactive-player");
         }
     }
 }
@@ -81,6 +83,7 @@ $("#startAnonBtn").on("click", function (e) {
         return;
     }
 
+    //start pool game
     if (!$("#gameType").prop("checked")) {
         localStorage.setItem("gameType", 1);
 
@@ -106,6 +109,66 @@ $("#startAnonBtn").on("click", function (e) {
         clearTimeout(timeVar);
         timeVar = setInterval(countTimer, 1000);
         setActivePlayerOnScreen();
+    }
+
+    //start carambol game
+    else {
+        localStorage.setItem("gameType", 2);
+
+        if ($("#karambolGameType").prop("checked")) {
+            localStorage.setItem("carType", "2"); //round game
+        }
+        else {
+            localStorage.setItem("carType", "1"); //carambol game
+        }
+
+        $("#loginPanel").hide();
+
+
+        $("#player1c").html($("#pl0").val());
+        $("#player2c").html($("#pl1").val());
+        $("#newGameDiv").hide();
+
+        $("#karambolControlDiv").show();
+
+        changeRound = 0;
+        lastRound = 0;
+        round = 1;
+
+        if (localStorage.getItem("carType") === "1") { //carambol game
+            $("#carGameType1Div").show();
+
+            localStorage.setItem("roundsTotal", $("#carambCount").val());
+            localStorage.setItem("roundsRemain", round);
+
+            $("#carGameType1CarsTotal").html(localStorage.getItem("roundsTotal"));
+            $("#carGameType1CurrentRound").html(localStorage.getItem("roundsRemain"));
+        }
+        else if (localStorage.getItem("carType") === "2") {  //round game
+            $("#carGameType2Div").show();
+
+            localStorage.setItem("carsTotal", $("#carambCount").val());
+            localStorage.setItem("currentRound", $("#carambCount").val());
+
+            $("#carGameType2RoundsTotal").html(localStorage.getItem("carsTotal"));
+            $("#carGameType2RoundsRemain").html(localStorage.getItem("currentRound"));
+        }
+        setActivePlayerOnScreen();
+
+        localStorage.setItem("activePlayer", activePlayer);
+
+        $("#helpDiv").html("");
+        $("#endOfGameDiv").html("");
+
+        $("#pl1goodc").html("0");
+        $("#pl2goodc").html("0");
+
+        $("#timerMc").html("0");
+        $("#timerSc").html("0");
+
+        clearTimeout(timeVar);
+        clearTimeout(timeVar);
+        timeVar = setInterval(countTimer, 1000);
     }
 });
 
