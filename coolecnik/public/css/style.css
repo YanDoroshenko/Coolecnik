@@ -317,6 +317,10 @@ input:checked + .slider:before {
     transform: scale(1.05);
 }
 
+#tournamentTable {
+    text-align: left;
+}
+
 .rules-spec a:link {
     color: #bb781a;
 }
