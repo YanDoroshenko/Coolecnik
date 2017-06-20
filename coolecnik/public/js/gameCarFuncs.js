@@ -301,6 +301,4 @@ function carRestoreGame() {
     //set other vars
     activePlayer = parseInt(localStorage.getItem("activePlayer"));
     setActivePlayerOnScreen();
-
-
 }
