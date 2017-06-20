@@ -92,7 +92,8 @@ function tempFunc(event, btnArrHtml, btnArr, i) {
         var plid = btnArr[i].value;
         localStorage.setItem("secondPlayerId", btnArr[i].value);
         isSecondPlayerAuthorized = true;
-        $("#pl0").html(plname);
+        $("#pl0").val(plname);
+        $("#pl0").prop("value", plname);
         $("#authPlayer2btn").css("display", "none");
     }
     else {
