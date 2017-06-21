@@ -467,8 +467,8 @@ class StatisticsController extends Controller {
             })
           .filter(v =>
             result match {
-              case Some("unfinished") => v._2.isEmpty
-              case Some("finished") => v._1._2.isEmpty
+              case Some("finished") => v._2.isEmpty
+              case Some("unfinished") => v._1._2.isEmpty
               case None => true
             }
           )
