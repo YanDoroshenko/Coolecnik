@@ -619,7 +619,20 @@ class StatisticsController extends Controller {
                     PlayerTournamentStats(pid, player.login, won.length, lost.length, draws.length, points)
                   }
                   )
-                  Ok(TournamentTable(t.id, t.title, pStats.distinct))
+                  Ok(TournamentTable(t.id, t.title,
+                    pStats
+                      .distinct
+                      .sortWith((l, r) =>
+                        if (l.points == r.points)
+                          gs.find(g =>
+                            g.player1 == l.id && g.player2 == r.id ||
+                              g.player2 == l.id && g.player1 == r.id)
+                            .get.winner.contains(l.id)
+                        else
+                          l.points > r.points
+                      )
+                  )
+                  )
                 }
                 )
             )
