@@ -109,7 +109,7 @@ function sendStrikes() {
 }
 
 function sendGameEnd(winnerId) {
-    var endpoint = "/api/games/" + gameId + "/end";
+    var endpoint = "/api/games/" + parseInt(localStorage.getItem("gameId")) + "/end";
     var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
     if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
         dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
@@ -187,7 +187,7 @@ function saveGameEnd(winnerId) {
         + m;
     if (winnerId === undefined) {
         obj = {
-            "gameId": gameId,
+            "gameId": parseInt(localStorage.getItem("gameId")),
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
@@ -199,7 +199,7 @@ function saveGameEnd(winnerId) {
     }
     else if (winnerId === -42) {
         obj = {
-            "gameId": gameId,
+            "gameId": parseInt(localStorage.getItem("gameId")),
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,
@@ -210,7 +210,7 @@ function saveGameEnd(winnerId) {
     }
     else {
         obj = {
-            "gameId": gameId,
+            "gameId": parseInt(localStorage.getItem("gameId")),
             "gameType": localStorage.getItem("gameType"),
             "pl2Name": players[1].name,
             "pl2Id": players[1].id,

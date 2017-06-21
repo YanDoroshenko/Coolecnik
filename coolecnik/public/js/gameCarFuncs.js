@@ -270,6 +270,7 @@ function carRestoreGame() {
 
     round = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].round + 1;
     gameId = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].game;
+    localStorage.setItem("gameId", gameId);
     players = JSON.parse(localStorage.getItem("players"));
 
     $("#player1c").html(players[0].name);

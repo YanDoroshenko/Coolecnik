@@ -211,7 +211,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
                     $("#poolControlDiv").css("display", "block");
 
-                    gameId = response.id;
+                    //gameId = response.id;
+                    localStorage.setItem("gameId", response.id);
                     players = [{
                         "id": parseInt(getCookie("myId")),
                         "name": getCookie("myName")
@@ -293,7 +294,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     }
 
 
-                    gameId = response.id;
+                    //gameId = response.id;
+                    localStorage.setItem("gameId", response.id);
                     players = [{
                         "id": parseInt(getCookie("myId")),
                         "name": getCookie("myName")
