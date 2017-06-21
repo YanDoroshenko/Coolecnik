@@ -564,7 +564,7 @@ class StatisticsController extends Controller {
                 case None => true
               }
             )
-          Future(Ok(Math.ceil(filteredGrouped.size / pageSize)))
+          Future(Ok(Math.ceil(filteredGrouped.size.toDouble / pageSize)))
         }
         )
     )
