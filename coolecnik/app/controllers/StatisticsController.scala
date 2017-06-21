@@ -619,7 +619,7 @@ class StatisticsController extends Controller {
                     PlayerTournamentStats(pid, player.login, won.length, lost.length, draws.length, points)
                   }
                   )
-                  Ok(TournamentTable(t.id, t.title, pStats))
+                  Ok(TournamentTable(t.id, t.title, pStats.distinct))
                 }
                 )
             )
