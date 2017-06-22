@@ -96,6 +96,31 @@ class GameController extends Controller {
     }
   }
 
+  def startGame(id: Int): Action[JsValue] = Action.async(parse.json) {
+    rq => {
+      log.info("Start game:\n" + rq.body)
+      Json.fromJson[StartGame](rq.body).asOpt match {
+        case Some(e) =>
+          db.run(
+            games.filter(r => r.id === id && r.beginning.isEmpty).result.map {
+              case Seq(g) =>
+                db.run(games.filter(r => r.id === id).map(g => g.beginning)
+                  .update(Some(e.startTime)))
+              case _ =>
+                new IllegalStateException("Game has already been started")
+            })
+            .flatMap {
+              case e: IllegalStateException => Future(Conflict(e.getMessage))
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ =>
+                db.run(games.filter(_.id === id).result)
+                  .map(gs => Ok(gs.head))
+            }
+        case None => Future(BadRequest("Request can't be deserialized"))
+      }
+    }
+  }
+
   def endGame(id: Int): Action[JsValue] = Action.async(parse.json) {
     rq => {
       log.info("End game:\n" + rq.body)

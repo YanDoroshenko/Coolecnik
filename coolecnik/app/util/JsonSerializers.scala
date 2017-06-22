@@ -55,4 +55,5 @@ object JsonSerializers {
   implicit val tdf: OFormat[TournamentDetails] = Json.format[TournamentDetails]
   implicit val ptf: OFormat[PlayerTournamentStats] = Json.format[PlayerTournamentStats]
   implicit val ttf: OFormat[TournamentTable] = Json.format[TournamentTable]
+  implicit val sgf: OFormat[StartGame] = Json.format[StartGame]
 }
