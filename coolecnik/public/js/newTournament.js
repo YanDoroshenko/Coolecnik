@@ -62,7 +62,7 @@ $.ajax(endpoint, {
             for (var i = 0; i < btnArr.length; i++) {
                 // fucking closure. What the hell is this?
                 (function (i) {
-                    btnArr[i].addEventListener('click', function () {
+                    btnArr[i].addEventListener('click', function (event) {
                         tempFunc(event, btnArrHtml, btnArr, i);
                     }, false);
                 })(i);
