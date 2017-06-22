@@ -1,3 +1,113 @@
+if(localStorage.getItem("tournamentGame") == "true"){
+    if (parseInt(localStorage.getItem("gameType")) === 1) {
+        localStorage.setItem("currentGame", null);
+        $("#player1").text(getCookie("myName"));
+        $("#player2").text(localStorage.getItem("secondPlayerName"));
+        $("#newGameDiv").css("display", "none");
+
+        $("#poolControlDiv").css("display", "block");
+
+        round = 1;
+
+        activePlayer = Math.floor(Math.random() * (3 - 1)); // 0 for 1st player, 1 for second
+        if (activePlayer === 0) {
+            document.getElementById("player1").className = "active-player";
+            document.getElementById("player2").className = "nonactive-player";
+        }
+        else {
+            document.getElementById("player1").className = "nonactive-player";
+            document.getElementById("player2").className = "active-player";
+        }
+        localStorage.setItem("activePlayer", activePlayer);
+
+        $("#helpDiv").html("");
+        $("#endOfGameDiv").html("");
+
+        $("#pl1good").html("0");
+        $("#pl2good").html("0");
+        $("#pl1bad").html("0");
+        $("#pl2bad").html("0");
+
+        $("#timerM").html("0");
+        $("#timerS").html("0");
+        var savedCounterValues = {
+            "green1": 0,
+            "green2": 0,
+            "red1": 0,
+            "red2": 0
+        };
+        localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
+
+        localStorage.setItem("activeGame", true);
+
+        localStorage.setItem("savedGame", null);
+        localStorage.setItem("savedGameInfo", null);
+        clearTimeout(timerVar);
+        timerVar = setInterval(countTimer, 1000);
+    }
+
+    else if (parseInt(localStorage.getItem("gameType")) === 2) {
+        localStorage.setItem("currentGame", null);
+        $("#player1c").text(getCookie("myName"));
+        $("#player2c").text(localStorage.getItem("secondPlayerName"));
+        $("#newGameDiv").css("display", "none");
+
+        $("#karambolControlDiv").css("display", "block");
+
+        changeRound = 0;
+        lastRound = 0;
+        round = 1;
+
+        if (localStorage.getItem("carType") === "2") { //carambol game
+            $("#carGameType1Div").show();
+
+            $("#carGameType1CarsTotal").html(localStorage.getItem("roundsTotal"));
+            $("#carGameType1CurrentRound").html(localStorage.getItem("roundsRemain"));
+        }
+        else if (localStorage.getItem("carType") === "1") {  //round game
+            $("#carGameType2Div").show();
+
+            $("#carGameType2RoundsTotal").html(localStorage.getItem("carsTotal"));
+            $("#carGameType2RoundsRemain").html(localStorage.getItem("currentRound"));
+        }
+
+        activePlayer = Math.floor(Math.random() * (3 - 1)); // 0 for 1st player, 1 for second
+        if (activePlayer === 0) {
+            document.getElementById("player1c").className = "active-player";
+            document.getElementById("player2c").className = "nonactive-player";
+        }
+        else {
+            document.getElementById("player1c").className = "nonactive-player";
+            document.getElementById("player2c").className = "active-player";
+        }
+        localStorage.setItem("activePlayer", activePlayer);
+
+        $("#helpDiv").html("");
+        $("#endOfGameDiv").html("");
+
+        $("#pl1goodc").html("0");
+        $("#pl2goodc").html("0");
+
+        $("#timerMc").html("0");
+        $("#timerSc").html("0");
+        var savedCounterValues = {
+            "green1": 0,
+            "green2": 0
+        };
+        localStorage.setItem("savedCounterValues", JSON.stringify(savedCounterValues));
+
+        localStorage.setItem("activeGame", true);
+
+        localStorage.setItem("savedGame", null);
+        localStorage.setItem("savedGameInfo", null);
+        clearTimeout(timerVar);
+        clearTimeout(timerVar);
+        timerVar = setInterval(countTimer, 1000);
+    }
+    localStorage.setItem("tournamentGame", false);
+}
+
+
 $("#gameType").change(function () {
     if (this.checked) {
         $("#carambParams").show();
@@ -211,7 +321,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
 
                     $("#poolControlDiv").css("display", "block");
 
-                    gameId = response.id;
+                    //gameId = response.id;
+                    localStorage.setItem("gameId", response.id);
                     players = [{
                         "id": parseInt(getCookie("myId")),
                         "name": getCookie("myName")
@@ -293,7 +404,8 @@ document.getElementById("newGameBtn").addEventListener("click", function (event)
                     }
 
 
-                    gameId = response.id;
+                    //gameId = response.id;
+                    localStorage.setItem("gameId", response.id);
                     players = [{
                         "id": parseInt(getCookie("myId")),
                         "name": getCookie("myName")

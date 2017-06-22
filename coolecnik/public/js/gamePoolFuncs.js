@@ -15,7 +15,7 @@ function savePoolStrike(strikeType) {
 
     var obj = {
         "strikeType": parseInt(strikeType),
-        "game": gameId,
+        "game": parseInt(localStorage.getItem("gameId")),
         "player": (activePlayer === 1) ? players[0].id : players[1].id,
         "round": round
     };
@@ -139,6 +139,7 @@ function poolRestoreGame() {
 
     round = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].round + 1;
     gameId = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].game;
+    localStorage.setItem("gameId", gameId);
 }
 
 

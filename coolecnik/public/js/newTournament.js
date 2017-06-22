@@ -29,6 +29,19 @@ $("#karambolGameType").change(function () {
     }
 });
 
+// callbacked function for addEventListeners of friends
+function tempFunc(event, btnArrHtml, btnArr, i) {
+    //console.log(btnArrHtml, i);
+    var plname = $.parseHTML(btnArrHtml[i]);
+    plname = plname[0].innerText;
+    var plid = btnArr[i].value;
+    //console.log(plname + " " + plid);
+
+    $("#player").html(plname).attr("value", plid);
+
+    // $("#authPlayer2btn").css("display", "none");
+}
+
 var endpoint = "/api/players/" + getCookie("myId") + "/friends";
 $.ajax(endpoint, {
     type: "GET",
@@ -49,7 +62,7 @@ $.ajax(endpoint, {
             for (var i = 0; i < btnArr.length; i++) {
                 // fucking closure. What the hell is this?
                 (function (i) {
-                    btnArr[i].addEventListener('click', function () {
+                    btnArr[i].addEventListener('click', function (event) {
                         tempFunc(event, btnArrHtml, btnArr, i);
                     }, false);
                 })(i);
@@ -60,21 +73,8 @@ $.ajax(endpoint, {
             console.log("404");
         }
     }
-})
+});
 
-
-// callbacked function for addEventListeners of friends
-function tempFunc(event, btnArrHtml, btnArr, i) {
-    //console.log(btnArrHtml, i);
-    var plname = $.parseHTML(btnArrHtml[i]);
-    plname = plname[0].innerText;
-    var plid = btnArr[i].value;
-    //console.log(plname + " " + plid);
-
-    $("#player").html(plname).attr("value", plid);
-
-    // $("#authPlayer2btn").css("display", "none");
-}
 
 $("#addPlayer").click(function () {
     var player = $("#player");
