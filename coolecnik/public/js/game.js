@@ -13,6 +13,7 @@ var players, activePlayer, gameId, timerVar;
  savedTime: obj("m", "s")
  savedCounterValues: obj("green1", "green2", "red1", "red2")
  players: arr of (id, name)
+ timerStart: 0 or 1 - for tournament games
  currentGame: arr(obj)
  <only carambol> carType:int    1 for carambols game, 2 for rounds game
  <only carambol && carType==1>  roundsTotal, roundsRemain
@@ -28,6 +29,8 @@ $(function () {
 
         if (localStorage.getItem("gameType") === "2")
             carRestoreGame();
+        else
+            alert("gameType is not set");
 
         clearTimeout(timerVar);
         var timerVar = setInterval(countTimer, 1000);

@@ -100,6 +100,7 @@ function poolEndGameRoutine(lastStrikeType) {
     $("#pl0").val("");
 
     $("#gameType").prop("checked", false);
+    clearTimeout(timerVar);
 }
 
 function poolRestoreGame() {
@@ -148,6 +149,7 @@ function poolSendSavedGame() {
     $("#savedGameModalWindow").modal();
     var gameInfo = JSON.parse(localStorage.getItem("savedGameInfo"));
     $("#savedGameModalDiv").html("Máte uloženou hru s hráčem  <u>" + gameInfo.pl2Name + "</u>  od " + gameInfo.dateTimeString);
+    clearTimeout(timerVar);
 
     document.getElementById("sendSavedGameBtn").addEventListener("click", function (event) {
         var allStrikes = JSON.parse(localStorage.getItem("currentGame"));

@@ -125,6 +125,8 @@ function playGame(id, games) {
     localStorage.setItem("gameId", game.id);
 
     localStorage.setItem("gameType", game.gameType);
+    localStorage.setItem("savedTime", JSON.stringify({"m": 0, "s": 1}));
+
 
     var p1 = getPlayerName(game.player1);
     var p2 = getPlayerName(game.player2);
@@ -157,7 +159,37 @@ function playGame(id, games) {
         }
     }
 
-    window.location.href = 'game.html';
+    var endpoint = "/api/games/" + parseInt(localStorage.getItem("gameId")) + "/start";
+    var dateTime = new Date().toISOString().slice(0, new Date().toISOString().length - 5) + "Z" + new Date().getTimezoneOffset() / 60 + "00";
+    if (new Date().getTimezoneOffset() / 60 < 10 && new Date().getTimezoneOffset() / 60 > -10)
+        dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
+    if (dateTime[20] === "0") {
+        dateTime = dateTime.replaceAt(20, "+");
+        console.log("new dateTime ", dateTime);
+    }
+    var obj = {
+        "startTime": dateTime,
+    };
+    $.ajax(endpoint, {
+        type: "PUT",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(obj),
+        statusCode: {
+            200: function (response) {
+                console.log("200 OK");
+                window.location.href = 'game.html';
+            },
+            400: function (response) {
+                console.log("400 BAD REQUEST");
+            },
+            409: function (response) {
+                console.log("409 CONFLICT");
+            }
+        }
+
+    });
+
+
 }
 
 function renderTable(id) {
