@@ -99,10 +99,18 @@ function renderTournament(tournament) {
 function addButtonListeners(games) {
     $("#tournamentStats")[0].querySelectorAll("button").forEach(function (butt) {
         butt.addEventListener("click", function (e) {
-            console.log(e.target);
-            playGame(e.target.id, games);
+            console.log(e.target.innerText);
+            if (e.target.innerText == "Info") {
+                showInfo(e.target.id)
+            } else {
+                playGame(e.target.id, games);
+            }
         })
     })
+}
+
+function showInfo(id) {
+
 }
 
 function playGame(id, games) {
@@ -113,46 +121,43 @@ function playGame(id, games) {
             break;
         }
     }
+    localStorage.setItem("tournamentGame", true);
+    localStorage.setItem("gameId", game.id);
 
-    localStorage.setItem("currentGame", null);
-    localStorage.setItem("activeGame", true);
-    localStorage.setItem("savedGame", null);
-    localStorage.setItem("savedGameInfo", null);
-    localStorage.setItem("activePlayer", 1);
     localStorage.setItem("gameType", game.gameType);
-    localStorage.setItem("savedTime", null);
-    localStorage.setItem("savedCounterValues", JSON.stringify({
-        "green1": 0,
-        "green2": 0,
-        "red1": 0,
-        "red2": 0
-    }));
+
     var p1 = getPlayerName(game.player1);
     var p2 = getPlayerName(game.player2);
-    if (p1 == null) p1 = getCookie("myName");
-    else p2 = getCookie("myName");
+    if (p1 == null) {
+        p1 = getCookie("myName");
+        localStorage.setItem("secondPlayerId", game.player2);
+        localStorage.setItem("secondPlayerName", p2);
+    }
+    else if (p2 == null) {
+        p2 = getCookie("myName");
+        localStorage.setItem("secondPlayerId", game.player1);
+        localStorage.setItem("secondPlayerName", p1);
+    }
 
-    localStorage.setItem("players", JSON.stringify([{"id": game.player1, "name": p1}
-        , {"id": gane.player2, "name": p2}]));
+    localStorage.setItem("players", JSON.stringify([
+        {"id": game.player1, "name": p1},
+        {"id": game.player2, "name": p2}]));
 
     if (game.gameType == 2) {
         if (typeof game.rounds == 'undefined') {
             //karambols
+            localStorage.setItem("carType", 1);
             localStorage.setItem("carsTotal", game.carambolesToWin);
             localStorage.setItem("currentRound", game.carambolesToWin);
         } else {
             //rounds
+            localStorage.setItem("carType", 2);
             localStorage.setItem("roundsTotal", game.rounds);
             localStorage.setItem("roundsRemain", 0);
         }
-        localStorage.setItem("savedCounterValues", JSON.stringify({
-            "green1": 0,
-            "green2": 0
-        }));
-
     }
 
-
+    window.location.href = 'game.html';
 }
 
 function renderTable(id) {
@@ -166,20 +171,16 @@ function renderTable(id) {
                 console.log(response);
                 var table = response.table;
 
-                table.sort(function (a, b) {
-                    return a.points > b.points;
-                });
-
-                var counter = 1
-                table.forEach(function (row) {
-                    var login = "<a href='friendProfile.html?id=" + row.id + "&nick=" + row.login + "' >" +
-                        row.login + "</a>"
-                    var toAppend = "<tr><th scope='row'>"+counter+"</th><td>"+login+"</td>" +
-                        "<td>"+row.won+"</td><td>"+row.lost+"</td><td>"+row.draws+"</td><td>"+row.points+"</td></tr>";
+                var counter = 1;
+                for (var i = 0; i < table.length; i++) {
+                    var login = "<a href='friendProfile.html?id=" + table[i].id + "&nick=" + table[i].login + "' >" +
+                        table[i].login + "</a>";
+                    var toAppend = "<tr><th scope='row'>" + counter + "</th><td>" + login + "</td>" +
+                        "<td>" + table[i].won + "</td><td>" + table[i].lost + "</td><td>" + table[i].draws + "</td><td>" + table[i].points + "</td></tr>";
                     console.log($.parseHTML(toAppend)[0]);
                     tableBody.append($.parseHTML(toAppend)[0]);
                     counter++;
-                })
+                }
             },
             404: function (response) {
                 console.log("404");
@@ -202,7 +203,7 @@ function renderUnplayed(games) {
 function renderPlayed(games) {
     games.forEach(function (game) {
         if (typeof game.end != 'undefined') {
-            played.append(getGameItem(game.player1, game.player2, game.id));
+            played.append(getGameItem(game.player1, game.player2, game.id, game.end));
         }
     });
     if (played.html() == "") {
@@ -217,33 +218,90 @@ function renderAll(games) {
 }
 
 function getGameItem(p1, p2, id, won) {
-    var name1 = getPlayerName(p1);
-    var name2 = getPlayerName(p2);
-    var name;
-    var p;
+    var id1 = p1;
+    var id2 = p2;
+    var name1 = getPlayerName(id1);
+    var name2 = getPlayerName(id2);
+
     if (name1 == null) {
-        name = name2;
-        p = p2;
+        name1 = getCookie("myName");
+        id1 = -1;
     }
-    else {
-        name = name1
-        p = p1;
+    else if (name2 == null) {
+        name2 = getCookie("myName");
+        id2 = -1
     }
 
-    if(typeof won == 'undefined') {
+    var first;
+    var second;
+    var button;
+
+    if (typeof won == 'undefined') {
+
+        if (id1 == -1) {
+            first = "<a href='#' class='text-white'>" + name1 + "</a>";
+            second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";
+            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Hrát</button>";
+        } else if (id2 == -1) {
+            first = "<a href='#' class='text-white'>" + name2 + "</a>";
+            second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
+            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Hrát</button>";
+        } else {
+            first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
+            second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";
+            button = "";
+        }
 
         return "<li class='bg-inverse text-white list-group-item justify-content-between'>"
-            + "<div class='col-md-4 d-flex justify-content-around'><a href='#' class='text-white'>" + getCookie("myName") + "</a> : " +
-            "<a href='friendProfile.html?id=" + p + "&nick=" + name + "' class='text-white'>" +
-            name + "</a></div><button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" +
-            "Hrát</button></li>"
+            + "<div class='col-md-4 d-flex justify-content-around'>" + first + " : " + second
+            + "</div>" + button + "</li>"
 
     } else {
+        var myId = getCookie("myId");
+
+        if (id1 == -1) {
+            if (won == id2) {
+                first = "<a href='#' class='text-white'>" + name1 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
+            } else if (won == myId) {
+                first = "<a href='#' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";
+            } else {
+                first = "<a href='#' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
+            }
+            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
+        } else if (id2 == -1) {
+            if (won == id2) {
+                first = "<a href='#' class='text-white'>" + name2 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
+            } else if (won == myId) {
+                first = "<a href='#' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
+            } else {
+                first = "<a href='#' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
+            }
+            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
+
+        } else {
+            if (won == id2) {
+                first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
+            } else if (won == myId) {
+                first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";
+            } else {
+                first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
+                second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
+            }
+            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
+
+        }
+
         return "<li class='bg-inverse text-white list-group-item justify-content-between'>"
-            + "<div class='col-md-4 d-flex justify-content-around'><a href='#' class='text-white'>" + getCookie("myName") + "</a> : " +
-            "<a href='friendProfile.html?id=" + p + "&nick=" + name + "' class='text-white'>" +
-            name + "</a></div><button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" +
-            "Info</button></li>"
+            + "<div class='col-md-4 d-flex justify-content-around'>" + first + " : " + second
+            + "</div>" + button + "</li>"
     }
 
 }

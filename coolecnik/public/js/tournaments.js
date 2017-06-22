@@ -3,7 +3,7 @@
  */
 
 var actualPage = 1;
-var pageSize = 20;
+var pageSize = 10;
 var status = "";
 var gameType = "";
 var tournamentTitle = "";
@@ -13,14 +13,21 @@ getTournaments();
 
 function getTournaments() {
     var endpointTournaments = "/api/players/"+getCookie("myId")+"/statistics/tournaments/basic?";
-    endpointTournaments += "pageSize=" + pageSize + "&";
-    endpointTournaments += "page=" + actualPage + "&";
-    if(status != "") endpointTournaments += "result=" + status + "&";
-    if(gameType != "") endpointTournaments += "gameType=" + gameType + "&";
-    if(tournamentTitle != "") endpointTournaments += "title=" + tournamentTitle + "&";
+    var plus = ""
+    plus += "pageSize=" + pageSize + "&";
+    if(status != "") plus += "result=" + status + "&";
+    if(gameType != "") plus += "gameType=" + gameType + "&";
+    if(tournamentTitle != "") plus += "title=" + tournamentTitle + "&";
+
+    var endpointTournamentPages = "/api/players/"+getCookie("myId")+"/statistics/tournaments/pages?";
+    endpointTournamentPages += plus;
+    plus += "page=" + actualPage + "&";
+
+    endpointTournaments += plus;
+    console.log(endpointTournaments)
 
 
-
+    getPages(endpointTournamentPages);
 
     $.ajax(endpointTournaments, {
         type: "GET",
@@ -75,7 +82,7 @@ document.getElementById("status").onchange = function () {
         status = this.value;
     }
     console.log("status " + this.value);
-    //getTournaments();
+    getTournaments();
 };
 
 document.getElementById("type").onchange = function () {
