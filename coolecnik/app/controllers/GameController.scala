@@ -102,14 +102,14 @@ class GameController extends Controller {
       Json.fromJson[EndGame](rq.body).asOpt match {
         case Some(e) =>
           db.run(
-            games.filter(r => r.id === id && r.end.isEmpty).result.map {
-              case rs: Iterable[Game] if rs.size == 1 =>
+            games.filter(r => r.id === id && r.beginning.nonEmpty && r.end.isEmpty).result.map {
+              case Seq(g) =>
                 db.run(
                   games.filter(r => r.id === id).map(g => g.end -> g.winner)
                     .update(Some(e.end) -> e.winner))
                   .flatMap(_ =>
-                    rs.head match {
-                      case Game(id_, _, _, _, _, Some(t), _, None, _, _) =>
+                    g match {
+                      case Game(_, _, _, _, _, Some(t), _, None, _, _) =>
                         db.run(
                           ((games.filter(g => g.tournament === t && g.end.isEmpty).exists === false) &&
                             (tournaments.filter(t_ => t_.id === t && t_.end.isEmpty).exists === true))
