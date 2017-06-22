@@ -168,7 +168,7 @@ function playGame(id, games) {
         console.log("new dateTime ", dateTime);
     }
     var obj = {
-        "startTime": dateTime,
+        "startTime": dateTime
     };
     $.ajax(endpoint, {
         type: "PUT",
