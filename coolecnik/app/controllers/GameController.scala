@@ -102,12 +102,12 @@ class GameController extends Controller {
       Json.fromJson[StartGame](rq.body).asOpt match {
         case Some(e) =>
           db.run(
-            games.filter(r => r.id === id && r.beginning.isEmpty).result.map {
-              case Seq(g) =>
+            games.filter(r => r.id === id && r.end.isEmpty).result.map {
+              case Seq(_) =>
                 db.run(games.filter(r => r.id === id).map(g => g.beginning)
                   .update(Some(e.startTime)))
               case _ =>
-                new IllegalStateException("Game has already been started")
+                new IllegalStateException("Can't start game with id " + id)
             })
             .flatMap {
               case e: IllegalStateException => Future(Conflict(e.getMessage))
