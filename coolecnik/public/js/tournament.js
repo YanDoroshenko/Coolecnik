@@ -340,14 +340,14 @@ function playGame(id, games) {
     if (game.gameType == 2) {
         if (typeof game.rounds == 'undefined') {
             //karambols
-            localStorage.setItem("carType", 1);
+            localStorage.setItem("carType", 2);
             localStorage.setItem("carsTotal", game.carambolesToWin);
-            localStorage.setItem("currentRound", game.carambolesToWin);
+            localStorage.setItem("currentRound", 1);
         } else {
             //rounds
-            localStorage.setItem("carType", 2);
+            localStorage.setItem("carType", 1);
             localStorage.setItem("roundsTotal", game.rounds);
-            localStorage.setItem("roundsRemain", 0);
+            localStorage.setItem("roundsRemain", game.rounds);
         }
     }
 
@@ -423,7 +423,7 @@ function renderUnplayed(games) {
 function renderPlayed(games) {
     games.forEach(function (game) {
         if (typeof game.end != 'undefined') {
-            played.append(getGameItem(game.player1, game.player2, game.id, game.winner));
+            played.append(getGameItem(game.player1, game.player2, game.id,game.end, game.winner));
         }
     });
     if (played.html() == "") {
@@ -433,11 +433,11 @@ function renderPlayed(games) {
 
 function renderAll(games) {
     games.forEach(function (game) {
-        all.append(getGameItem(game.player1, game.player2, game.id, game.winner))
+        all.append(getGameItem(game.player1, game.player2, game.id,game.end, game.winner))
     })
 }
 
-function getGameItem(p1, p2, id, won) {
+function getGameItem(p1, p2, id,end, won) {
     var id1 = p1;
     var id2 = p2;
     var name1 = getPlayerName(id1);
@@ -456,7 +456,7 @@ function getGameItem(p1, p2, id, won) {
     var second;
     var button;
 
-    if (typeof won == 'undefined') {
+    if (typeof end == 'undefined') {
 
         if (id1 == -1) {
             first = "<a href='#' class='text-white'>" + name1 + "</a>";

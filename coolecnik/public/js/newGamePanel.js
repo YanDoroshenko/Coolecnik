@@ -1,4 +1,6 @@
 if(localStorage.getItem("tournamentGame") == "true"){
+    players = JSON.parse(localStorage.getItem("players"))
+
     if (parseInt(localStorage.getItem("gameType")) === 1) {
         localStorage.setItem("currentGame", null);
         $("#player1").text(getCookie("myName"));
@@ -100,8 +102,8 @@ if(localStorage.getItem("tournamentGame") == "true"){
 
         localStorage.setItem("savedGame", null);
         localStorage.setItem("savedGameInfo", null);
-        clearTimeout(timerVar);
-        clearTimeout(timerVar);
+        //clearTimeout(timerVar);
+        //clearTimeout(timerVar);
         timerVar = setInterval(countTimer, 1000);
     }
     localStorage.setItem("tournamentGame", false);
