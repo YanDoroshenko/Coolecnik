@@ -28,6 +28,7 @@ String.prototype.toHHMMSS = function () {
 };
 
 const endpointLoad = "/api/players/" + getCookie("myId") + "/statistics/basic";
+const endpointTournamentsBasics = "/api/players/" + getCookie("myId") + "/statistics/basicTournament";
 const endpointStrikes = "/api/players/" + getCookie("myId") + "/statistics/strikes";
 const passMatch = "<strong>Hesla se neshodují.</strong>";
 const passChanged = "<strong>Heslo změněno.</strong>";
@@ -68,6 +69,63 @@ $.ajax(endpointLoad, {
     }
 
 });
+
+$.ajax(endpointTournamentsBasics, {
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    statusCode: {
+        200: function (response) {
+            setTournamentsStats(response);
+            console.log(response);
+        },
+        404: function (response) {
+            console.log("404");
+        }
+
+    }
+
+});
+
+function setTournamentsStats(stats) {
+    $("#t_total").html(stats.total);
+    $("#t_won").html(stats.won);
+    $("#t_lost").html(stats.lost);
+    $("#t_draws").html(stats.draws);
+    var percent = stats.won/((stats.won+stats.lost)/100);
+    $("#t_percent").html(percent.toFixed(2) + " %");
+
+    var chart = new CanvasJS.Chart("chartTournament_games",
+        {
+            theme: "theme2",
+            title:{
+                text: "Turnajové hry: " + stats.total
+            },
+            backgroundColor: "rgba(1, 1, 1, 0.2)",
+            legend: {
+                maxWidth: 350,
+                fontColor: "white"
+            },
+            data: [
+                {
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{y} : #percent %",
+                    yValueFormatString: "#0.#",
+                    legendText: "{indexLabel}",
+                    dataPoints: [
+                        {  y: stats.draws, indexLabel: "Remízy" },
+                        {  y: stats.lost, indexLabel: "Prohry" },
+                        {  y: stats.won,  indexLabel: "Výhry" }
+                    ]
+                }
+            ]
+        });
+    if(stats.total != 0) {
+        chart.render();
+    } else {
+        $("#chartTournament_games").addClass("d-none");
+    }
+}
 
 function setStats(stats) {
     $("#time").html(stats.totalSecs.toString().toHHMMSS());

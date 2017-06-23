@@ -65,7 +65,7 @@ var all = $("#all");
 var table = $("#table");
 var gameType = "";
 var carambolType;
-var carambolTypeText;
+var carambolTypeText = "";
 
 function renderTournament(tournament) {
 

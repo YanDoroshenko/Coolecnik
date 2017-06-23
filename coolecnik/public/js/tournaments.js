@@ -3,7 +3,7 @@
  */
 
 var actualPage = 1;
-var pageSize = 10;
+var pageSize = 12;
 var status = "";
 var gameType = "";
 var tournamentTitle = "";
@@ -57,8 +57,8 @@ function listTournaments(tournaments) {
         card += tournament.title;
         card += "</h4></a><p ><strong>Typ: ";
         card += tournament.gameTypeTitle;
-        card += "</strong></p><p class='card-text'>Pocet karambolu: ";
-        card += tournament.numberOfCarambols;
+        // card += "</strong></p><p class='card-text'>Pocet karambolu: ";
+        // card += tournament.numberOfCarambols;
         card += "</p></div><ul class='list-group list-group-flush'>" +
             "<li class='list-group-item tournament-spec'>Pocet hracu: ";
         card += tournament.playerCount;
