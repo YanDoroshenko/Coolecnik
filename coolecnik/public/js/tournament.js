@@ -109,7 +109,176 @@ function addButtonListeners(games) {
     })
 }
 
+
+//change guest winner name from -1 to something else
+function changeGuestWinnerName(guestWinnerPlayer) {
+    if(guestWinnerPlayer == -1) {
+        guestWinnerPlayer = "'Host'";
+    }
+    if(guestWinnerPlayer == null){
+        guestWinnerPlayer = "remíza";
+    }
+    return guestWinnerPlayer
+}
+
+//change guest opponent name from -1 to something else or draw
+function changeGuestOpponentName(guestOpponentPlayer) {
+    if(guestOpponentPlayer == -1) {
+        guestOpponentPlayer = "'Host'";
+    }
+    return guestOpponentPlayer
+}
+
+//date of game beginning formatting
+function dateCorrectFormat(gameBeg) {
+    sliceBeg = gameBeg.slice(0, 10);
+    replaceBeg = sliceBeg.replace("-", ".");
+    index = 7;
+    replaceBeg2 = replaceBeg.substr(0, index) + '.' + replaceBeg.substr(index + 1);
+    beginTime = replaceBeg2.split(/([^\d])/).reverse().join('');
+
+    return beginTime;
+}
+
+//beginTime - endTime = time player in MS and converted to normal time HH:MM:SS
+function playedTime(begTime, endTime) {
+
+    sliceBegg = begTime.slice(0, 19);
+    sliceEnd = endTime.slice(0, 19);
+
+    replaceBegg = sliceBegg.replace("T", " ");
+    replaceEnd = sliceEnd.replace("T", " ");
+
+    var old_date_obj = new Date(Date.parse(replaceBegg));
+    var new_date_obj = new Date(Date.parse(replaceEnd));
+
+    var diffMs = Math.abs(new_date_obj - old_date_obj);
+// var diffDays = Math.round(diffMs / 86400000); // days
+// var diffHrs = Math.round((diffMs % 86400000) / 3600000); // hours
+// var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+// var diffSecs = Math.round(((diffMs % 86400000) % 3600000) / 60000 / 60000); // minutes
+// alert("days:"+diffDays+"\nhours:"+diffHrs+"\nminutes:"+diffMins+"\nseconds:"+diffSecs+"\nMSseconds:"+diffMs);
+    return msToTime(diffMs);
+}
+
+//convert miliSeconds to Time
+function msToTime(s) {
+
+    // Pad to 2 or 3 digits, default is 2
+    function pad(n, z) {
+        z = z || 2;
+        return ('00' + n).slice(-z);
+    }
+
+    var ms = s % 1000;
+    s = (s - ms) / 1000;
+    var secs = s % 60;
+    s = (s - secs) / 60;
+    var mins = s % 60;
+    var hrs = (s - mins) / 60;
+
+    convert = pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+
+    return convert;
+}
+
 function showInfo(id) {
+
+    $("#both-main-eight tbody").html(""); //to clear data previous session from table
+    $("#both-main-carambole tbody").html(""); //to clear data previous session from table
+
+    //game by id
+    var endpoint_single_game = "/api/players/" + getCookie("myId") + "/games/" + id;
+    $.ajax(endpoint_single_game, {
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        statusCode: {
+            200: function (response) {
+
+                //game beginning date formatting
+                var dateBeginning = response.beginning;
+
+                //changes guest players -1 name to "neznámy"
+                var guestWinnerPlayer = response.winnerLogin;
+                var guestOpponentPlayer = response.opponentLogin;
+
+                //time played counting
+                var begTime = response.beginning;
+                var endTime = response.end;
+
+                //which table to show
+                if (response.typeId == "1") {
+                    document.getElementById("both-main-carambole").style.display = "none";
+                    document.getElementById("both-main-eight").style.display = "";
+                }
+
+                if (response.typeId == "2") {
+                    document.getElementById("both-main-carambole").style.display = "";
+                    document.getElementById("both-main-eight").style.display = "none";
+                }
+
+                $("#both-main-eight tbody").append($("<tr>" +
+                    "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
+                    "<td>" + response.typeTitle + "</td>" +
+                    "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                    "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+                    "<td>" + playedTime(begTime, endTime) + "</td>" +
+                    "<td>" + response.correctStrikes + "</td>" +
+                    "<td>" + response.wrongStrikes + "</td>" +
+                    "<td>" + response.faulsWithWhite + "</td>" +
+                    "<td>" + response.faulsWithOthers + "</td>" +
+                    "<td>" + response.faulsOther + "</td>" +
+                    "</tr>"));
+
+                $("#both-main-carambole tbody").append($("<tr>" +
+                    "<td>" + dateCorrectFormat(dateBeginning) + "</td>" +
+                    "<td>" + response.typeTitle + "</td>" +
+                    "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                    "<td>" + changeGuestWinnerName(guestWinnerPlayer) + "</td>" +
+                    "<td>" + response.rounds + "</td>" +
+                    "<td>" + playedTime(begTime, endTime) + "</td>" +
+                    "<td>" + response.myCaramboles + "</td>" +
+                    "<td>" + response.opponentsCaramboles + "</td>" +
+                    "<td>" + response.myFouls + "</td>" +
+                    "<td>" + response.opponentsFouls + "</td>" +
+                    "</tr>"));
+            }
+        },
+        404: function (response) {
+            console.log("404 NOT FOUND");
+        }
+    });
+    $("#both-strikes tbody").html(""); //to clear data previous session from table
+
+    //single strikes
+    var endpoint_strikes = "/api/games/" + id + "/strikes";
+
+    $.ajax(endpoint_strikes, {
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        statusCode: {
+            200: function (response) {
+
+                for (var i = 0; i < response.length; i++) {
+
+                    var guestOpponentPlayer = response[i].playerLogin;
+
+                    //strike id to change name
+                    var strikeRename = response[i].strikeTypeId;
+
+                    $("#both-strikes tbody").append($("<tr>" +
+                        "<td>" + response[i].round + "</td>" +
+                        "<td>" + changeGuestOpponentName(guestOpponentPlayer) + "</td>" +
+                        "<td>" + strikeTypeRename(strikeRename) + "</td>" +
+                        "</tr>"));
+                }
+
+            }
+        },
+        404: function (response) {
+            console.log("404 NOT FOUND");
+        }
+    });
 
 }
 
