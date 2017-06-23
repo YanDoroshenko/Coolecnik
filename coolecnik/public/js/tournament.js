@@ -25,7 +25,6 @@ function dateCorrectFormat(gameBeg) {
 var endpointTournament = "/api/tournaments/" + GET.id + "/details";
 var endpointTournamentTable = "/api/tournaments/" + GET.id + "/table";
 var friends = [];
-console.log(GET.id);
 
 
 $.ajax(endpointTournament, {
@@ -52,7 +51,6 @@ function getFriends(games) {
             200: function (response) {
                 friends = response;
                 renderTournament(games);
-                console.log(friends)
             },
             404: function (response) {
                 console.log("404");
@@ -86,7 +84,6 @@ function renderTournament(tournament) {
     }
     $("#tournamentHeading")[0].innerHTML = "<h2 class='h2'>" + tournament.title + "</h2>" + gameType
         + carambolTypeText + "<p>" + dateCorrectFormat(tournament.beginning) + "</p>";
-    console.log(friends);
     renderTable();
     renderAll(tournament.games);
     renderUnplayed(tournament.games);
@@ -99,7 +96,6 @@ function renderTournament(tournament) {
 function addButtonListeners(games) {
     $("#tournamentStats")[0].querySelectorAll("button").forEach(function (butt) {
         butt.addEventListener("click", function (e) {
-            console.log(e.target.innerText);
             if (e.target.innerText == "Info") {
                 showInfo(e.target.id)
             } else {
@@ -182,6 +178,34 @@ function msToTime(s) {
     return convert;
 }
 
+function strikeTypeRename(strikeTypeId) {
+    if(strikeTypeId == 1){
+        return strikeTypeTitle = "Správny strk";
+    }else if(strikeTypeId == 2) {
+        return strikeTypeTitle = "Špatný strk";
+    }else if(strikeTypeId == 3) {
+        return strikeTypeTitle = "Faul s bílou koulí";
+    }else if(strikeTypeId == 4) {
+        return strikeTypeTitle = "Faul s koulí protiháče";
+    }else if(strikeTypeId == 5) {
+        return strikeTypeTitle = "Jiný faul";
+    }else if(strikeTypeId == 6) {
+        return strikeTypeTitle = "Hra ukončená v pořádku - výhra hráče";
+    }else if(strikeTypeId == 7) {
+        return strikeTypeTitle = "Faul s koulí 8- faul při potápění koule č.8 --> výhra protihráče";
+    }else if(strikeTypeId == 8) {
+        return strikeTypeTitle = "Faul s koulí 8- potopená příliš brzy --> výhra protihráče";
+    }else if(strikeTypeId == 9) {
+        return strikeTypeTitle = "Faul s koulí 8- do nehlášené kapsy --> výhra protihráče";
+    }else if(strikeTypeId == 10) {
+        return strikeTypeTitle = "Faul s koulí 8- vyhozená ze stola --> výhra protihráče";
+    }else if(strikeTypeId == 11) {
+        return strikeTypeTitle = "Karambol";
+    }else if(strikeTypeId == 12) {
+        return strikeTypeTitle = "Faul";
+    }
+}
+
 function showInfo(id) {
 
     $("#both-main-eight tbody").html(""); //to clear data previous session from table
@@ -194,7 +218,6 @@ function showInfo(id) {
         contentType: "application/json; charset=utf-8",
         statusCode: {
             200: function (response) {
-
                 //game beginning date formatting
                 var dateBeginning = response.beginning;
 
@@ -334,7 +357,6 @@ function playGame(id, games) {
         dateTime = dateTime.slice(0, 21) + 0 + dateTime.slice(21, 22) + "00";
     if (dateTime[20] === "0") {
         dateTime = dateTime.replaceAt(20, "+");
-        console.log("new dateTime ", dateTime);
     }
     var obj = {
         "startTime": dateTime
@@ -363,13 +385,11 @@ function playGame(id, games) {
 
 function renderTable(id) {
     var tableBody = $("#tournamentTable")[0].querySelector("tbody");
-    console.log(tableBody);
     $.ajax(endpointTournamentTable, {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         statusCode: {
             200: function (response) {
-                console.log(response);
                 var table = response.table;
 
                 var counter = 1;
@@ -378,7 +398,6 @@ function renderTable(id) {
                         table[i].login + "</a>";
                     var toAppend = "<tr><th scope='row'>" + counter + "</th><td>" + login + "</td>" +
                         "<td>" + table[i].won + "</td><td>" + table[i].lost + "</td><td>" + table[i].draws + "</td><td>" + table[i].points + "</td></tr>";
-                    console.log($.parseHTML(toAppend)[0]);
                     tableBody.append($.parseHTML(toAppend)[0]);
                     counter++;
                 }
@@ -404,7 +423,7 @@ function renderUnplayed(games) {
 function renderPlayed(games) {
     games.forEach(function (game) {
         if (typeof game.end != 'undefined') {
-            played.append(getGameItem(game.player1, game.player2, game.id, game.end));
+            played.append(getGameItem(game.player1, game.player2, game.id, game.winner));
         }
     });
     if (played.html() == "") {
@@ -414,7 +433,7 @@ function renderPlayed(games) {
 
 function renderAll(games) {
     games.forEach(function (game) {
-        all.append(getGameItem(game.player1, game.player2, game.id, game.end))
+        all.append(getGameItem(game.player1, game.player2, game.id, game.winner))
     })
 }
 
@@ -459,44 +478,44 @@ function getGameItem(p1, p2, id, won) {
 
     } else {
         var myId = getCookie("myId");
+        console.log(id1, id2, myId);
 
         if (id1 == -1) {
             if (won == id2) {
                 first = "<a href='#' class='text-white'>" + name1 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
-            } else if (won == myId) {
+            } else if (won == parseInt(myId)) {
                 first = "<a href='#' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";
             } else {
                 first = "<a href='#' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
             }
-            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
+            button = "<button type='button' data-target='#both-modal' data-toggle='modal' class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
         } else if (id2 == -1) {
-            if (won == id2) {
+            if (won == id1) {
                 first = "<a href='#' class='text-white'>" + name2 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
-            } else if (won == myId) {
+            } else if (won == parseInt(myId)) {
                 first = "<a href='#' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
             } else {
                 first = "<a href='#' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
             }
-            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
-
+            button = "<button type='button' data-target='#both-modal' data-toggle='modal' class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
         } else {
             if (won == id2) {
                 first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
-            } else if (won == myId) {
+            } else if (won == parseInt(myId)) {
                 first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";
             } else {
                 first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-capitalize' style='color: gold'>" + name1 + "</a>";
                 second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-capitalize' style='color: gold'>" + name2 + "</a>";
             }
-            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
+            button = "<button type='button' data-target='#both-modal' data-toggle='modal' class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Info</button>";
 
         }
 

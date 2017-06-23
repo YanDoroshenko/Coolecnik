@@ -95,6 +95,8 @@ function poolEndGameRoutine(lastStrikeType) {
     else {
         saveGameEnd();
     }
+    localStorage.setItem("tournamentGame", false);
+
     clearTimeout(timerVar);
     isSecondPlayerAuthorized = false;
     $("#pl0").val("");
