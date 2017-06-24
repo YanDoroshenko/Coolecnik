@@ -450,6 +450,11 @@ h4 {
     margin: 5px;
 }
 
+#chartTournament_games {
+    height: 400px;
+    margin: 5px;
+}
+
 #chartPoolStrikes {
     height: 400px;
     margin: 5px;
