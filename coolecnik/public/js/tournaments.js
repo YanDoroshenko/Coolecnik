@@ -38,7 +38,10 @@ function getTournaments() {
                 listTournaments(response);
             },
             404: function (response) {
-                console.log("404");
+                listTournaments([]);
+            },
+            400: function (response) {
+                console.log("400: " + response)
             }
         }
     });
