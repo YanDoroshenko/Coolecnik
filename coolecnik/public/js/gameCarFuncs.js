@@ -268,8 +268,13 @@ function carRestoreGame() {
         return;
     }
 
-    round = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].round + 1;
-    gameId = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].game;
+    if(JSON.parse(localStorage.getItem("currentGame")) == null){
+        round = 1;
+    } else {
+        round = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].round + 1;
+    }
+    gameId = JSON.parse(localStorage.getItem("gameId"));
+    localStorage.setItem("gameId", gameId);
     players = JSON.parse(localStorage.getItem("players"));
 
     $("#player1c").html(players[0].name);
@@ -301,6 +306,4 @@ function carRestoreGame() {
     //set other vars
     activePlayer = parseInt(localStorage.getItem("activePlayer"));
     setActivePlayerOnScreen();
-
-
 }

@@ -22,6 +22,8 @@ case class NewGame(
                     rounds: Option[Int],
                     carambolesToWin: Option[Int])
 
+case class StartGame(startTime: Timestamp)
+
 case class EndGame(winner: Option[Int], end: Timestamp)
 
 case class NewGameType(title: String, description: Option[String])
@@ -94,3 +96,13 @@ case class Friend(id: Int, login: String, firstName: Option[String], lastName: O
 case class Opponent(id: Int, login: String)
 
 case class NameUpdate(firstName: Option[String], lastName: Option[String])
+
+case class NewTournament(gameType: Int, tournamentType: Int, title: Option[String], players: Seq[Int], rounds: Option[Int], caramboles: Option[Int])
+
+case class TournamentStats(id: Int, title: Option[String], gameType: Int, gameTypeTitle: String, playerCount: Int, finished: Int, unfinished: Int, rounds: Option[Int], caramboles: Option[Int])
+
+case class TournamentDetails(id: Int, title: Option[String], tournamentType: Int, gameType: Int, gameTypeTitle: String, beginning: Timestamp, end: Option[Timestamp], games: Seq[Game])
+
+case class PlayerTournamentStats(id: Int, login: String, won: Int, lost: Int, draws: Int, points: Int)
+
+case class TournamentTable(id: Int, title: Option[String], table: Seq[PlayerTournamentStats])

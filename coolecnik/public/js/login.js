@@ -58,6 +58,9 @@ document.getElementById("btnLogin").addEventListener("click", function (event) {
                 localStorage.setItem("myId", response.id);
                 localStorage.setItem("myName", vLogin);
                 window.location.replace("/game.html");
+
+
+                deleteCookie("__cwjWsTr");
             },
             400: function (response) {
                 $("#loginSpan").text("Can't deserialize JSON");

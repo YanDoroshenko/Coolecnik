@@ -15,7 +15,7 @@ function savePoolStrike(strikeType) {
 
     var obj = {
         "strikeType": parseInt(strikeType),
-        "game": gameId,
+        "game": parseInt(localStorage.getItem("gameId")),
         "player": (activePlayer === 1) ? players[0].id : players[1].id,
         "round": round
     };
@@ -95,11 +95,14 @@ function poolEndGameRoutine(lastStrikeType) {
     else {
         saveGameEnd();
     }
+    localStorage.setItem("tournamentGame", false);
+
     clearTimeout(timerVar);
     isSecondPlayerAuthorized = false;
     $("#pl0").val("");
 
     $("#gameType").prop("checked", false);
+    clearTimeout(timerVar);
 }
 
 function poolRestoreGame() {
@@ -139,6 +142,7 @@ function poolRestoreGame() {
 
     round = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].round + 1;
     gameId = JSON.parse(localStorage.getItem("currentGame"))[JSON.parse(localStorage.getItem("currentGame")).length - 1].game;
+    localStorage.setItem("gameId", gameId);
 }
 
 
@@ -147,6 +151,7 @@ function poolSendSavedGame() {
     $("#savedGameModalWindow").modal();
     var gameInfo = JSON.parse(localStorage.getItem("savedGameInfo"));
     $("#savedGameModalDiv").html("Máte uloženou hru s hráčem  <u>" + gameInfo.pl2Name + "</u>  od " + gameInfo.dateTimeString);
+    clearTimeout(timerVar);
 
     document.getElementById("sendSavedGameBtn").addEventListener("click", function (event) {
         var allStrikes = JSON.parse(localStorage.getItem("currentGame"));

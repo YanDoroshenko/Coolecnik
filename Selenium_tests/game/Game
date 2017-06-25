@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="014.html">TC: 014 - Založení nové hry (8-pool), neúspěch</a></td></tr>
+<tr><td><a href="014(1).html">TC: 014 - Založení nové hry (8-pool), úspěch, hra s guestem, úvod</a></td></tr>
+<tr><td><a href="014(2).html">TC: 014 - Založení nové hry (8-pool), úspěch, hra s friendem, úvod</a></td></tr>
+<tr><td><a href="015.html">TC: 015 - Založení nové hry (8-pool), úspěch, hra s guestemem, konec 1</a></td></tr>
+<tr><td><a href="015(1).html">TC: 015 - Založení nové hry (8-pool), úspěch, hra s friendem, konec 1</a></td></tr>
+<tr><td><a href="016.html">TC: 016 - Založení nové hry (8-pool), úspěch, hra s guestem, konec 2</a></td></tr>
+<tr><td><a href="016(1).html">TC: 016 - Založení nové hry (8-pool), úspěch, hra s friendem, konec 2</a></td></tr>
+<tr><td><a href="017.html">TC: 017 - Založení nové hry (8-pool), úspěch, hra s guestem, konec 3</a></td></tr>
+<tr><td><a href="017(1).html">TC: 017 - Založení nové hry (8-pool), úspěch, hra s friendem, konec 3</a></td></tr>
+<tr><td><a href="018.html">TC: 018 - Založení nové hry (8-pool), úspěch, hra s guestem, konec 4</a></td></tr>
+<tr><td><a href="018(1).html">TC: 018 - Založení nové hry (8-pool), úspěch, hra s friendem, konec 4</a></td></tr>
+<tr><td><a href="019.html">TC: 019 - Založení nové hry (8-pool), úspěch, hra s guestem, konec 5</a></td></tr>
+<tr><td><a href="019(1).html">TC: 019 - Založení nové hry (8-pool), úspěch, hra s friendem, konec 5</a></td></tr>
+<tr><td><a href="020.html">TC: 020 - Založení nové hry (8-pool), úspěch, hra s guestem, konec 6</a></td></tr>
+<tr><td><a href="020(1).html">TC: 020 - Založení nové hry (8-pool), úspěch, hra s friendem, konec 6</a></td></tr>
+<tr><td><a href="021.html">TC: 021 - Založení nové hry (Karambol), neúspěch</a></td></tr>
+<tr><td><a href="022.html">TC: 022 - Založení nové hry (Karambol), úspěch, hra s guestem, karambol</a></td></tr>
+<tr><td><a href="022(1).html">TC: 022 - Založení nové hry (Karambol), úspěch, hra s friendem, karambol</a></td></tr>
+<tr><td><a href="022(2).html">TC: 022 - Založení nové hry (Karambol), úspěch, hra s guestem, kola</a></td></tr>
+<tr><td><a href="022(3).html">TC: 022 - Založení nové hry (Karambol), úspěch, hra s friendem, kola</a></td></tr>
+<tr><td><a href="023.html">TC: 023 - Založení nové hry (Karambol), úspěch, hra s guestem, kola 2</a></td></tr>
+<tr><td><a href="023(1).html">TC: 023 - Založení nové hry (Karambol), úspěch, hra s friendem, kola 2</a></td></tr>
+<tr><td><a href="024.html">TC: 024 - Založení nové hry (Karambol), úspěch, hra s guestem, karambol 2</a></td></tr>
+<tr><td><a href="024_1.html">TC: 024 - Založení nové hry (Karambol), úspěch, hra s friendem, karambol 2</a></td></tr>
+</tbody></table>
+</body>
+</html>

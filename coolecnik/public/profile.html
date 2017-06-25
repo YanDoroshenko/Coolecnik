@@ -32,8 +32,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="game.html">Hra</a>
             </li>
-            <li class="nav-item" >
-                <a class="nav-link disabled" href="">Turnaje</a>
+            <li class="nav-item">
+                <a class="nav-link" href="tournaments.html">Turnaje</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="friends.html">Přátelé</a>
@@ -44,14 +44,17 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown02">
                     <a class="dropdown-item" href="rules_8pool.html">Osmička</a>
                     <a class="dropdown-item" href="rules_karambol.html">Karambol</a>
+                    <a class="dropdown-item" href="rules_tournaments.html">Turnaje</a>
+
                 </div>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="dropdown03" data-toggle="dropdown"
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Profil</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
                     <a class="dropdown-item active" href="profile.html">Profil</a>
-                    <a class="dropdown-item" href="statistics.html">Statistika</a>
+                    <a class="dropdown-item" href="statistics.html">Statistiky her</a>
+
                     <a class="dropdown-item" id="logout" href="#" onclick="unauthorize()">Odhlásit se</a>
                 </div>
             </li>
@@ -143,19 +146,19 @@
             <hr class="hr-light"/>
             <dl class="row justify-content-end">
                 <dt class="col-7">Turnajové hry:</dt>
-                <dd class="col-5">43</dd>
+                <dd class="col-5" id="t_total">0</dd>
 
                 <dt class="col-7">Turnajové výhry:</dt>
-                <dd class="col-5">16</dd>
+                <dd class="col-5" id="t_won">0</dd>
 
                 <dt class="col-7">Turnajové prohry:</dt>
-                <dd class="col-5">25</dd>
+                <dd class="col-5" id="t_lost">0</dd>
 
                 <dt class="col-7">Turnajové remízy:</dt>
-                <dd class="col-5">2</dd>
+                <dd class="col-5" id="t_draws">0</dd>
 
                 <dt class="col-7">Turnajová výhernost:</dt>
-                <dd class="col-5">37 %</dd>
+                <dd class="col-5" id="t_percent">0 %</dd>
             </dl>
         </div>
     </div>
@@ -165,6 +168,7 @@
 <div class="container col-xl-12 col-md-9">
     <div class="row justify-content-center">
         <div class="col-xl-5" id="chartContainer_games"></div>
+        <div class="col-xl-5" id="chartTournament_games"></div>
         <div class="col-xl-5" id="chartPoolStrikes"></div>
         <div class="col-xl-5" id="chartCarambolStrikes"></div>
         <div class="col-xl-5" id="chartPoolEndStrikes"></div>

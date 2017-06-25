@@ -46,7 +46,8 @@ function setActivePlayerOnScreen() {
             $("#player2").removeClass("active-player").addClass("nonactive-player");
         }
         else {
-
+            $("#player1c").removeClass("nonactive-player").addClass("active-player");
+            $("#player2c").removeClass("active-player").addClass("nonactive-player");
         }
     }
     else {
@@ -55,8 +56,20 @@ function setActivePlayerOnScreen() {
             $("#player1").removeClass("active-player").addClass("nonactive-player");
         }
         else {
-
+            $("#player2c").removeClass("nonactive-player").addClass("active-player");
+            $("#player1c").removeClass("active-player").addClass("nonactive-player");
         }
+    }
+}
+
+function setCarCounters(goodOrBad) {
+    if (activePlayer === 0) {
+        var preparedStr = "#pl1" + goodOrBad + "c";
+        $(preparedStr).html(parseInt($(preparedStr).text()) + 1);
+    }
+    else {
+        var preparedStr = "#pl2" + goodOrBad + "c";
+        $(preparedStr).html(parseInt($(preparedStr).text()) + 1);
     }
 }
 
@@ -81,6 +94,7 @@ $("#startAnonBtn").on("click", function (e) {
         return;
     }
 
+    //start pool game
     if (!$("#gameType").prop("checked")) {
         localStorage.setItem("gameType", 1);
 
@@ -107,7 +121,71 @@ $("#startAnonBtn").on("click", function (e) {
         timeVar = setInterval(countTimer, 1000);
         setActivePlayerOnScreen();
     }
+
+    //start carambol game
+    else {
+        localStorage.setItem("gameType", 2);
+
+        if ($("#karambolGameType").prop("checked")) {
+            localStorage.setItem("carType", "2"); //round game
+        }
+        else {
+            localStorage.setItem("carType", "1"); //carambol game
+        }
+
+        $("#loginPanel").hide();
+
+
+        $("#player1c").html($("#pl0").val());
+        $("#player2c").html($("#pl1").val());
+        $("#newGameDiv").hide();
+
+        $("#karambolControlDiv").show();
+
+        changeRound = 0;
+        lastRound = 0;
+        round = 1;
+        activePlayer = 0;
+
+        if (localStorage.getItem("carType") === "1") { //carambol game
+            $("#carGameType1Div").show();
+
+            localStorage.setItem("roundsTotal", $("#carambCount").val());
+            localStorage.setItem("roundsRemain", round);
+
+            $("#carGameType1CarsTotal").html(localStorage.getItem("roundsTotal"));
+            $("#carGameType1CurrentRound").html(localStorage.getItem("roundsRemain"));
+        }
+        else if (localStorage.getItem("carType") === "2") {  //round game
+            $("#carGameType2Div").show();
+
+            localStorage.setItem("carsTotal", $("#carambCount").val());
+            localStorage.setItem("currentRound", $("#carambCount").val());
+
+            $("#carGameType2RoundsTotal").html(localStorage.getItem("carsTotal"));
+            $("#carGameType2RoundsRemain").html(localStorage.getItem("currentRound"));
+        }
+        setActivePlayerOnScreen();
+
+        localStorage.setItem("activePlayer", activePlayer);
+
+        $("#helpDiv").html("");
+        $("#endOfGameDiv").html("");
+
+        $("#pl1goodc").html("0");
+        $("#pl2goodc").html("0");
+
+        $("#timerMc").html("0");
+        $("#timerSc").html("0");
+
+        clearTimeout(timeVar);
+        clearTimeout(timeVar);
+        timeVar = setInterval(countTimer, 1000);
+    }
 });
+
+
+//      POOL BUTTONS
 
 $("#poolCorrectBtn").on("click", function () {
     if (activePlayer === 0)
@@ -151,7 +229,6 @@ $("#poolOthFaulBtn").on("click", function () {
     activePlayer = (activePlayer === 1) ? 0 : 1;
     setActivePlayerOnScreen();
 });
-
 
 $("#correctEndBtn").on("click", function () {
     $("#poolControlDiv").hide();
@@ -200,4 +277,237 @@ $("#endGameBtn").on("click", function () {
     $("#endOfGameDiv").show();
     $("#endOfGameDivButton").show();
     $("#endOfGameDiv").html("Hra byla ukončena");
+});
+
+
+//    CARAMBOL BUTTONS
+
+$("#carCorrectBtn").on("click", function () {
+    if (localStorage.getItem("carType") === "1")
+        round = parseInt($("#carGameType1CurrentRound").html());
+    else if (localStorage.getItem("carType") === "2") {
+        round = parseInt($("#carGameType2RoundsTotal").html()) - parseInt($("#carGameType2RoundsRemain").html()) + 1;
+    }
+
+    setCarCounters("good");
+
+    if (localStorage.getItem("carType") === "1") {
+        if (changeRound === 0 && lastRound === 0) {
+            if (parseInt($("#pl1goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
+                activePlayer = (activePlayer === 1) ? 0 : 1;
+                setActivePlayerOnScreen();
+                lastRound = 1;
+                changeRound++;
+            }
+            else if (parseInt($("#pl2goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
+                activePlayer = (activePlayer === 1) ? 0 : 1;
+                setActivePlayerOnScreen();
+                lastRound = 1;
+                changeRound++;
+            }
+
+        }
+
+        else if (changeRound === 1 && lastRound === 0) {
+            if (parseInt($("#pl1goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
+                console.log("---------END GAME PL1W");
+
+                clearTimeout(timeVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#endOfGameDivButton").show();
+                $("#endOfGameDiv").show();
+                $("#karambolControlDiv").hide();
+                $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String($("#player1c").html()));
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+            else if (parseInt($("#pl2goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
+                console.log("---------END GAME PL2W");
+                clearTimeout(timeVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#endOfGameDivButton").show();
+                $("#endOfGameDiv").show();
+                $("#karambolControlDiv").hide();
+                $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String($("#player2c").html()));
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+        }
+
+        else if (changeRound === 1 && lastRound === 1) {
+            if ((parseInt($("#pl1goodc").html()) === parseInt($("#carGameType1CarsTotal").html()) ) &&
+                (parseInt($("#pl2goodc").html()) === parseInt($("#carGameType1CarsTotal").html()) )) {
+                console.log("---------END GAME DRAW");
+
+                clearTimeout(timeVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#endOfGameDivButton").show();
+                $("#endOfGameDiv").show();
+                $("#karambolControlDiv").hide();
+                $("#endOfGameDiv").html("Hra byla ukončena <br> Remíza");
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+        }
+    }
+
+    localStorage.setItem("activePlayer", activePlayer);
+
+});
+
+$("#carFaulBtn").on("click", function () {
+    if (localStorage.getItem("carType") === "1")
+        round = parseInt($("#carGameType1CurrentRound").html());
+    else if (localStorage.getItem("carType") === "2") {
+        round = parseInt($("#carGameType2RoundsTotal").html()) - parseInt($("#carGameType2RoundsRemain").html()) + 1;
+    }
+
+    setCarCounters("bad");
+
+    activePlayer = (activePlayer === 1) ? 0 : 1;
+    setActivePlayerOnScreen();
+    changeRound++;
+
+    if (localStorage.getItem("carType") === "1") {
+        if (changeRound === 2) {
+            changeRound = 0;
+            $("#carGameType1CurrentRound").html(parseInt($("#carGameType1CurrentRound").html()) + 1);
+        }
+
+        if (parseInt($("#pl1goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
+            console.log("---------END GAME PL1W");
+
+            clearTimeout(timeVar);
+            isSecondPlayerAuthorized = false;
+            $("#pl0").val("");
+
+            $("#carGameType1Div").hide();
+            $("#carGameType2Div").hide();
+
+            $("#endOfGameDivButton").show();
+            $("#endOfGameDiv").show();
+            $("#karambolControlDiv").hide();
+            $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String($("#player1c").html()));
+
+            $("#gameType").prop("checked", false);
+            $("#carambParams").hide();
+            return;
+        }
+        else if (parseInt($("#pl2goodc").html()) === parseInt($("#carGameType1CarsTotal").html())) {
+            console.log("---------END GAME PL2W");
+
+            clearTimeout(timeVar);
+            isSecondPlayerAuthorized = false;
+            $("#pl0").val("");
+
+            $("#carGameType1Div").hide();
+            $("#carGameType2Div").hide();
+
+            $("#endOfGameDivButton").show();
+            $("#endOfGameDiv").show();
+            $("#karambolControlDiv").hide();
+            $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String($("#player2c").html()));
+
+            $("#gameType").prop("checked", false);
+            $("#carambParams").hide();
+            return;
+        }
+    }
+
+    if (localStorage.getItem("carType") === "2") {
+        if (changeRound === 2) {
+            changeRound = 0;
+            $("#carGameType2RoundsRemain").html(parseInt($("#carGameType2RoundsRemain").html()) - 1);
+        }
+
+        if ($("#carGameType2RoundsRemain").html() === "0") {
+            if (parseInt($("#pl1goodc").html()) === parseInt($("#pl2goodc").html())) {
+                // draw
+                console.log("-------DRAW");
+
+                clearTimeout(timeVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#endOfGameDivButton").show();
+                $("#endOfGameDiv").show();
+                $("#karambolControlDiv").hide();
+                $("#endOfGameDiv").html("Hra byla ukončena <br> Remíza");
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+            else if (parseInt($("#pl1goodc").html()) > parseInt($("#pl2goodc").html())) {
+                // pl1 win
+                console.log("-------PL1 W");
+
+                clearTimeout(timeVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#endOfGameDivButton").show();
+                $("#endOfGameDiv").show();
+                $("#karambolControlDiv").hide();
+                $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String($("#player1c").html()));
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+            else {
+                // pl2 win
+                console.log("-------PL2 W");
+
+                clearTimeout(timeVar);
+                isSecondPlayerAuthorized = false;
+                $("#pl0").val("");
+
+                $("#carGameType1Div").hide();
+                $("#carGameType2Div").hide();
+
+                $("#endOfGameDivButton").show();
+                $("#endOfGameDiv").show();
+                $("#karambolControlDiv").hide();
+                $("#endOfGameDiv").html("Hra byla ukončena, výherce je " + String($("#player2c").html()));
+
+                $("#gameType").prop("checked", false);
+                $("#carambParams").hide();
+                return;
+            }
+        }
+    }
+
+    localStorage.setItem("activePlayer", activePlayer);
+});
+
+$("#carEndGameBtn").on("click", function () {
+
 });

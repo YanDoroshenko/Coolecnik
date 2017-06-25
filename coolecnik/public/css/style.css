@@ -38,6 +38,7 @@ button {
     border-color: #2b542c;
     background-color: #2b542c;
     color: white;
+    cursor: pointer;
 }
 
 .green-btn:focus {
@@ -291,7 +292,6 @@ input:checked + .slider:before {
 
 .tournament-card a:hover h4 {
     color: white;
-    font-size: 1.6em;
 }
 
 .tournament-card:hover {
@@ -305,6 +305,20 @@ input:checked + .slider:before {
     color: #d9edf7;
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.225);
+}
+
+.tournament .tab-content li:hover {
+    background-color: #4b5257!important;
+
+}
+
+.tournament .tab-content a:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+#tournamentTable {
+    text-align: left;
 }
 
 .rules-spec a:link {
@@ -432,6 +446,11 @@ h4 {
 }
 
 #chartContainer_games {
+    height: 400px;
+    margin: 5px;
+}
+
+#chartTournament_games {
     height: 400px;
     margin: 5px;
 }

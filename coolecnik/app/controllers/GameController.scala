@@ -1,5 +1,8 @@
 package controllers
 
+import java.sql.Timestamp
+import java.time.LocalDateTime
+
 import models.Queries._
 import models._
 import org.postgresql.util.PSQLException
@@ -63,10 +66,16 @@ class GameController extends Controller {
         Json.fromJson[NewGame](rq.body).asOpt match {
           case Some(g) =>
             db.run(
-              games.map(
-                g_ => {
-                  (g_.gameType, g_.player1, g_.player2, g_.beginning, g_.tournament, g_.rounds, g_.carambolesToWin)
-                }) +=
+              (games.map(
+                g_ => (
+                  g_.gameType,
+                  g_.player1,
+                  g_.player2,
+                  g_.beginning,
+                  g_.tournament,
+                  g_.rounds,
+                  g_.carambolesToWin))
+                returning games.map(_.id)) +=
                 (g.gameType, g.player1, g.player2, Some(g.beginning), g.tournament, g.rounds, g.carambolesToWin)
             )
               .recover {
@@ -74,10 +83,8 @@ class GameController extends Controller {
               }
               .flatMap {
                 case e: PSQLException => Future(Conflict(e.getMessage))
-                case _ =>
-                  db.run(games.filter(
-                    g_ => g_.player1 === g.player1 && g_.player2 === g.player2 && g_.beginning === g.beginning)
-                    .result)
+                case id: Int =>
+                  db.run(games.filter(_.id === id).result)
                     .map(gs => Created(gs.head))
               }
           case None => Future(BadRequest("Request can't be deserialized"))
@@ -89,17 +96,59 @@ class GameController extends Controller {
     }
   }
 
+  def startGame(id: Int): Action[JsValue] = Action.async(parse.json) {
+    rq => {
+      log.info("Start game:\n" + rq.body)
+      Json.fromJson[StartGame](rq.body).asOpt match {
+        case Some(e) =>
+          db.run(
+            games.filter(r => r.id === id && r.end.isEmpty).result.map {
+              case Seq(_) =>
+                db.run(games.filter(r => r.id === id).map(g => g.beginning)
+                  .update(Some(e.startTime)))
+              case _ =>
+                new IllegalStateException("Can't start game with id " + id)
+            })
+            .flatMap {
+              case e: IllegalStateException => Future(Conflict(e.getMessage))
+              case e: PSQLException => Future(Conflict(e.getMessage))
+              case _ =>
+                db.run(games.filter(_.id === id).result)
+                  .map(gs => Ok(gs.head))
+            }
+        case None => Future(BadRequest("Request can't be deserialized"))
+      }
+    }
+  }
+
   def endGame(id: Int): Action[JsValue] = Action.async(parse.json) {
     rq => {
       log.info("End game:\n" + rq.body)
       Json.fromJson[EndGame](rq.body).asOpt match {
         case Some(e) =>
           db.run(
-            games.filter(r => r.id === id && r.end.isEmpty).result.map {
-              case rs: Iterable[Game] if rs.nonEmpty =>
+            games.filter(r => r.id === id && r.beginning.nonEmpty && r.end.isEmpty).result.map {
+              case Seq(g) =>
                 db.run(
-                  (for (g <- games.filter(r => r.id === id)) yield g.end -> g.winner)
+                  games.filter(r => r.id === id).map(g => g.end -> g.winner)
                     .update(Some(e.end) -> e.winner))
+                  .flatMap(_ =>
+                    g match {
+                      case Game(_, _, _, _, _, Some(t), _, None, _, _) =>
+                        db.run(
+                          ((games.filter(g => g.tournament === t && g.end.isEmpty).exists === false) &&
+                            (tournaments.filter(t_ => t_.id === t && t_.end.isEmpty).exists === true))
+                            .result
+                        )
+                          .flatMap {
+                            case true =>
+                              db.run(
+                                tournaments.filter(_.id === t).map(_.end).update(Some(Timestamp.valueOf(LocalDateTime.now())))
+                              )
+                            case _ => Future(None)
+                          }
+                      case _ => Future(None)
+                    })
               case _ =>
                 new IllegalStateException("Game has already been ended")
             })

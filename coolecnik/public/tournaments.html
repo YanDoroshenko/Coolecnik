@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.2.0.min.js" type="text/javascript"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
     <script src="js/authCookies.js"></script>
     <title>Turnaje</title>
 
@@ -39,6 +42,8 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown02">
                     <a class="dropdown-item" href="rules_8pool.html">Osmička</a>
                     <a class="dropdown-item" href="rules_karambol.html">Karambol</a>
+                    <a class="dropdown-item" href="rules_tournaments.html">Turnaje</a>
+
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -46,156 +51,50 @@
                    aria-haspopup="true" aria-expanded="false">Profil</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
                     <a class="dropdown-item" href="profile.html">Profil</a>
-                    <a class="dropdown-item" href="statistics.html">Statistika</a>
+                    <a class="dropdown-item" href="statistics.html">Statistiky her</a>
+
                     <a class="dropdown-item" id="logout" href="#" onclick="unauthorize()">Odhlásit se</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+
 <div class="container">
     <section class="row justify-content-center m-2">
-        <form class="form-inline mr-5">
+        <form class="form-inline mr-5" id="findTitle">
             <input type="text" class="form-control-sm" id="search" placeholder="Název turnaje"/>
             <button type="submit" class="btn btn-sm m-1">Hledej</button>
         </form>
-        <div class="row align-content-center">
-        <span class="form-control-static">Filtr</span>
-        <select class="form-select-sm m-1">
+        <form class="form-inline">
+
+            <label for="status">Status</label>
+        <select class="form-control small m-2" id="status">
             <option value="all">Vše</option>
             <option value="finished">Dokončené</option>
-            <option value="playable">Neodehrané</option>
-            <option value="played">Dohrané</option>
-            <option value="winned">Vyhrané</option>
+            <option value="unfinished">Neodehrané</option>
         </select>
-        <select class="form-select-sm m-1">
+            <label for="type">Typ</label>
+        <select class="form-control small m-2" id="type">
             <option value="all">Vše</option>
-            <option value="karambol">Karambol</option>
-            <option value="8pool">8-pool</option>
+            <option value="carambole">Karambol</option>
+            <option value="pool8">8-pool</option>
         </select>
-        </div>
+
+        </form>
     </section>
-    <section class="row justify-content-center">
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
-        <div class="card tournament-card col-md-3">
-            <div class="card-block">
-                <a href="#"><h4 class="card-title">Turnaj 1</h4></a>
-                <p ><strong>Typ: Karambol</strong></p>
-                <p class="card-text">Pocet karambolu: 800</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item tournament-spec">Pocet hracu: 8</li>
-                <li class="list-group-item tournament-spec">Odehrane hry: 8</li>
-                <li class="list-group-item tournament-spec">Zbyva: 1</li>
-            </ul>
-        </div>
+    <section class="row justify-content-center" id="tournaments_list">
 
 
     </section>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center" id="tournamentsPagination">
+        </ul>
+    </nav>
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/tournaments.js"></script>
 </body>
 </html>

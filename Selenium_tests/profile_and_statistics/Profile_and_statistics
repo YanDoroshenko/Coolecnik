@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="../Profila and statistics/025.html">TC: 025 - Zobrazení profilu</a></td></tr>
+<tr><td><a href="../Profila and statistics/026.html">TC: 026 - Zobrazení statistik</a></td></tr>
+<tr><td><a href="../Profila and statistics/027.html">TC: 027 - Změna jména</a></td></tr>
+<tr><td><a href="../Profila and statistics/028.html">TC: 028 - Změna příjmení</a></td></tr>
+<tr><td><a href="../Profila and statistics/029.html">TC: 029 - Změna hesla, úspěch</a></td></tr>
+<tr><td><a href="../Profila and statistics/030.html">TC: 030 - Změna hesla, neúspěch</a></td></tr>
+<tr><td><a href="../Profila and statistics/031.html">TC: 031 - Odhlášení</a></td></tr>
+<tr><td><a href="../Profila and statistics/032.html">TC: 032 - Filtrování statistik, Druh Hry: 8-Pool</a></td></tr>
+<tr><td><a href="../Profila and statistics/033.html">TC: 033 - Filtrování statistik, Druh Hry: Karambol</a></td></tr>
+<tr><td><a href="../Profila and statistics/034.html">TC: 034 - Filtrování statistik, Druh Hry: Vše</a></td></tr>
+<tr><td><a href="../Profila and statistics/035.html">TC: 035 - Filtrování statistik, Stav Hry: Vyhrané</a></td></tr>
+<tr><td><a href="../Profila and statistics/036.html">TC: 036 - Filtrování statistik, Stav Hry: Prohrané</a></td></tr>
+<tr><td><a href="../Profila and statistics/037.html">TC: 037 - Filtrování statistik, Stav Hry: Remíza</a></td></tr>
+<tr><td><a href="../Profila and statistics/038.html">TC: 038 - Filtrování statistik, Stav Hry: Vše</a></td></tr>
+<tr><td><a href="../Profila and statistics/039.html">TC: 039 - Filtrování statistik, Hráči: Přítel</a></td></tr>
+<tr><td><a href="../Profila and statistics/040.html">TC: 040 - Filtrování statistik, Hráči: Vše</a></td></tr>
+<tr><td><a href="../Profila and statistics/041.html">TC: 041 - Filtrování statistik, Datum</a></td></tr>
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://coolecnik.felk.cvut.cz/" />
+<title>TC: 035 - Filtrování statistik, Stav Hry: Vyhrané</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TC: 035 - Filtrování statistik, Stav Hry: Vyhrané</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=signinCollapseBtn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=loginLogin</td>
+	<td>testovani</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=loginPass</td>
+	<td>1234test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=btnLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=dropdown03</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Statistika</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=gameStatus</td>
+	<td>label=Vyhrané</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

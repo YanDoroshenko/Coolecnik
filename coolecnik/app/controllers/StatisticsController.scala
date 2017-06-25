@@ -3,7 +3,7 @@ package controllers
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
-import models.Queries._
+import models.Queries.{tournaments, _}
 import models._
 import org.slf4j.LoggerFactory
 import play.api.mvc.{Action, AnyContent, Controller}
@@ -26,8 +26,27 @@ class StatisticsController extends Controller {
 
   def basicGameStats(id: Int): Action[AnyContent] = Action.async { _ =>
     db.run(
-      games.filter(g =>
-        (g.player1 === id || g.player2 === id) && g.end.nonEmpty)
+      games
+        .filter(_.tournament.isEmpty)
+        .filter(g => (g.player1 === id || g.player2 === id) && g.end.nonEmpty)
+        .result)
+      .map {
+        case gs: Seq[Game] if gs.nonEmpty =>
+          val total = gs.size
+          val won = gs.count(_.winner.contains(id))
+          val draws = gs.count(_.winner.isEmpty)
+          val lost = total - won - draws
+          val totalSecs = gs.map(g => g.end.get.toInstant.getEpochSecond - g.beginning.get.toInstant.getEpochSecond).sum
+          Ok(BasicGameStats(total, won, draws, lost, totalSecs))
+        case _ => NotFound
+      }
+  }
+
+  def basicTournamentGameStats(id: Int): Action[AnyContent] = Action.async { _ =>
+    db.run(
+      games
+        .filter(_.tournament.nonEmpty)
+        .filter(g => (g.player1 === id || g.player2 === id) && g.beginning.nonEmpty && g.end.nonEmpty)
         .result)
       .map {
         case gs: Seq[Game] if gs.nonEmpty =>
@@ -43,11 +62,12 @@ class StatisticsController extends Controller {
 
   def basicStrikeStats(id: Int): Action[AnyContent] = Action.async {
     db.run(
-      (for ((s, t) <- strikes
-        .filter(_.player === id)
-        .groupBy(_.strikeType)
-        .map { case (strikeType, ss) => strikeType -> ss.length }
-        joinRight strikeTypes on (_._1 === _.id)) yield (
+      (for ((s, t) <-
+            (for ((_, s) <- games.filter(_.tournament.isEmpty) join strikes on (_.id === _.game)) yield s)
+              .filter(_.player === id)
+              .groupBy(_.strikeType)
+              .map { case (strikeType, ss) => strikeType -> ss.length }
+              joinRight strikeTypes on (_._1 === _.id)) yield (
         t.id,
         t.title,
         s.map { case (_, c) => c }))
@@ -60,7 +80,10 @@ class StatisticsController extends Controller {
 
 
   def opponents(id: Int): Action[AnyContent] = Action.async {
-    db.run((for ((g, p) <- games.filter(_.player2 === id) join players on (_.player1 === _.id)) yield p.id -> p.login).result)
+    db.run((for ((g, p) <-
+                 games
+                   .filter(_.tournament.isEmpty)
+                   .filter(_.player2 === id) join players on (_.player1 === _.id)) yield p.id -> p.login).result)
       .zip(db.run((for ((g, p) <- games.filter(_.player1 === id) join players on (_.player2 === _.id)) yield p.id -> p.login).result))
       .map(z => (z._1 ++ z._2).distinct.map((Opponent.apply _).tupled(_)))
       .map {
@@ -92,6 +115,7 @@ class StatisticsController extends Controller {
       def process(gs: Seq[Game]) = {
         val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
         val filtered = gs
+          .filter(_.tournament.isEmpty)
           .filter(g => (result: @unchecked) match {
             case Some("win") => g.winner.nonEmpty && g.winner.get == id
             case Some("lose") => g.winner.nonEmpty && g.winner.get != id
@@ -269,6 +293,7 @@ class StatisticsController extends Controller {
       def process(gs: Seq[Game]) = {
         val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'Z")
         val filtered = gs
+          .filter(_.tournament.isEmpty)
           .filter(g => (result: @unchecked) match {
             case Some("win") => g.winner.nonEmpty && g.winner.get == id
             case Some("lose") => g.winner.nonEmpty && g.winner.get != id
@@ -424,6 +449,212 @@ class StatisticsController extends Controller {
               case _ => Future(NotFound("Game with id " + gameId + " not found for player " + playerId))
             }
         case false => Future(NotFound("Player with id " + playerId + " not found"))
+      }
+  }
+
+  def basicTournaments(id: Int, gameType: Option[String], title: Option[String], result: Option[String], page: Option[Int], pageSize: Option[Int]): Action[AnyContent] = Action.async {
+    val all = for ((t, g) <-
+                   (for ((t, g) <-
+                         (for ((tp, gt) <- (
+                           ((for ((t, g) <- tournaments join
+                             games.filter(g => g.player1 === id || g.player2 === id) on
+                             (_.id === _.tournament)) yield t -> g.player1)
+                             ++
+                             (for ((t, g) <- tournaments join
+                               games.filter(g => g.player1 === id || g.player2 === id) on
+                               (_.id === _.tournament)) yield t -> g.player2))
+                             .groupBy(_._1)
+                             .map { case (t, group) => t -> group.map(_._2).countDistinct }
+                             join gameTypes on (_._1.gameType === _.id))) yield (tp._1, gt.id, gt.title, tp._2))
+                           joinLeft games.filter(_.end.nonEmpty) on (_._1.id === _.tournament)) yield t -> g)
+                     joinLeft games.filter(_.end.isEmpty) on (_._1._1.id === _.tournament)) yield t -> g
+    db.run(all.result)
+      .map(ts => {
+        val filtered = ts
+          .filter(v =>
+            title match {
+              case Some(t) => v._1._1._1.title.nonEmpty &&
+                t.toLowerCase.getBytes.toSet.forall(b => v._1._1._1.title.get.toLowerCase.getBytes.toSet.contains(b))
+              case None => true
+            })
+          .filter(v =>
+            gameType match {
+              case Some("pool8") => v._1._1._1.gameType == 1
+              case Some("carambole") => v._1._1._1.gameType == 2
+              case o if o.contains("all") || o.isEmpty => true
+            })
+          .filter(v =>
+            result match {
+              case Some("finished") => v._2.isEmpty
+              case Some("unfinished") => v._1._2.isEmpty
+              case None => true
+            }
+          )
+
+        filtered
+          .sortWith((l, r) =>
+            l._1._1._1.beginning.after(r._1._1._1.beginning))
+          .groupBy(_._1)
+          .map(p => (
+            p._1._1._1.id,
+            p._1._1._1.title,
+            p._1._1._2,
+            p._1._1._3,
+            p._1._1._4,
+            p._2.map(_._2).map {
+              case Some(_) => 1
+              case None => 0
+            }.sum
+          ) ->
+            p._1._2
+          )
+          .groupBy(_._1)
+          .map(p => TournamentStats(
+            p._1._1,
+            p._1._2,
+            p._1._3,
+            p._1._4,
+            p._1._5,
+            p._2.values.map {
+              case Some(_) => 1
+              case None => 0
+            }.sum,
+            p._1._6,
+            p._2.values.head match {
+              case Some(g) => g.rounds
+              case _ => None
+            },
+            p._2.values.head match {
+              case Some(g) => g.carambolesToWin
+              case _ => None
+            }
+          )
+          )
+      }
+      )
+      .map(r => {
+        val paged =
+          if (page.nonEmpty && pageSize.nonEmpty)
+            r.slice((page.get - 1) * pageSize.get, (page.get - 1) * pageSize.get + pageSize.get)
+          else Seq()
+        if (paged.nonEmpty)
+          Ok(paged.toSeq)
+        else
+          NotFound
+      }
+      )
+  }
+
+  def tournamentPages(
+                       id: Int,
+                       gameType: Option[String],
+                       title: Option[String],
+                       result: Option[String],
+                       pageSize: Int
+                     ): Action[AnyContent] = Action.async {
+    Try(
+      db.run(
+        (for ((g, t) <- games
+          .filter(g => g.player1 === id || g.player2 === id)
+          join tournaments on (_.tournament === _.id)) yield g -> t)
+          .result)
+        .flatMap(ps => {
+          val filtered = ps.filter(p =>
+            gameType match {
+              case Some("pool8") => p._2.gameType == 1
+              case Some("carambole") => p._2.gameType == 2
+              case o if o.isEmpty || o.contains("all") => true
+            }
+          )
+            .filter(p =>
+              title match {
+                case Some(t) => p._2.title.nonEmpty &&
+                  t.toLowerCase.getBytes.toSet.forall(b => p._2.title.get.toLowerCase.getBytes.toSet.contains(b))
+                case None => true
+              }
+            )
+          val filteredGrouped = filtered
+            .groupBy(_._2)
+            .filter(p =>
+              result match {
+                case Some("finished") => p._2.map(_._1).forall(_.end.nonEmpty)
+                case Some("unfinished") => p._2.map(_._1).exists(_.end.isEmpty)
+                case None => true
+              }
+            )
+          Future(Ok(Math.ceil(filteredGrouped.size.toDouble / pageSize)))
+        }
+        )
+    )
+    match {
+      case Success(r) => r
+      case Failure(e) => Future(BadRequest(e.getMessage))
+    }
+  }
+
+
+  def tournamentDetails(id: Int): Action[AnyContent] = Action.async {
+    db.run(
+      (for ((t, gt) <- tournaments.filter(_.id === id) join gameTypes on (_.gameType === _.id))
+        yield (t.id, t.title, t.tournamentType, t.gameType, gt.title, t.beginning, t.end)
+        ).result
+    )
+      .flatMap {
+        case Seq(t) =>
+          db.run(
+            games
+              .filter(_.tournament === id)
+              .result
+          )
+            .map(gs =>
+              Ok(TournamentDetails(t._1, t._2, t._3, t._4, t._5, t._6, t._7, gs)))
+        case _ => Future(NotFound)
+      }
+  }
+
+  def tournamentTable(id: Int): Action[AnyContent] = Action.async {
+    db.run(tournaments.filter(_.id === id).result)
+      .flatMap {
+        case Seq(t) =>
+          db.run(games.filter(g => g.tournament === id).result)
+            .flatMap(gs =>
+              db.run(
+                (for ((g, p) <-
+                      games.filter(g => g.tournament === id).map(_.player1) ++
+                        games.filter(g => g.tournament === id).map(_.player2)
+                        join players on (_ === _.id)) yield p)
+                  .result)
+                .map(ps => {
+                  val groupedByPlayer = ps.map(p => p -> gs.filter(g => g.player1 == p.id || g.player2 == p.id))
+                  val pStats = groupedByPlayer.map(p => {
+                    val player = p._1
+                    val pid = player.id
+                    val games = p._2.filter(_.end.nonEmpty)
+                    val won = games.filter(_.winner.contains(pid))
+                    val lost = games.filter(g => g.winner.nonEmpty && !g.winner.contains(pid))
+                    val draws = games.filter(_.winner.isEmpty)
+                    val points = won.length * 3 + draws.length
+                    PlayerTournamentStats(pid, player.login, won.length, lost.length, draws.length, points)
+                  }
+                  )
+                  Ok(TournamentTable(t.id, t.title,
+                    pStats
+                      .distinct
+                      .sortWith((l, r) =>
+                        if (l.points == r.points)
+                          gs.find(g =>
+                            g.player1 == l.id && g.player2 == r.id ||
+                              g.player2 == l.id && g.player1 == r.id)
+                            .get.winner.contains(l.id)
+                        else
+                          l.points > r.points
+                      )
+                  )
+                  )
+                }
+                )
+            )
+        case Seq() => Future(NotFound)
       }
   }
 }
