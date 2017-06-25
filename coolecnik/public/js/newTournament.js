@@ -193,7 +193,8 @@ $("#createTournament").click(function (e) {
         data: JSON.stringify(data),
         statusCode: {
             201: function (response) {
-                console.log(response);
+                //console.log(response);
+                window.location.href = 'tournament.html?id='+response.id;
             },
             400: function (response) {
                 console.log(response);

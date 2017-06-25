@@ -74,7 +74,7 @@ function renderTournament(tournament) {
     }
     else {
         gameType = "<small>karambol</small>";
-        if (typeof tournament.rounds == 'undefined') {
+        if (typeof tournament.games[0].rounds == 'undefined') {
             carambolTypeText = "<small> - na karamboly</small>";
             carambolType = 2;
         } else {
@@ -340,14 +340,16 @@ function playGame(id, games) {
     if (game.gameType == 2) {
         if (typeof game.rounds == 'undefined') {
             //karambols
-            localStorage.setItem("carType", 2);
-            localStorage.setItem("carsTotal", game.carambolesToWin);
+            localStorage.setItem("carType", 1);
+            localStorage.setItem("roundsTotal", game.carambolesToWin);
             localStorage.setItem("currentRound", 1);
         } else {
             //rounds
-            localStorage.setItem("carType", 1);
-            localStorage.setItem("roundsTotal", game.rounds);
+            console.log("setting rounds");
+            localStorage.setItem("carType", 2);
+            localStorage.setItem("carsTotal", game.rounds);
             localStorage.setItem("roundsRemain", game.rounds);
+            localStorage.setItem("currentRound", game.rounds);
         }
     }
 
@@ -461,11 +463,19 @@ function getGameItem(p1, p2, id,end, won) {
         if (id1 == -1) {
             first = "<a href='#' class='text-white'>" + name1 + "</a>";
             second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";
-            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Hrát</button>";
+            if(localStorage.getItem("activeGame") == "false"){
+                button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Hrát</button>";
+            } else {
+                button = "<button class='btn btn-outline-secondary disabled col-md-2 col-lg-1' disabled id=" + id + ">" + "Hrát</button>";
+            }
         } else if (id2 == -1) {
             first = "<a href='#' class='text-white'>" + name2 + "</a>";
             second = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
-            button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Hrát</button>";
+            if(localStorage.getItem("activeGame") == "false"){
+                button = "<button class='btn btn-outline-secondary green-btn col-md-2 col-lg-1' id=" + id + ">" + "Hrát</button>";
+            } else {
+                button = "<button class='btn btn-outline-secondary disabled col-md-2 col-lg-1' disabled id=" + id + ">" + "Hrát</button>";
+            }
         } else {
             first = "<a href='friendProfile.html?id=" + id1 + "&nick=" + name1 + "' class='text-white'>" + name1 + "</a>";
             second = "<a href='friendProfile.html?id=" + id2 + "&nick=" + name2 + "' class='text-white'>" + name2 + "</a>";

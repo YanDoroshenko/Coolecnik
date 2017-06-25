@@ -60,15 +60,13 @@ if(localStorage.getItem("tournamentGame") == "true"){
         lastRound = 0;
         round = 1;
 
-        if (localStorage.getItem("carType") === "2") { //carambol game
+        if (localStorage.getItem("carType") === "1") {
             $("#carGameType1Div").show();
-
             $("#carGameType1CarsTotal").html(localStorage.getItem("roundsTotal"));
-            $("#carGameType1CurrentRound").html(localStorage.getItem("roundsRemain"));
+            $("#carGameType1CurrentRound").html(1);
         }
-        else if (localStorage.getItem("carType") === "1") {  //round game
+        else if (localStorage.getItem("carType") === "2") {
             $("#carGameType2Div").show();
-
             $("#carGameType2RoundsTotal").html(localStorage.getItem("carsTotal"));
             $("#carGameType2RoundsRemain").html(localStorage.getItem("currentRound"));
         }
