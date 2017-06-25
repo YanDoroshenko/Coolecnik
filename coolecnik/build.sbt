@@ -1,6 +1,6 @@
 name := "coolecnik"
 
-version := "1.0.1"
+version := "1.1.0"
 
 lazy val `coolecnik` = (project in file("."))
   .enablePlugins(PlayScala, PlayAkkaHttpServer)
